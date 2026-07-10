@@ -1,0 +1,39 @@
+book_id,lang,store,format,url
+chronofall,en,Amazon,ebook,https://www.amazon.com/dp/PLACEHOLDER
+chronofall,en,Amazon,paperback,https://www.amazon.com/dp/PLACEHOLDER
+chronofall,en,Amazon,hardcover,https://www.amazon.com/dp/PLACEHOLDER
+chronofall,en,Apple Books,ebook,https://books.apple.com/book/PLACEHOLDER
+chronofall,en,Kobo,ebook,https://www.kobo.com/ebook/PLACEHOLDER
+chronofall,en,Barnes & Noble,paperback,https://www.barnesandnoble.com/w/PLACEHOLDER
+chronofall,en,Audible,audiobook,https://www.audible.com/pd/PLACEHOLDER
+chronofall,ru,LitRes,ebook,https://www.litres.ru/book/PLACEHOLDER
+chronofall,ru,Author.Today,ebook,https://author.today/work/PLACEHOLDER
+chronofall,fr,Amazon,ebook,https://www.amazon.fr/dp/PLACEHOLDER
+chronofall,fr,Fnac,ebook,https://www.fnac.com/livre-numerique/PLACEHOLDER
+chronofall,de,Amazon,ebook,https://www.amazon.de/dp/PLACEHOLDER
+chronofall,de,Amazon,paperback,https://www.amazon.de/dp/PLACEHOLDER
+chronofall,de,Thalia,ebook,https://www.thalia.de/shop/home/artikeldetails/PLACEHOLDER
+chronofall,de,Audible,audiobook,https://www.audible.de/pd/PLACEHOLDER
+chronofall,it,Amazon,ebook,https://www.amazon.it/dp/PLACEHOLDER
+chronofall,es,Amazon,ebook,https://www.amazon.es/dp/PLACEHOLDER
+chronofall,es,Casa del Libro,ebook,https://www.casadellibro.com/ebook/PLACEHOLDER
+chronofall,pt,Amazon,ebook,https://www.amazon.com.br/dp/PLACEHOLDER
+chronofall,ja,Amazon,ebook,https://www.amazon.co.jp/dp/PLACEHOLDER
+chronofall,ja,BOOK WALKER,ebook,https://bookwalker.jp/PLACEHOLDER
+paradox-tide,en,Amazon,ebook,https://www.amazon.com/dp/PLACEHOLDER
+paradox-tide,en,Amazon,paperback,https://www.amazon.com/dp/PLACEHOLDER
+paradox-tide,en,Apple Books,ebook,https://books.apple.com/book/PLACEHOLDER
+paradox-tide,en,Kobo,ebook,https://www.kobo.com/ebook/PLACEHOLDER
+paradox-tide,ru,LitRes,ebook,https://www.litres.ru/book/PLACEHOLDER
+ninth-iteration,en,Amazon,ebook,https://www.amazon.com/dp/PLACEHOLDER
+ninth-iteration,ru,LitRes,ebook,https://www.litres.ru/book/PLACEHOLDER
+static-empire,en,Amazon,ebook,https://www.amazon.com/dp/PLACEHOLDER
+static-empire,en,Amazon,paperback,https://www.amazon.com/dp/PLACEHOLDER
+static-empire,en,Kobo,ebook,https://www.kobo.com/ebook/PLACEHOLDER
+static-empire,ru,LitRes,ebook,https://www.litres.ru/book/PLACEHOLDER
+static-empire,de,Amazon,ebook,https://www.amazon.de/dp/PLACEHOLDER
+silence-bureau,en,Amazon,ebook,https://www.amazon.com/dp/PLACEHOLDER
+silence-bureau,en,Apple Books,ebook,https://books.apple.com/book/PLACEHOLDER
+silence-bureau,ru,LitRes,ebook,https://www.litres.ru/book/PLACEHOLDER
+silence-bureau,de,Amazon,ebook,https://www.amazon.de/dp/PLACEHOLDER
+silence-bureau,de,Thalia,ebook,https://www.thalia.de/shop/home/artikeldetails/PLACEHOLDER

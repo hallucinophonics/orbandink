@@ -1,0 +1,70 @@
+<section class="hero">
+  <p class="hero-kicker kicker">{{HERO_NAME}}</p>
+  <div class="hero-word-wrap">
+    <h1 class="hero-word" data-words="{{HERO_WORDS}}" data-glyphs="{{GLYPHS}}">{{HERO_WORD}}</h1>
+  </div>
+  <div class="hero-foot">
+    <span class="mono-meta">{{T_TAGLINE}}</span>
+    <span class="mono-meta scroll-cue">{{T_SCROLL}}</span>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-seg">{{TICKER}}</div>
+    <div class="ticker-seg">{{TICKER}}</div>
+  </div>
+</div>
+
+<section class="section" style="--accent-book:{{F_ACCENT}}">
+  <span class="sec-num" aria-hidden="true" data-plx>01</span>
+  <div class="sec-mark" data-reveal><span class="idx">01</span><span class="lbl" data-decode>{{T_FEATURED}}{{F_SERIES_META}}</span></div>
+  <div class="featured">
+    <div class="cover-col" data-reveal>
+      <div class="cover-box" data-fx data-book="{{F_ID}}" data-accent="{{F_ACCENT}}">
+        <img src="{{REL}}{{F_COVER}}"{{F_SRCSET}} alt="{{F_COVER_ALT}}" width="800" height="1200" fetchpriority="high">
+        <span class="tick tk-a" aria-hidden="true"></span><span class="tick tk-b" aria-hidden="true"></span>
+      </div>
+      <div class="cover-reflect" aria-hidden="true"></div>
+    </div>
+    <div>
+      <h2 class="featured-title fx-erode" data-accent="{{F_ACCENT}}"><a href="{{F_URL}}">{{F_TITLE}}</a></h2>
+      <p class="tagline" data-reveal>{{F_TAGLINE}}</p>
+      <div class="data-strip mono-meta" data-reveal>
+{{F_DATA}}
+      </div>
+      <div class="meta-row" data-reveal>
+        <a class="btn" href="{{F_URL}}">{{F_CTA}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="cat-h" data-rain>
+  <span class="sec-num" aria-hidden="true" data-plx>02</span>
+  <div class="sec-mark" data-reveal><span class="idx">02</span><span class="lbl" data-decode>{{CAT_SPAN}}</span></div>
+  <div class="sec-head">
+    <h2 id="cat-h" class="fx-erode">{{T_BOOKS}}</h2>
+    <a class="more" href="{{REL}}{{LANG}}/books/">{{T_VIEW_ALL}} →</a>
+  </div>
+  <div class="timeline" aria-hidden="true" data-reveal>
+{{TIMELINE}}
+  </div>
+  <div class="grid-books">
+{{CARDS}}
+  </div>
+</section>
+
+<section class="section">
+  <span class="sec-num" aria-hidden="true" data-plx>03</span>
+  <div class="sec-mark" data-reveal><span class="idx">03</span><span class="lbl" data-decode>{{T_ABOUT_TEASER}}</span></div>
+  <div class="about-grid">
+    <div class="ph ph--portrait" data-reveal><span>{{PORTRAIT_NOTE}}</span></div>
+    <div>
+      <div class="bio" data-reveal>
+{{BIO_FIRST}}
+      </div>
+      <a class="btn btn--ghost" href="{{REL}}{{LANG}}/about/" style="margin-top:28px" data-reveal>{{T_ABOUT}}</a>
+    </div>
+  </div>
+</section>

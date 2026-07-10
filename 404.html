@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Alexey Belenkiy</title>
+<meta name="robots" content="noindex">
+<style>
+html{background:#0D0B09;color:#EDE6DC;color-scheme:dark}
+body{margin:0;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.nf{min-height:100svh;display:grid;align-content:center;justify-items:start;padding:0 clamp(20px,6vw,90px)}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#A79D8F;margin:0}
+.nf-code{font-size:clamp(90px,24vw,400px);font-weight:900;line-height:.9;letter-spacing:-.02em;
+  background:linear-gradient(175deg,#EDE6DC 45%,#D9A05B 140%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nf p.msg{margin:26px 0 0;font-size:clamp(17px,2vw,24px);color:#A79D8F;max-width:34ch;line-height:1.6}
+.btn{display:inline-flex;gap:12px;margin-top:34px;border:1px solid #D9A05B;padding:14px 22px;color:#EDE6DC;
+  text-decoration:none;font-size:13px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s cubic-bezier(.22,.61,.2,1)}
+.btn::after{content:"→";color:#D9A05B}
+.btn:hover{background:#D9A05B;color:#14100A}
+.btn:hover::after{color:#14100A}
+.btn:focus-visible{outline:2px solid #D9A05B;outline-offset:3px}
+[hidden]{display:none !important}
+::selection{background:#D9A05B;color:#14100A}
+</style>
+</head>
+<body>
+<div class="nf" data-nf="en">
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">This moment does not exist in this timeline.</p>
+  <a class="btn" href="/en/" data-home="en">Return to the present</a>
+</div>
+<div class="nf" data-nf="ru" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Этого момента нет в этой линии времени.</p>
+  <a class="btn" href="/ru/" data-home="ru">Вернуться в настоящее</a>
+</div>
+<div class="nf" data-nf="fr" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Ce moment n&#x27;existe pas dans cette ligne temporelle.</p>
+  <a class="btn" href="/fr/" data-home="fr">Revenir au présent</a>
+</div>
+<div class="nf" data-nf="pt" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Este momento não existe nesta linha do tempo.</p>
+  <a class="btn" href="/pt/" data-home="pt">Voltar ao presente</a>
+</div>
+<div class="nf" data-nf="de" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Diesen Moment gibt es in dieser Zeitlinie nicht.</p>
+  <a class="btn" href="/de/" data-home="de">Zurück in die Gegenwart</a>
+</div>
+<div class="nf" data-nf="it" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Questo momento non esiste in questa linea temporale.</p>
+  <a class="btn" href="/it/" data-home="it">Torna al presente</a>
+</div>
+<div class="nf" data-nf="es" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">Este momento no existe en esta línea temporal.</p>
+  <a class="btn" href="/es/" data-home="es">Volver al presente</a>
+</div>
+<div class="nf" data-nf="ja" hidden>
+  <p class="kicker">Alexey Belenkiy</p>
+  <div class="nf-code" aria-hidden="true">404</div>
+  <p class="msg">この瞬間は、この時間線には存在しません。</p>
+  <a class="btn" href="/ja/" data-home="ja">現在へ戻る</a>
+</div>
+<script>
+(function(){
+  var langs = "en,ru,fr,pt,de,it,es,ja".split(",");
+  var segs = location.pathname.split("/").filter(Boolean);
+  var ix = -1;
+  for (var i = 0; i < segs.length; i++) { if (langs.indexOf(segs[i]) >= 0) { ix = i; break; } }
+  var lang = ix >= 0 ? segs[ix] : "en";
+  var root = ix > 0 ? "/" + segs.slice(0, ix).join("/") + "/" : "/";
+  document.documentElement.lang = lang;
+  var blocks = document.querySelectorAll("[data-nf]");
+  for (var b = 0; b < blocks.length; b++) blocks[b].hidden = blocks[b].getAttribute("data-nf") !== lang;
+  var homes = document.querySelectorAll("[data-home]");
+  for (var h = 0; h < homes.length; h++) homes[h].setAttribute("href", root + homes[h].getAttribute("data-home") + "/");
+})();
+</script>
+</body>
+</html>

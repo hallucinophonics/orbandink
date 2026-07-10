@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}" data-rel="{{REL}}" data-langs="{{LANGS}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="canonical" href="{{CANONICAL}}">
+{{HREFLANGS}}<meta property="og:type" content="{{OG_TYPE}}">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:site_name" content="{{SITE_NAME}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0D0B09">
+<link rel="icon" type="image/svg+xml" href="{{REL}}assets/img/favicon.svg">
+{{PRELOADS}}<link rel="stylesheet" href="{{REL}}assets/css/fonts.css">
+<link rel="stylesheet" href="{{REL}}assets/css/main.css">
+{{JSONLD}}</head>
+<body class="{{BODY_CLASS}}">
+<a class="skip" href="#main">{{T_SKIP}}</a>
+<div class="site">
+<header class="site-head">
+  <a class="wordmark" href="{{REL}}{{LANG}}/">{{SITE_NAME}}</a>
+  <nav aria-label="{{T_NAV}}">
+    <a href="{{REL}}{{LANG}}/books/"{{CUR_BOOKS}}>{{T_BOOKS}}</a>
+    <a href="{{REL}}{{LANG}}/about/"{{CUR_ABOUT}}>{{T_ABOUT}}</a>
+  </nav>
+  <details class="langs">
+    <summary aria-label="{{T_LANGS}}">{{LANG_SHORT}}</summary>
+    <div class="langs-panel">
+{{LANG_LINKS}}    </div>
+  </details>
+</header>
+<main id="main">
+{{CONTENT}}
+</main>
+<footer class="site-foot">
+  <div class="col">
+    <span class="mono-meta">© {{YEARS}} {{AUTHOR}} — {{T_RIGHTS}}</span>
+    <span class="mono-meta">{{T_TAGLINE}}</span>
+    <span class="mono-meta foot-status">{{FOOT_STATUS}}</span>
+  </div>
+  <div class="col">
+    <span class="mono-meta"><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></span>
+{{SOCIALS}}  </div>
+  <div class="col">
+    <span class="kicker">{{T_FOOT_LANGS}}</span>
+    <nav class="foot-langs" aria-label="{{T_LANGS}}">
+{{FOOT_LANGS}}    </nav>
+  </div>
+</footer>
+</div>
+<script type="module" src="{{REL}}assets/js/app.js"></script>
+</body>
+</html>

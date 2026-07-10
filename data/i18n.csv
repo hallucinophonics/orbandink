@@ -1,0 +1,59 @@
+key,en,ru,fr,pt,de,it,es,ja
+nav.books,Books,Книги,Livres,Livros,Bücher,Libri,Libros,作品
+nav.about,About,Об авторе,L'auteur,O autor,Autor,Autore,Autor,著者
+meta.tagline,Science fiction · dystopia · time travel,Научная фантастика · антиутопия · путешествия во времени,Science-fiction · dystopie · voyage dans le temps,Ficção científica · distopia · viagem no tempo,Science-Fiction · Dystopie · Zeitreisen,Fantascienza · distopia · viaggi nel tempo,Ciencia ficción · distopía · viajes en el tiempo,SF・ディストピア・時間旅行
+hero.word,ALEXEY|BELENKIY,АЛЕКСЕЙ|БЕЛЕНЬКИЙ,ALEXEY|BELENKIY,ALEXEY|BELENKIY,ALEXEY|BELENKIY,ALEXEY|BELENKIY,ALEXEY|BELENKIY,アレクセイ|ベレンキー
+hero.name,Alexey Belenkiy,Алексей Беленький,Alexeï Belenkiy,Alexey Belenkiy,Alexey Belenkiy,Alexey Belenkiy,Alexey Belenkiy,アレクセイ・ベレンキー
+home.featured,Featured,Избранное,À la une,Em destaque,Im Fokus,In evidenza,Destacado,注目の一冊
+home.view_all,All books,Все книги,Tous les livres,Todos os livros,Alle Bücher,Tutti i libri,Todos los libros,すべての作品
+home.about_teaser,About the author,Об авторе,L'auteur,O autor,Über den Autor,L'autore,El autor,著者について
+books.title,Books,Книги,Livres,Livros,Bücher,Libri,Libros,作品一覧
+filter.all,All,Все,Tout,Tudo,Alle,Tutti,Todos,すべて
+filter.series,Series,Циклы,Séries,Séries,Reihen,Serie,Series,シリーズ
+filter.themes,Themes,Темы,Thèmes,Temas,Themen,Temi,Temas,テーマ
+book.buy,Buy,Купить,Acheter,Comprar,Kaufen,Acquista,Comprar,購入
+book.preorder,Pre-order,Предзаказ,Précommander,Pré-encomendar,Vorbestellen,Preordina,Reservar,予約注文
+book.coming_soon,Coming soon,Скоро,À paraître,Em breve,Demnächst,In arrivo,Próximamente,近日刊行
+book.coming_soon_note,Not yet on sale. The timeline is still settling.,Ещё не в продаже. Линия времени ещё оседает.,Pas encore en vente. La ligne temporelle se stabilise encore.,Ainda não está à venda. A linha do tempo ainda assenta.,Noch nicht im Verkauf. Die Zeitlinie setzt sich noch.,Non ancora in vendita. La linea temporale si sta assestando.,Aún no está a la venta. La línea temporal todavía se asienta.,まだ発売されていません。時間線は安定しつつあります。
+book.excerpt,Read excerpt,Читать отрывок,Lire un extrait,Ler excerto,Leseprobe,Leggi un estratto,Leer un fragmento,試し読み
+book.series_pos,Book {n} of {series},Книга {n} цикла «{series}»,Livre {n} de « {series} »,Livro {n} de {series},Band {n} von {series},Libro {n} di {series},Libro {n} de {series},「{series}」第{n}巻
+book.standalone,Standalone novel,Отдельный роман,Roman indépendant,Romance independente,Eigenständiger Roman,Romanzo autoconclusivo,Novela independiente,単独作品
+book.in_series,Also in this series,В этом цикле,Dans la même série,Na mesma série,In dieser Reihe,Nella stessa serie,En la misma serie,同じシリーズの作品
+book.themes,Themes,Темы,Thèmes,Temas,Themen,Temi,Temas,テーマ
+plate.pages,Pages,Страниц,Pages,Páginas,Seiten,Pagine,Páginas,ページ
+plate.isbn,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN
+plate.year,Year,Год,Année,Ano,Jahr,Anno,Año,刊行年
+plate.series,Series,Цикл,Série,Série,Reihe,Serie,Serie,シリーズ
+plate.status,Status,Статус,Statut,Estado,Status,Stato,Estado,状態
+status.published,Published,Издано,Paru,Publicado,Erschienen,Pubblicato,Publicado,刊行済み
+status.preorder,Pre-order,Предзаказ,Précommande,Pré-venda,Vorbestellung,Preordine,Reserva,予約受付中
+status.coming_soon,Coming soon,Скоро,À paraître,Em breve,Demnächst,In arrivo,Próximamente,近日刊行
+format.ebook,E-book,Электронная книга,Livre numérique,E-book,E-Book,E-book,E-book,電子書籍
+format.paperback,Paperback,Мягкая обложка,Broché,Brochura,Taschenbuch,Brossura,Tapa blanda,ペーパーバック
+format.hardcover,Hardcover,Твёрдый переплёт,Relié,Capa dura,Gebunden,Rilegato,Tapa dura,ハードカバー
+format.audiobook,Audiobook,Аудиокнига,Livre audio,Audiolivro,Hörbuch,Audiolibro,Audiolibro,オーディオブック
+about.title,About the author,Об авторе,L'auteur,O autor,Über den Autor,L'autore,El autor,著者について
+about.contact,Contact,Контакты,Contact,Contacto,Kontakt,Contatti,Contacto,連絡先
+about.press,Press,Пресса,Presse,Imprensa,Presse,Stampa,Prensa,プレス
+footer.rights,All rights reserved,Все права защищены,Tous droits réservés,Todos os direitos reservados,Alle Rechte vorbehalten,Tutti i diritti riservati,Todos los derechos reservados,無断転載を禁じます
+footer.langs,Read in,Читать на,Lire en,Ler em,Lesen auf,Leggi in,Leer en,言語
+a11y.skip,Skip to content,К содержанию,Aller au contenu,Ir para o conteúdo,Zum Inhalt,Vai al contenuto,Ir al contenido,本文へ
+a11y.nav,Main navigation,Основная навигация,Navigation principale,Navegação principal,Hauptnavigation,Navigazione principale,Navegación principal,メインナビゲーション
+a11y.langs,Language,Язык,Langue,Idioma,Sprache,Lingua,Idioma,言語
+a11y.filters,Filter,Фильтры,Filtres,Filtros,Filter,Filtri,Filtros,フィルター
+a11y.buy,"Buy {title} — {format}, {store}","Купить {title} — {format}, {store}","Acheter {title} — {format}, {store}","Comprar {title} — {format}, {store}","{title} kaufen — {format}, {store}","Acquista {title} — {format}, {store}","Comprar {title} — {format}, {store}","{title}を購入 — {format}、{store}"
+scroll.cue,Scroll,Листайте,Défiler,Rolar,Scrollen,Scorri,Desplázate,スクロール
+nf.body,This moment does not exist in this timeline.,Этого момента нет в этой линии времени.,Ce moment n'existe pas dans cette ligne temporelle.,Este momento não existe nesta linha do tempo.,Diesen Moment gibt es in dieser Zeitlinie nicht.,Questo momento non esiste in questa linea temporale.,Este momento no existe en esta línea temporal.,この瞬間は、この時間線には存在しません。
+nf.back,Return to the present,Вернуться в настоящее,Revenir au présent,Voltar ao presente,Zurück in die Gegenwart,Torna al presente,Volver al presente,現在へ戻る
+meta.home_desc,"Science-fiction novels by Alexey Belenkiy — time travel, dystopia, and the machinery of memory. Read in eight languages.","Фантастические романы Алексея Беленького — путешествия во времени, антиутопии и механика памяти. Читайте на восьми языках.","Les romans de science-fiction d'Alexey Belenkiy — voyage dans le temps, dystopie et machinerie de la mémoire. À lire en huit langues.","Romances de ficção científica de Alexey Belenkiy — viagem no tempo, distopia e a maquinaria da memória. Em oito línguas.","Science-Fiction-Romane von Alexey Belenkiy — Zeitreisen, Dystopien und die Maschinerie der Erinnerung. In acht Sprachen.","I romanzi di fantascienza di Alexey Belenkiy — viaggi nel tempo, distopie e la macchina della memoria. In otto lingue.","Novelas de ciencia ficción de Alexey Belenkiy — viajes en el tiempo, distopía y la maquinaria de la memoria. En ocho idiomas.",アレクセイ・ベレンキーのSF小説 — 時間旅行、ディストピア、記憶の機構。8つの言語で。
+meta.books_desc,"All novels by Alexey Belenkiy: the Meridian Loop time-travel cycle and the Ashfall Protocol dystopias.","Все романы Алексея Беленького: цикл о путешествиях во времени «Меридианная петля» и антиутопии «Протокол пепла».","Tous les romans d'Alexey Belenkiy : le cycle temporel Meridian Loop et les dystopies Ashfall Protocol.","Todos os romances de Alexey Belenkiy: o ciclo temporal Meridian Loop e as distopias Ashfall Protocol.","Alle Romane von Alexey Belenkiy: der Zeitreise-Zyklus Meridian Loop und die Dystopien des Ashfall Protocol.","Tutti i romanzi di Alexey Belenkiy: il ciclo temporale Meridian Loop e le distopie Ashfall Protocol.","Todas las novelas de Alexey Belenkiy: el ciclo temporal Meridian Loop y las distopías Ashfall Protocol.",アレクセイ・ベレンキーの全作品：時間旅行サイクル「メリディアン・ループ」とディストピア「アッシュフォール・プロトコル」。
+footer.status,Timeline stable,Линия времени стабильна,Ligne temporelle stable,Linha do tempo estável,Zeitlinie stabil,Linea temporale stabile,Línea temporal estable,時間線は安定
+theme.time_travel,Time travel,Путешествия во времени,Voyage dans le temps,Viagem no tempo,Zeitreisen,Viaggi nel tempo,Viajes en el tiempo,時間旅行
+theme.paradox,Paradox,Парадокс,Paradoxe,Paradoxo,Paradoxon,Paradosso,Paradoja,パラドックス
+theme.memory,Memory,Память,Mémoire,Memória,Erinnerung,Memoria,Memoria,記憶
+theme.identity,Identity,Идентичность,Identité,Identidade,Identität,Identità,Identidad,アイデンティティ
+theme.dystopia,Dystopia,Антиутопия,Dystopie,Distopia,Dystopie,Distopia,Distopía,ディストピア
+theme.surveillance,Surveillance,Слежка,Surveillance,Vigilância,Überwachung,Sorveglianza,Vigilancia,監視
+theme.language,Language,Язык,Langage,Língua,Sprache,Linguaggio,Lenguaje,言語
+theme.climate,Climate,Климат,Climat,Clima,Klima,Clima,Clima,気候
+meta.about_desc,"About Alexey Belenkiy — science fiction about time, memory, and power.","Об Алексее Беленьком — фантастика о времени, памяти и власти.","À propos d'Alexey Belenkiy — la science-fiction du temps, de la mémoire et du pouvoir.","Sobre Alexey Belenkiy — ficção científica sobre tempo, memória e poder.","Über Alexey Belenkiy — Science-Fiction über Zeit, Erinnerung und Macht.","Su Alexey Belenkiy — fantascienza su tempo, memoria e potere.","Sobre Alexey Belenkiy — ciencia ficción sobre el tiempo, la memoria y el poder.",アレクセイ・ベレンキーについて — 時間、記憶、権力を描くSF。

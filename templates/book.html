@@ -1,0 +1,34 @@
+<nav class="crumbs" aria-label="{{T_NAV}}">
+  <a href="{{REL}}{{LANG}}/books/">{{T_BOOKS}}</a><span class="sep" aria-hidden="true">/</span><span class="mono-meta">{{B_CRUMB}}</span>
+</nav>
+<div class="book-title-wrap" style="--accent-book:{{B_ACCENT}}">
+  <h1 class="book-title fx-erode" data-accent="{{B_ACCENT}}">{{B_TITLE}}</h1>
+  <p class="book-tagline">{{B_TAGLINE}}</p>
+</div>
+<section class="section book-layout" style="--accent-book:{{B_ACCENT}}; margin-top:clamp(32px,5vw,72px)">
+  <div class="cover-col">
+    <div class="cover-box" data-fx data-book="{{B_ID}}" data-accent="{{B_ACCENT}}">
+      <img src="{{REL}}{{B_COVER}}"{{B_SRCSET}} alt="{{B_COVER_ALT}}" width="800" height="1200" fetchpriority="high">
+      <span class="tick tk-a" aria-hidden="true"></span><span class="tick tk-b" aria-hidden="true"></span>
+    </div>
+    <div class="cover-reflect" aria-hidden="true"></div>
+    <dl class="plate">
+{{B_PLATE}}
+    </dl>
+  </div>
+  <div class="book-body">
+{{B_SERIES_NOTE}}
+    <div class="synopsis" data-reveal>
+{{B_SYNOPSIS}}
+    </div>
+    <div class="themes-row" data-reveal>
+{{B_THEME_PILLS}}
+    </div>
+{{B_EXCERPT_BTN}}
+    <div class="buy" id="buy" data-reveal>
+      <span class="kicker">{{B_BUY_HEAD}}</span>
+{{B_BUY_GROUPS}}
+    </div>
+  </div>
+</section>
+{{B_SIBLINGS}}

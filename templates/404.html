@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — {{SITE_NAME}}</title>
+<meta name="robots" content="noindex">
+<style>
+html{background:#0D0B09;color:#EDE6DC;color-scheme:dark}
+body{margin:0;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.nf{min-height:100svh;display:grid;align-content:center;justify-items:start;padding:0 clamp(20px,6vw,90px)}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#A79D8F;margin:0}
+.nf-code{font-size:clamp(90px,24vw,400px);font-weight:900;line-height:.9;letter-spacing:-.02em;
+  background:linear-gradient(175deg,#EDE6DC 45%,#D9A05B 140%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nf p.msg{margin:26px 0 0;font-size:clamp(17px,2vw,24px);color:#A79D8F;max-width:34ch;line-height:1.6}
+.btn{display:inline-flex;gap:12px;margin-top:34px;border:1px solid #D9A05B;padding:14px 22px;color:#EDE6DC;
+  text-decoration:none;font-size:13px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s cubic-bezier(.22,.61,.2,1)}
+.btn::after{content:"→";color:#D9A05B}
+.btn:hover{background:#D9A05B;color:#14100A}
+.btn:hover::after{color:#14100A}
+.btn:focus-visible{outline:2px solid #D9A05B;outline-offset:3px}
+[hidden]{display:none !important}
+::selection{background:#D9A05B;color:#14100A}
+</style>
+</head>
+<body>
+{{NF_BLOCKS}}
+<script>
+(function(){
+  var langs = "{{LANGS}}".split(",");
+  var segs = location.pathname.split("/").filter(Boolean);
+  var ix = -1;
+  for (var i = 0; i < segs.length; i++) { if (langs.indexOf(segs[i]) >= 0) { ix = i; break; } }
+  var lang = ix >= 0 ? segs[ix] : "en";
+  var root = ix > 0 ? "/" + segs.slice(0, ix).join("/") + "/" : "/";
+  document.documentElement.lang = lang;
+  var blocks = document.querySelectorAll("[data-nf]");
+  for (var b = 0; b < blocks.length; b++) blocks[b].hidden = blocks[b].getAttribute("data-nf") !== lang;
+  var homes = document.querySelectorAll("[data-home]");
+  for (var h = 0; h < homes.length; h++) homes[h].setAttribute("href", root + homes[h].getAttribute("data-home") + "/");
+})();
+</script>
+</body>
+</html>
