@@ -3,9 +3,7 @@
 Static, multilingual book storefront for **Alexey Belenkiy** — science
 fiction / dystopia / time travel. No framework, no bundler, no CMS, no
 database, no CDNs, no analytics. Plain HTML + CSS + ES-module JS,
-prerendered by a single stdlib-Python generator. Lives under
-`storefront/` of the `hallucinophonics/music` monorepo (Cloudflare
-Pages *root directory* = `storefront`; see `DEPLOY.md`).
+prerendered by a single stdlib-Python generator.
 
 - **8 languages** — en ru fr pt de it es ja, language-first URLs
   (`/{lang}/`, `/{lang}/books`, `/{lang}/books/{slug}`, `/{lang}/about`,

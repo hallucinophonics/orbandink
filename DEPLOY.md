@@ -3,21 +3,14 @@
 Target: **GitHub repo + Cloudflare Pages**. The repo *is* the deploy
 artifact — build output is committed; Cloudflare runs nothing.
 
-This site lives under `storefront/` of the `hallucinophonics/music`
-monorepo, so Pages must be pointed at that subdirectory (Cloudflare's
-*root directory* setting). To extract it into its own repo later, use
-`git subtree split --prefix=storefront` and drop the root-directory
-setting.
-
 ## First deploy
 
 Cloudflare Dashboard → Workers & Pages → **Create → Pages →
-Connect to Git** → pick the `music` repo:
+Connect to Git** → pick this repo:
 
 | Setting          | Value        |
 |------------------|--------------|
 | Production branch| `main`       |
-| Root directory   | `storefront` |
 | Build command    | *(none — leave empty)* |
 | Build output dir | `/`          |
 
@@ -37,7 +30,6 @@ sitemap.xml all derive from it.
 
     # edit data/*.csv (and covers/)
     python3 build.py
-    git add . && git commit -m "storefront: content: …" && git push
+    git add -A && git commit -m "content: …" && git push
 
-Pages redeploys on push (only when files under `storefront/` changed).
-Nothing else to configure.
+Pages redeploys on push. Nothing else to configure.
