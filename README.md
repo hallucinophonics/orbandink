@@ -3,11 +3,13 @@
 Static, multilingual book storefront for **Alexey Belenkiy** — science
 fiction / dystopia / time travel. No framework, no bundler, no CMS, no
 database, no CDNs, no analytics. Plain HTML + CSS + ES-module JS,
-prerendered by a single stdlib-Python generator.
+prerendered by a single stdlib-Python generator. Lives under
+`storefront/` of the `hallucinophonics/music` monorepo (Cloudflare
+Pages *root directory* = `storefront`; see `DEPLOY.md`).
 
 - **8 languages** — en ru fr pt de it es ja, language-first URLs
-  (`/{lang}/`, `/{lang}/books`, `/{lang}/books/{slug}`, `/{lang}/about`),
-  full hreflang alternates, per-language store links.
+  (`/{lang}/`, `/{lang}/books`, `/{lang}/books/{slug}`, `/{lang}/about`,
+  `/{lang}/privacy`), full hreflang alternates, per-language store links.
 - **All content lives in `data/*.csv`.** Books, translations, buy links,
   UI strings — everything is a CSV row.
 - **The `/{lang}/` trees are build output.** Never hand-edit them.
@@ -28,14 +30,17 @@ prerendered by a single stdlib-Python generator.
    (`book_id,lang,store,format,url`; formats: `ebook | paperback |
    hardcover | audiobook`). Pages show the visitor's language rows,
    else the `en` rows.
-4. Drop the cover in `covers/` (2:3, ≥800px wide).
-5. `python3 build.py` → commit → push. Done.
+4. Optional: `data/praise.csv` — review quotes (`book_id,lang,quote,
+   source`), shown on the book page between synopsis and themes;
+   language rows fall back to `en`, no rows → no section.
+5. Drop the cover in `covers/` (2:3, ≥800px wide).
+6. `python3 build.py` → commit → push. Done.
 
 ### Add or adjust translations
 Edit the language columns in `data/i18n.csv` (UI strings) or the
-language rows in `data/books_i18n.csv` / `data/about_i18n.csv`, then
-`python3 build.py` and push. A new theme token in `books.csv` needs a
-matching `theme.*` row in `i18n.csv`.
+language rows in `data/books_i18n.csv` / `data/about_i18n.csv` /
+`data/privacy_i18n.csv`, then `python3 build.py` and push. A new theme
+token in `books.csv` needs a matching `theme.*` row in `i18n.csv`.
 
 ## One-time setup: fonts
 

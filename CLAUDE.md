@@ -23,13 +23,17 @@ none, output dir: `/`).
   (`tools/fetch_fonts.py` regenerates them + `assets/css/fonts.css`).
 
 ## Workflow
-- Content changes (CSV rows, covers, translations): commit straight to
-  `main` after running `build.py`.
+- This folder lives inside the `hallucinophonics/music` monorepo —
+  follow that repo's branch workflow, and prefix commit subjects with
+  `storefront:` so they sort with the other subprojects.
+- Content changes (CSV rows, covers, translations): run `build.py`,
+  commit source + regenerated output together.
 - Structural changes (templates, build.py, assets/js, assets/css):
-  work on a branch, verify locally (`python3 -m http.server`, check
-  `/en/`, `/ru/`, `/ja/`, reduced-motion, JS disabled), then merge.
-- Commit messages: short imperative, prefixed `content:` / `site:` /
-  `fx:` / `build:`. **No Co-Authored-By trailers.**
+  verify locally (`python3 -m http.server`, check `/en/`, `/ru/`,
+  `/ja/`, reduced-motion, JS disabled) before pushing.
+- Commit messages: short imperative, prefixed `storefront:` then
+  `content:` / `site:` / `fx:` / `build:`. **No Co-Authored-By
+  trailers.**
 
 ## Checks before pushing structural work
 - `python3 build.py` exits clean (validation warns on missing covers /

@@ -254,6 +254,10 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
 .contact-list { display: grid; gap: 10px; margin-top: 34px; }
 .contact-list a { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; }
 
+/* ---- plain prose pages (privacy) ---- */
+.prose { max-width: 62ch; font-size: clamp(17px, 1.15vw, 19px); }
+.prose p + p { margin-top: 1em; }
+
 /* striped placeholder — drop real art here */
 .ph {
   position: relative; border: 1px solid var(--line);
@@ -281,6 +285,26 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
 .series-note a:hover { text-decoration: underline; }
 
 .themes-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+
+/* praise quotes */
+.praise { max-width: 60ch; margin-top: 34px; border-top: 1px solid var(--line); padding-top: 22px; }
+.praise > .kicker { display: block; margin-bottom: 20px; }
+.praise blockquote { position: relative; margin: 0 0 24px; padding-left: 22px; }
+.praise blockquote:last-child { margin-bottom: 0; }
+.praise blockquote::before {
+  content: ""; position: absolute; left: 0; top: 3px; bottom: 3px;
+  width: 1px; background: var(--accent-book, var(--accent));
+}
+.praise blockquote p {
+  font-family: var(--font-title); font-style: italic;
+  font-size: clamp(18px, 1.5vw, 22px); line-height: 1.45; margin: 0 0 8px;
+}
+html[lang="ja"] .praise blockquote p { font-style: normal; }
+.praise cite {
+  font-style: normal; font-family: var(--font-mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-dim);
+}
+.praise cite::before { content: "— "; color: var(--accent-book, var(--accent)); }
 
 .plate {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));

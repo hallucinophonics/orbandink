@@ -43,6 +43,8 @@ BOOKS = read_csv("books")
 BI18N = read_csv("books_i18n")
 LINKS = read_csv("store_links")
 ABOUT = {r["lang"]: r for r in read_csv("about_i18n")}
+PRIVACY = {r["lang"]: r for r in read_csv("privacy_i18n")}
+PRAISE = read_csv("praise")
 
 DOMAIN = SITE["domain"]
 YEAR = datetime.date.today().year
@@ -91,6 +93,12 @@ def links_for(book_id, lang):
     return mine if mine else [r for r in rows if r["lang"] == "en"]
 
 
+def praise_for(book_id, lang):
+    rows = [r for r in PRAISE if r["book_id"] == book_id]
+    mine = [r for r in rows if r["lang"] == lang]
+    return mine if mine else [r for r in rows if r["lang"] == "en"]
+
+
 def themes_of(book):
     return [s.strip() for s in book["themes"].split(";") if s.strip()]
 
@@ -103,7 +111,8 @@ def theme_key(tok):
 
 def page_path(lang, kind, slug=None):
     return {"home": f"{lang}/", "books": f"{lang}/books/",
-            "book": f"{lang}/books/{slug}/", "about": f"{lang}/about/"}[kind]
+            "book": f"{lang}/books/{slug}/", "about": f"{lang}/about/",
+            "privacy": f"{lang}/privacy/"}[kind]
 
 
 def canonical(path):
@@ -303,6 +312,12 @@ def portrait_note(lang):
     return esc(row.get("portrait_note", "AUTHOR PORTRAIT"))
 
 
+def privacy_paragraphs(lang):
+    row = PRIVACY.get(lang) or PRIVACY.get("en") or {}
+    paras = [p.strip() for p in re.split(r"\n\s*\n", row.get("body", "")) if p.strip()]
+    return "\n".join(f"      <p>{esc(p)}</p>" for p in paras)
+
+
 def socials(fmt):
     out = []
     for key, val in SITE.items():
@@ -329,7 +344,7 @@ def lang_links(lang, kind, rel, slug=None):
 
 def base_page(lang, kind, content, *, title, desc, og_type="website",
               og_image=None, slug=None, jsonld="", body_class=""):
-    depth = {"home": 1, "books": 2, "book": 3, "about": 2}[kind]
+    depth = {"home": 1, "books": 2, "book": 3, "about": 2, "privacy": 2}[kind]
     rel = "../" * depth
     self_path = page_path(lang, kind, slug)
     panel, foot = lang_links(lang, kind, rel, slug)
@@ -364,6 +379,7 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
         "T_RIGHTS": esc(t("footer.rights", lang)),
         "T_TAGLINE": esc(t("meta.tagline", lang)),
         "EMAIL": esc(SITE["contact_email"]),
+        "T_PRIVACY": esc(t("privacy.title", lang)),
         "SOCIALS": socials('    <span class="mono-meta"><a href="{url}" target="_blank" rel="noopener">{label} ↗</a></span>'),
         "T_FOOT_LANGS": esc(t("footer.langs", lang)),
         "FOOT_LANGS": foot,
@@ -526,6 +542,16 @@ def build_book(lang, book):
     synopsis = "\n".join(f'      <p>{esc(p.strip())}</p>'
                          for p in L["synopsis"].split("\n") if p.strip())
 
+    praise = ""
+    quotes = praise_for(book["id"], lang)
+    if quotes:
+        blocks = "\n".join(
+            f'      <blockquote><p>{esc(r["quote"])}</p><cite>{esc(r["source"])}</cite></blockquote>'
+            for r in quotes)
+        praise = ('    <div class="praise" data-reveal>\n'
+                  f'      <span class="kicker">{esc(t("book.praise", lang))}</span>\n'
+                  f'{blocks}\n    </div>')
+
     content = render("book", {
         "REL": rel,
         "T_NAV": esc(t("a11y.nav", lang)),
@@ -541,6 +567,7 @@ def build_book(lang, book):
         "B_PLATE": "\n".join(plate),
         "B_SERIES_NOTE": series_note,
         "B_SYNOPSIS": synopsis,
+        "B_PRAISE": praise,
         "B_THEME_PILLS": theme_pills,
         "B_EXCERPT_BTN": excerpt,
         "B_BUY_HEAD": esc(t(cta_key(book["status"]), lang)),
@@ -577,6 +604,21 @@ def build_about(lang):
         body_class="page-about"))
 
 
+def build_privacy(lang):
+    content = render("privacy", {
+        "HERO_NAME": esc(t("hero.name", lang)),
+        "T_PRIVACY_TITLE": esc(t("privacy.title", lang)),
+        "PRIVACY_BODY": privacy_paragraphs(lang),
+        "T_CONTACT": esc(t("about.contact", lang)),
+        "EMAIL": esc(SITE["contact_email"]),
+    })
+    write(page_path(lang, "privacy") + "index.html", base_page(
+        lang, "privacy", content,
+        title=f'{t("privacy.title", lang)} — {SITE["site_name"]}',
+        desc=t("meta.privacy_desc", lang),
+        body_class="page-privacy"))
+
+
 # ---------------------------------------------------------------- root files
 
 def build_root():
@@ -607,6 +649,7 @@ def build_root():
         "/ /en/ 302",
         "/books /en/books/ 302",
         "/about /en/about/ 302",
+        "/privacy /en/privacy/ 302",
     ]) + "\n")
 
     write("robots.txt",
@@ -614,7 +657,8 @@ def build_root():
 
     urls = []
     for kind, slug_list in (("home", [None]), ("books", [None]),
-                            ("book", [b["slug"] for b in BOOKS]), ("about", [None])):
+                            ("book", [b["slug"] for b in BOOKS]), ("about", [None]),
+                            ("privacy", [None])):
         for slug in slug_list:
             for code in CODES:
                 alts = "".join(
@@ -698,6 +742,7 @@ def main():
         for book in BOOKS:
             build_book(code, book)
         build_about(code)
+        build_privacy(code)
     build_root()
     print(f"wrote {len(written)} files"
           + (f" · {len(warnings)} warning(s)" if warnings else ""))

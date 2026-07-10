@@ -864,4 +864,100 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/about/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/about/"/>
   </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/ru/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/fr/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/pt/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/de/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/it/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/es/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
+  <url>
+    <loc>https://alexeybelenkiy.com/ja/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alexeybelenkiy.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alexeybelenkiy.com/ru/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alexeybelenkiy.com/fr/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://alexeybelenkiy.com/pt/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alexeybelenkiy.com/de/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://alexeybelenkiy.com/it/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://alexeybelenkiy.com/es/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alexeybelenkiy.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alexeybelenkiy.com/en/privacy/"/>
+  </url>
 </urlset>
