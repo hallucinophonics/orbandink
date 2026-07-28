@@ -390,7 +390,10 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
 
 def build_home(lang):
     rel = "../"
-    featured = next(b for b in BOOKS if b["id"] == SITE["featured_book"])
+    featured = next((b for b in BOOKS if b["id"] == SITE["featured_book"]), None)
+    if featured is None:
+        sys.exit(f"FATAL: site.csv featured_book={SITE['featured_book']!r} is not "
+                 f"in books.csv. Available: {', '.join(b['id'] for b in BOOKS) or 'none'}")
     fl = loc(featured, lang)
     others = sorted((b for b in BOOKS if b["id"] != featured["id"]),
                     key=lambda b: int(b["year"] or 0), reverse=True)[:3]

@@ -1,7 +1,6 @@
 id,slug,series,series_order,year,status,pages,isbn,cover,accent,themes
-chronofall,chronofall,The Meridian Loop,1,2022,published,384,978-0-00-000000-1,covers/chronofall.jpg,#E0B45C,time travel;paradox
-paradox-tide,paradox-tide,The Meridian Loop,2,2023,published,412,978-0-00-000000-2,covers/paradox-tide.jpg,#C1754F,time travel;memory
-ninth-iteration,ninth-iteration,The Meridian Loop,3,2026,preorder,368,978-0-00-000000-3,covers/ninth-iteration.jpg,#D8C49A,time travel;identity
-static-empire,static-empire,Ashfall Protocol,1,2021,published,352,978-0-00-000000-4,covers/static-empire.jpg,#B85C38,dystopia;surveillance
-silence-bureau,silence-bureau,Ashfall Protocol,2,2024,published,396,978-0-00-000000-5,covers/silence-bureau.jpg,#C4867E,dystopia;language
-second-suns,second-suns,,,2026,coming_soon,,,covers/second-suns.jpg,#D97757,dystopia;climate;time travel
+the-clockmaker-s-tide,the-clockmaker-s-tide,,,,coming_soon,21,,covers/the-clockmaker-s-tide.jpg,,
+linewalker,linewalker,The Calorate,1,,coming_soon,221,,covers/linewalker.jpg,#E4863A,climate;dystopia
+the-golden-shore,the-golden-shore,The Calorate,2,,coming_soon,291,,covers/the-golden-shore.jpg,#D8B24A,
+the-even-cold,the-even-cold,The Calorate,3,,coming_soon,193,,covers/the-even-cold.jpg,#C4453C,climate
+venice-2068-a-d,venice-2068-a-d,World Without Humans,0,,coming_soon,171,,covers/venice-2068-a-d.jpg,#C9A24B,climate
