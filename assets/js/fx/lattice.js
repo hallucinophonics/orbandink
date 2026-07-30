@@ -1,9 +1,10 @@
 /* lattice.js — glyph-lattice hero.
-   The author's name rendered as hundreds of small characters (sampled
-   from the book titles across scripts, timestamps, binary) that drift,
-   scatter under the cursor, heal, and periodically migrate to re-form
-   the word in another script (EN → RU → JA). 2D canvas; the real <h1>
-   stays in the DOM underneath. */
+   The house's bylines rendered as hundreds of small characters (sampled
+   from the names and book titles across scripts, timestamps, binary)
+   that drift, scatter under the cursor, heal, and periodically migrate
+   to re-form the next name in the rotation — the real name and the pen
+   names, each cycling EN → RU → JA. 2D canvas; the real <h1> stays in
+   the DOM underneath. */
 
 import * as sched from './scheduler.js';
 
@@ -15,7 +16,11 @@ export function init(hero) {
   let words;
   try { words = JSON.parse(h1.dataset.words || '{}'); } catch { return null; }
   const activeLang = document.documentElement.lang || 'en';
-  const cycle = [...new Set([words[activeLang], words.en, words.ru, words.ja].filter(Boolean))];
+  // data-words is a frame LIST (the house's bylines rotating through scripts);
+  // the legacy {lang: word} dict form still works for older built pages.
+  const cycle = Array.isArray(words)
+    ? [...new Set(words.filter(Boolean))]
+    : [...new Set([words[activeLang], words.en, words.ru, words.ja].filter(Boolean))];
   if (!cycle.length) return null;
   const pool = (h1.dataset.glyphs || '01') + '0101··:/—';
 

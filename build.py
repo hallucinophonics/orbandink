@@ -227,9 +227,14 @@ def card(book, lang, rel):
 
 
 def glyph_pool():
-    """Characters the hero lattice is built from: book titles across
-    scripts + digits/timestamps/binary."""
+    """Characters the hero lattice is built from: the bylines and book titles
+    across scripts + digits/timestamps/binary. Byline glyphs go in first so
+    every script the name rotation reaches survives the 96-glyph cap."""
     chars = []
+    for key in ("hero.word", "hero.word.bianco",
+                "hero.word.weiss", "hero.word.blanc"):
+        for code in ("en", "ru", "ja"):
+            chars.extend(t(key, code).replace("|", ""))
     for r in BI18N:
         if r["lang"] in ("en", "ru", "ja"):
             chars.extend(r["title"])
@@ -241,10 +246,23 @@ def glyph_pool():
 
 
 def hero_words(lang):
-    words = {code: t("hero.word", code).replace("|", "\n") for code in ("en", "ru", "ja")}
-    if lang not in ("en", "ru", "ja"):
-        words[lang] = t("hero.word", lang).replace("|", "\n")
-    return json.dumps(words, ensure_ascii=False)
+    """The hero lattice's morph frames: all four of the house's bylines — the
+    real name and the three pen names — rotating through the en/ru/ja scripts,
+    stepped together (4 and 3 are coprime, so all twelve name×script frames
+    occur and consecutive frames change both). The page's own script leads so
+    the first frame matches the static H1 underneath the canvas."""
+    identities = ["hero.word", "hero.word.bianco",
+                  "hero.word.weiss", "hero.word.blanc"]
+    scripts = ["en", "ru", "ja"]
+    if lang in scripts:
+        scripts = [lang] + [s for s in scripts if s != lang]
+    frames = []
+    for i in range(len(identities) * len(scripts)):
+        word = t(identities[i % len(identities)], scripts[i % len(scripts)])
+        word = word.replace("|", "\n")
+        if word not in frames:
+            frames.append(word)
+    return json.dumps(frames, ensure_ascii=False)
 
 
 def ticker_html(lang):
