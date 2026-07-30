@@ -1,6 +1,5 @@
 id,slug,series,series_order,year,status,pages,isbn,cover,accent,themes
-the-clockmaker-s-tide,the-clockmaker-s-tide,,,,coming_soon,21,,covers/the-clockmaker-s-tide.jpg,,
-linewalker,linewalker,The Calorate,1,,coming_soon,221,,covers/linewalker.jpg,#E4863A,climate;dystopia
-the-golden-shore,the-golden-shore,The Calorate,2,,coming_soon,291,,covers/the-golden-shore.jpg,#D8B24A,
-the-even-cold,the-even-cold,The Calorate,3,,coming_soon,193,,covers/the-even-cold.jpg,#C4453C,climate
-venice-2068-a-d,venice-2068-a-d,World Without Humans,0,,coming_soon,171,,covers/venice-2068-a-d.jpg,#C9A24B,climate
+linewalker,linewalker,The Calorate,1,,coming_soon,241,,covers/linewalker.jpg,#E4863A,climate;dystopia
+the-golden-shore,the-golden-shore,The Calorate,2,,coming_soon,345,,covers/the-golden-shore.jpg,#D8B24A,
+the-even-cold,the-even-cold,The Calorate,3,,coming_soon,219,,covers/the-even-cold.jpg,#C4453C,climate
+venice-2068-a-d,venice-2068-a-d,World Without Humans,0,,coming_soon,197,,covers/venice-2068-a-d.jpg,#C9A24B,climate
