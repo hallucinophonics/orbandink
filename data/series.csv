@@ -1,12 +1,12 @@
-series,url
-World Without Humans,https://worldwithouthumans.com
-The Calorate,https://PLACEHOLDER
-Terms & Conditions,https://PLACEHOLDER
-The Barycentric Creed,https://PLACEHOLDER
-The Breathing Dark,https://PLACEHOLDER
-The Calculus of Fortune,https://PLACEHOLDER
-The Drowned Houses,https://PLACEHOLDER
-The Night Tenant,https://PLACEHOLDER
-The Relic Protocol,https://PLACEHOLDER
-The Seventh Watch,https://PLACEHOLDER
-The Universal Menu,https://PLACEHOLDER
+series,url,ordinal_key
+World Without Humans,https://worldwithouthumans.com,
+The Calorate,https://PLACEHOLDER,
+Terms & Conditions,https://PLACEHOLDER,
+The Barycentric Creed,https://PLACEHOLDER,
+The Breathing Dark,https://PLACEHOLDER,
+The Calculus of Fortune,https://PLACEHOLDER,
+The Drowned Houses,https://PLACEHOLDER,
+The Night Tenant,https://PLACEHOLDER,
+The Relic Protocol,https://PLACEHOLDER,
+The Seventh Watch,https://PLACEHOLDER,
+The Universal Menu,https://PLACEHOLDER,series.course

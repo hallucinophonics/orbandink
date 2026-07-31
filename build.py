@@ -55,6 +55,17 @@ PRIVACY = {r["lang"]: r for r in read_csv("privacy_i18n")}
 SERIES_SITES = {r["series"]: r["url"] for r in read_csv("series")
                 if r["url"] and not any(tok in r["url"] for tok in
                                         ("PLACEHOLDER", "example.com", "TODO"))}
+# A series may brand its ordinal (The Universal Menu numbers its books as
+# menu courses); the label lives in i18n so every language uses its own
+# restaurant word (Gang, Service, Portata…). Empty key → plain number.
+SERIES_ORDINAL = {r["series"]: r.get("ordinal_key", "") for r in read_csv("series")}
+
+
+def series_no(book, lang):
+    """The series-branded ordinal: 'Course 01' / 'Gang 01' / plain '01'."""
+    n = f'{int(book["series_order"]):02d}'
+    key = SERIES_ORDINAL.get(book["series"], "")
+    return f'{t(key, lang)} {n}' if key else n
 PRAISE = read_csv("praise")
 
 DOMAIN = SITE["domain"]
@@ -327,7 +338,7 @@ def f_data(book, lang):
     parts = []
     if book["year"]:
         parts.append(esc(book["year"]))
-    parts.append(esc(f'{book["series"]} {int(book["series_order"]):02d}'
+    parts.append(esc(f'{book["series"]} {series_no(book, lang)}'
                      if book["series"] else t("book.standalone", lang)))
     parts.append(esc(t("status." + book["status"], lang)))
     if book["pages"]:
@@ -506,7 +517,7 @@ def build_home(lang):
         "F_SRCSET": srcset_for(featured["cover"], rel),
         "F_COVER_ALT": esc(fl["title"]),
         "T_FEATURED": esc(t("home.featured", lang)),
-        "F_SERIES_META": esc(f" · {featured['series']} {int(featured['series_order']):02d}"
+        "F_SERIES_META": esc(f" · {featured['series']} {series_no(featured, lang)}"
                              if featured["series"] else f" · {t('book.standalone', lang)}"),
         "F_URL": rel + page_path(lang, "book", featured["slug"]),
         "F_WORLD_LINK": (
@@ -605,7 +616,7 @@ def build_book(lang, book):
     plate = []
     for label_key, val in (
             ("plate.year", book["year"]),
-            ("plate.series", f'{book["series"]} · {int(book["series_order"]):02d}' if book["series"] else ""),
+            ("plate.series", f'{book["series"]} · {series_no(book, lang)}' if book["series"] else ""),
             ("plate.pages", book["pages"]),
             ("plate.isbn", book["isbn"]),
             ("plate.status", t("status." + book["status"], lang))):
@@ -674,7 +685,7 @@ def build_book(lang, book):
         "REL": rel,
         "T_NAV": esc(t("a11y.nav", lang)),
         "T_BOOKS": esc(t("nav.books", lang)),
-        "B_CRUMB": esc(f'{book["series"]} · {int(book["series_order"]):02d}' if book["series"] else t("book.standalone", lang)),
+        "B_CRUMB": esc(f'{book["series"]} · {series_no(book, lang)}' if book["series"] else t("book.standalone", lang)),
         "B_ACCENT": accent,
         "B_TITLE": esc(L["title"]),
         "B_TAGLINE": esc(L["tagline"]),
