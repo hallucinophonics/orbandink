@@ -1,9 +1,10 @@
-# alexeybelenkiy.com
+# orbandink.co.uk
 
-Static, multilingual book storefront for **Alexey Belenkiy** — science
-fiction / dystopia / time travel. No framework, no bundler, no CMS, no
-database, no CDNs, no analytics. Plain HTML + CSS + ES-module JS,
-prerendered by a single stdlib-Python generator.
+Static, multilingual home of **Orb & Ink** — a science-fiction imprint
+publishing series and standalones under four bylines (Alexey Belenkiy,
+Alessio Bianco, A. P. Weiss, Alec Blanc). No framework, no bundler, no
+CMS, no database, no CDNs, no analytics. Plain HTML + CSS + ES-module
+JS, prerendered by a single stdlib-Python generator.
 
 - **8 languages** — en ru fr pt de it es ja, language-first URLs
   (`/{lang}/`, `/{lang}/books`, `/{lang}/books/{slug}`, `/{lang}/about`,
@@ -13,7 +14,7 @@ prerendered by a single stdlib-Python generator.
 - **The `/{lang}/` trees are build output.** Never hand-edit them.
 
 > Everything marked `PLACEHOLDER` (synopses, store URLs, socials,
-> covers, ISBNs, bio) is invented seed content — replace it in the CSVs
+> covers, ISBNs) is invented seed content — replace it in the CSVs
 > and `covers/`, then rebuild.
 
 ## Workflows
@@ -31,14 +32,18 @@ prerendered by a single stdlib-Python generator.
 4. Optional: `data/praise.csv` — review quotes (`book_id,lang,quote,
    source`), shown on the book page between synopsis and themes;
    language rows fall back to `en`, no rows → no section.
+   Optional: `data/series.csv` — series with a dedicated world-site
+   (`series,url`); book pages and the featured band link out to it.
+   `PLACEHOLDER` urls stay hidden until the real domain exists.
 5. Drop the cover in `covers/` (2:3, ≥800px wide).
 6. `python3 build.py` → commit → push. Done.
 
 ### Add or adjust translations
-Edit the language columns in `data/i18n.csv` (UI strings) or the
-language rows in `data/books_i18n.csv` / `data/about_i18n.csv` /
-`data/privacy_i18n.csv`, then `python3 build.py` and push. A new theme
-token in `books.csv` needs a matching `theme.*` row in `i18n.csv`.
+Edit the language columns in `data/i18n.csv` (UI strings — including
+the `author.*` roster rows) or the language rows in
+`data/books_i18n.csv` / `data/privacy_i18n.csv`, then
+`python3 build.py` and push. A new theme token in `books.csv` needs a
+matching `theme.*` row in `i18n.csv`.
 
 ## One-time setup: fonts
 

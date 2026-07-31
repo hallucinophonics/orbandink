@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alexeybelenkiy.com/sitemap.xml
+Sitemap: https://orbandink.co.uk/sitemap.xml

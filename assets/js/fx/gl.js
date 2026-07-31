@@ -88,11 +88,15 @@ void main(){
   col.r = texture2D(uTex, uv + off).r;
   col.g = texture2D(uTex, uv).g;
   col.b = texture2D(uTex, uv - off).b;
-  // at rest: warm duotone time-grade; hover clears it — the original art
+  // at rest: a deep duotone plate — highlights crushed so the art (and
+  // its own typeset title) sinks to texture and the rained-in canvas
+  // title carries the name; hover clears the plate to the original art
   float luma = dot(col, vec3(0.299,0.587,0.114));
-  vec3 duo = mix(vec3(0.06,0.05,0.045), uAccent, smoothstep(0.05,0.95,luma));
-  float g = (0.32 + 0.10*fract(uSeed*5.7)) * (1.0 - 0.92*uHover);
+  float shaped = smoothstep(0.04, 1.55, luma);
+  vec3 duo = mix(vec3(0.05,0.045,0.04), uAccent*0.85, shaped);
+  float g = (0.78 + 0.08*fract(uSeed*5.7)) * (1.0 - 0.97*uHover);
   col = mix(col, duo, g);
+  col *= 0.72 + 0.28*uHover;
   float grain = (hash(vUv*uRes + fract(uTime)*7.0) - 0.5) * (0.05*(1.0-0.6*uHover) + 0.04*fract(uSeed*3.3));
   col += grain;
   col *= smoothstep(1.5, 0.42, length(vUv-0.5));
@@ -127,7 +131,7 @@ function compile(fsrc) {
 
 function hex(c) {
   const m = /^#?([0-9a-f]{6})$/i.exec(c || '');
-  if (!m) return [0.85, 0.63, 0.36];
+  if (!m) return [0.84, 0.68, 0.37];
   const v = parseInt(m[1], 16);
   return [(v >> 16 & 255) / 255, (v >> 8 & 255) / 255, (v & 255) / 255];
 }
@@ -290,7 +294,8 @@ function drawCover(e, t, dt, w, h) {
   gl.bindTexture(gl.TEXTURE_2D, S.tex);
   gl.uniform1i(pr.u.uTex, 0);
   gl.uniform1f(pr.u.uTime, staticMode ? 3.3 : t);
-  gl.uniform1f(pr.u.uHover, S.hoverS);
+  // designed stillness shows the true art — a plate nobody can lift is a wall
+  gl.uniform1f(pr.u.uHover, staticMode ? 1 : S.hoverS);
   gl.uniform1f(pr.u.uSeed, S.seed);
   gl.uniform1f(pr.u.uMirror, e.src ? 1 : 0);
   gl.uniform1f(pr.u.uMirrorK, mk);
@@ -402,6 +407,14 @@ export function registerCover(box, accentHex, seedStr) {
     }, { passive: true });
   }
   effects.push(e);
+}
+
+/** external reveal control for a registered cover (touch scroll-reveal:
+    pointerenter never fires, so covertitle.js drives the hover state) */
+export function setCoverHover(box, on) {
+  if (!gl) return;
+  const e = effects.find(x => x.el === box && x.type === 'cover' && !x.src);
+  if (e) e.hover = !!on;
 }
 
 /** reflection strip below a registered cover: same texture, mirrored,

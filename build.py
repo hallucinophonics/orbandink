@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-build.py — static site generator for alexeybelenkiy.com
---------------------------------------------------------
-Prerenders every page for every language from data/*.csv + templates/.
+build.py — static site generator for orbandink.co.uk
+------------------------------------------------------
+The Orb & Ink publisher storefront: the imprint's catalogue and its
+authors, prerendered for every language from data/*.csv + templates/.
 Python 3 stdlib only. Pillow is OPTIONAL — when installed it also makes
 responsive cover sizes (covers/{id}-480.jpg / -800.jpg) and OG images
 (og/{id}.jpg); without it those steps are skipped gracefully.
@@ -42,8 +43,12 @@ I18N = {r["key"]: r for r in read_csv("i18n")}
 BOOKS = read_csv("books")
 BI18N = read_csv("books_i18n")
 LINKS = read_csv("store_links")
-ABOUT = {r["lang"]: r for r in read_csv("about_i18n")}
 PRIVACY = {r["lang"]: r for r in read_csv("privacy_i18n")}
+# Some series have a dedicated world-site (hand-owned data/series.csv);
+# PLACEHOLDER urls stay hidden until the real domain exists.
+SERIES_SITES = {r["series"]: r["url"] for r in read_csv("series")
+                if r["url"] and not any(tok in r["url"] for tok in
+                                        ("PLACEHOLDER", "example.com", "TODO"))}
 PRAISE = read_csv("praise")
 
 DOMAIN = SITE["domain"]
@@ -317,17 +322,32 @@ def f_data(book, lang):
     return "\n".join(f'        <span class="ds">{p}</span>' for p in parts)
 
 
-def bio_paragraphs(lang, first_only=False):
-    row = ABOUT.get(lang) or ABOUT.get("en") or {}
-    paras = [p.strip() for p in re.split(r"\n\s*\n", row.get("bio", "")) if p.strip()]
-    if first_only:
-        paras = paras[:1]
-    return "\n".join(f"      <p>{esc(p)}</p>" for p in paras)
+# The house's bylines, roster order. Belenkiy's display name localizes
+# (his name has native forms); pen names stay Latin in every script.
+AUTHORS = [("belenkiy", None), ("bianco", "Alessio Bianco"),
+           ("weiss", "A. P. Weiss"), ("blanc", "Alec Blanc")]
 
 
-def portrait_note(lang):
-    row = ABOUT.get(lang) or ABOUT.get("en") or {}
-    return esc(row.get("portrait_note", "AUTHOR PORTRAIT"))
+def author_blocks(lang, rel):
+    blocks = []
+    for i, (key, name) in enumerate(AUTHORS, 1):
+        display = name or t("hero.name", lang)
+        if key == "belenkiy":
+            status = (f'<a class="btn btn--ghost" href="{rel}{lang}/books/">'
+                      f'{esc(t("home.view_all", lang))}</a>')
+        else:
+            status = f'<span class="pill pill--soon">{esc(t("authors.debut", lang))}</span>'
+        blocks.append(
+            f'  <article class="author-row" data-reveal>\n'
+            f'    <span class="author-idx mono-meta">{i:02d}</span>\n'
+            f'    <div class="author-body">\n'
+            f'      <h2 class="author-name" data-decode-hover>{esc(display)}</h2>\n'
+            f'      <p class="kicker author-lane">{esc(t("author.lane." + key, lang))}</p>\n'
+            f'      <p class="author-bio">{esc(t("author.bio." + key, lang))}</p>\n'
+            f'      <p class="author-status">{status}</p>\n'
+            f'    </div>\n'
+            f'  </article>')
+    return "\n".join(blocks)
 
 
 def privacy_paragraphs(lang):
@@ -339,7 +359,9 @@ def privacy_paragraphs(lang):
 def socials(fmt):
     out = []
     for key, val in SITE.items():
-        if key.startswith("social_"):
+        # seed rows keep PLACEHOLDER urls — a link that goes nowhere never ships
+        if key.startswith("social_") and not any(
+                tok in val for tok in ("PLACEHOLDER", "example.com", "TODO")):
             label = key.split("_", 1)[1].replace("_", ".").title()
             out.append(fmt.format(url=esc(val), label=esc(label)))
     return "\n".join(out) + "\n"
@@ -393,9 +415,8 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
         "LANG_LINKS": panel,
         "CONTENT": content,
         "YEARS": f"{SITE.get('copyright_start', YEAR)}–{YEAR}",
-        "AUTHOR": esc(SITE["author_name"]),
         "T_RIGHTS": esc(t("footer.rights", lang)),
-        "T_TAGLINE": esc(t("meta.tagline", lang)),
+        "T_BRANDLINE": esc(t("brand.line", lang)),
         "EMAIL": esc(SITE["contact_email"]),
         "T_PRIVACY": esc(t("privacy.title", lang)),
         "SOCIALS": socials('    <span class="mono-meta"><a href="{url}" target="_blank" rel="noopener">{label} ↗</a></span>'),
@@ -420,7 +441,7 @@ def build_home(lang):
         "TICKER": ticker_html(lang),
         "TIMELINE": timeline_html(int(featured["year"]) if featured["year"] else None),
         "CAT_SPAN": esc(cat_span()),
-        "HERO_NAME": esc(t("hero.name", lang)),
+        "KICKER": esc(t("brand.kicker", lang)),
         "HERO_WORDS": esc(hero_words(lang)),
         "GLYPHS": esc(glyph_pool()),
         "HERO_WORD": esc(t("hero.word", lang)).replace("|", "<br>"),
@@ -435,6 +456,10 @@ def build_home(lang):
         "F_SERIES_META": esc(f" · {featured['series']} {int(featured['series_order']):02d}"
                              if featured["series"] else f" · {t('book.standalone', lang)}"),
         "F_URL": rel + page_path(lang, "book", featured["slug"]),
+        "F_WORLD_LINK": (
+            f'        <a class="btn btn--ghost" href="{esc(SERIES_SITES[featured["series"]])}" '
+            f'target="_blank" rel="noopener">{esc(t("series.site", lang))}</a>\n'
+            if SERIES_SITES.get(featured["series"]) else ""),
         "F_TITLE": esc(fl["title"]),
         "F_TAGLINE": esc(fl["tagline"]),
         "F_YEAR": esc(featured["year"]),
@@ -444,9 +469,9 @@ def build_home(lang):
         "T_BOOKS": esc(t("nav.books", lang)),
         "T_VIEW_ALL": esc(t("home.view_all", lang)),
         "CARDS": "\n".join(card(b, lang, rel) for b in others),
-        "PORTRAIT_NOTE": portrait_note(lang),
         "T_ABOUT_TEASER": esc(t("home.about_teaser", lang)),
-        "BIO_FIRST": bio_paragraphs(lang, first_only=True),
+        "AUTHORS_INTRO": esc(t("authors.intro", lang)),
+        "SITE_NAME": esc(SITE["site_name"]),
         "T_ABOUT": esc(t("nav.about", lang)),
         "LANG": lang,
     })
@@ -455,13 +480,14 @@ def build_home(lang):
         title=f'{SITE["site_name"]} — {t("meta.tagline", lang)}',
         desc=t("meta.home_desc", lang),
         og_image=canonical(SITE["og_default"]),
+        jsonld=jsonld_org(lang),
         body_class="page-home"))
 
 
 def build_books(lang):
     rel = "../../"
     content = render("books", {
-        "HERO_NAME": esc(t("hero.name", lang)),
+        "KICKER": esc(t("brand.kicker", lang)),
         "T_BOOKS_TITLE": esc(t("books.title", lang)),
         "T_FILTERS": esc(t("a11y.filters", lang)),
         "TIMELINE": timeline_html(),
@@ -474,12 +500,26 @@ def build_books(lang):
         body_class="page-books"))
 
 
+def jsonld_org(lang):
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": SITE["site_name"],
+        "url": canonical(f"{lang}/"),
+        "logo": canonical("assets/img/orb-and-ink-wordmark-lg.png"),
+    }
+    return ('<script type="application/ld+json">'
+            + json.dumps(data, ensure_ascii=False) + "</script>\n")
+
+
 def jsonld_book(book, lang, L):
     data = {
         "@context": "https://schema.org",
         "@type": "Book",
         "name": L["title"],
-        "author": {"@type": "Person", "name": SITE["author_name"]},
+        "author": {"@type": "Person",
+                   "name": book.get("author") or SITE["author_name"]},
+        "publisher": {"@type": "Organization", "name": SITE["site_name"]},
         "inLanguage": lang,
         "url": canonical(page_path(lang, "book", book["slug"])),
         "image": og_image_for(book),
@@ -523,8 +563,13 @@ def build_book(lang, book):
     series_note = ""
     siblings_html = ""
     if book["series"]:
+        world = ""
+        if SERIES_SITES.get(book["series"]):
+            world = (f' · <a href="{esc(SERIES_SITES[book["series"]])}" target="_blank" '
+                     f'rel="noopener">{esc(t("series.site", lang))} ↗</a>')
         series_note = (f'    <p class="series-note mono-meta" data-reveal>'
-                       f'{esc(t("book.series_pos", lang, n=int(book["series_order"]), series=book["series"]))}</p>')
+                       f'{esc(t("book.series_pos", lang, n=int(book["series_order"]), series=book["series"]))}'
+                       f'{world}</p>')
         sibs = [b for b in BOOKS if b["series"] == book["series"] and b["id"] != book["id"]]
         if sibs:
             cards = "\n".join(card(b, lang, rel) for b in sibs)
@@ -609,11 +654,12 @@ def build_book(lang, book):
 
 
 def build_about(lang):
+    rel = "../../"
     content = render("about", {
-        "HERO_NAME": esc(t("hero.name", lang)),
+        "KICKER": esc(t("brand.kicker", lang)),
         "T_ABOUT_TITLE": esc(t("about.title", lang)),
-        "PORTRAIT_NOTE": portrait_note(lang),
-        "BIO": bio_paragraphs(lang),
+        "AUTHORS_INTRO": esc(t("authors.intro", lang)),
+        "AUTHOR_BLOCKS": author_blocks(lang, rel),
         "T_CONTACT": esc(t("about.contact", lang)),
         "EMAIL": esc(SITE["contact_email"]),
         "SOCIAL_LINKS": socials('      <a href="{url}" target="_blank" rel="noopener">{label} ↗</a>'),
@@ -627,7 +673,7 @@ def build_about(lang):
 
 def build_privacy(lang):
     content = render("privacy", {
-        "HERO_NAME": esc(t("hero.name", lang)),
+        "KICKER": esc(t("brand.kicker", lang)),
         "T_PRIVACY_TITLE": esc(t("privacy.title", lang)),
         "PRIVACY_BODY": privacy_paragraphs(lang),
         "T_CONTACT": esc(t("about.contact", lang)),
@@ -717,7 +763,7 @@ def build_images():
                 r.save(out, "JPEG", quality=82)
         og_path = ROOT / f"og/{book['id']}.jpg"
         og_path.parent.mkdir(exist_ok=True)
-        og = Image.new("RGB", (1200, 630), "#0D0B09")
+        og = Image.new("RGB", (1200, 630), "#0A0908")
         cov = img.copy()
         cov.thumbnail((10_000, 530))
         og.paste(cov, (60, 50))

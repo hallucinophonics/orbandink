@@ -1,7 +1,8 @@
 # CLAUDE.md — repo conventions
 
 ## What this is
-Static multilingual storefront for Alexey Belenkiy's novels.
+Static multilingual home of Orb & Ink — the imprint's catalogue and
+its four bylines (Belenkiy, Bianco, Weiss, Blanc).
 Plain HTML/CSS/ES-modules + `build.py` (Python stdlib generator).
 No frameworks, no npm, no bundlers, no CDNs, no analytics, no external
 requests at runtime. Deployed as-is to Cloudflare Pages (build command:

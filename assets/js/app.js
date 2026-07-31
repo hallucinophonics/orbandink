@@ -170,7 +170,7 @@ async function initFx() {
 }
 
 const cssAccent = () =>
-  getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#D9A05B';
+  getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#D6AE5E';
 
 devFontShim();
 initLangMenu();

@@ -1,11 +1,14 @@
-/* covertitle.js — the printed title falls into place.
-   Placeholder covers ship title-less; when a cover scrolls into view,
-   the letters of the book's title rain down inside the cover —
-   scrambling as they fall — and settle into the title block, where
-   they stay, static, like ink that found its page. Reduced motion
-   renders the settled state immediately. */
+/* covertitle.js — the printed title falls into place, then steps aside.
+   Covers rest as duotone plates (the GL veil, or a CSS filter without
+   WebGL): when one scrolls into view the letters of the book's title
+   rain down inside it — scrambling as they fall — and settle into a
+   title block. Revealing the cover (hover on fine pointers, crossing
+   the viewport's center band on touch) fades this canvas title away as
+   the veil clears, so the real typeset art never wears two titles.
+   Reduced motion opts out entirely: plain, honest covers. */
 
 import * as sched from './scheduler.js';
+import * as glfx from './gl.js';
 
 function hashSeed(s) {
   let h = 2166136261;
@@ -27,8 +30,9 @@ function resolveTitle(box) {
 export function init(box) {
   const title = (resolveTitle(box) || '').trim();
   if (!title) return;
-  const reduced = sched.reduced.matches;
-  const accent = box.dataset.accent || '#D9A05B';
+  // reduced motion: no plate, no rain — the real cover, still
+  if (sched.reduced.matches) return;
+  const accent = box.dataset.accent || '#D6AE5E';
   const seed = hashSeed(box.dataset.book || title);
 
   const canvas = document.createElement('canvas');
@@ -37,6 +41,20 @@ export function init(box) {
   box.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
+
+  // veil + reveal choreography (the GL shader mirrors the hover state;
+  // without WebGL the .has-plate CSS filter carries the veil)
+  box.classList.add('has-plate');
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    box.addEventListener('pointerenter', () => box.classList.add('is-revealed'));
+    box.addEventListener('pointerleave', () => box.classList.remove('is-revealed'));
+  } else if ('IntersectionObserver' in window) {
+    // touch: the cover crossing the viewport's center band reveals it
+    new IntersectionObserver(es => es.forEach(ev => {
+      box.classList.toggle('is-revealed', ev.isIntersecting);
+      glfx.setCoverHover(box, ev.isIntersecting);
+    }), { rootMargin: '-32% 0px -32% 0px', threshold: 0 }).observe(box);
+  }
 
   const family = getComputedStyle(document.documentElement).getPropertyValue('--font-title').trim() || 'serif';
   let W = 0, H = 0, DPR = 1, chars = [], formed = false, running = false, stop = null;
@@ -137,7 +155,6 @@ export function init(box) {
   const boot = () => {
     size = layout();
     if (!chars.length) return;
-    if (reduced) { drawFinal(); return; }
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(es => es.forEach(e => {
         if (e.isIntersecting) { io.disconnect(); start(); }

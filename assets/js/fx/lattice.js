@@ -46,7 +46,7 @@ export function init(hero) {
       { size: 10, color: 'rgba(237,230,220,0.88)' },
       { size: 12, color: 'rgba(237,230,220,0.62)' },
       { size: 9,  color: 'rgba(167,157,143,0.55)' },
-      { size: 12, color: 'rgba(217,160,91,0.95)' }, // accent — sparse
+      { size: 12, color: 'rgba(214,174,94,0.95)' }, // accent — sparse
     ];
     cols = glyphs.length;
     atlas = document.createElement('canvas');

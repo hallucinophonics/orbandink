@@ -1,15 +1,17 @@
 /* ============================================================
-   main.css — Alexey Belenkiy · typography under temporal stress
-   Warm near-black, brass accent, hairline structure.
+   main.css — Orb & Ink · typography under temporal stress
+   Void black under a candle-glow bloom, old-gold accent,
+   hairline structure, film grain over the whole frame.
    ============================================================ */
 
 :root {
-  --bg: #0D0B09;
+  --bg: #0A0908;                /* brand void */
   --bg-2: #14110D;
   --ink: #EDE6DC;
   --ink-dim: #A79D8F;
   --ink-faint: #6E665B;
-  --accent: #D9A05B;            /* brass — global */
+  --accent: #D6AE5E;            /* brand old gold — global */
+  --gold-hot: #E8AC3C;          /* brand foil gold — sparse highlights */
   --accent-ink: #14100A;        /* text on accent fills */
   --line: rgba(237, 230, 220, 0.14);
   --line-soft: rgba(237, 230, 220, 0.08);
@@ -47,9 +49,26 @@ body {
   overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
+
+/* ---- the orb: a candle-glow bloom over the void (brand bloom tones),
+   fixed so every scroll depth keeps the light; grain over the whole
+   frame like film stock. Both decorative, both inert to the pointer. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(clamp(640px, 110vw, 1500px) clamp(480px, 85vh, 900px) at 50% -18%,
+      rgba(63, 50, 25, 0.50), rgba(41, 33, 17, 0.22) 46%, transparent 72%),
+    radial-gradient(clamp(500px, 90vw, 1200px) clamp(400px, 70vh, 800px) at 88% 115%,
+      rgba(41, 33, 17, 0.33), transparent 62%);
+}
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 6; pointer-events: none;
+  background: url("../img/grain.png") repeat 0 0 / 160px 160px;
+  opacity: 0.05; mix-blend-mode: overlay;
+}
 h1, h2, h3, h4 { margin: 0; font-weight: 700; }
 p { margin: 0 0 1em; text-wrap: pretty; }
-a { color: var(--ink); text-decoration-color: rgba(217, 160, 91, 0.5); text-underline-offset: 3px; transition: color var(--t-fast) var(--ease), text-decoration-color var(--t-fast) var(--ease); }
+a { color: var(--ink); text-decoration-color: rgba(214, 174, 94, 0.5); text-underline-offset: 3px; transition: color var(--t-fast) var(--ease), text-decoration-color var(--t-fast) var(--ease); }
 a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
@@ -100,14 +119,12 @@ html[lang="ja"] .display { line-height: 1.12; letter-spacing: 0.02em; }
   padding: 18px var(--pad);
   border-bottom: 1px solid var(--line-soft);
 }
-.wordmark {
-  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  text-decoration: none; color: var(--ink);
-  white-space: nowrap;
+.wordmark { display: inline-flex; align-items: center; text-decoration: none; }
+.wordmark img {
+  height: 21px; width: auto; display: block; opacity: 0.94;
+  transition: opacity var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
 }
-.wordmark::before { content: "◈ "; color: var(--accent); font-size: 10px; }
-.wordmark:hover { color: var(--accent); }
+.wordmark:hover img { opacity: 1; filter: drop-shadow(0 0 10px rgba(232, 172, 60, 0.45)); }
 .site-head nav { margin-left: auto; display: flex; gap: clamp(14px, 2.5vw, 32px); }
 .site-head nav a {
   font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
@@ -174,6 +191,15 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
 .fx-cover-live img { opacity: 0; }
 .cover-box img { transition: opacity 300ms var(--ease), transform 600ms var(--ease), filter 600ms var(--ease); }
 
+/* plated covers: at rest the art wears a duotone veil and the rained-in
+   canvas title reads as the cover type; revealing (hover on desktop,
+   scroll-center on touch) clears the veil and fades the canvas title so
+   the real typeset cover shows clean — never two titles at once */
+.cover-box .cover-title { transition: opacity 480ms var(--ease); }
+.cover-box.is-revealed .cover-title { opacity: 0; }
+html.no-webgl .cover-box.has-plate img { filter: sepia(0.5) saturate(0.4) brightness(0.46) contrast(1.02); }
+html.no-webgl .cover-box.has-plate.is-revealed img { filter: saturate(1) contrast(1.06); }
+
 /* ---- covers / cards ---- */
 .cover-box {
   position: relative; aspect-ratio: 2 / 3; overflow: hidden;
@@ -236,7 +262,7 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
   transition: all var(--t-fast) var(--ease); background: transparent;
 }
 .btn::after { content: "↗"; color: var(--accent-book, var(--accent)); transition: inherit; }
-.btn:hover { background: var(--accent-book, var(--accent)); color: var(--accent-ink); }
+.btn:hover { background: var(--accent-book, var(--accent)); color: var(--accent-ink); box-shadow: 0 8px 28px rgba(214, 174, 94, 0.22); }
 .btn:hover::after { color: var(--accent-ink); transform: translate(2px, -2px); }
 .btn--ghost { border-color: var(--line); }
 .btn--ghost::after { content: "→"; }
@@ -246,6 +272,25 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
 .sec-head h2 { font-family: var(--font-title); font-weight: 700; letter-spacing: 0; font-size: clamp(28px, 3.6vw, 60px); line-height: 1; }
 .sec-head .more { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--ink-dim); white-space: nowrap; }
 .sec-head .more:hover { color: var(--accent); }
+
+/* ---- authors roster (about) ---- */
+.authors-list { display: grid; border-top: 1px solid var(--line); }
+.author-row {
+  position: relative; display: grid; grid-template-columns: 3.4em 1fr;
+  gap: clamp(14px, 2.4vw, 32px); align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding: clamp(30px, 4.4vw, 58px) 0;
+}
+.author-idx { color: var(--accent); }
+.author-name {
+  font-family: var(--font-title); font-weight: 700; letter-spacing: 0;
+  font-size: clamp(30px, 4.6vw, 76px); line-height: 1.04;
+  transition: color var(--t-fast) var(--ease);
+}
+.author-row:hover .author-name { color: var(--accent); }
+.author-lane { margin: 12px 0 0; }
+.author-bio { margin: 14px 0 0; max-width: 58ch; color: var(--ink-dim); font-size: clamp(16px, 1.15vw, 18px); }
+.author-status { margin: 20px 0 0; }
 
 /* ---- about ---- */
 .about-grid { display: grid; grid-template-columns: minmax(240px, 360px) 1fr; gap: clamp(32px, 5vw, 96px); align-items: start; }
@@ -266,6 +311,19 @@ html[lang="ja"] .hero-word { font-size: clamp(46px, 10.5vw, 200px); letter-spaci
 }
 .ph--portrait { aspect-ratio: 3 / 4; }
 .ph span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-faint); text-transform: uppercase; }
+
+/* the imprint's plate on the home authors band — wordmark under glass */
+.brand-plate {
+  position: relative; border: 1px solid var(--line); aspect-ratio: 3 / 4;
+  display: grid; place-items: center; overflow: hidden; padding: 10%;
+  background: radial-gradient(72% 56% at 50% 42%,
+    rgba(63, 50, 25, 0.55), rgba(41, 33, 17, 0.20) 62%, transparent 100%);
+}
+.brand-plate img { width: 100%; height: auto; opacity: 0.95; }
+.brand-plate::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(45deg, transparent 0 12px, rgba(237, 230, 220, 0.03) 12px 13px);
+}
 
 /* ---- book page ---- */
 .crumbs { display: flex; gap: 10px; flex-wrap: wrap; padding: 28px var(--pad) 0; }
@@ -385,7 +443,7 @@ html.no-webgl .card a:hover .cover-box img { transform: scale(1.025); filter: sa
   position: absolute; top: -0.14em; right: 1vw; z-index: -1;
   font-family: var(--font-display); font-weight: 700;
   font-size: clamp(150px, 24vw, 400px); line-height: 1;
-  color: transparent; -webkit-text-stroke: 1px rgba(217, 160, 91, 0.13);
+  color: transparent; -webkit-text-stroke: 1px rgba(214, 174, 94, 0.13);
   pointer-events: none; user-select: none; will-change: transform;
 }
 @supports not (-webkit-text-stroke: 1px #000) { .sec-num { color: rgba(237, 230, 220, 0.045); } }
@@ -502,6 +560,8 @@ html.no-webgl .cover-reflect, html.no-fx .cover-reflect { display: none; }
   .featured .cover-box { max-width: 320px; }
   .site-foot { grid-template-columns: 1fr; }
   .hero-word { white-space: normal; }
+  .brand-plate { max-width: 340px; }
+  .author-row { grid-template-columns: 2.4em 1fr; }
 }
 @media (max-width: 560px) {
   .site-head { flex-wrap: wrap; row-gap: 12px; padding-block: 14px; }

@@ -21,7 +21,7 @@ and self-localizes from the URL's language segment.
 
 ## Custom domain
 
-Pages → Custom domains → add `alexeybelenkiy.com` (and `www`, set to
+Pages → Custom domains → add `orbandink.co.uk` (and `www`, set to
 redirect to the apex). Then update `domain` in `data/site.csv` if it
 ever changes and rebuild — canonicals, hreflang, OG URLs and
 sitemap.xml all derive from it.

@@ -1,5 +1,5 @@
 <section class="hero">
-  <p class="hero-kicker kicker">{{HERO_NAME}}</p>
+  <p class="hero-kicker kicker">{{KICKER}}</p>
   <div class="hero-word-wrap">
     <h1 class="hero-word" data-words="{{HERO_WORDS}}" data-glyphs="{{GLYPHS}}">{{HERO_WORD}}</h1>
   </div>
@@ -35,7 +35,7 @@
       </div>
       <div class="meta-row" data-reveal>
         <a class="btn" href="{{F_URL}}">{{F_CTA}}</a>
-      </div>
+{{F_WORLD_LINK}}      </div>
     </div>
   </div>
 </section>
@@ -59,10 +59,10 @@
   <span class="sec-num" aria-hidden="true" data-plx>03</span>
   <div class="sec-mark" data-reveal><span class="idx">03</span><span class="lbl" data-decode>{{T_ABOUT_TEASER}}</span></div>
   <div class="about-grid">
-    <div class="ph ph--portrait" data-reveal><span>{{PORTRAIT_NOTE}}</span></div>
+    <div class="brand-plate" data-reveal><img src="{{REL}}assets/img/orb-and-ink-wordmark-lg.png" alt="{{SITE_NAME}}" loading="lazy"></div>
     <div>
       <div class="bio" data-reveal>
-{{BIO_FIRST}}
+        <p>{{AUTHORS_INTRO}}</p>
       </div>
       <a class="btn btn--ghost" href="{{REL}}{{LANG}}/about/" style="margin-top:28px" data-reveal>{{T_ABOUT}}</a>
     </div>

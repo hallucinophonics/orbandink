@@ -1,17 +1,15 @@
 <div class="page-title-wrap">
-  <p class="kicker">{{HERO_NAME}}</p>
+  <p class="kicker">{{KICKER}}</p>
   <h1 class="page-title fx-erode">{{T_ABOUT_TITLE}}</h1>
+  <p class="page-sub">{{AUTHORS_INTRO}}</p>
 </div>
-<section class="section about-grid" style="margin-top:clamp(28px,4vw,56px)">
-  <div class="ph ph--portrait" data-reveal><span>{{PORTRAIT_NOTE}}</span></div>
-  <div>
-    <div class="bio" data-reveal>
-{{BIO}}
-    </div>
-    <div class="contact-list" data-reveal>
-      <span class="kicker">{{T_CONTACT}}</span>
-      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+<section class="section authors-list" style="margin-top:clamp(28px,4vw,56px)" data-rain>
+{{AUTHOR_BLOCKS}}
+</section>
+<section class="section">
+  <div class="contact-list" data-reveal>
+    <span class="kicker">{{T_CONTACT}}</span>
+    <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
 {{SOCIAL_LINKS}}
-    </div>
   </div>
 </section>
