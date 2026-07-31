@@ -23,14 +23,22 @@ precision mediump float; varying vec2 vUv;
 uniform float uTime,uScroll,uQ; uniform vec2 uRes; uniform vec3 uAccent;
 ${NOISE}
 void main(){
-  vec2 p = vUv * vec2(uRes.x/uRes.y, 1.0);
+  float asp = uRes.x/max(uRes.y,1.0);
+  vec2 p = vUv * vec2(asp, 1.0);
   float t = uTime*0.03 + uScroll*0.25;
+  // candle blooms live HERE (this canvas is opaque, so CSS glows behind
+  // it never show): a warm crown glow and a cold corner counterlight
+  vec2 q1 = (vUv - vec2(0.5, 1.14)) * vec2(asp, 1.0);
+  vec2 q2 = (vUv - vec2(1.06, -0.12)) * vec2(asp, 1.0);
+  vec3 blooms = vec3(0.37,0.30,0.15) * exp(-dot(q1,q1)*1.9) * 0.34
+              + vec3(0.10,0.12,0.21) * exp(-dot(q2,q2)*1.1) * 0.42;
   // nebula: two slow cloud layers — warm gold dust and a cold indigo
   // vein — drifting against each other; dark, but never flat
   float nb1 = fbm(p*1.15 + vec2(t*0.16, -t*0.11));
   float nb2 = fbm(p*2.35 - vec2(t*0.10, t*0.06) + nb1*1.1);
-  vec3 nebula = uAccent * pow(nb1, 2.4) * 0.11
-              + vec3(0.16,0.22,0.36) * pow(nb2, 2.8) * 0.12;
+  vec3 nebula = blooms
+              + uAccent * pow(nb1, 2.2) * 0.16
+              + vec3(0.16,0.22,0.36) * pow(nb2, 2.6) * 0.16;
   // world-lines: slow horizontal filaments, dragged by scroll
   float warp = fbm(p*vec2(0.7,2.2) + vec2(t*0.55, 0.0));
   float n = fbm(p*vec2(1.6,7.0) + vec2(-t*0.35, warp*1.4));
@@ -41,7 +49,7 @@ void main(){
   float star = step(0.998, h) * (0.35 + 0.65*(0.5+0.5*sin(uTime*1.4+h*70.0)));
   vec3 col = nebula
            + uAccent * lines * (0.05 + uScroll*0.06)
-           + vec3(0.93,0.87,0.78) * star * 0.14;
+           + vec3(0.93,0.87,0.78) * star * 0.16;
   float vig = smoothstep(1.25, 0.35, length(vUv-0.5));
   col *= vig;
   gl_FragColor = vec4(col, 1.0); // additive blend

@@ -635,7 +635,7 @@ def build_book(lang, book):
         "B_TITLE": esc(L["title"]),
         "B_TAGLINE": esc(L["tagline"]),
         "B_ID": book["id"],
-        "B_PLATE": plate_attr(book),
+        "B_PLATE_ATTR": plate_attr(book),
         "B_COVER": book["cover"],
         "B_SRCSET": srcset_for(book["cover"], rel),
         "B_COVER_ALT": esc(L["title"]),
