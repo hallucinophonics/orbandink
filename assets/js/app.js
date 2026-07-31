@@ -159,14 +159,42 @@ async function initFx() {
     console.warn('cover titles disabled:', err);
   }
   try {
-    const rainSecs = document.querySelectorAll('[data-rain]');
-    if (rainSecs.length) {
-      const rain = await import('./fx/rain.js');
-      rainSecs.forEach(s => rain.init(s));
-    }
+    const rain = await import('./fx/rain.js');
+    document.querySelectorAll('[data-rain]').forEach(s => rain.init(s));
+    // ambient letterfall: one sparse fixed layer under the whole page
+    const amb = document.createElement('div');
+    amb.className = 'rain-ambient';
+    amb.setAttribute('aria-hidden', 'true');
+    const heroGlyphs = document.querySelector('.hero-word[data-glyphs]');
+    amb.dataset.glyphs = (heroGlyphs && heroGlyphs.dataset.glyphs) || 'ORB&INK0123·:/—';
+    amb.dataset.rainDensity = '0.38';
+    document.body.appendChild(amb);
+    rain.init(amb);
   } catch (err) {
     console.warn('rain disabled:', err);
   }
+  initCoverTilt();
+}
+
+/* ---- 3D tilt on revealed covers (fine pointers) ---- */
+function initCoverTilt() {
+  if (reduced || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  document.querySelectorAll('.cover-box[data-fx]').forEach(box => {
+    box.addEventListener('pointermove', ev => {
+      if (!box.classList.contains('is-revealed')) return;
+      const r = box.getBoundingClientRect();
+      const nx = (ev.clientX - r.left) / r.width - 0.5;
+      const ny = (ev.clientY - r.top) / r.height - 0.5;
+      box.style.setProperty('--ty', (nx * 10).toFixed(2) + 'deg');
+      box.style.setProperty('--tx', (ny * -8).toFixed(2) + 'deg');
+      box.style.setProperty('--gx', (50 + nx * 64).toFixed(1) + '%');
+      box.style.setProperty('--gy', (32 + ny * 64).toFixed(1) + '%');
+    }, { passive: true });
+    box.addEventListener('pointerleave', () => {
+      box.style.setProperty('--ty', '0deg');
+      box.style.setProperty('--tx', '0deg');
+    });
+  });
 }
 
 const cssAccent = () =>

@@ -210,6 +210,12 @@ def cta_key(status):
             "coming_soon": "book.coming_soon"}.get(status, "book.buy")
 
 
+def plate_attr(book):
+    """Interim plates (no real cover art yet) keep the rained-in title and
+    never run the reveal — there is nothing truer underneath to show."""
+    return ' data-plate="1"' if book.get("cover_art") == "plate" else ""
+
+
 def card(book, lang, rel):
     L = loc(book, lang)
     return render("_card", {
@@ -219,6 +225,7 @@ def card(book, lang, rel):
         "C_SERIES": esc(book["series"]),
         "C_THEMES": esc(book["themes"]),
         "C_SLUG": book["slug"],
+        "C_PLATE": plate_attr(book),
         "C_ID": book["id"],
         "C_COVER": book["cover"],
         "C_SRCSET": srcset_for(book["cover"], rel),
@@ -449,6 +456,7 @@ def build_home(lang):
         "T_SCROLL": esc(t("scroll.cue", lang)),
         "F_ACCENT": featured["accent"] or SITE["accent"],
         "F_ID": featured["id"],
+        "F_PLATE": plate_attr(featured),
         "F_COVER": featured["cover"],
         "F_SRCSET": srcset_for(featured["cover"], rel),
         "F_COVER_ALT": esc(fl["title"]),
@@ -627,6 +635,7 @@ def build_book(lang, book):
         "B_TITLE": esc(L["title"]),
         "B_TAGLINE": esc(L["tagline"]),
         "B_ID": book["id"],
+        "B_PLATE": plate_attr(book),
         "B_COVER": book["cover"],
         "B_SRCSET": srcset_for(book["cover"], rel),
         "B_COVER_ALT": esc(L["title"]),
@@ -660,6 +669,8 @@ def build_about(lang):
         "T_ABOUT_TITLE": esc(t("about.title", lang)),
         "AUTHORS_INTRO": esc(t("authors.intro", lang)),
         "AUTHOR_BLOCKS": author_blocks(lang, rel),
+        "T_PRESS": esc(t("about.press", lang)),
+        "PRESS_BODY": esc(t("press.body", lang)),
         "T_CONTACT": esc(t("about.contact", lang)),
         "EMAIL": esc(SITE["contact_email"]),
         "SOCIAL_LINKS": socials('      <a href="{url}" target="_blank" rel="noopener">{label} ↗</a>'),
