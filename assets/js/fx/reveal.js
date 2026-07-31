@@ -13,6 +13,13 @@ export function decode(el, dur = 420) {
   if (el.dataset.decoding) return;
   el.dataset.decoding = '1';
   const orig = el.dataset.orig || (el.dataset.orig = el.textContent);
+  /* The scramble glyphs have different advance widths than the real letters,
+     so a wrapping title can flicker between line counts mid-animation and
+     shove every section below it. Lock the box to its settled size for the
+     duration: the text ends where it began, so the lock releases invisibly. */
+  const lock = el.getBoundingClientRect();
+  el.style.height = lock.height + 'px';
+  el.style.overflow = 'hidden';
   const start = performance.now();
   const n = orig.length;
   const frame = now => {
@@ -22,7 +29,12 @@ export function decode(el, dur = 420) {
     for (let i = solid; i < n; i++) out += orig[i] === ' ' ? ' ' : POOL[(Math.random() * POOL.length) | 0];
     el.textContent = out;
     if (p < 1) requestAnimationFrame(frame);
-    else { el.textContent = orig; delete el.dataset.decoding; }
+    else {
+      el.textContent = orig;
+      el.style.height = '';
+      el.style.overflow = '';
+      delete el.dataset.decoding;
+    }
   };
   requestAnimationFrame(frame);
 }
