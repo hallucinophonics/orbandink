@@ -25,6 +25,12 @@ ${NOISE}
 void main(){
   vec2 p = vUv * vec2(uRes.x/uRes.y, 1.0);
   float t = uTime*0.03 + uScroll*0.25;
+  // nebula: two slow cloud layers — warm gold dust and a cold indigo
+  // vein — drifting against each other; dark, but never flat
+  float nb1 = fbm(p*1.15 + vec2(t*0.16, -t*0.11));
+  float nb2 = fbm(p*2.35 - vec2(t*0.10, t*0.06) + nb1*1.1);
+  vec3 nebula = uAccent * pow(nb1, 2.4) * 0.11
+              + vec3(0.16,0.22,0.36) * pow(nb2, 2.8) * 0.12;
   // world-lines: slow horizontal filaments, dragged by scroll
   float warp = fbm(p*vec2(0.7,2.2) + vec2(t*0.55, 0.0));
   float n = fbm(p*vec2(1.6,7.0) + vec2(-t*0.35, warp*1.4));
@@ -32,9 +38,10 @@ void main(){
   // sparse slow "instants" (star points)
   vec2 g = floor(p*140.0);
   float h = hash(g);
-  float star = step(0.9987, h) * (0.35 + 0.65*(0.5+0.5*sin(uTime*1.4+h*70.0)));
-  vec3 col = uAccent * lines * (0.05 + uScroll*0.06)
-           + vec3(0.93,0.87,0.78) * star * 0.10;
+  float star = step(0.998, h) * (0.35 + 0.65*(0.5+0.5*sin(uTime*1.4+h*70.0)));
+  vec3 col = nebula
+           + uAccent * lines * (0.05 + uScroll*0.06)
+           + vec3(0.93,0.87,0.78) * star * 0.14;
   float vig = smoothstep(1.25, 0.35, length(vUv-0.5));
   col *= vig;
   gl_FragColor = vec4(col, 1.0); // additive blend
@@ -233,10 +240,23 @@ function renderFrame(t, dt) {
   gl.uniform3f(f.u.uAccent, acc[0], acc[1], acc[2]);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
+  // proximity typography on erosion titles: ease the warp amplitude and
+  // re-raster while it changes (one title warps at a time — cheap)
+  for (const e of effects) {
+    if (e.type !== 'erode' || e.warpAmp === undefined) continue;
+    const prev = e.warpAmp;
+    e.warpAmp += ((e.warpOn ? 1 : 0) - e.warpAmp) * 0.22;
+    if (Math.abs(e.warpAmp - prev) > 0.004 || (e.warpOn && e.warpDirty)) {
+      e.warpDirty = false;
+      e.raster();
+    }
+  }
+
   // 2+3 — element-scoped effects
   gl.enable(gl.SCISSOR_TEST);
   for (const e of effects) {
     if (!(e.src ? e.src.ready : e.ready)) continue;
+    if (e.released && !e.src) continue;      // handed back to the DOM <img>
     const r = e.el.getBoundingClientRect();
     if (r.bottom < -60 || r.top > innerHeight + 60 || r.width === 0) continue;
     const pad = e.type === 'erode' ? e.pad : 0;
@@ -282,7 +302,7 @@ function drawErode(e, t, stress, glitch, w, h) {
 function drawCover(e, t, dt, w, h) {
   const pr = progs.cover;
   const S = e.src || e;
-  if (!e.src) S.hoverS += ((S.hover ? 1 : 0) - S.hoverS) * Math.min(1, dt * 7 || 0.4);
+  if (!e.src) S.hoverS += ((S.hover ? 1 : 0) - S.hoverS) * Math.min(1, (dt || 0.06) * (S.rate || 7));
   let mk = 0;
   if (e.src) {
     const mr = e.el.getBoundingClientRect(), sr = S.el.getBoundingClientRect();
@@ -304,6 +324,12 @@ function drawCover(e, t, dt, w, h) {
   gl.uniform2f(pr.u.uMouse, S.mouse[0], S.mouse[1]);
   gl.uniform3f(pr.u.uAccent, S.accent[0], S.accent[1], S.accent[2]);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  // once a pinned reveal has fully cleared, hand the box back to the real
+  // <img> (identical pixels) so CSS can tilt it in 3D — and stop drawing
+  if (!e.src && S.pinned && !S.released && S.hoverS > 0.985) {
+    S.released = true;
+    S.el.classList.remove('fx-cover-live');
+  }
 }
 
 /* ---- erosion titles ---- */
@@ -319,6 +345,17 @@ export function registerErosion(el, accentHex) {
   e.raster = () => rasterizeText(e);
   document.fonts?.ready.then(e.raster);
   e.raster();
+  // proximity typography: letters swell toward the cursor (fine pointers)
+  if (!staticMode && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    e.warpAmp = 0; e.warpOn = false; e.warpX = 0; e.warpDirty = false;
+    el.addEventListener('pointermove', ev => {
+      const r = el.getBoundingClientRect();
+      e.warpOn = true;
+      e.warpX = (ev.clientX - r.left + e.pad) * DPR;
+      e.warpDirty = true;
+    }, { passive: true });
+    el.addEventListener('pointerleave', () => { e.warpOn = false; });
+  }
   effects.push(e);
 }
 
@@ -350,10 +387,26 @@ function rasterizeText(e) {
   if (line) lines.push(line);
   const lh = (parseFloat(cs.lineHeight) || size * 1.1) * dpr;
   const alignC = cs.textAlign === 'center';
+  const warp = e.warpAmp && e.warpAmp > 0.02 ? e.warpAmp : 0;
+  const sigma = size * dpr * 2.1;
   lines.forEach((ln, i) => {
     const wpx = x.measureText(ln).width;
     const lx = e.pad * dpr + (alignC ? (maxW - wpx) / 2 : 0);
-    x.fillText(ln, lx, e.pad * dpr + i * lh + size * dpr * 0.8);
+    const ly = e.pad * dpr + i * lh + size * dpr * 0.8;
+    if (!warp) { x.fillText(ln, lx, ly); return; }
+    // per-glyph pass: letters near the cursor widen, the rest tighten
+    let cx = 0;
+    for (const ch of ln) {
+      const w = x.measureText(ch).width;
+      const d = (lx + cx + w / 2) - e.warpX;
+      const sx = 1 + warp * (0.46 * Math.exp(-(d * d) / (sigma * sigma)) - 0.045);
+      x.save();
+      x.translate(lx + cx, ly);
+      x.scale(sx, 1);
+      x.fillText(ch, 0, 0);
+      x.restore();
+      cx += w * sx;
+    }
   });
   gl.bindTexture(gl.TEXTURE_2D, e.tex);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -381,6 +434,7 @@ export function registerCover(box, accentHex, seedStr) {
     type: 'cover', el: box, seed: seedOf(seedStr || box.dataset.book || 'x'),
     accent: hex(accentHex), tex: gl.createTexture(),
     ready: false, ghosted: false, hover: false, hoverS: 0,
+    rate: 7, pinned: false,
     mouse: [0, 0], fit: [1, 1],
     ghost: () => box.classList.add('fx-cover-live'),
   };
@@ -399,8 +453,14 @@ export function registerCover(box, accentHex, seedStr) {
   if (img.complete && img.naturalWidth) upload();
   else img.addEventListener('load', upload, { once: true });
   if (!staticMode) {
-    box.addEventListener('pointerenter', () => { e.hover = true; });
-    box.addEventListener('pointerleave', () => { e.hover = false; e.mouse = [0, 0]; });
+    // interim plates (data-plate) hold their veil — hover never lifts it
+    if (box.dataset.plate !== '1') {
+      box.addEventListener('pointerenter', () => { e.hover = true; });
+    }
+    box.addEventListener('pointerleave', () => {
+      if (!e.pinned) e.hover = false;        // a pinned reveal never re-veils
+      e.mouse = [0, 0];
+    });
     box.addEventListener('pointermove', ev => {
       const r = box.getBoundingClientRect();
       e.mouse = [(ev.clientX - r.left) / r.width - 0.5, (ev.clientY - r.top) / r.height - 0.5];
@@ -409,12 +469,16 @@ export function registerCover(box, accentHex, seedStr) {
   effects.push(e);
 }
 
-/** external reveal control for a registered cover (touch scroll-reveal:
-    pointerenter never fires, so covertitle.js drives the hover state) */
-export function setCoverHover(box, on) {
+/** external reveal control for a registered cover — covertitle.js drives
+    the permanent reveal: opts.pin makes it one-way, opts.rate sets how
+    fast the veil clears (slow scroll-reveal vs quick hover) */
+export function setCoverHover(box, on, opts) {
   if (!gl) return;
   const e = effects.find(x => x.el === box && x.type === 'cover' && !x.src);
-  if (e) e.hover = !!on;
+  if (!e) return;
+  e.hover = !!on;
+  if (opts && opts.rate) e.rate = opts.rate;
+  if (opts && opts.pin) e.pinned = true;
 }
 
 /** reflection strip below a registered cover: same texture, mirrored,

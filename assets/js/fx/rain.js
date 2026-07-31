@@ -44,7 +44,8 @@ export function init(section) {
     H = Math.max(2, Math.round(r.height));
     canvas.width = W * DPR; canvas.height = H * DPR;
     const q = sched.getQuality();
-    const count = Math.max(6, Math.round((W / 66) * (q >= 1 ? 1 : q >= 0.6 ? 0.7 : 0.45)));
+    const dens = parseFloat(section.dataset.rainDensity || '1') || 1;
+    const count = Math.max(4, Math.round((W / 66) * dens * (q >= 1 ? 1 : q >= 0.6 ? 0.7 : 0.45)));
     cols = Array.from({ length: Math.min(28, count) }, makeCol);
     if (reduced) draw(0, 0);
   }
