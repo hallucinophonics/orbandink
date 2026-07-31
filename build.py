@@ -440,6 +440,46 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
     return page.replace("</head>", GENERATED_MARK + "\n</head>", 1)
 
 
+def series_sections_html(lang, rel, start_num=2):
+    """The home shelf: one numbered section per series, standalones last.
+
+    The catalogue page keeps the flat everything-together grid; home reads as
+    the imprint's index — each series its own entry in the running numbers,
+    its books in series order, the shared card component throughout. A series
+    with a real world-site gets its outbound link in the section head.
+    """
+    groups: dict[str, list] = {}
+    for b in BOOKS:
+        groups.setdefault(b["series"] or "", []).append(b)
+    order = [k for k in groups if k] + ([""] if "" in groups else [])
+    out = []
+    num = start_num
+    for key in order:
+        books = groups[key]
+        if key:
+            books = sorted(books, key=lambda b: int(b["series_order"] or 0))
+        label = key or t("book.standalone", lang)
+        world = SERIES_SITES.get(key)
+        more = (f'\n  <div class="sec-head"><a class="more" href="{esc(world)}" '
+                f'target="_blank" rel="noopener">{esc(t("series.site", lang))} →</a></div>'
+                if world else "")
+        accent = books[0]["accent"] or SITE["accent"]
+        cards = "\n".join(card(b, lang, rel) for b in books)
+        rain = ' data-rain' if num == start_num else ''
+        out.append(
+            f'<section class="section" style="--accent-book:{accent}"{rain}>\n'
+            f'  <span class="sec-num" aria-hidden="true" data-plx>{num:02d}</span>\n'
+            f'  <div class="sec-mark" data-reveal><span class="idx">{num:02d}</span>'
+            f'<span class="lbl" data-decode>{esc(label)} · {len(books):02d}</span></div>{more}\n'
+            f'  <div class="grid-books">\n{cards}\n  </div>\n'
+            f'</section>')
+        num += 1
+    view_all = (f'<p style="text-align:center;margin:48px 0 0" data-reveal>'
+                f'<a class="btn btn--ghost" href="{rel}{lang}/books/">'
+                f'{esc(t("home.view_all", lang))} · {len(BOOKS):02d} →</a></p>')
+    return "\n\n".join(out) + "\n\n" + view_all, num
+
+
 def build_home(lang):
     rel = "../"
     featured = next((b for b in BOOKS if b["id"] == SITE["featured_book"]), None)
@@ -447,8 +487,7 @@ def build_home(lang):
         sys.exit(f"FATAL: site.csv featured_book={SITE['featured_book']!r} is not "
                  f"in books.csv. Available: {', '.join(b['id'] for b in BOOKS) or 'none'}")
     fl = loc(featured, lang)
-    others = sorted((b for b in BOOKS if b["id"] != featured["id"]),
-                    key=lambda b: int(b["year"] or 0), reverse=True)[:3]
+    series_html, next_num = series_sections_html(lang, rel)
     content = render("home", {
         "REL": rel,
         "TICKER": ticker_html(lang),
@@ -480,9 +519,8 @@ def build_home(lang):
         "F_STATUS_PILL": status_pill(featured, lang),
         "F_CTA": esc(t(cta_key(featured["status"]), lang)),
         "F_DATA": f_data(featured, lang),
-        "T_BOOKS": esc(t("nav.books", lang)),
-        "T_VIEW_ALL": esc(t("home.view_all", lang)),
-        "CARDS": "\n".join(card(b, lang, rel) for b in others),
+        "SERIES_SECTIONS": series_html,
+        "ABOUT_NUM": f"{next_num:02d}",
         "T_ABOUT_TEASER": esc(t("home.about_teaser", lang)),
         "AUTHORS_INTRO": esc(t("authors.intro", lang)),
         "SITE_NAME": esc(SITE["site_name"]),
