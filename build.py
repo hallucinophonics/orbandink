@@ -41,6 +41,12 @@ CODES = [l["code"] for l in LANGS]
 SITE = {r["key"]: r["value"] for r in read_csv("site")}
 I18N = {r["key"]: r for r in read_csv("i18n")}
 BOOKS = read_csv("books")
+# catalog_coming_soon (data/site.csv): "show" keeps unreleased books in the
+# catalogue wearing their Coming soon pill — the full-shelf storefront view.
+# "hide" builds a published-only site for when the imprint wants to promote
+# nothing before its time. One switch, no row edits.
+if SITE.get("catalog_coming_soon", "show") == "hide":
+    BOOKS = [b for b in BOOKS if b["status"] in ("published", "preorder")]
 BI18N = read_csv("books_i18n")
 LINKS = read_csv("store_links")
 PRIVACY = {r["lang"]: r for r in read_csv("privacy_i18n")}

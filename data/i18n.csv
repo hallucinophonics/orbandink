@@ -77,3 +77,18 @@ meta.about_desc,"The authors of Orb & Ink — Alexey Belenkiy, Alessio Bianco, A
 privacy.title,Privacy,Конфиденциальность,Confidentialité,Privacidade,Datenschutz,Privacy,Privacidad,プライバシー
 meta.privacy_desc,"No cookies, no analytics, no tracking — how this site handles data.","Без cookie, без аналитики, без слежения — как этот сайт обращается с данными.","Pas de cookies, pas d'analyse, pas de suivi — comment ce site traite les données.","Sem cookies, sem análises, sem rastreio — como este site trata os dados.","Keine Cookies, keine Analyse, kein Tracking — wie diese Website mit Daten umgeht.","Niente cookie, niente analisi, niente tracciamento — come questo sito tratta i dati.","Sin cookies, sin análisis, sin rastreo — cómo trata los datos este sitio.",Cookieなし・解析なし・トラッキングなし — 本サイトのデータの扱いについて。
 book.praise,Praise,Отзывы,Éloges,Elogios,Stimmen,Elogi,Elogios,推薦の声
+theme.first_contact,First contact,Первый контакт,Premier contact,Primeiro contacto,Erstkontakt,Primo contatto,Primer contacto,ファーストコンタクト
+theme.satire,Satire,Сатира,Satire,Sátira,Satire,Satira,Sátira,風刺
+theme.moral_physics,Moral physics,Физика совести,Physique morale,Física moral,Moralphysik,Fisica morale,Física moral,倫理の物理学
+theme.dark_sf,Dark SF,Мрачная фантастика,SF sombre,FC sombria,Düstere SF,SF cupa,CF oscura,ダークSF
+theme.cosmic_horror,Cosmic horror,Космический ужас,Horreur cosmique,Horror cósmico,Kosmischer Horror,Orrore cosmico,Horror cósmico,宇宙的恐怖
+theme.deep_space,Deep space,Дальний космос,Espace lointain,Espaço profundo,Tiefer Raum,Spazio profondo,Espacio profundo,深宇宙
+theme.gothic_sf,Gothic SF,Готическая фантастика,SF gothique,FC gótica,Gotische SF,SF gotica,CF gótica,ゴシックSF
+theme.deep_time,Deep time,Глубокое время,Temps profond,Tempo profundo,Tiefe Zeit,Tempo profondo,Tiempo profundo,深い時間
+theme.thriller_sf,SF thriller,Фантастический триллер,Thriller SF,Thriller de FC,SF-Thriller,Thriller SF,Thriller de CF,SFスリラー
+theme.epic_sf,Epic SF,Эпическая фантастика,SF épique,FC épica,Epische SF,SF epica,CF épica,壮大なSF
+theme.secondary_world,Secondary world,Вымышленный мир,Monde secondaire,Mundo secundário,Sekundärwelt,Mondo secondario,Mundo secundario,異世界
+theme.heist,Heist,Ограбление,Casse,Assalto,Raubzug,Colpo,Atraco,強奪劇
+theme.coastal_mystery,Coastal mystery,Прибрежная тайна,Mystère côtier,Mistério costeiro,Küstenmysterium,Mistero costiero,Misterio costero,海辺のミステリー
+theme.fantasy,Fantasy,Фэнтези,Fantasy,Fantasia,Fantasy,Fantasy,Fantasía,ファンタジー
+theme.ai,Artificial intelligence,Искусственный интеллект,Intelligence artificielle,Inteligência artificial,Künstliche Intelligenz,Intelligenza artificiale,Inteligencia artificial,人工知能
