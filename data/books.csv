@@ -1,43 +1,43 @@
-id,slug,series,series_order,year,status,pages,isbn,cover,accent,themes,cover_art
-venice-2068-a-d,venice-2068-a-d,World Without Humans,1,,coming_soon,197,,covers/venice-2068-a-d.jpg,#C9A24B,climate,real
-paris-2073-a-d,paris-2073-a-d,World Without Humans,2,,published,207,,covers/paris-2073-a-d.jpg,#C87A3C,time_travel;memory,real
-kyoto-2076-a-d,kyoto-2076-a-d,World Without Humans,3,,coming_soon,191,,covers/kyoto-2076-a-d.jpg,#C2453E,memory;language,real
-moscow-2067-a-d,moscow-2067-a-d,World Without Humans,4,,coming_soon,205,,covers/moscow-2067-a-d.jpg,#8FA7B8,time_travel;identity,real
-jerusalem-2080-a-d,jerusalem-2080-a-d,World Without Humans,5,,coming_soon,205,,covers/jerusalem-2080-a-d.jpg,#D9C178,memory;identity,plate
-antarctica-2061-a-d,antarctica-2061-a-d,World Without Humans,6,,coming_soon,195,,covers/antarctica-2061-a-d.jpg,#6FB5C9,time_travel;paradox,plate
-rio-de-janeiro-2088-a-d,rio-de-janeiro-2088-a-d,World Without Humans,7,,coming_soon,,,covers/rio-de-janeiro-2088-a-d.jpg,#6FAE7F,climate;identity,plate
-the-coast-12000-b-c,the-coast-12000-b-c,World Without Humans,8,,coming_soon,,,covers/the-coast-12000-b-c.jpg,#C98A5B,time_travel;memory,plate
-linewalker,linewalker,The Calorate,1,,coming_soon,241,,covers/linewalker.jpg,#E4863A,climate;dystopia,real
-the-golden-shore,the-golden-shore,The Calorate,2,,coming_soon,345,,covers/the-golden-shore.jpg,#D8B24A,,real
-the-even-cold,the-even-cold,The Calorate,3,,coming_soon,219,,covers/the-even-cold.jpg,#C4453C,climate,real
-proof-of-purchase,proof-of-purchase,Terms & Conditions,1,,coming_soon,,,covers/proof-of-purchase.jpg,#E08A3C,first_contact;satire,plate
-the-class-action,the-class-action,Terms & Conditions,2,,coming_soon,,,covers/the-class-action.jpg,#E08A3C,first_contact;satire,plate
-as-is-no-returns,as-is-no-returns,Terms & Conditions,3,,coming_soon,,,covers/as-is-no-returns.jpg,#E08A3C,first_contact;satire,plate
-the-weight-of-malice,the-weight-of-malice,The Barycentric Creed,1,,coming_soon,,,covers/the-weight-of-malice.jpg,#8A7BC8,dark_sf;moral_physics,plate
-the-event-horizon,the-event-horizon,The Barycentric Creed,2,,coming_soon,,,covers/the-event-horizon.jpg,#8A7BC8,dark_sf;moral_physics,plate
-the-unforgivable,the-unforgivable,The Barycentric Creed,3,,coming_soon,,,covers/the-unforgivable.jpg,#8A7BC8,dark_sf;moral_physics,plate
-the-vanishing,the-vanishing,The Breathing Dark,1,,coming_soon,,,covers/the-vanishing.jpg,#3FA08C,cosmic_horror;deep_space,plate
-the-exhale,the-exhale,The Breathing Dark,2,,coming_soon,,,covers/the-exhale.jpg,#3FA08C,cosmic_horror;deep_space,plate
-the-outside,the-outside,The Breathing Dark,3,,coming_soon,,,covers/the-outside.jpg,#3FA08C,cosmic_horror;deep_space,plate
-the-actuarys-burden,the-actuarys-burden,The Calculus of Fortune,1,,coming_soon,,,covers/the-actuarys-burden.jpg,#7FA65A,dystopia;dark_sf,plate
-the-probability-war,the-probability-war,The Calculus of Fortune,2,,coming_soon,,,covers/the-probability-war.jpg,#7FA65A,dystopia;dark_sf,plate
-the-unrigged,the-unrigged,The Calculus of Fortune,3,,coming_soon,,,covers/the-unrigged.jpg,#7FA65A,dystopia;dark_sf,plate
-the-resurfacing,the-resurfacing,The Drowned Houses,1,,coming_soon,,,covers/the-resurfacing.jpg,#4E8CA0,gothic_sf;deep_time,plate
-the-undertow,the-undertow,The Drowned Houses,2,,coming_soon,,,covers/the-undertow.jpg,#4E8CA0,gothic_sf;deep_time,plate
-the-night-tenant,the-night-tenant,The Night Tenant,1,,coming_soon,,,covers/the-night-tenant.jpg,#5AB8C8,thriller_sf;identity,plate
-vacant-possession,vacant-possession,The Night Tenant,2,,coming_soon,,,covers/vacant-possession.jpg,#5AB8C8,thriller_sf;identity,plate
-the-third-shift,the-third-shift,The Night Tenant,3,,coming_soon,,,covers/the-third-shift.jpg,#5AB8C8,thriller_sf;identity,plate
-the-gravity-king,the-gravity-king,The Relic Protocol,1,,coming_soon,,,covers/the-gravity-king.jpg,#B87333,epic_sf;deep_time,plate
-the-stolen-light,the-stolen-light,The Relic Protocol,2,,coming_soon,,,covers/the-stolen-light.jpg,#B87333,epic_sf;heist,plate
-the-final-observer,the-final-observer,The Relic Protocol,3,,coming_soon,,,covers/the-final-observer.jpg,#B87333,epic_sf;deep_time,plate
-the-early-dusk,the-early-dusk,The Seventh Watch,1,,coming_soon,,,covers/the-early-dusk.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-drained-sea,the-drained-sea,The Seventh Watch,2,,coming_soon,,,covers/the-drained-sea.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-continuous-city,the-continuous-city,The Seventh Watch,3,,coming_soon,,,covers/the-continuous-city.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-slow-court,the-slow-court,The Seventh Watch,4,,coming_soon,,,covers/the-slow-court.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-ingathering,the-ingathering,The Seventh Watch,5,,coming_soon,,,covers/the-ingathering.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-far-shore,the-far-shore,The Seventh Watch,6,,coming_soon,,,covers/the-far-shore.jpg,#C8B45A,epic_sf;secondary_world,plate
-the-aperitif,the-aperitif,The Universal Menu,1,,coming_soon,,,covers/the-aperitif.jpg,#D05348,first_contact;satire,real
-the-recipe-rebellion,the-recipe-rebellion,The Universal Menu,2,,coming_soon,,,covers/the-recipe-rebellion.jpg,#D05348,first_contact;satire,real
-past-expiration-date,past-expiration-date,The Universal Menu,3,,coming_soon,,,covers/past-expiration-date.jpg,#D05348,first_contact;satire,real
-the-clockmakers-tide,the-clockmakers-tide,,,,coming_soon,,,covers/the-clockmakers-tide.jpg,#6FA0B8,coastal_mystery;fantasy,plate
-the-silence-between-stars,the-silence-between-stars,,,,coming_soon,,,covers/the-silence-between-stars.jpg,#9AA8C0,first_contact;ai,plate
+id,slug,series,series_order,year,status,pages,isbn,cover,accent,themes,cover_art,release_date
+venice-2068-a-d,venice-2068-a-d,World Without Humans,1,,coming_soon,197,,covers/venice-2068-a-d.jpg,#C9A24B,climate,real,
+paris-2073-a-d,paris-2073-a-d,World Without Humans,2,,coming_soon,207,,covers/paris-2073-a-d.jpg,#C87A3C,time_travel;memory,real,
+kyoto-2076-a-d,kyoto-2076-a-d,World Without Humans,3,,coming_soon,191,,covers/kyoto-2076-a-d.jpg,#C2453E,memory;language,real,
+moscow-2067-a-d,moscow-2067-a-d,World Without Humans,4,,coming_soon,205,,covers/moscow-2067-a-d.jpg,#8FA7B8,time_travel;identity,real,
+jerusalem-2080-a-d,jerusalem-2080-a-d,World Without Humans,5,,coming_soon,205,,covers/jerusalem-2080-a-d.jpg,#D9C178,memory;identity,plate,
+antarctica-2061-a-d,antarctica-2061-a-d,World Without Humans,6,,coming_soon,195,,covers/antarctica-2061-a-d.jpg,#6FB5C9,time_travel;paradox,plate,
+rio-de-janeiro-2088-a-d,rio-de-janeiro-2088-a-d,World Without Humans,7,,coming_soon,,,covers/rio-de-janeiro-2088-a-d.jpg,#6FAE7F,climate;identity,plate,
+the-coast-12000-b-c,the-coast-12000-b-c,World Without Humans,8,,coming_soon,,,covers/the-coast-12000-b-c.jpg,#C98A5B,time_travel;memory,plate,
+linewalker,linewalker,The Calorate,1,,preorder,241,,covers/linewalker.jpg,#E4863A,climate;dystopia,real,2026-10-01
+the-golden-shore,the-golden-shore,The Calorate,2,,coming_soon,345,,covers/the-golden-shore.jpg,#D8B24A,,real,
+the-even-cold,the-even-cold,The Calorate,3,,coming_soon,219,,covers/the-even-cold.jpg,#C4453C,climate,real,
+proof-of-purchase,proof-of-purchase,Terms & Conditions,1,,coming_soon,,,covers/proof-of-purchase.jpg,#E08A3C,first_contact;satire,plate,
+the-class-action,the-class-action,Terms & Conditions,2,,coming_soon,,,covers/the-class-action.jpg,#E08A3C,first_contact;satire,plate,
+as-is-no-returns,as-is-no-returns,Terms & Conditions,3,,coming_soon,,,covers/as-is-no-returns.jpg,#E08A3C,first_contact;satire,plate,
+the-weight-of-malice,the-weight-of-malice,The Barycentric Creed,1,,coming_soon,,,covers/the-weight-of-malice.jpg,#8A7BC8,dark_sf;moral_physics,plate,
+the-event-horizon,the-event-horizon,The Barycentric Creed,2,,coming_soon,,,covers/the-event-horizon.jpg,#8A7BC8,dark_sf;moral_physics,plate,
+the-unforgivable,the-unforgivable,The Barycentric Creed,3,,coming_soon,,,covers/the-unforgivable.jpg,#8A7BC8,dark_sf;moral_physics,plate,
+the-vanishing,the-vanishing,The Breathing Dark,1,,coming_soon,,,covers/the-vanishing.jpg,#3FA08C,cosmic_horror;deep_space,plate,
+the-exhale,the-exhale,The Breathing Dark,2,,coming_soon,,,covers/the-exhale.jpg,#3FA08C,cosmic_horror;deep_space,plate,
+the-outside,the-outside,The Breathing Dark,3,,coming_soon,,,covers/the-outside.jpg,#3FA08C,cosmic_horror;deep_space,plate,
+the-actuarys-burden,the-actuarys-burden,The Calculus of Fortune,1,,coming_soon,,,covers/the-actuarys-burden.jpg,#7FA65A,dystopia;dark_sf,plate,
+the-probability-war,the-probability-war,The Calculus of Fortune,2,,coming_soon,,,covers/the-probability-war.jpg,#7FA65A,dystopia;dark_sf,plate,
+the-unrigged,the-unrigged,The Calculus of Fortune,3,,coming_soon,,,covers/the-unrigged.jpg,#7FA65A,dystopia;dark_sf,plate,
+the-resurfacing,the-resurfacing,The Drowned Houses,1,,coming_soon,,,covers/the-resurfacing.jpg,#4E8CA0,gothic_sf;deep_time,plate,
+the-undertow,the-undertow,The Drowned Houses,2,,coming_soon,,,covers/the-undertow.jpg,#4E8CA0,gothic_sf;deep_time,plate,
+the-night-tenant,the-night-tenant,The Night Tenant,1,,coming_soon,,,covers/the-night-tenant.jpg,#5AB8C8,thriller_sf;identity,plate,
+vacant-possession,vacant-possession,The Night Tenant,2,,coming_soon,,,covers/vacant-possession.jpg,#5AB8C8,thriller_sf;identity,plate,
+the-third-shift,the-third-shift,The Night Tenant,3,,coming_soon,,,covers/the-third-shift.jpg,#5AB8C8,thriller_sf;identity,plate,
+the-gravity-king,the-gravity-king,The Relic Protocol,1,,coming_soon,,,covers/the-gravity-king.jpg,#B87333,epic_sf;deep_time,plate,
+the-stolen-light,the-stolen-light,The Relic Protocol,2,,coming_soon,,,covers/the-stolen-light.jpg,#B87333,epic_sf;heist,plate,
+the-final-observer,the-final-observer,The Relic Protocol,3,,coming_soon,,,covers/the-final-observer.jpg,#B87333,epic_sf;deep_time,plate,
+the-early-dusk,the-early-dusk,The Seventh Watch,1,,coming_soon,,,covers/the-early-dusk.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-drained-sea,the-drained-sea,The Seventh Watch,2,,coming_soon,,,covers/the-drained-sea.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-continuous-city,the-continuous-city,The Seventh Watch,3,,coming_soon,,,covers/the-continuous-city.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-slow-court,the-slow-court,The Seventh Watch,4,,coming_soon,,,covers/the-slow-court.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-ingathering,the-ingathering,The Seventh Watch,5,,coming_soon,,,covers/the-ingathering.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-far-shore,the-far-shore,The Seventh Watch,6,,coming_soon,,,covers/the-far-shore.jpg,#C8B45A,epic_sf;secondary_world,plate,
+the-aperitif,the-aperitif,The Universal Menu,1,,preorder,,,covers/the-aperitif.jpg,#D05348,first_contact;satire,real,2026-10-08
+the-recipe-rebellion,the-recipe-rebellion,The Universal Menu,2,,coming_soon,,,covers/the-recipe-rebellion.jpg,#D05348,first_contact;satire,real,
+past-expiration-date,past-expiration-date,The Universal Menu,3,,coming_soon,,,covers/past-expiration-date.jpg,#D05348,first_contact;satire,real,
+the-clockmakers-tide,the-clockmakers-tide,,,,coming_soon,,,covers/the-clockmakers-tide.jpg,#6FA0B8,coastal_mystery;fantasy,plate,
+the-silence-between-stars,the-silence-between-stars,,,,coming_soon,,,covers/the-silence-between-stars.jpg,#9AA8C0,first_contact;ai,plate,
