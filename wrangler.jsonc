@@ -1,0 +1,12 @@
+// Cloudflare Workers static-assets config: the repo IS the deploy artifact
+// (build output committed; see DEPLOY.md). This lets the dashboard's new
+// Workers git flow deploy with its default `npx wrangler deploy` — no build
+// step, serve everything from the repo root.
+{
+  "name": "orbandink",
+  "compatibility_date": "2026-08-21",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page"
+  }
+}
