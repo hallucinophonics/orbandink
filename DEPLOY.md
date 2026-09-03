@@ -33,3 +33,35 @@ sitemap.xml all derive from it.
     git add -A && git commit -m "content: …" && git push
 
 Pages redeploys on push. Nothing else to configure.
+
+## Announcing a book (the release checklist)
+
+The catalogue is deliberately half-hidden. `catalog_coming_soon` in
+`data/site.csv` is set to `hide`, so only books with status `preorder`
+or `published` are built — two today, out of forty-five. Everything
+else is written, translated and covered, waiting on dates.
+
+**Per book, when its date is known** (all in `data/books.csv`):
+
+1. `release_date` — ISO `YYYY-MM-DD`. It renders as a localised line on
+   the book plate (`1 October 2026`, `1er octobre 2026`, `2026年10月1日`)
+   and as JSON-LD `datePublished`. Leave it blank and the row simply
+   does not appear, which is the right look for an unannounced book.
+2. `status` — `coming_soon` → `preorder`, then `published` on the day.
+   The pill, the call to action and schema.org availability all follow
+   from this one field.
+3. A row in `data/store_links.csv` for each retailer. **A dated book
+   with no link is a dead button**, which the series briefs forbid; the
+   buy block falls back to a "coming from Orb & Ink" state without one.
+4. `isbn` once assigned, and `pages` from the book's own
+   `build/print_report.json` — never typed by hand, and only for a book
+   whose chapters are all `final`. A page count taken from a draft
+   drifts, and the same figure sets the spine width on the cover.
+
+**Site-wide, when the catalogue should open:** set
+`catalog_coming_soon` to `show`. That alone takes the build from 2
+books to 45 across 8 languages (53 files to 397). Responsive covers and
+OG images are already generated for every book, released or not, so the
+switch needs no second build and no missing art.
+
+Then the usual `python3 build.py`, commit, push.

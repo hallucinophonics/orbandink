@@ -332,6 +332,51 @@ def cat_span():
     return f"{ys[0]} — {ys[-1]}" if ys else ""
 
 
+# Month names per language, so a release date reads as written rather than as
+# an ISO string. Locale-aware formatting is deliberately not used: the build
+# must produce identical bytes on any machine, and the C library's locale set
+# is not something a static site can depend on.
+MONTHS = {
+    "en": "January February March April May June July August September October November December",
+    "ru": "января февраля марта апреля мая июня июля августа сентября октября ноября декабря",
+    "fr": "janvier février mars avril mai juin juillet août septembre octobre novembre décembre",
+    "pt": "janeiro fevereiro março abril maio junho julho agosto setembro outubro novembro dezembro",
+    "de": "Januar Februar März April Mai Juni Juli August September Oktober November Dezember",
+    "it": "gennaio febbraio marzo aprile maggio giugno luglio agosto settembre ottobre novembre dicembre",
+    "es": "enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre",
+}
+
+
+def release_date(book, lang):
+    """A book's release date written the way that language writes one.
+
+    Empty until the owner sets it, which is the normal state for an
+    unannounced book: no date is better than a guessed one, so a missing
+    value simply drops the row rather than inventing "TBC".
+    """
+    raw = (book.get("release_date") or "").strip()
+    if not raw:
+        return ""
+    try:
+        y, m, d = (int(x) for x in raw.split("-"))
+        month = MONTHS.get(lang, MONTHS["en"]).split()[m - 1]
+    except (ValueError, IndexError):
+        return raw           # malformed dates surface as themselves, not as a crash
+    if lang == "ja":
+        return f"{y}年{m}月{d}日"
+    if lang == "ru":
+        return f"{d} {month} {y}"          # month already genitive
+    if lang in ("pt", "es"):
+        return f"{d} de {month} de {y}"
+    if lang == "de":
+        return f"{d}. {month} {y}"
+    if lang == "fr":
+        return f"{'1er' if d == 1 else d} {month} {y}"
+    if lang == "it":
+        return f"{'1º' if d == 1 else d} {month} {y}"
+    return f"{d} {month} {y}"
+
+
 def foot_status(lang):
     return (f'{esc(t("nav.books", lang))} {len(BOOKS):02d} · '
             f'{esc(t("a11y.langs", lang))} {len(LANGS):02d} · '
@@ -595,8 +640,10 @@ def jsonld_book(book, lang, L):
         data["isbn"] = book["isbn"]
     if book["pages"]:
         data["numberOfPages"] = int(book["pages"])
-    if book["year"]:
-        data["datePublished"] = book["year"]
+    # The exact date outranks the bare year when both are known. No row
+    # carries a year today, so in practice this is the release date or nothing.
+    if book.get("release_date") or book["year"]:
+        data["datePublished"] = (book.get("release_date") or "").strip() or book["year"]
     if book["series"]:
         data["isPartOf"] = {"@type": "BookSeries", "name": book["series"]}
         if book["series_order"]:
@@ -623,7 +670,8 @@ def build_book(lang, book):
             ("plate.series", f'{book["series"]} · {series_no(book, lang)}' if book["series"] else ""),
             ("plate.pages", book["pages"]),
             ("plate.isbn", book["isbn"]),
-            ("plate.status", t("status." + book["status"], lang))):
+            ("plate.status", t("status." + book["status"], lang)),
+            ("plate.release", release_date(book, lang))):
         if val:
             plate.append(f'      <div><dt>{esc(t(label_key, lang))}</dt><dd>{esc(val)}</dd></div>')
 

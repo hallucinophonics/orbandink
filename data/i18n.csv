@@ -31,6 +31,7 @@ plate.isbn,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN,ISBN
 plate.year,Year,Год,Année,Ano,Jahr,Anno,Año,刊行年
 plate.series,Series,Цикл,Série,Série,Reihe,Serie,Serie,シリーズ
 plate.status,Status,Статус,Statut,Estado,Status,Stato,Estado,状態
+plate.release,Release date,Дата выхода,Date de parution,Data de lançamento,Erscheinungstermin,Data di uscita,Fecha de publicación,発売日
 status.published,Published,Издано,Paru,Publicado,Erschienen,Pubblicato,Publicado,刊行済み
 status.preorder,Pre-order,Предзаказ,Précommande,Pré-venda,Vorbestellung,Preordine,Reserva,予約受付中
 status.coming_soon,Coming soon,Скоро,À paraître,Em breve,Demnächst,In arrivo,Próximamente,近日刊行
