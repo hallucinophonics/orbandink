@@ -41,6 +41,10 @@ CODES = [l["code"] for l in LANGS]
 SITE = {r["key"]: r["value"] for r in read_csv("site")}
 I18N = {r["key"]: r for r in read_csv("i18n")}
 BOOKS = read_csv("books")
+# Every row, whatever its status. Derived assets (responsive covers, OG) are
+# not publication — generating them for a coming-soon book reveals nothing and
+# means flipping catalog_coming_soon later needs no second build.
+ALL_BOOKS = list(BOOKS)
 # catalog_coming_soon (data/site.csv): "show" keeps unreleased books in the
 # catalogue wearing their Coming soon pill — the full-shelf storefront view.
 # "hide" builds a published-only site for when the imprint wants to promote
@@ -815,7 +819,7 @@ def build_images():
         print("  · Pillow not installed — skipping responsive covers + OG images "
               "(pages fall back to the base cover; install Pillow and re-run to upgrade)")
         return
-    for book in BOOKS:
+    for book in ALL_BOOKS:
         src = ROOT / book["cover"]
         if not src.exists():
             warn(f"cover missing: {book['cover']}")
@@ -823,7 +827,12 @@ def build_images():
         img = Image.open(src).convert("RGB")
         for w in (480, 800):
             out = ROOT / f"covers/{Path(book['cover']).stem}-{w}.jpg"
-            if not out.exists():
+            # Written only when ABSENT until now, so replacing a source cover
+            # left the -480/-800 showing the old art indefinitely: the shelf's
+            # real covers landed in covers/<id>.jpg while the responsive
+            # variants stayed on July's placeholders. Rebuild when the source
+            # is newer, like any build system.
+            if not out.exists() or src.stat().st_mtime > out.stat().st_mtime:
                 r = img.copy()
                 r.thumbnail((w, w * 2))
                 r.save(out, "JPEG", quality=82)
