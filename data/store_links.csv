@@ -1,3 +1,7 @@
 book_id,lang,store,format,url
 linewalker,en,Amazon,ebook,https://www.amazon.com/dp/B0HF13VNMR
+linewalker,en,Amazon,paperback,https://www.amazon.com/dp/1919140018
+linewalker,en,Amazon,hardcover,https://www.amazon.com/dp/1919140026
 the-aperitif,en,Amazon,ebook,https://www.amazon.com/dp/B0HFDPP6F4
+the-aperitif,en,Amazon,paperback,https://www.amazon.com/dp/1919140611
+the-aperitif,en,Amazon,hardcover,https://www.amazon.com/dp/191914062X
