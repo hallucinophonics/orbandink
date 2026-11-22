@@ -5,8 +5,9 @@ Static multilingual home of Orb & Ink — the imprint's catalogue and
 its four bylines (Belenkiy, Bianco, Weiss, Blanc).
 Plain HTML/CSS/ES-modules + `build.py` (Python stdlib generator).
 No frameworks, no npm, no bundlers, no CDNs, no analytics, no external
-requests at runtime. Deployed as-is to Cloudflare Pages (build command:
-none, output dir: `/`).
+requests at runtime. Deployed as-is by Cloudflare Workers Builds
+(`wrangler.jsonc`, static assets from the repo root; `.assetsignore`
+keeps `.git` and build-only files out of the upload — see `DEPLOY.md`).
 
 ## Hard rules
 - `/{en,ru,fr,pt,de,it,es,ja}/` trees + root `index.html`, `404.html`,

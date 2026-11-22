@@ -1,9 +1,27 @@
 # Deploying
 
-Target: **GitHub repo + Cloudflare Pages**. The repo *is* the deploy
-artifact — build output is committed; Cloudflare runs nothing.
+Target: **GitHub repo + Cloudflare Workers Builds** (since 21 Aug 2026;
+the Pages setup below is the original one, kept for reference). The repo
+*is* the deploy artifact — build output is committed; Cloudflare runs no
+build, only wrangler.
 
-## First deploy
+## How it deploys now (Workers)
+
+- `wrangler.jsonc` serves the repo root as static assets
+  (`assets.directory: "."`, `not_found_handling: "404-page"`).
+- `.assetsignore` keeps everything that is not the website out of the
+  upload: `.git` above all (a fresh clone packs git history into one file
+  over the 25 MiB asset limit, which failed every build until 22 Nov
+  2026), plus `build.py`, `templates/`, `tools/` and the repo notes.
+  `data/` must stay public: `assets/js/data.js` fetches `data/*.csv`.
+- Dashboard → Workers & Pages → `orbandink` → Settings → Build: build
+  command none, root directory `/`. Branches other than `main` run
+  `npx wrangler versions upload` (a preview, never live); `main` deploys
+  to orbandink.co.uk.
+- Check a build: GitHub check "Workers Builds: orbandink" on the commit;
+  its log is on the dashboard (owner's sign-in).
+
+## First deploy (original Pages setup, superseded)
 
 Cloudflare Dashboard → Workers & Pages → **Create → Pages →
 Connect to Git** → pick this repo:

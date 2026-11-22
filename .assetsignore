@@ -1,0 +1,20 @@
+# Cloudflare uploads the repo root as the website (wrangler.jsonc: assets.directory ".").
+# Everything listed here stays out of that upload. Git's own folder must stay out:
+# its pack files exceed the 25 MiB asset limit and made every build fail.
+# data/ is NOT listed: assets/js/data.js fetches data/*.csv at runtime.
+.git
+.gitignore
+.wrangler
+node_modules
+.DS_Store
+Thumbs.db
+__pycache__
+*.pyc
+*.swp
+/CLAUDE.md
+/DEPLOY.md
+/README.md
+/build.py
+/templates/
+/tools/
+/wrangler.jsonc
