@@ -25,6 +25,12 @@ keeps `.git` and build-only files out of the upload — see `DEPLOY.md`).
 - Missing translations must degrade to `en`, never break a page.
 - Real store URLs only when provided; otherwise keep them clearly
   marked `PLACEHOLDER`.
+- Amazon links in `data/store_links.csv` are plain amazon.com links
+  (`https://www.amazon.com/dp/<ID>`). `assets/js/local-store.js` points
+  them at the reader's own Amazon store on load (time zone, no request).
+  It lists only stores checked by hand; check a new edition on each
+  before it goes on sale. The two series sites with live links carry the
+  same table (`thermo.js`, `menu.js`): change all three together.
 - Real DOM text under every canvas/shader effect; effects are
   decoration, never content.
 - Fonts are self-hosted woff2 in `assets/fonts/`

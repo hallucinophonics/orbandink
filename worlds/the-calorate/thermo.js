@@ -62,6 +62,49 @@ const SEE = 'See the book at Orb & Ink';
 // labels are our own constants; a hyphenated word (e-book) is kept whole so it never breaks at the hyphen
 const whole = (s) => s.replace(/&/g, '&amp;').replace(/(\S+-\S+)/g, '<span class="nb">$1</span>');
 
+// ── A buy button opens the reader's own Amazon store ───────────────────────────────────
+// RETAIL holds amazon.com links (they work for everyone, and in the no-script markup). On
+// load each plain https://www.amazon.com/dp/<ID> link is pointed at the store of the country
+// the reader is in (amazon.co.uk in Britain, amazon.de in Germany …), read from the device's
+// time zone: no request is made, nothing is stored, and it stays a direct Amazon link, so a
+// phone still opens it in the Amazon app. STORES lists only stores where every edition on
+// sale was opened and checked by hand (2026-11-22); anywhere else the amazon.com link stays.
+// To keep one link on amazon.com for everybody, give it a query string (…/dp/<ID>?th=1).
+// Same table and rule as orbandink/assets/js/local-store.js and the other series site
+// (calorate-site/thermo.js, universal-menu-site/menu.js): change all three together.
+// store → the time zones of the countries that shop there; a name ending in "/" is a prefix
+const STORES = {
+  'co.uk': 'Europe/London Europe/Belfast Europe/Jersey Europe/Guernsey Europe/Isle_of_Man Europe/Dublin GB Eire',
+  'de': 'Europe/Berlin Europe/Busingen Europe/Vienna Europe/Zurich Europe/Vaduz',
+  'fr': 'Europe/Paris Europe/Monaco',
+  'it': 'Europe/Rome Europe/San_Marino Europe/Vatican',
+  'es': 'Europe/Madrid Africa/Ceuta Atlantic/Canary',
+  'nl': 'Europe/Amsterdam',
+  'co.jp': 'Asia/Tokyo Japan',
+  'com.au': 'Australia/ Pacific/Auckland Pacific/Chatham NZ',
+  'ca': 'Canada/ America/Toronto America/Montreal America/Vancouver America/Edmonton America/Winnipeg '
+    + 'America/Regina America/Halifax America/Moncton America/St_Johns America/Whitehorse '
+    + 'America/Yellowknife America/Iqaluit',
+};
+let storeFound; // undefined: not worked out yet · '': stay on amazon.com
+function storeHere() {
+  if (storeFound !== undefined) return storeFound;
+  storeFound = '';
+  try {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    for (const store of Object.keys(STORES)) {
+      if (STORES[store].split(' ').some((z) => (z.endsWith('/') ? zone.startsWith(z) : zone === z))) { storeFound = store; break; }
+    }
+  } catch (e) { /* an old browser: amazon.com */ }
+  return storeFound;
+}
+const PLAIN_AMAZON = /^https:\/\/www\.amazon\.com\/dp\/([A-Z0-9]{10})\/?$/;
+function localAmazon(url) {
+  const m = PLAIN_AMAZON.exec(url || '');
+  const store = m && storeHere();
+  return store ? 'https://www.amazon.' + store + '/dp/' + m[1] : url;
+}
+
 // Markup contract (see any page):
 //   <a class="buy" data-buy="<book>">             a book's main button; holds [data-buy-main] and, optionally,
 //                                                 [data-buy-sub] with data-sub-live / data-sub-soon lines
@@ -71,7 +114,7 @@ const whole = (s) => s.replace(/&/g, '&amp;').replace(/(\S+-\S+)/g, '<span class
 // .is-live is the solid, lit state; .is-soon the quiet dashed one. The CSS is in each page.
 export function wireRetail(root) {
   root = root || document;
-  const out = (a, url) => { a.setAttribute('href', url); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); };
+  const out = (a, url) => { a.setAttribute('href', localAmazon(url)); a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); };
   const mark = (el, live) => { el.classList.toggle('is-live', live); el.classList.toggle('is-soon', !live); };
   root.querySelectorAll('[data-buy]').forEach((a) => {
     const book = RETAIL[a.getAttribute('data-buy')];

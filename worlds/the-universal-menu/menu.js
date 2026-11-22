@@ -30,6 +30,49 @@ const EDITIONS = [
   ['drama', 'Listen to the audio drama'], ['graphic', 'See the graphic novel'],
 ];
 
+// ── A buy button opens the reader's own Amazon store ───────────────────────────────────
+// RETAIL holds amazon.com links (they work for everyone, and in the no-script markup). On
+// load each plain https://www.amazon.com/dp/<ID> link is pointed at the store of the country
+// the reader is in (amazon.co.uk in Britain, amazon.de in Germany …), read from the device's
+// time zone: no request is made, nothing is stored, and it stays a direct Amazon link, so a
+// phone still opens it in the Amazon app. STORES lists only stores where every edition on
+// sale was opened and checked by hand (2026-11-22); anywhere else the amazon.com link stays.
+// To keep one link on amazon.com for everybody, give it a query string (…/dp/<ID>?th=1).
+// Same table and rule as orbandink/assets/js/local-store.js and the other series site
+// (calorate-site/thermo.js, universal-menu-site/menu.js): change all three together.
+// store → the time zones of the countries that shop there; a name ending in "/" is a prefix
+const STORES = {
+  'co.uk': 'Europe/London Europe/Belfast Europe/Jersey Europe/Guernsey Europe/Isle_of_Man Europe/Dublin GB Eire',
+  'de': 'Europe/Berlin Europe/Busingen Europe/Vienna Europe/Zurich Europe/Vaduz',
+  'fr': 'Europe/Paris Europe/Monaco',
+  'it': 'Europe/Rome Europe/San_Marino Europe/Vatican',
+  'es': 'Europe/Madrid Africa/Ceuta Atlantic/Canary',
+  'nl': 'Europe/Amsterdam',
+  'co.jp': 'Asia/Tokyo Japan',
+  'com.au': 'Australia/ Pacific/Auckland Pacific/Chatham NZ',
+  'ca': 'Canada/ America/Toronto America/Montreal America/Vancouver America/Edmonton America/Winnipeg '
+    + 'America/Regina America/Halifax America/Moncton America/St_Johns America/Whitehorse '
+    + 'America/Yellowknife America/Iqaluit',
+};
+let storeFound; // undefined: not worked out yet · '': stay on amazon.com
+function storeHere() {
+  if (storeFound !== undefined) return storeFound;
+  storeFound = '';
+  try {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    for (const store of Object.keys(STORES)) {
+      if (STORES[store].split(' ').some((z) => (z.endsWith('/') ? zone.startsWith(z) : zone === z))) { storeFound = store; break; }
+    }
+  } catch (e) { /* an old browser: amazon.com */ }
+  return storeFound;
+}
+const PLAIN_AMAZON = /^https:\/\/www\.amazon\.com\/dp\/([A-Z0-9]{10})\/?$/;
+function localAmazon(url) {
+  const m = PLAIN_AMAZON.exec(url || '');
+  const store = m && storeHere();
+  return store ? 'https://www.amazon.' + store + '/dp/' + m[1] : url;
+}
+
 const EASE = 'cubic-bezier(.2,.7,.2,1)';
 const q = (s, r) => (r || document).querySelector(s);
 const qa = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
@@ -64,7 +107,7 @@ export function applyRetail(map) {
     const verb = q('.btn-verb', a), sub = q('.btn-sub', a);
     a.classList.toggle('btn-live', !!live);
     a.classList.toggle('btn-imprint', !live);
-    a.href = live ? r[live[0]] : IMPRINT(slug);
+    a.href = live ? localAmazon(r[live[0]]) : IMPRINT(slug);
     if (verb) verb.textContent = live ? live[1] : IMPRINT_VERB;
     if (sub) {
       if (!sub.dataset.subAsIs) sub.dataset.subAsIs = sub.textContent;
@@ -80,7 +123,7 @@ export function applyRetail(map) {
     slot.textContent = '';
     if (url) {
       const a = document.createElement('a'), v = document.createElement('span');
-      a.className = 'btn btn-live btn-sm'; a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'btn btn-live btn-sm'; a.href = localAmazon(url); a.target = '_blank'; a.rel = 'noopener';
       v.className = 'btn-verb'; v.textContent = ed[1]; a.appendChild(v); slot.appendChild(a);
     } else {
       const c = document.createElement('span'); c.className = 'chip'; c.textContent = 'Coming'; slot.appendChild(c);

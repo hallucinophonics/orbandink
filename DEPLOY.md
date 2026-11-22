@@ -82,6 +82,14 @@ series).
 3. A row in `data/store_links.csv` for each retailer. **A dated book
    with no link is a dead button**, which the series briefs forbid; the
    buy block falls back to a "coming from Orb & Ink" state without one.
+   For Amazon, enter the plain amazon.com link
+   (`https://www.amazon.com/dp/<ID>`): the page sends each reader to
+   their own country's store (`assets/js/local-store.js`, by time zone;
+   UK, Germany, France, Italy, Spain, Netherlands, Canada, Australia,
+   Japan; amazon.com everywhere else and without JavaScript). First open
+   the new edition on each of those stores with the same ID. If one
+   lacks it, add `?th=1` to the link and it stays on amazon.com for
+   everybody.
 4. `isbn` once assigned, and `pages` from the book's own
    `build/print_report.json` — never typed by hand, and only for a book
    whose chapters are all `final`. A page count taken from a draft

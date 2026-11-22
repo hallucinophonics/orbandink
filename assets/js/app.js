@@ -2,9 +2,11 @@
    Everything on the page already works without this file:
    real links, prerendered content, working buy buttons.
    This adds: language menu behavior, the shelf's filters, page
-   transitions, the opening books and the shader/particle layer. */
+   transitions, the opening books, the shader/particle layer, and
+   buy buttons that open the reader's own Amazon store. */
 
 import { site } from './data.js';
+import { wireLocalStores } from './local-store.js';
 
 document.documentElement.classList.add('js');
 
@@ -235,6 +237,7 @@ async function initObjects() {
 const cssAccent = () =>
   getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#D6AE5E';
 
+wireLocalStores();
 devFontShim();
 initLangMenu();
 initTransitions();
