@@ -538,23 +538,65 @@ html.fx-ready [data-reveal].in { opacity: 1; transform: translateY(0); }
 .book3d {
   position: relative; display: block; width: 100%; aspect-ratio: 2 / 3;
   container-type: inline-size;
-  --ry: -15deg; --rx: 0deg; --lift: 0cqw; --open: 0deg; --shift: 0cqw;
+  --ry: -15deg; --rx: 0deg; --lift: 0; --open: 0deg; --shift: 0;
   --vis: hidden; --visd: 1s;      /* the pages exist only while the book is open */
+}
+/* The pose (closed/open) animates through registered properties, not a
+   transition on `transform`: the pointer lean (--ty/--tx, eased by
+   book3d.js) is added straight into the same transform, so a moving pointer
+   never restarts the opening — that restart is what made Safari shudder.
+   (Browsers without @property simply snap between poses.) */
+@property --ry { syntax: "<angle>"; inherits: true; initial-value: -15deg; }
+@property --rx { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --lift { syntax: "<number>"; inherits: true; initial-value: 0; }   /* in cqw of the book */
+@property --shift { syntax: "<number>"; inherits: true; initial-value: 0; }  /* in cqw of the book */
+.book3d {
+  transition: --ry 0.75s cubic-bezier(0.2, 0.7, 0.15, 1), --rx 0.75s cubic-bezier(0.2, 0.7, 0.15, 1),
+              --lift 0.75s cubic-bezier(0.2, 0.7, 0.15, 1), --shift 0.75s cubic-bezier(0.2, 0.7, 0.15, 1);
 }
 .b3 {
   --t: clamp(4.5cqw, calc(var(--pages, 320) * 0.027cqw), 12.5cqw);
+  --bt: 1.9cqw;                     /* board thickness: ~3 mm on a royal octavo */
+  --case: color-mix(in srgb, var(--accent-book, var(--accent)) 30%, #15110d);
   position: absolute; inset: 0; transform-style: preserve-3d;
-  transform: perspective(560cqw) translateX(var(--shift))
+  transform: perspective(560cqw) translateX(calc(var(--shift) * 1cqw))
              rotateY(calc(var(--ry) + var(--ty, 0deg)))
              rotateX(calc(var(--rx) + var(--tx, 0deg)))
-             translateZ(var(--lift));
-  transition: transform 0.75s cubic-bezier(0.2, 0.7, 0.15, 1);
+             translateZ(calc(var(--lift) * 1cqw));
 }
 .b3-back, .b3-leaf, .b3-cover, .b3-front, .b3-inside { position: absolute; inset: 0; }
+/* the back board, seen from the front: the case turned in over its edge,
+   showing round the page block as the squares */
 .b3-back {
-  transform: translateZ(calc(var(--t) / -2));
-  border-radius: 0.7cqw 1.5cqw 1.5cqw 0.7cqw;
-  background: color-mix(in srgb, var(--accent-book, var(--accent)) 22%, #0b0907);
+  transform: translateZ(calc(var(--t) / -2)); transform-style: preserve-3d;
+  border-radius: 0.5cqw 0.9cqw 0.9cqw 0.5cqw;
+  background: var(--case) center / 100% 100% no-repeat;
+}
+.b3-back::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(90deg, rgba(8, 6, 4, 0.62), rgba(8, 6, 4, 0.46));
+}
+.b3-back::before {                /* its fore-edge, as thick as the board */
+  content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: var(--bt);
+  transform: translateX(50%) translateZ(calc(var(--bt) / -2)) rotateY(90deg);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background-color: var(--case); background-image: inherit;
+  background-size: 9000% 100%; background-position: 100% 0;
+  box-shadow: inset 0 0 0 100cqw rgba(0, 0, 0, 0.5);
+}
+/* the spine: the case's art carried round the back, rounded */
+.b3-spine {
+  position: absolute; top: 0; bottom: 0; left: 0; width: calc(var(--t) + var(--bt));
+  transform-origin: 0 50%;
+  transform: translateZ(calc(var(--t) / -2)) rotateY(-90deg);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 0.6cqw;
+  background: var(--case) 0 0 / 9000% 100% no-repeat;
+}
+.b3-spine::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.12) 22%,
+    rgba(255, 246, 232, 0.12) 46%, rgba(0, 0, 0, 0.08) 70%, rgba(0, 0, 0, 0.5));
 }
 .b3-block {
   position: absolute; top: 1.3%; bottom: 1.3%; right: 0; width: var(--t);
@@ -568,9 +610,14 @@ html.fx-ready [data-reveal].in { opacity: 1; transform: translateY(0); }
   inset: 1.3% 1.6% 1.3% 0;
   transform: translateZ(calc(var(--t) / 2 - 0.5px));
   border-radius: 0 1cqw 1cqw 0; overflow: hidden;
+  /* book paper: gutter shade, the fibre and formation of the sheet
+     (assets/img/paper.png, tools/make_paper.py), then the cream itself */
   background:
     linear-gradient(90deg, rgba(43, 34, 25, 0.34), rgba(43, 34, 25, 0.06) 9%, transparent 24%),
+    radial-gradient(120% 90% at 78% 18%, rgba(255, 252, 244, 0.32), transparent 62%),
+    url("../img/paper.png") 0 0 / 62cqw 62cqw,
     linear-gradient(180deg, var(--paper), var(--paper-2));
+  background-blend-mode: normal, normal, soft-light, normal;
   color: var(--paper-ink);
 }
 .b3-leaf-in {
@@ -605,9 +652,30 @@ html:not([lang="ja"]) .b3-page::first-letter {
 }
 .b3-front, .b3-inside {
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  border-radius: 0.7cqw 1.5cqw 1.5cqw 0.7cqw; overflow: hidden;
+  border-radius: 0.5cqw 0.9cqw 0.9cqw 0.5cqw; overflow: hidden;
 }
-.b3-front { background: #15120e; box-shadow: inset 0 0 0 1px rgba(237, 230, 220, 0.07); }
+/* the front board is a board: its face sits a board's thickness above the
+   hinge, and its three free edges are covered by the wrapped case */
+.b3-front { transform: translateZ(var(--bt)); background: #15120e; box-shadow: inset 0 0 0 1px rgba(237, 230, 220, 0.07); }
+.b3-edge {
+  position: absolute;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background-color: var(--case); background-repeat: no-repeat;
+}
+.b3-edge::after { content: ""; position: absolute; inset: 0; }
+.b3-edge-r {
+  top: 0.35cqw; bottom: 0.35cqw; right: 0; width: var(--bt);
+  transform: translateX(50%) translateZ(calc(var(--bt) / 2)) rotateY(90deg);
+  background-size: 9000% 100%; background-position: 100% 0;
+}
+.b3-edge-t, .b3-edge-b { left: 0.25cqw; right: 0.35cqw; height: var(--bt); background-size: 100% 9000%; }
+.b3-edge-t { top: 0; transform: translateY(-50%) translateZ(calc(var(--bt) / 2)) rotateX(90deg); background-position: 0 0; }
+.b3-edge-b { bottom: 0; transform: translateY(50%) translateZ(calc(var(--bt) / 2)) rotateX(-90deg); background-position: 0 100%; }
+/* the cloth rolls over a slightly rounded board edge: lit at the face,
+   falling into shade toward the inside */
+.b3-edge-r::after { background: linear-gradient(90deg, rgba(255, 246, 232, 0.16), rgba(0, 0, 0, 0.1) 45%, rgba(0, 0, 0, 0.45)); }
+.b3-edge-t::after { background: linear-gradient(0deg, rgba(255, 246, 232, 0.2), rgba(0, 0, 0, 0.05) 45%, rgba(0, 0, 0, 0.4)); }
+.b3-edge-b::after { background: linear-gradient(180deg, rgba(255, 246, 232, 0.08), rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.6)); }
 .b3-front img { width: 100%; height: 100%; object-fit: cover; }
 .b3-front::before {              /* the hinge crease */
   content: ""; position: absolute; inset: 0 auto 0 0; width: 4.4cqw; z-index: 1;
@@ -618,11 +686,44 @@ html:not([lang="ja"]) .b3-page::first-letter {
   background: linear-gradient(102deg, transparent 32%, rgba(255, 250, 240, 0.17) 48%, transparent 63%);
   transform: translateX(-85%); transition: transform 1.1s var(--ease);
 }
-.b3-inside {                     /* endpaper */
+/* inside the front board, as in a bound hardcover: the case turned in over
+   the three free edges (a narrow band of the cover art), and the pastedown
+   endpaper laid over the rest — a laid, fibrous sheet in the book's own
+   colour that runs into the hinge. Local left is the fore-edge here
+   (the face is turned 180°), local right the hinge. */
+.b3-inside {
   transform: rotateY(180deg);
-  background:
-    repeating-linear-gradient(135deg, rgba(237, 230, 220, 0.05) 0 1px, transparent 1px 7px),
-    linear-gradient(90deg, color-mix(in srgb, var(--accent-book, var(--accent)) 34%, #100d0a), #0b0907);
+  background: var(--case) center / 100% 100% no-repeat;
+}
+.b3-inside::before {              /* the turn-in: shaded, its board edge just caught by light */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(10, 8, 6, 0.42), rgba(10, 8, 6, 0.5));
+  box-shadow: inset 0.3cqw 0 0 rgba(255, 246, 232, 0.12), inset 0 0.3cqw 0 rgba(255, 246, 232, 0.08),
+              inset 0 -0.3cqw 0 rgba(0, 0, 0, 0.3);
+}
+.b3-paste {
+  --epc: var(--ep, color-mix(in srgb, var(--accent-book, var(--accent)) 48%, #1d1711));
+  position: absolute; top: 3.1cqw; bottom: 3.1cqw; left: 3.1cqw; right: 0;
+  border-radius: 0.25cqw 0 0 0.25cqw;
+  background-color: var(--epc);
+  background-image:
+    /* the hinge: the sheet bends down into the joint, with the board's edge
+       showing as a soft ridge a few millimetres out */
+    linear-gradient(270deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.28) 2.6cqw, rgba(255, 244, 228, 0.07) 4.4cqw,
+      rgba(0, 0, 0, 0.12) 5.4cqw, transparent 9cqw),
+    /* light from above the reader's right shoulder */
+    radial-gradient(130% 100% at 88% 6%, rgba(255, 244, 228, 0.14), transparent 60%),
+    linear-gradient(180deg, transparent 70%, rgba(0, 0, 0, 0.18)),
+    /* laid paper: fine laid lines, and chain lines a thumb's width apart */
+    repeating-linear-gradient(0deg, rgba(255, 244, 228, 0.028) 0 1px, transparent 1px 0.7cqw),
+    repeating-linear-gradient(90deg, transparent 0 calc(12.5cqw - 1.2cqw), rgba(0, 0, 0, 0.025) calc(12.5cqw - 0.4cqw) 12.5cqw),
+    /* the sheet's colour laid back over half the fibre, so the grain stays a whisper */
+    linear-gradient(color-mix(in srgb, var(--epc) 45%, transparent), color-mix(in srgb, var(--epc) 45%, transparent)),
+    url("../img/paper.png");
+  background-size: auto, auto, auto, auto, auto, auto, 58cqw 58cqw;
+  background-blend-mode: normal, normal, normal, normal, normal, normal, soft-light;
+  /* the sheet's own cut edge, a hair lighter than the turn-in it lies on */
+  box-shadow: 0 0 0 0.12cqw rgba(255, 244, 228, 0.07), -0.15cqw 0.2cqw 0.5cqw rgba(0, 0, 0, 0.35);
 }
 .b3-shadow {
   position: absolute; left: 4%; right: -6%; bottom: -8.5%; height: 11%; pointer-events: none;
@@ -632,15 +733,15 @@ html:not([lang="ja"]) .b3-page::first-letter {
 
 /* open: hover and focus on fine pointers, .is-open from the button, and a
    smaller "peek" as a book crosses the middle of a touch screen */
-.book3d.is-open { --ry: -23deg; --rx: 2deg; --lift: 6cqw; --open: -70deg; --shift: 9cqw; --vis: visible; --visd: 0s; }
-.book3d.is-peek { --ry: -18deg; --lift: 3cqw; --open: -22deg; --vis: visible; --visd: 0s; }
+.book3d.is-open { --ry: -23deg; --rx: 2deg; --lift: 6; --open: -70deg; --shift: 9; --vis: visible; --visd: 0s; }
+.book3d.is-peek { --ry: -18deg; --lift: 3; --open: -22deg; --vis: visible; --visd: 0s; }
 .now-book .book3d.is-peek { --ry: -20deg; --open: -40deg; }
 @media (hover: hover) and (pointer: fine) {
   .card-link:hover .book3d, .now:hover .book3d, .book-stage:hover .book3d {
-    --ry: -23deg; --rx: 2deg; --lift: 6cqw; --open: -70deg; --shift: 9cqw; --vis: visible; --visd: 0s;
+    --ry: -23deg; --rx: 2deg; --lift: 6; --open: -70deg; --shift: 9; --vis: visible; --visd: 0s;
   }
 }
-.card-link:focus-visible .book3d { --ry: -23deg; --rx: 2deg; --lift: 6cqw; --open: -70deg; --shift: 9cqw; --vis: visible; --visd: 0s; }
+.card-link:focus-visible .book3d { --ry: -23deg; --rx: 2deg; --lift: 6; --open: -70deg; --shift: 9; --vis: visible; --visd: 0s; }
 .card-link:hover .b3-front::after, .now:hover .b3-front::after,
 .book-stage:hover .b3-front::after, .is-open .b3-front::after, .is-peek .b3-front::after { transform: translateX(85%); }
 .card-link:hover .b3-shadow, .book-stage:hover .b3-shadow, .now:hover .b3-shadow,
@@ -649,8 +750,8 @@ html:not([lang="ja"]) .b3-page::first-letter {
 /* browsers without container units (before Safari 16 / Chrome 105): the
    book is its cover, flat and honest — no half-built 3D */
 @supports not (width: 1cqw) {
-  .b3, .b3-cover { transform: none !important; }
-  .b3-leaf, .b3-inside, .b3-block, .b3-back { display: none; }
+  .b3, .b3-cover, .b3-front { transform: none !important; }
+  .b3-leaf, .b3-inside, .b3-block, .b3-back, .b3-spine, .b3-edge { display: none; }
 }
 
 /* ---- shelf grid + cards ---- */
@@ -2108,14 +2209,13 @@ html.js .shelf-sec .filters { gap: 8px; padding: 12px clamp(14px, 1.6vw, 24px); 
 /* the open book: the cover swings past the spine and lies open to the left,
    its endpaper toward the reader, so the first page is never covered (at
    -70deg the board stood across the page; in Safari it hid the text) */
-.book3d.is-open { --ry: -9deg; --rx: 2deg; --lift: 4cqw; --open: -142deg; --shift: 24cqw; }
+.book3d.is-open { --ry: -9deg; --rx: 2deg; --lift: 4; --open: -142deg; --shift: 24; }
 @media (hover: hover) and (pointer: fine) {
-  .card-link:hover .book3d, .now:hover .book3d, .book-stage:hover .book3d { --ry: -9deg; --rx: 2deg; --lift: 4cqw; --open: -142deg; --shift: 24cqw; }
+  .card-link:hover .book3d, .now:hover .book3d, .book-stage:hover .book3d { --ry: -9deg; --rx: 2deg; --lift: 4; --open: -142deg; --shift: 24; }
 }
-.card-link:focus-visible .book3d { --ry: -9deg; --rx: 2deg; --lift: 4cqw; --open: -142deg; --shift: 24cqw; }
+.card-link:focus-visible .book3d { --ry: -9deg; --rx: 2deg; --lift: 4; --open: -142deg; --shift: 24; }
 .b3-cover { z-index: 2; }
 .b3-leaf { z-index: 1; }
-.b3-inside { box-shadow: inset 0 0 0 1px rgba(237, 230, 220, 0.06); }
 
 /* ---- the authors page: each author a full-width lit stage ---- */
 .astages { display: grid; margin-top: clamp(36px, 5vw, 80px); }

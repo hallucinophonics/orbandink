@@ -412,17 +412,25 @@ def book3d(book, lang, rel, *, eager=False, leaf=""):
                 f'<span class="b3-by">{esc(byline_name(key, lang))}</span>')
     pages = book["pages"] if book["pages"].isdigit() and int(book["pages"]) > 60 else "320"
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    # the printed case wraps round the boards: their edges, the spine, the
+    # turn-ins inside the cover and the back board carry the cover art
+    # (book3d.js paints them from the cover <img> once it has loaded)
+    art = ' data-art'
     return (
         f'<div class="book3d" data-book3d style="--pages:{pages}">\n'
         f'      <div class="b3">\n'
-        f'        <div class="b3-back"></div>\n'
+        f'        <div class="b3-back"{art}></div>\n'
         f'        <div class="b3-block"></div>\n'
+        f'        <div class="b3-spine"{art}></div>\n'
         f'        <div class="b3-leaf" aria-hidden="true"><div class="b3-leaf-in">{leaf}'
         f'<span class="b3-mark">Orb &amp; Ink</span></div></div>\n'
         f'        <div class="b3-cover">\n'
         f'          <div class="b3-front"><img src="{rel}{book["cover"]}"{srcset_for(book["cover"], rel)} '
         f'alt="{esc(L["title"])}" width="800" height="1200" {load}></div>\n'
-        f'          <div class="b3-inside"></div>\n'
+        f'          <div class="b3-edge b3-edge-r"{art}></div>'
+        f'<div class="b3-edge b3-edge-t"{art}></div>'
+        f'<div class="b3-edge b3-edge-b"{art}></div>\n'
+        f'          <div class="b3-inside"{art}><div class="b3-paste"></div></div>\n'
         f'        </div>\n'
         f'      </div>\n'
         f'      <div class="b3-shadow"></div>\n'
