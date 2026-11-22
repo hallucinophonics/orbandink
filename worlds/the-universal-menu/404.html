@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not on the menu — The Universal Menu</title>
+<meta name="robots" content="noindex">
+<meta name="author" content="Alessio Bianco">
+<meta name="theme-color" content="#F5F0E6">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..800&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="menu.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<main class="lost">
+<!-- an empty plate, the lid still on: nothing has been prepared under that name -->
+<svg class="dish" viewBox="0 0 448 324" role="img" aria-label="A silver cloche on an empty plate">
+<defs>
+<radialGradient id="gPlate" cx="46%" cy="38%" r="66%"><stop offset="0" stop-color="#FFFEFA"/><stop offset=".68" stop-color="#F6F0E4"/><stop offset="1" stop-color="#E6DCCA"/></radialGradient>
+<linearGradient id="gChrome" x1=".1" y1="0" x2=".42" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".22" stop-color="#C6CDD3"/><stop offset=".44" stop-color="#5C6772"/><stop offset=".56" stop-color="#8E99A3"/><stop offset=".80" stop-color="#F3EEE3"/><stop offset="1" stop-color="#C9BFAC"/></linearGradient>
+<radialGradient id="gKnob" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#FFF1C9"/><stop offset=".5" stop-color="#C99A3A"/><stop offset="1" stop-color="#7A570C"/></radialGradient>
+<filter id="fSoft" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<ellipse cx="240" cy="240" rx="204" ry="76" fill="rgba(28,23,18,.20)" filter="url(#fSoft)"/>
+<ellipse cx="224" cy="230.6" rx="197" ry="73.8" fill="url(#gPlate)"/>
+<ellipse cx="224" cy="230.6" rx="183" ry="68" fill="none" stroke="#B8892B" stroke-width="3.5" opacity=".9"/>
+<ellipse cx="238" cy="226" rx="132" ry="46" fill="rgba(28,23,18,.22)" filter="url(#fSoft)"/>
+<path d="M95.2 217.9A128.8 172 0 0 1 352.8 217.9A128.8 47.9 0 0 1 95.2 217.9Z" fill="url(#gChrome)"/>
+<path d="M95.2 217.9A128.8 47.9 0 0 0 352.8 217.9" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.5" transform="translate(0 -4)"/>
+<path d="M150 150C150 96 180 66 214 58" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+<ellipse cx="224" cy="44" rx="16" ry="7" fill="#AEB7BF"/>
+<circle cx="224" cy="28" r="14" fill="url(#gKnob)"/>
+</svg>
+<p class="eyebrow">Course not found · 404</p>
+<h1 class="display">That dish is not on the menu.</h1>
+<p>The kitchen has checked. Nothing is served here that was not written down first.</p>
+<div class="actions" style="justify-content:center;margin-top:.6rem">
+<a class="btn btn-live" href="index.html"><span class="btn-verb">Back to the menu</span></a>
+<a class="link-quiet" href="the-aperitif.html">Or start with the first course <span aria-hidden="true">→</span></a>
+</div>
+<p class="colophon" style="border:0;padding:1rem 0 0;max-width:none">Earth · disposition: pending · © Alessio Bianco</p>
+</main>
+</body>
+</html>

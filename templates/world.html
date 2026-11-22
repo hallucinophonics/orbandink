@@ -1,0 +1,43 @@
+<section class="whero{{W_HERO_CLASS}}" style="--accent-book:{{W_ACCENT}}" data-tint-page="{{W_ACCENT}}">
+{{W_HERO_PIC}}
+  <nav class="crumbs" aria-label="{{T_NAV}}">
+    <a href="{{REL}}{{LANG}}/series/">{{T_SERIES}}</a><span class="sep" aria-hidden="true">/</span><span class="mono-meta">{{W_NAME}}</span>
+  </nav>
+  <div class="whero-in">
+    <div class="whero-text">
+      <p class="whero-by mono-meta"><span>{{W_BY}}</span><span>{{W_COUNT}}</span></p>
+      <h1 class="whero-title" data-gather>{{W_NAME}}</h1>
+      <p class="world-line">{{W_TAGLINE}}</p>
+      {{W_NOW}}
+      <div class="whero-act">
+        {{W_SITE_BTN}}
+        <a class="btn btn--glass" href="{{W_FIRST_URL}}">{{W_FIRST}}</a>
+      </div>
+    </div>
+    <div class="whero-books">{{W_HERO_BOOKS}}</div>
+  </div>
+</section>
+<section class="section wintro{{W_STAGE_CLASS}}" style="--accent-book:{{W_ACCENT}}">
+  <div class="wintro-text" data-reveal>
+    <p class="world-premise">{{W_PREMISE}}</p>
+    <div class="themes-row">{{W_THEMES}}</div>
+  </div>
+  {{W_PORTAL}}
+</section>
+<section class="section act act--split" style="--accent-book:{{W_ACCENT}}">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{W_COUNT}}</p>
+    <h2 class="act-title act-title--sm" data-gather>{{T_ORDER}}</h2>
+  </header>
+  <div class="grid-books shelf">
+{{W_CARDS}}
+  </div>
+</section>
+<section class="section act act--split" style="--accent-book:{{W_ACCENT}}">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{W_NAME}}</p>
+    <h2 class="act-title act-title--sm" data-gather>{{T_FORMATS}}</h2>
+  </header>
+  <ul class="way-list" data-reveal>{{W_WAYS}}</ul>
+</section>
+{{W_MORE}}

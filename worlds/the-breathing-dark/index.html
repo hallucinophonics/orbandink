@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Breathing Dark — a trilogy by A. P. Weiss</title>
+<meta name="description" content="The stars are going out — one by one, no explosions, no remnants. A complete literary hard-SF trilogy by A. P. Weiss. The dark was breathing.">
+<meta property="og:title" content="The Breathing Dark — a trilogy by A. P. Weiss">
+<meta property="og:description" content="The dark was never empty. It was breathing. A complete literary hard science fiction trilogy about the death of the sky.">
+<meta property="og:type" content="website">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050708">
+<meta name="author" content="A. P. Weiss">
+<meta property="og:site_name" content="The Breathing Dark">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A night sky half gone dark, and the words The Breathing Dark, a trilogy by A. P. Weiss.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Space+Grotesk:wght@500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<script>(function(d){d.className+=' js';try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.className+=' still'}catch(e){}})(document.documentElement)</script>
+<link rel="preload" as="image" href="assets/scenes/sky-wide.webp" media="(min-aspect-ratio:85/100)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/scenes/sky-tall.webp" media="(max-aspect-ratio:85/100)" fetchpriority="high">
+<link rel="modulepreload" href="dark.js">
+<link rel="modulepreload" href="sky.js">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BookSeries","name":"The Breathing Dark","description":"The stars are going out — one by one, no explosions, no remnants, just gone — and the last expedition sent to find out why will learn what the dark has been doing all along: breathing. A complete literary hard science fiction trilogy.","genre":["Science fiction","Hard science fiction","Literary fiction"],"inLanguage":"en","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"hasPart":[{"@type":"Book","name":"The Vanishing","position":1,"numberOfPages":377,"inLanguage":"en","url":"https://orbandink.co.uk/en/books/the-vanishing/","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink"}},{"@type":"Book","name":"The Exhale","position":2,"numberOfPages":363,"inLanguage":"en","url":"https://orbandink.co.uk/en/books/the-exhale/","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink"}},{"@type":"Book","name":"The Outside","position":3,"numberOfPages":347,"inLanguage":"en","url":"https://orbandink.co.uk/en/books/the-outside/","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink"}}]}</script>
+<style>
+/* ── The Breathing Dark · shared system ─────────────────────────────────────
+   Palette: void, star white, dim ink, amber. The only true black on the site is
+   the door. Motion: dim, kindle, breathe — opacity and luminance only. */
+:root{--void:#050708;--field:#0B1016;--star:#E9EEF4;--ink:#B4BDC7;--dim:#8C97A3;--amber:#D9A05B;--deep:#8A5B28;--obit:#6E3B2E;
+  --accent:#D9A05B;--on-accent:#050708;--rule:rgba(140,151,163,.2);--scrim:5,7,8;--murmur:.5;--amp:1;
+  --buy:#D9A05B;--buy-hi:#EDC48C;--buy-lo:#B8843F;--on-buy:#050708;--buy-halo:217,160,91;
+  --serif:Spectral,"Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);--gut:clamp(20px,5.4vw,88px);--max:1240px;--edge:max(var(--gut),calc((100% - var(--max)) / 2))}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--void);-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:76px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--void);color:var(--ink);font:400 18px/1.65 var(--serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ol,ul,figure,table{margin:0}
+ol,ul{padding:0;list-style:none}
+img,svg{display:block}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--accent);outline-offset:5px}
+::selection{background:rgba(217,160,91,.3);color:#fff}
+.gr{text-transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--gut);top:-80px;z-index:95;background:var(--void);color:var(--star);font:500 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:12px 16px;border:1px solid var(--accent)}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto}
+
+/* voices */
+.lab{font:500 11px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.lab a{text-decoration:none;color:var(--star)}
+.lab b{font-weight:500;color:var(--star)}
+.mono{font:400 11.5px/1.7 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.h2{font:300 clamp(30px,4.5vw,60px)/1.1 var(--serif);color:var(--star);letter-spacing:-.006em;text-wrap:balance}
+.caps{font-family:var(--serif);font-weight:300;text-transform:uppercase;letter-spacing:.16em;color:var(--star)}
+.t-the{display:block;font-size:.27em;letter-spacing:.52em;line-height:1;margin:0 0 .5em .12em}
+/* a ruled line with a mono label, as in a survey logbook */
+.rule{display:flex;justify-content:space-between;align-items:baseline;gap:8px 24px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:13px;font:400 11px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.rule > :first-child{color:var(--star)}
+.rule h2,.rule h3{font:inherit;letter-spacing:inherit}
+.tick{flex:none;width:13px;height:10px;fill:none;stroke:var(--amber);stroke-width:1.4}
+.more{font:500 11px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--star);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:5px;text-decoration-thickness:1px;transition:text-decoration-color .5s var(--ease)}
+.more:hover{text-decoration-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:1.1em;border:1px solid var(--accent);color:var(--accent);font:500 12px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;padding:18px 26px 17px;transition:background-color .6s var(--ease),color .6s var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--accent);color:var(--on-accent)}
+
+/* ── buying: a plain verb first, the series' voice second ──────────────────────
+   .buy--solid is a book's main button. .buy--line is a quieter one. When RETAIL in
+   dark.js holds a shop link the engine adds .is-live: solid, with a lit halo. An
+   edition that is not on sale yet is a .chip, which is not a button at all. */
+.buy{display:inline-flex;flex-direction:column;justify-content:center;gap:6px;max-width:100%;padding:16px 24px 15px;border:1px solid var(--buy);color:var(--buy);text-decoration:none;text-align:left;transition:background-color .5s var(--ease),border-color .5s var(--ease),color .5s var(--ease),box-shadow .6s var(--ease)}
+.buy-verb{display:flex;align-items:center;justify-content:space-between;gap:1.2em;font:500 13px/1.3 var(--sans);letter-spacing:.17em;text-transform:uppercase}
+.buy-verb::after{content:"\2192";flex:none;letter-spacing:0;font-size:1.15em;line-height:1}
+.buy-sub{font:400 10.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.buy--solid,.buy.is-live{background:var(--buy);color:var(--on-buy);box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(0,0,0,.18),0 18px 40px -22px rgba(var(--buy-halo),.75)}
+.buy--solid:hover,.buy--solid:focus-visible,.buy.is-live:hover,.buy.is-live:focus-visible{background:var(--buy-hi);border-color:var(--buy-hi)}
+.buy--line{background:rgba(var(--buy-halo),.09);box-shadow:inset 0 1px 0 rgba(var(--buy-halo),.28)}
+.buy--line:hover,.buy--line:focus-visible{background:var(--buy);color:var(--on-buy)}
+.buy:active{background:var(--buy-lo);border-color:var(--buy-lo);color:var(--on-buy);box-shadow:inset 0 2px 6px rgba(0,0,0,.35);transition-duration:.08s}
+.buy:focus-visible{outline:2px solid var(--star);outline-offset:4px}
+.buy.is-live{box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 0 0 4px rgba(var(--buy-halo),.2),0 0 44px rgba(var(--buy-halo),.4)}
+.buy.is-live .buy-sub::before{content:"Available now \00B7  "}
+.buy--lg{padding:19px 28px 18px}
+.buy--lg .buy-verb{font-size:14px}
+.buy--sm{padding:11px 14px 10px}
+.buy--sm .buy-verb{font-size:10.5px;letter-spacing:.13em;gap:.9em}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 13px 7px;border:1px solid var(--rule);border-radius:99px;font:400 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid currentColor}
+
+/* covers: the real jackets, on the void, with a faint edge-light */
+.cover{position:relative;display:block;margin:0}
+.cover img{width:100%;height:auto;box-shadow:0 0 0 1px rgba(217,160,91,.16),0 34px 90px -46px rgba(138,91,40,.55)}
+.cover::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 1px 1px 0 rgba(217,160,91,.34)}
+/* stills: one frame of each scene, in the markup, under its canvas from the first paint */
+.plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* the sky */
+.sky{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:0;background:var(--void);pointer-events:none;overflow:hidden}
+.sky--in{position:absolute;height:100%}
+.sky canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .9s var(--ease)}
+.still .sky canvas{transition:none}
+/* the still: one frame of this page's own sky, in place from the first paint. The live sky fades in over it */
+.sky-static{position:absolute;inset:0;background:var(--void) 50% 50%/cover no-repeat}
+
+/* the Murmur: page luminance, one overlay, one property */
+.breath{position:fixed;inset:0;z-index:80;pointer-events:none;background:#000;opacity:calc(.046 * var(--amp) * (1 - var(--murmur)));transition:opacity .16s linear}
+.still .breath{transition:none}
+/* archival grain */
+.grain{position:fixed;inset:0;z-index:81;pointer-events:none;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .92  0 0 0 0 .94  0 0 0 0 .97  0 0 0 .34 -.115'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* kindle: every reveal is a fade */
+.js:not(.still) [data-k]{opacity:0;transition:opacity .6s var(--ease) var(--d,0s)}
+.js:not(.still) [data-k].is-lit{opacity:1}
+
+/* nav */
+.nav{position:fixed;left:0;right:0;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:18px;height:62px;padding:0 var(--edge);font:500 10.5px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;background:linear-gradient(to bottom,rgba(var(--scrim),.86),rgba(var(--scrim),.6) 42%,rgba(var(--scrim),.2) 78%,rgba(var(--scrim),0));transition:opacity .9s var(--ease)}
+.nav a{display:inline-block;padding:16px 0;color:var(--dim);text-decoration:none;transition:color .5s var(--ease)}
+.nav a:hover,.nav a[aria-current]{color:var(--star)}
+.nav .nav-home{color:var(--star)}
+.nav ul{display:flex;gap:clamp(16px,2.6vw,38px)}
+.nav .s{display:none}
+.js .nav.is-shy:not(.is-on):not(:focus-within){opacity:0;pointer-events:none}
+.nav[data-tone="blue"]{--scrim:7,19,30;--dim:#86A0B3}
+.nav[data-tone="bone"]{--scrim:232,226,214;--dim:#5F584D;--star:#141210}
+/* dark type passing under a pale bar ghosts through a soft scrim: on bone the bar is nearly solid */
+.nav[data-tone="bone"]{background:linear-gradient(to bottom,rgba(232,226,214,.98),rgba(232,226,214,.95) 72%,rgba(232,226,214,0))}
+@media (max-width:780px){.nav{font-size:10px;letter-spacing:.2em}.nav .l{display:none}.nav .s{display:inline}.nav ul{gap:0}.nav ul a{padding:16px 9px;min-width:30px;text-align:center}.nav ul li:last-child a{padding-right:0}}
+@media (max-width:350px){.nav .nav-author{display:none}}
+
+/* ── the dock: the persistent buy control ──────────────────────────────────────
+   A slim bar at the foot of the window once the first screen is behind you: the
+   book, a plain verb, and the door. It is chrome at the edge, so it never sits on
+   reading text, and the footer keeps clear of it. */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px var(--edge) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(var(--scrim),.94),rgba(var(--scrim),.78) 46%,rgba(var(--scrim),0));pointer-events:none;transition:opacity .9s var(--ease),visibility 0s}
+.dock > *{pointer-events:auto}
+.js .dock:not(.is-seen){opacity:0;visibility:hidden;pointer-events:none;transition:opacity .9s var(--ease),visibility 0s linear .9s}
+.dock-voice{font:400 10.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* the button the dock holds: the door is its icon, a true-black hole in the light, so the disc always comes with its plain words */
+.dock .dock-go{flex-direction:row;align-items:center;gap:15px;padding:8px 20px 8px 9px;min-width:0}
+.dock-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dock .buy-verb{font-size:12px;letter-spacing:.15em}
+.dock .buy-sub{font-size:9.5px}
+.dock-go.is-live .buy-sub::before{content:"Available now \00B7  "}
+.door{position:relative;flex:none;width:34px;height:34px;border-radius:50%}
+.door-disc{position:absolute;inset:0;border-radius:50%;background:#000;box-shadow:0 0 0 1px rgba(80,50,20,.55),0 0 0 calc(2px + 2px * var(--murmur)) rgba(255,236,204,calc(.18 + .3 * var(--murmur))),inset 0 2px 5px rgba(0,0,0,.9);transition:box-shadow .16s linear}
+.door-lens{position:absolute;left:-13px;top:-13px;width:60px;height:60px;transform:scale(calc(1 + .04 * var(--murmur)));fill:none;stroke:#2A1A08;stroke-linecap:round;transition:transform .16s linear}
+@media (max-width:700px){
+  .dock{padding-left:12px;padding-right:12px;gap:0}
+  .dock-voice{display:none}
+  .dock .dock-go{flex:1;padding:7px 16px 7px 8px;gap:12px}
+  .dock .buy-verb{font-size:11px;letter-spacing:.12em}
+  .door{width:30px;height:30px}
+  .door-lens{left:-11px;top:-11px;width:52px;height:52px}
+}
+
+/* obituary caption for a bright star */
+.obit{position:fixed;z-index:65;margin:0;padding:0 0 0 16px;font:400 10.5px/1.6 var(--mono);letter-spacing:.11em;color:var(--star);text-shadow:0 0 12px rgb(var(--scrim)),0 0 4px rgb(var(--scrim));pointer-events:none;opacity:0;transition:opacity .5s var(--ease)}
+.obit::before{content:"";position:absolute;left:0;top:.78em;width:9px;height:1px;background:var(--amber)}
+.obit.is-on{opacity:1}
+
+/* footer: the colophon (it keeps clear of the dock) */
+.foot{position:relative;z-index:1;background:var(--void);padding:0 var(--gut) calc(92px + env(safe-area-inset-bottom))}
+.foot-in{max-width:var(--max);margin:0 auto;border-top:1px solid var(--rule);padding:22px 0 0;display:grid;grid-template-columns:1fr auto;gap:10px 40px;align-items:baseline}
+.foot p{font:400 11px/1.8 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.foot a{color:var(--ink);text-decoration:none;transition:color .5s var(--ease)}
+.foot a:hover{color:var(--star)}
+.foot .foot-pub a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:4px}
+.foot-links{grid-column:1/-1;font-family:var(--sans) !important;font-weight:500 !important;letter-spacing:.22em !important;font-size:10.5px !important}
+.foot-links a{display:inline-block;padding:6px 0;margin-right:clamp(14px,2.2vw,30px)}
+@media (max-width:700px){.foot-in{grid-template-columns:1fr}}
+
+/* the door, large, where the page ends: a true-black disc; the shader bends the sky round it */
+.end-art{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.end-art canvas,.band-art canvas,.about-art canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s var(--ease)}
+.end-art canvas.is-on,.band-art canvas.is-on,.about-art canvas.is-on{opacity:1}
+.end-door{position:relative;z-index:1;width:clamp(104px,12vw,150px);aspect-ratio:1;margin:0 auto clamp(40px,7vh,72px)}
+.end-door i{position:absolute;inset:0;border-radius:50%;background:#000;border:1px solid rgba(217,160,91,calc(.4 + .55 * var(--murmur)));box-shadow:0 0 calc(18px + 44px * var(--murmur)) rgba(217,160,91,calc(.05 + .15 * var(--murmur)));transition:border-color .16s linear,box-shadow .16s linear}
+.end-door svg{position:absolute;inset:-38%;width:176%;height:176%;fill:none;stroke:var(--star);stroke-linecap:round;transform:scale(calc(1 + .03 * var(--murmur)))}
+.end-door.is-live svg{display:none}
+.go > *:not(.end-art),.end > *:not(.end-art){position:relative;z-index:1}
+
+/* a book is an object: a board, a spine, light across it */
+.book{position:relative;display:block;margin:0;transform:perspective(1500px) rotateY(15deg);transform-style:preserve-3d}
+.book img{width:100%;height:auto;box-shadow:0 44px 90px -46px rgba(var(--lift,138,91,40),var(--lift-a,.7))}
+.book::before{content:"";position:absolute;left:0;top:0;width:30px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#030405,#1b2129 46%,#0a0d11)}
+.book::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(104deg,rgba(255,255,255,.13) 0,rgba(255,255,255,0) 21%,rgba(0,0,0,0) 72%,rgba(0,0,0,.26) 100%);box-shadow:inset 1px 1px 0 rgba(217,160,91,.4);transition:opacity .6s var(--ease)}
+a.book:hover::after{opacity:.55}
+/* a glass plate: emulsion, a bevel, a second edge where the glass ends */
+.gp{position:relative;margin:0;aspect-ratio:1;overflow:hidden;background:#07090C center/cover no-repeat;box-shadow:0 0 0 1px rgba(233,238,244,.2),0 0 0 7px rgba(140,151,163,.07),0 0 0 8px rgba(233,238,244,.1),0 60px 100px -56px rgba(138,91,40,.75)}
+.gp canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s var(--ease)}
+.gp canvas.is-on{opacity:1}
+.gp::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.09),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 82%,rgba(255,255,255,.04))}
+.gp figcaption{position:absolute;left:14px;bottom:11px;z-index:1;font:400 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--star);text-shadow:0 0 8px #000}
+
+/* ── landing ─────────────────────────────────────────────────────────────── */
+main{position:relative;z-index:1}
+.sky-static{background-image:url(assets/scenes/sky-wide.webp)}
+@media (max-aspect-ratio:85/100){.sky-static{background-image:url(assets/scenes/sky-tall.webp)}}
+
+/* the descent: with scripting on, a pinned stage where the copy dims and kindles
+   while the sky behind it goes out; without it, the same lines in plain order */
+.stage{position:relative}
+.beat{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:76vh;padding:9vh var(--edge)}
+.beat-title{min-height:100vh;min-height:100svh;justify-content:flex-end;padding-bottom:clamp(86px,12.5vh,132px)}
+.js:not(.still) .descent{height:300vh}
+.js:not(.still) .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.js:not(.still) .beat{position:absolute;inset:0;min-height:0;padding-top:0;opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility 0s linear .45s}
+.js:not(.still) .beat.is-on{opacity:1;visibility:visible;transition:opacity .7s var(--ease) .14s,visibility 0s}
+.js:not(.still) .ln{opacity:0;transition:opacity .9s var(--ease)}
+.js:not(.still) .ln.is-on{opacity:1}
+@supports (height:100svh){.js:not(.still) .descent{height:300svh}}
+/* type on a photograph: a breath of the void behind every letter, never a box */
+.beat{text-shadow:0 0 34px rgba(5,7,8,.7),0 0 8px rgba(5,7,8,.45)}
+.beat .buy{text-shadow:none}
+
+.hero-kind{margin-bottom:clamp(16px,2.8vh,32px);color:var(--ink)}
+.title{--ts:min(10.4vw,17.4vh,160px);font:300 var(--ts)/.94 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:var(--star);margin:0 -.2em 0 -.045em;white-space:nowrap;transform:scale(calc(1 + .006 * var(--murmur) * var(--amp)));transform-origin:0 100%}
+.title .t-l{display:block}
+.title .t-the{font-size:.25em;letter-spacing:.58em;margin:0 0 .62em .2em}
+.hero-block{width:max-content;max-width:100%}
+.hero-sub{display:flex;justify-content:space-between;align-items:baseline;gap:10px 44px;flex-wrap:wrap;margin-top:clamp(18px,3.2vh,36px);padding-top:17px;border-top:1px solid rgba(233,238,244,.26)}
+.hero-sub .byline{color:var(--ink)}
+.tagline{font:italic 300 clamp(19px,2.15vw,30px)/1.3 var(--serif);color:var(--star)}
+.hero-buy{margin-top:clamp(18px,3vh,32px)}
+@keyframes kindle{from{opacity:0}to{opacity:1}}
+.js:not(.still) .tg1{animation:kindle 1.2s var(--ease) .3s both}
+.js:not(.still) .tg2{animation:kindle 1.4s var(--ease) 1.3s both}
+.cue{position:absolute;right:var(--edge);bottom:34px;padding-top:64px;font:400 10.5px/1 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--ink)}
+.cue::before{content:"";position:absolute;right:50%;top:0;width:1px;height:50px;background:linear-gradient(to bottom,rgba(233,238,244,0),rgba(233,238,244,.75));opacity:calc(.3 + .7 * var(--murmur))}
+/* the running count of the catalogue, at the foot of the sky */
+.count{position:absolute;left:var(--edge);top:calc(100vh - 56px);top:calc(100svh - 56px);display:flex;gap:28px;font:400 10.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity 1.2s var(--ease);text-shadow:0 0 12px #050708,0 0 4px #050708}
+.count.is-on{opacity:1}
+.count b{font-weight:400;color:var(--star);margin-left:.8em;font-variant-numeric:tabular-nums}
+.count-late b{color:var(--amber)}
+.js:not(.still) .count{top:auto;bottom:88px}
+.js:not(.still) .count-late{opacity:0;transition:opacity 1.2s var(--ease)}
+.js:not(.still) .count.is-late .count-late{opacity:1}
+@media (max-width:700px){.title{--ts:min(11.5vw,13vh)}.hero-buy .buy{display:flex}.cue{display:none}.count{gap:16px;letter-spacing:.12em;font-size:10px}
+  /* on a phone the count rides under the bar once the title has gone, clear of the button and the dock */
+  .js:not(.still) .count{top:64px;bottom:auto}.js:not(.still) .count:not(.is-up){opacity:0}
+  .js:not(.still) .descent{height:270vh}
+  @supports (height:100svh){.js:not(.still) .descent{height:270svh}}}
+
+.say{font:300 clamp(32px,5.5vw,84px)/1.14 var(--serif);color:var(--star);letter-spacing:-.01em;max-width:17em}
+.say .ln{display:block}
+.say em{font-style:italic}
+.beat-b{align-items:center;text-align:center}
+.clue{font:400 clamp(12.5px,1.85vw,23px)/1.7 var(--mono);letter-spacing:.34em;text-transform:uppercase;color:var(--star);margin-right:-.34em}
+.clue-sub{margin-top:clamp(16px,2.6vh,26px);font:italic 300 clamp(19px,2.1vw,28px)/1.4 var(--serif);color:var(--ink)}
+/* an entry of the catalogue, written into the sky beside the star it is for */
+.obit--entry{color:var(--ink);transition:opacity .9s var(--ease)}
+.obit--entry b{display:block;font-weight:400;color:var(--amber);letter-spacing:.2em;text-transform:uppercase}
+.obit--entry::before{top:.8em}
+.past-sky .obit--entry,.obit--entry.is-out{opacity:0 !important}
+
+/* ── the trilogy: three rooms, three grounds, three scenes ── */
+.listen,.shelf,.go{position:relative;background:var(--void)}
+.band{position:relative;overflow:hidden;display:flex;align-items:center;min-height:min(92vh,860px);padding:clamp(72px,11vh,120px) var(--edge);background:var(--void);color:var(--ink)}
+.band-art{position:absolute;inset:0;background:var(--void)}
+.band-art::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(var(--scrim),.82) 0,rgba(var(--scrim),.5) 30%,rgba(var(--scrim),0) 62%)}
+.band-in{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(30px,5.5vw,90px);align-items:center}
+.band-cover{justify-self:end;width:100%;max-width:310px;--lift:0,0,0;--lift-a:.9}
+.band-title{font-size:clamp(40px,5.6vw,84px);line-height:.98;margin:16px 0 0 -.03em}
+.band-hook{margin-top:clamp(16px,2.6vh,28px);max-width:15em;font:italic 300 clamp(22px,2.5vw,33px)/1.25 var(--serif);color:var(--star);text-wrap:balance}
+.band-p{margin-top:12px;max-width:23em}
+.band-go{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin-top:clamp(24px,4vh,38px)}
+
+/* Book one: the vigil. The band is open to the sky behind it, the sky you have just
+   watched go out, and a ridge of people with lanterns comes up into it */
+.band--vigil{background:none;align-items:flex-start;min-height:0;padding-top:clamp(92px,14vh,140px);padding-bottom:calc(28.6vw + 6px)}
+.band--vigil .band-text{text-shadow:0 0 30px rgba(5,7,8,.8),0 0 8px rgba(5,7,8,.5)}
+.band--vigil .buy{text-shadow:none}
+.ridge{--lit:1;position:absolute;left:0;bottom:0;width:100%;aspect-ratio:1672/478;z-index:1;pointer-events:none}
+.js:not(.still) .ridge{--lit:0}
+/* the last of the twilight behind the hill, so the people read against it */
+.ridge::before{content:"";position:absolute;left:0;right:0;bottom:34%;height:150%;background:linear-gradient(to top,rgba(30,52,86,.6),rgba(18,33,56,.3) 34%,rgba(11,16,22,0))}
+.ridge::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:34%;background:linear-gradient(to bottom,rgba(5,7,8,0),#050708 92%)}
+.ridge img{position:absolute;inset:0;width:100%;height:100%}
+.ridge-light{opacity:calc(.8 + .2 * var(--murmur));-webkit-mask-image:linear-gradient(90deg,#000 calc(var(--lit) * 124% - 24%),rgba(0,0,0,0) calc(var(--lit) * 124% - 4%));mask-image:linear-gradient(90deg,#000 calc(var(--lit) * 124% - 24%),rgba(0,0,0,0) calc(var(--lit) * 124% - 4%))}
+.ridge-note{position:absolute;right:var(--edge);bottom:calc(28.6vw * .62);z-index:2;font:400 10.5px/1.7 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-align:right;text-shadow:0 0 12px #050708,0 0 4px #050708}
+.ridge-note b{display:block;font-weight:400;color:var(--amber)}
+
+.band--blue{--void:#07131E;--scrim:6,16,26;--star:#E6F1F8;--ink:#B9CBD8;--dim:#8AA2B4;--rule:rgba(138,162,180,.24);background:#061018}
+.band--blue .book::after{box-shadow:inset 1px 1px 0 rgba(95,182,212,.4)}
+.band--blue .band-art::after{background:linear-gradient(90deg,rgba(var(--scrim),.86) 0,rgba(var(--scrim),.55) 32%,rgba(var(--scrim),0) 66%),linear-gradient(to bottom,#050708 0,rgba(5,7,8,0) 16%)}
+/* the third room is bone: the sky as a survey negative, and the view pulling back from it */
+.band--bone{--void:#E8E2D6;--scrim:232,226,214;--star:#141210;--ink:#2B2723;--dim:#5F584D;--accent:#141210;--on-accent:#E8E2D6;--rule:rgba(20,18,16,.2);--buy:#141210;--buy-hi:#3A342D;--on-buy:#E8E2D6;--buy-halo:20,18,16}
+.band--bone .band-art{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.14) 0,rgba(0,0,0,.2) 44%,#000 62%);mask-image:linear-gradient(90deg,rgba(0,0,0,.14) 0,rgba(0,0,0,.2) 44%,#000 62%)}
+.band--bone .band-art::after{background:none}
+.band--bone .band-cover{--lift:20,18,16;--lift-a:.7}
+.band--bone .book::after{box-shadow:inset 1px 1px 0 rgba(232,226,214,.45)}
+/* what the ruled frame holds, and how far back the view now stands */
+.scale-tag{position:absolute;left:78%;top:47%;z-index:2;margin:0;padding-top:clamp(40px,5.4vw,78px);transform:translate(-50%,14px);font:400 10.5px/1.7 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#5F584D;white-space:nowrap;text-align:center}
+.scale-tag::before{content:"";position:absolute;left:50%;top:0;width:1px;height:clamp(30px,4.6vw,66px);background:rgba(20,18,16,.5)}
+.scale-tag b{display:block;font:300 clamp(24px,2.8vw,40px)/1.1 var(--serif);letter-spacing:.02em;color:#141210;font-variant-numeric:tabular-nums}
+@media (max-width:820px){
+  .band{display:block;min-height:0;padding:0 var(--gut) 40px}
+  .band-art{position:relative;inset:auto;margin:0 calc(var(--gut) * -1);aspect-ratio:3/2}
+  .band-art::after{background:linear-gradient(to bottom,rgba(var(--scrim),0) 52%,rgb(var(--scrim)) 100%) !important}
+  .band-in{grid-template-columns:1fr !important;gap:18px;margin-top:-84px}
+  .band-cover{justify-self:start !important;width:min(34vw,170px)}
+  .band-title{margin-top:10px}
+  .band-go{margin-top:20px;gap:14px 30px}
+  .band-go .buy{display:flex;flex:1 1 100%}
+  .band--vigil{padding-top:84px;padding-bottom:calc(57.2vw * .88);min-height:0}
+  .band--vigil .band-in{margin-top:0}
+  .ridge{width:200%}
+  .ridge-note{bottom:calc(57.2vw * .56);right:var(--gut)}
+  .band--bone .band-art{-webkit-mask-image:none;mask-image:none}
+  .scale-tag{left:64%;top:34%}
+}
+
+/* read or listen: the audio editions have covers of their own */
+.listen{padding:clamp(72px,12vh,130px) var(--gut) 0}
+.listen-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:18px clamp(30px,5vw,80px);align-items:end;margin-top:clamp(22px,4vh,44px)}
+.listen-p{max-width:25em}
+.listen-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2.2vw,32px);margin-top:clamp(40px,7vh,76px)}
+.listen-row .lis-art{display:block;margin-bottom:18%}
+.listen-row .buy{display:flex;margin-top:18px}
+.listen-row img{width:100%;height:auto;aspect-ratio:1;background:#0B1016;box-shadow:0 0 0 1px rgba(217,160,91,.2);transition:box-shadow .6s var(--ease),filter .6s var(--ease);-webkit-box-reflect:below 1px linear-gradient(to bottom,rgba(0,0,0,0) 72%,rgba(0,0,0,.26))}
+a.lis-art:hover img{box-shadow:0 0 0 1px rgba(217,160,91,.6),0 50px 100px -50px rgba(217,160,91,.6)}
+@media (max-width:700px){.listen{padding-top:60px}.listen-row{margin-top:32px}.shelf{padding-top:60px}.listen-head{grid-template-columns:1fr}.listen-row{gap:10px}.listen-row .lis-art{margin-bottom:10%}.listen-row .buy{padding:9px 9px 8px}.listen-row .buy-verb{font-size:9px;letter-spacing:.06em;gap:.3em}.listen-row .buy-verb::after{display:none}.listen-row .buy-sub{font-size:8.5px;letter-spacing:.06em}}
+
+/* shelved beside: one board, the comps and the trilogy at one end, the author's card standing at the other */
+.shelf{padding:clamp(72px,12vh,130px) var(--gut) 0}
+.board{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-top:clamp(26px,4.4vh,44px);padding:0 clamp(8px,1.4vw,22px)}
+.board::after{content:"";position:absolute;left:0;right:0;top:100%;height:14px;background:linear-gradient(to bottom,#2a323c,#10151b 28%,#050708);box-shadow:0 30px 40px -14px #000,inset 0 1px 0 rgba(255,255,255,.14)}
+.spines{--k:1;display:flex;align-items:flex-end;gap:2px}
+.spine{position:relative;display:flex;justify-content:space-between;align-items:center;writing-mode:vertical-rl;text-orientation:sideways;flex:none;width:clamp(40px,5.6vw,72px);height:calc(var(--h,300px) * var(--k));padding:28px 0 24px;overflow:hidden;text-decoration:none;background:linear-gradient(90deg,rgba(255,255,255,.11),rgba(255,255,255,.03) 24%,rgba(0,0,0,0) 58%,rgba(0,0,0,.5)),var(--c,#131920);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),3px 0 7px -2px rgba(0,0,0,.8)}
+.spine::before,.spine::after{content:"";position:absolute;left:0;right:0;z-index:1;height:1px;background:rgba(217,160,91,.42)}
+.spine::before{top:14px}
+.spine::after{bottom:12px}
+.spine cite{font:italic 300 clamp(16px,1.75vw,24px)/1 var(--serif);color:var(--star);white-space:nowrap}
+.spine i{font:400 9.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.spine--first{margin-left:clamp(10px,1.8vw,26px)}
+/* the trilogy's own spines: cloth in each book's ground, a foil band, the door stamped at the foot */
+.spine--own{--c:#0C1622;background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 24%,rgba(0,0,0,0) 58%,rgba(0,0,0,.55)),radial-gradient(120% 40% at 50% 100%,rgba(138,91,40,.5),rgba(138,91,40,0) 70%),var(--c)}
+.spine--own::before,.spine--own::after{background:rgba(217,160,91,.85)}
+.spine--own cite{font-style:normal;text-transform:uppercase;letter-spacing:.22em;font-size:clamp(12px,1.25vw,17px)}
+.spine--own i{color:var(--amber)}
+.spine--own .dot{position:absolute;left:50%;bottom:34px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:#000;box-shadow:0 0 0 1px rgba(217,160,91,.7)}
+.spine--own i{margin-bottom:26px}
+.spine--b2{--c:#0A1C2E}
+.spine--b3{--c:#D9D2C4}
+.spine--b3 cite{color:#141210}
+.spine--b3 i{color:#5F584D}
+.spine--b3 .dot{background:#141210;box-shadow:0 0 0 1px rgba(20,18,16,.5)}
+.spine--b3::before,.spine--b3::after{background:rgba(20,18,16,.6)}
+a.spine--own{transition:filter .6s var(--ease)}
+a.spine--own:hover{filter:brightness(1.22)}
+/* a hand-ruled index card, bone stock, standing on the board */
+.card{position:relative;flex:0 1 430px;padding:26px 30px 32px;color:#2B2723;background:repeating-linear-gradient(to bottom,rgba(20,18,16,0) 0 31px,rgba(20,18,16,.09) 31px 32px) 0 62px/100% auto no-repeat,linear-gradient(104deg,#EFEADF,#E2DBCD 62%,#D6CEBE);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,-14px 0 30px -18px rgba(0,0,0,.9),26px 30px 50px -26px #000}
+.card-lab{display:flex;justify-content:space-between;gap:12px;font:400 10.5px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#5F584D}
+.card-name{margin-top:18px;font:300 clamp(34px,3.8vw,52px)/1.1 var(--serif);color:#141210;letter-spacing:-.006em}
+.card-p{margin-top:14px;font:400 17px/32px var(--serif)}
+@media (max-width:900px){.board{flex-direction:column;align-items:stretch;gap:0;padding:0 6px}.spines{--k:.6;order:2;margin-top:34px}.card{order:1;flex:none;align-self:flex-start;max-width:420px}.spine--first{margin-left:8px}}
+.spine{}
+@media (max-width:420px){.spines{--k:.44;margin-top:28px}.card{padding:20px 24px 24px}.card-p{font-size:16px;line-height:28px}.card-name{margin-top:12px}.spine{padding:20px 0 18px}.spine i{display:none}.spine--own .dot{bottom:22px}}
+@media (max-width:350px){.spine{width:34px}.spine cite{font-size:14px}.spine--own cite{font-size:10.5px}.spine--first{margin-left:6px}}
+
+/* go and look: the three books, their buttons, Book One first */
+.go{padding:clamp(90px,15vh,170px) var(--gut) clamp(72px,11vh,130px);text-align:center}
+.go-h span{white-space:nowrap}
+.go-h{font:300 clamp(29px,5.4vw,78px)/1.12 var(--serif);letter-spacing:.14em;text-transform:uppercase;color:var(--star);margin-right:-.14em;text-shadow:0 0 30px rgba(5,7,8,.8)}
+.go-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(16px,3.4vw,54px);align-items:end;max-width:1180px;margin:clamp(44px,8vh,84px) auto 0;text-align:left}
+.go-row li{display:flex;flex-direction:column;gap:20px;min-width:0}
+.go-row .book{--lift:217,160,91;--lift-a:.42}
+.go-row .lab b{color:var(--buy)}
+.go-row .buy{display:flex}
+.go-row li:not(.go-one) .buy-verb{font-size:12px;letter-spacing:.13em}
+.go-note{margin-top:clamp(26px,4.4vh,44px);font:400 11px/1.75 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+@media (max-width:700px){
+  .go{padding-top:56px;padding-bottom:56px}
+  .go-row{grid-template-columns:1fr 1fr;gap:26px 14px;align-items:start;margin-top:36px}
+  .go-row li{gap:14px}
+  .go-one{grid-column:1/-1}
+  .go-one .book{width:44%}
+  .go .end-door{width:88px;margin-bottom:30px}
+  .go-row li:not(.go-one) .buy{padding:12px 12px 11px}
+  .go-row li:not(.go-one) .buy-verb{font-size:10.5px;letter-spacing:.1em;gap:.6em}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#trilogy">Skip to the books</a>
+<div class="sky" data-sky aria-hidden="true"><div class="sky-static"></div></div>
+<nav class="nav is-shy" data-nav aria-label="The Breathing Dark">
+  <a class="nav-home" href="index.html" aria-current="page">The Breathing Dark</a>
+  <ul>
+    <li><a href="the-vanishing.html" aria-label="The Vanishing, book one"><span class="l">The Vanishing</span><span class="s" aria-hidden="true">I</span></a></li>
+    <li><a href="the-exhale.html" aria-label="The Exhale, book two"><span class="l">The Exhale</span><span class="s" aria-hidden="true">II</span></a></li>
+    <li><a href="the-outside.html" aria-label="The Outside, book three"><span class="l">The Outside</span><span class="s" aria-hidden="true">III</span></a></li>
+    <li><a class="nav-author" href="index.html#author">Author</a></li>
+  </ul>
+</nav>
+<main>
+<div data-sky-zone>
+  <section class="descent" data-descent aria-label="The Breathing Dark">
+    <div class="stage" data-stage>
+      <div class="beat beat-title is-on" data-beat data-from="-9" data-to="0.1">
+        <p class="lab hero-kind">Literary hard science fiction</p>
+        <div class="hero-block">
+          <h1 class="title"><span class="t-the">The</span> <span class="t-l">Breathing</span> <span class="t-l">Dark</span></h1>
+          <div class="hero-sub">
+            <p class="tagline"><span class="tg1">The dark was never empty.</span> <span class="tg2">It was breathing.</span></p>
+            <p class="lab byline">A complete trilogy by <b>A. P. Weiss</b></p>
+          </div>
+        </div>
+        <p class="hero-buy"><a class="buy buy--solid buy--lg" data-buy="the-vanishing" data-hero-buy href="https://orbandink.co.uk/en/books/the-vanishing/"><span class="buy-verb" data-buy-verb>See Book One at Orb &amp; Ink</span><span class="buy-sub">The Vanishing · start here</span></a></p>
+        <p class="cue" aria-hidden="true">Look down</p>
+      </div>
+      <div class="beat beat-a" data-beat data-from="0.1" data-to="0.42">
+        <p class="say"><span class="ln" data-at="0.1">The stars are going out.</span> <span class="ln" data-at="0.17">One by one.</span> <span class="ln" data-at="0.24">No explosions. No remnants.</span></p>
+      </div>
+      <div class="beat beat-b" data-beat data-from="0.42" data-to="0.7">
+        <p class="clue ln" data-at="0.42">Only the weightless go out.</p>
+        <p class="clue-sub ln" data-at="0.5">Every star humanity ever weighed still burns.</p>
+      </div>
+      <div class="beat beat-c" data-beat data-from="0.7" data-to="9">
+        <p class="say"><span class="ln" data-at="0.7">The universe isn’t expanding.</span> <span class="ln" data-at="0.77">It’s breathing in.</span> <span class="ln" data-at="0.84"><em>And it just started to breathe out.</em></span></p>
+      </div>
+      <p class="count" data-count aria-hidden="true"><span>Present<b data-present>—</b></span><span>Gone<b data-gone>—</b></span><span class="count-late">Empty by<b>2145</b></span></p>
+    </div>
+  </section>
+
+  <article class="band band--vigil" id="trilogy" aria-labelledby="b1">
+    <div class="wrap band-in">
+      <a class="book band-cover" href="the-vanishing.html" data-k><img src="assets/cover-the-vanishing-490.webp" srcset="assets/cover-the-vanishing-490.webp 490w, assets/cover-the-vanishing-980.webp 980w" sizes="(max-width:820px) 38vw, 310px" width="490" height="757" loading="lazy" decoding="async" alt="Cover of The Vanishing by A. P. Weiss: a round darkness at the centre of a nebula of blue and rust."></a>
+      <div class="band-text" data-k style="--d:.1s">
+        <p class="lab">Book one · 377 pages</p>
+        <h2 class="band-title caps" id="b1"><span class="t-the">The</span> Vanishing</h2>
+        <p class="band-hook">“I sold the sky for a boat.”</p>
+        <p class="band-p">Deneb fades before a hemisphere’s held breath. One ship goes to learn why: a one-way, twenty-year ride into the dark.</p>
+        <p class="band-go"><a class="buy buy--solid" data-buy="the-vanishing" href="https://orbandink.co.uk/en/books/the-vanishing/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">Take the boat</span></a><a class="more" href="the-vanishing.html">About the book</a></p>
+      </div>
+    </div>
+    <p class="ridge-note" aria-hidden="true"><b>The vigil</b>Witnesses: everyone</p>
+    <div class="ridge" data-ridge aria-hidden="true"><img class="ridge-base" src="assets/scenes/ridge.webp" width="1672" height="478" loading="lazy" decoding="async" alt=""><img class="ridge-light" src="assets/scenes/ridge-light.webp" width="1672" height="478" loading="lazy" decoding="async" alt=""></div>
+  </article>
+</div>
+
+<div class="trilogy">
+  <article class="band band--blue" data-tone="blue" aria-labelledby="b2">
+    <div class="band-art" data-plate="exhale" aria-hidden="true"><picture><source media="(max-width:820px)" srcset="assets/scenes/still-exhale-s.webp"><img class="plate" src="assets/scenes/still-exhale.webp" width="1440" height="860" loading="lazy" decoding="async" alt=""></picture></div>
+    <div class="wrap band-in">
+      <a class="book band-cover" href="the-exhale.html" data-k><img src="assets/cover-the-exhale-490.webp" srcset="assets/cover-the-exhale-490.webp 490w, assets/cover-the-exhale-980.webp 980w" sizes="(max-width:820px) 38vw, 310px" width="490" height="757" loading="lazy" decoding="async" alt="Cover of The Exhale by A. P. Weiss: a round darkness with a crowded field of stars pressing in around it."></a>
+      <div class="band-text" data-k style="--d:.1s">
+        <p class="lab">Book two · 363 pages</p>
+        <h2 class="band-title caps" id="b2"><span class="t-the">The</span> Exhale</h2>
+        <p class="band-hook">The expansion of the universe has stopped.</p>
+        <p class="band-p">And reversed. Blueshift rises like a tide. Run, stand, or ride.</p>
+        <p class="band-go"><a class="buy buy--solid" data-buy="the-exhale" href="https://orbandink.co.uk/en/books/the-exhale/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">Ride it down</span></a><a class="more" href="the-exhale.html">About the book</a></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="band band--bone" data-tone="bone" aria-labelledby="b3">
+    <div class="band-art" data-plate="scale" aria-hidden="true"><picture><source media="(max-width:820px)" srcset="assets/scenes/still-scale-s.webp"><img class="plate" src="assets/scenes/still-scale.webp" width="1440" height="860" loading="lazy" decoding="async" alt=""></picture><p class="scale-tag">The catalogued sky<b data-scale-out>×150</b></p></div>
+    <div class="wrap band-in">
+      <a class="book band-cover" href="the-outside.html" data-k><img src="assets/cover-the-outside-490.webp" srcset="assets/cover-the-outside-490.webp 490w, assets/cover-the-outside-980.webp 980w" sizes="(max-width:820px) 38vw, 310px" width="490" height="757" loading="lazy" decoding="async" alt="Cover of The Outside by A. P. Weiss: a dark ring, and a field of stars seen through it."></a>
+      <div class="band-text" data-k style="--d:.1s">
+        <p class="lab">Book three · 347 pages</p>
+        <h2 class="band-title caps" id="b3"><span class="t-the">The</span> Outside</h2>
+        <p class="band-hook">Every vanished star was pointing at the same place.</p>
+        <p class="band-p">The answer is larger than any question humanity knew to ask.</p>
+        <p class="band-go"><a class="buy buy--solid" data-buy="the-outside" href="https://orbandink.co.uk/en/books/the-outside/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">See how it ends</span></a><a class="more" href="the-outside.html">About the book</a></p>
+      </div>
+    </div>
+  </article>
+</div>
+
+<section class="listen" id="editions" aria-labelledby="lis-h">
+  <div class="wrap">
+    <p class="lab">Six editions of every book</p>
+    <div class="listen-head" data-k>
+      <h2 class="h2" id="lis-h">Read it. Or hear it in the dark.</h2>
+      <p class="listen-p">E-book, paperback, hardcover. Audiobook, immersive audiobook with score and sound design, full-cast audio drama.</p>
+    </div>
+    <ol class="listen-row">
+      <li data-k><a class="lis-art" href="the-vanishing.html#editions"><img src="assets/audio-the-vanishing-600.webp" width="600" height="600" loading="lazy" decoding="async" alt="Cover of the immersive audiobook of The Vanishing."></a><a class="buy buy--line buy--sm" data-buy="the-vanishing" data-buy-pref="listen" href="the-vanishing.html#editions"><span class="buy-verb" data-buy-verb>See the audio editions</span><span class="buy-sub">The Vanishing</span></a></li>
+      <li data-k style="--d:.08s"><a class="lis-art" href="the-exhale.html#editions"><img src="assets/audio-the-exhale-600.webp" width="600" height="600" loading="lazy" decoding="async" alt="Cover of the immersive audiobook of The Exhale."></a><a class="buy buy--line buy--sm" data-buy="the-exhale" data-buy-pref="listen" href="the-exhale.html#editions"><span class="buy-verb" data-buy-verb>See the audio editions</span><span class="buy-sub">The Exhale</span></a></li>
+      <li data-k style="--d:.16s"><a class="lis-art" href="the-outside.html#editions"><img src="assets/audio-the-outside-600.webp" width="600" height="600" loading="lazy" decoding="async" alt="Cover of the immersive audiobook of The Outside."></a><a class="buy buy--line buy--sm" data-buy="the-outside" data-buy-pref="listen" href="the-outside.html#editions"><span class="buy-verb" data-buy-verb>See the audio editions</span><span class="buy-sub">The Outside</span></a></li>
+    </ol>
+  </div>
+</section>
+
+<section class="shelf" aria-label="Shelved beside, and the author">
+  <div class="wrap">
+    <p class="lab" data-k>Shelved beside</p>
+    <div class="board" data-k>
+      <div class="spines" role="list">
+        <span class="spine" role="listitem" style="--h:300px;--c:#141B24"><cite>Solaris</cite><i>Lem · 1961</i></span>
+        <span class="spine" role="listitem" style="--h:392px;--c:#1C1713"><cite>Rendezvous with Rama</cite><i>Clarke · 1973</i></span>
+        <span class="spine" role="listitem" style="--h:330px;--c:#10191B"><cite>Station Eleven</cite><i>Mandel · 2014</i></span>
+        <span class="spine" role="listitem" style="--h:352px;--c:#191418"><cite>Death’s End</cite><i>Liu · 2010</i></span>
+        <a class="spine spine--own spine--first" role="listitem" href="the-vanishing.html" style="--h:410px"><cite>The Vanishing</cite><i>I</i><span class="dot"></span></a>
+        <a class="spine spine--own spine--b2" role="listitem" href="the-exhale.html" style="--h:410px"><cite>The Exhale</cite><i>II</i><span class="dot"></span></a>
+        <a class="spine spine--own spine--b3" role="listitem" href="the-outside.html" style="--h:410px"><cite>The Outside</cite><i>III</i><span class="dot"></span></a>
+      </div>
+      <div class="card" id="author">
+        <p class="card-lab"><span>The author</span><span>2026</span></p>
+        <p class="card-name">A. P. Weiss</p>
+        <p class="card-p">Literary science fiction where the arithmetic is real and the grief is kept as carefully as the data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="go" id="go" aria-labelledby="go-h">
+  <div class="end-art" data-plate="door" aria-hidden="true"><picture><source media="(max-width:820px)" srcset="assets/scenes/still-door-s.webp"><img class="plate" src="assets/scenes/still-door.webp" width="1440" height="1200" loading="lazy" decoding="async" alt=""></picture></div>
+  <div class="end-door" data-door-disc data-k aria-hidden="true"><i></i></div>
+  <h2 class="go-h" id="go-h" data-k><span>The sky is</span> <span>going out.</span><br><span>Go and look.</span></h2>
+  <ol class="go-row">
+    <li class="go-one" data-k>
+      <p class="lab"><b>Start with Book One</b></p>
+      <a class="book" href="the-vanishing.html"><img src="assets/cover-the-vanishing-490.webp" srcset="assets/cover-the-vanishing-490.webp 490w, assets/cover-the-vanishing-980.webp 980w" sizes="(max-width:700px) 54vw, 360px" width="490" height="757" loading="lazy" decoding="async" alt="The Vanishing, book one."></a>
+      <a class="buy buy--solid" data-buy="the-vanishing" href="https://orbandink.co.uk/en/books/the-vanishing/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">The Vanishing</span></a>
+    </li>
+    <li data-k style="--d:.08s">
+      <p class="lab">Book two</p>
+      <a class="book" href="the-exhale.html"><img src="assets/cover-the-exhale-490.webp" srcset="assets/cover-the-exhale-490.webp 490w, assets/cover-the-exhale-980.webp 980w" sizes="(max-width:700px) 44vw, 300px" width="490" height="757" loading="lazy" decoding="async" alt="The Exhale, book two."></a>
+      <a class="buy buy--line" data-buy="the-exhale" href="https://orbandink.co.uk/en/books/the-exhale/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">The Exhale</span></a>
+    </li>
+    <li data-k style="--d:.16s">
+      <p class="lab">Book three</p>
+      <a class="book" href="the-outside.html"><img src="assets/cover-the-outside-490.webp" srcset="assets/cover-the-outside-490.webp 490w, assets/cover-the-outside-980.webp 980w" sizes="(max-width:700px) 44vw, 300px" width="490" height="757" loading="lazy" decoding="async" alt="The Outside, book three."></a>
+      <a class="buy buy--line" data-buy="the-outside" href="https://orbandink.co.uk/en/books/the-outside/"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub">The Outside</span></a>
+    </li>
+  </ol>
+  <p class="go-note">Six editions of each, on the way.</p>
+</section>
+</main>
+<footer class="foot">
+  <div class="foot-in">
+    <p class="foot-links"><a href="index.html">The Breathing Dark</a><a href="the-vanishing.html">The Vanishing</a><a href="the-exhale.html">The Exhale</a><a href="the-outside.html">The Outside</a><a href="index.html#author">Author</a></p>
+    <p class="foot-pub">© A. P. Weiss 2026 · Published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a></p>
+    <p class="foot-rhythm">Background rhythm: 19 s · Unexplained.</p>
+  </div>
+</footer>
+<aside class="dock" data-dock aria-label="Buy the book">
+  <p class="dock-voice" aria-hidden="true">Marked the way you mark a door.</p>
+  <a class="dock-go buy buy--solid" data-buy="the-vanishing" href="https://orbandink.co.uk/en/books/the-vanishing/">
+    <span class="door" aria-hidden="true">
+      <svg class="door-lens" viewBox="0 0 92 92" focusable="false">
+        <circle cx="46" cy="46" r="31" stroke-width="1.3" stroke-dasharray="9 44 3 58 13 36 2 29.8" stroke-dashoffset="14" opacity=".55"/>
+        <circle cx="46" cy="46" r="36" stroke-width="1.1" stroke-dasharray="1.5 31 6 55 1 43 4 81.5" stroke-dashoffset="3" opacity=".38"/>
+      </svg>
+      <span class="door-disc"></span>
+    </span>
+    <span class="dock-txt"><span class="buy-sub">The Vanishing · Book one</span><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span></span>
+  </a>
+</aside>
+<div class="breath" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<script type="module" onerror="document.documentElement.classList.remove('js')">
+import { boot } from './dark.js';
+boot({ page: 'landing', murmur: { period: 19, amp: 1 }, sky: { mode: 'vanish', stillAt: 0.42, creep: { rate: 0.0075, max: 0.14 } } });
+</script>
+</body>
+</html>

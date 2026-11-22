@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F2EDE2">
+<title>The Actuary's Burden — The Calculus of Fortune, Book 1 | A. P. Weiss</title>
+<meta name="description" content="In Meridian nothing random ever happens — until a file returns marked RECONCILIATION FAILURE. Book 1 of The Calculus of Fortune: Kafkaesque literary SF.">
+<meta property="og:title" content="The Actuary's Burden — The Calculus of Fortune, Book 1">
+<meta property="og:description" content="In Meridian nothing random ever happens — until a file returns marked RECONCILIATION FAILURE. Book 1 of The Calculus of Fortune: Kafkaesque literary SF.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,600;0,800;1,400;1,600&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--paper:#F2EDE2;--manila:#E7DCC1;--ink:#1B1712;--carbon:#544A6B;--stamp:#A31E22;--gaslight:#E3A93C;--river-night:#101720;--scaffold:#7A6A54;--mirror:#B9C2CC;--lot-stone:#8C8778;--meter-bloom:#3E7C6B;
+--serif:"Besley",Georgia,serif;--type:"Courier Prime",ui-monospace,"Courier New",monospace;
+--pad:clamp(20px,5.2vw,72px);--ground:var(--paper);--fg:var(--ink);--muted:var(--carbon);--hair:rgba(27,23,18,.2);
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .11 0 0 0 0 .09 0 0 0 0 .07 .2 0 0 0 -.065'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");--grain5:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .11 0 0 0 0 .09 0 0 0 0 .07 .3 0 0 0 -.095'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");--stock:var(--paper) var(--grain);--inkmask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='m' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .05' numOctaves='3' seed='4' stitchTiles='stitch' result='a'/%3E%3CfeColorMatrix in='a' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 .06' result='b'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='1' seed='9' stitchTiles='stitch' result='c'/%3E%3CfeColorMatrix in='c' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.5 0 0 0 -.12' result='d'/%3E%3CfeComposite in='b' in2='d' operator='in'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23m)'/%3E%3C/svg%3E");color-scheme:light;
+--sh-s:0 1px 1px rgba(27,23,18,.22),0 7px 12px -7px rgba(27,23,18,.42);--sh-m:0 1px 1px rgba(27,23,18,.26),0 14px 24px -12px rgba(27,23,18,.5),0 34px 54px -32px rgba(27,23,18,.42);--sh-l:0 1px 2px rgba(27,23,18,.3),0 22px 34px -16px rgba(27,23,18,.55),0 54px 80px -44px rgba(27,23,18,.5);--sg:clamp(22px,4.4vw,64px)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip;scroll-padding-top:24px}
+body{margin:0;background:var(--paper) var(--grain);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+h1,h2,h3,p,ol,ul,dl,dd,figure,blockquote,table{margin:0;padding:0}
+ol,ul{list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration-color:rgba(84,74,107,.55);text-underline-offset:3px;text-decoration-thickness:1px}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:3px}
+.dark :focus-visible,.dark:focus-visible{outline-color:var(--gaslight)}
+::selection{background:rgba(84,74,107,.26)}
+[hidden]{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:var(--paper);font:700 12px/1 var(--type);letter-spacing:.14em;text-transform:uppercase;padding:12px 14px;text-decoration:none}
+.skip:focus{top:12px}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.doc{position:relative;z-index:1;overflow-x:clip}
+/* the page itself is a shader when it can be: laid paper under gaslight, with ruled rain printed on it */
+.field{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .5s}
+.field.on{opacity:1}
+.shade{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;pointer-events:none}
+.wrap{width:min(1120px,100% - 2 * var(--pad));margin-inline:auto}
+@media (min-width:1000px){
+  :root{--gut:184px}
+  .wrap{width:auto;max-width:1120px;margin-left:max(var(--gut),calc((100% - 1120px) / 2));margin-right:var(--pad)}
+  .top,.bk-top{padding-left:max(var(--gut),calc((100% - 1120px) / 2))!important}
+  .doc::before{content:"";position:absolute;z-index:0;left:calc(max(var(--gut),(100% - 1120px) / 2) - 24px);top:0;bottom:0;width:4px;border-left:1px solid rgba(84,74,107,.26);border-right:1px solid rgba(84,74,107,.26);pointer-events:none}
+}
+.t{font-family:var(--type);text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;line-height:1.5;font-variant-numeric:tabular-nums}
+h1,h2,h3,.pull p{font-family:var(--serif);font-weight:800;letter-spacing:-.012em;text-shadow:0 -1px 0 rgba(255,255,255,.55),0 1px 0 rgba(27,23,18,.15);text-wrap:balance}
+h2{font-size:clamp(31px,4.5vw,60px);line-height:1.04}
+h3{font-size:clamp(30px,4.2vw,56px);line-height:1.02}
+.lede{font-size:clamp(18px,1.55vw,21px);line-height:1.6;max-width:34em;text-wrap:pretty}
+.fig,[data-readout]{font-family:var(--type);font-variant-numeric:tabular-nums;color:var(--meter-bloom);font-weight:700;letter-spacing:.04em}
+.err{color:var(--meter-bloom);font-weight:400;margin-left:.4em}
+.go{position:relative;display:inline-block;font:700 12.5px/1.3 var(--type);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
+.go:hover{border-bottom-width:2px;padding-bottom:2px}
+.go::before{content:"";position:absolute;inset:-13px -8px}
+.redact{display:inline-block;height:.86em;width:var(--w,6ch);background:var(--ink);vertical-align:-.08em}
+.sec{padding:clamp(54px,6.6vw,96px) 0}
+.sec-head{margin-top:clamp(26px,3.2vw,44px)}
+.sec-head .lede{margin-top:clamp(16px,2vw,24px)}
+
+/* ledger rules: thin double lines with a typed label riding them */
+.rule{display:flex;align-items:center;gap:14px;font:700 11.5px/1.2 var(--type);letter-spacing:.16em;text-transform:uppercase;color:var(--fg);translate:calc(var(--j,0) * var(--v,0) * 5px) 0}
+.rule-ln{flex:1;display:flex;align-items:flex-start;min-width:20px;height:5px}
+.rule-ln i{display:block;height:5px;border-top:1px solid currentColor;border-bottom:1px solid currentColor;opacity:.72}
+.rule-ln i:first-child{flex:0 0 var(--brk,60%)}
+.rule-ln i:last-child{flex:1}
+.rule.snapped .rule-ln i:last-child{margin-left:6px;transform:translateY(2px) rotate(.4deg);transform-origin:100% 0;transition:transform .1s steps(2)}
+.rule-end{color:var(--muted);font-weight:400}
+
+/* THE STAMP — marks (never links): RECONCILIATION FAILURE, SURVIVED */
+.stamp{--rot:-2.2deg;position:relative;display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px;padding:13px 19px 11px;color:var(--stamp);font-family:var(--type);font-weight:700;text-transform:uppercase;letter-spacing:.09em;text-decoration:none;rotate:var(--rot);-webkit-mask-image:var(--inkmask);mask-image:var(--inkmask);-webkit-mask-position:var(--mx,0) var(--my,0);mask-position:var(--mx,0) var(--my,0)}
+.stamp-frame{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.stamp-frame rect{fill:none;stroke:currentColor;stroke-width:2.6;filter:url(#rough)}
+.stamp.mark{font-size:clamp(15px,1.7vw,21px);letter-spacing:.12em;line-height:1.15;padding:10px 16px 8px}
+
+/* BUY — every buy control is a slab of the cover's red sealing wax with plain words pressed into it.
+   solid = the book's primary; .line = an inked outline (books two and three on the series page, until they are on sale);
+   .live is added by calculus.js when the RETAIL map holds a URL for that book. */
+.buy{--rot:-1deg;position:relative;isolation:isolate;display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;max-width:100%;padding:17px 26px 14px;color:#FBF3E8;font-family:var(--type);font-weight:700;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;text-shadow:0 1px 0 rgba(70,5,9,.8),0 -1px 0 rgba(255,190,175,.2);rotate:var(--rot);filter:drop-shadow(0 2px 1px rgba(58,8,8,.4)) drop-shadow(0 12px 11px rgba(27,23,18,.3));transition:rotate .18s cubic-bezier(.3,1.5,.5,1),translate .18s cubic-bezier(.3,1.5,.5,1),filter .18s}
+.buy-ink{position:absolute;inset:0;z-index:-1;width:100%;height:100%;overflow:visible;pointer-events:none}
+.buy-ink rect{fill:var(--stamp);filter:url(#wax);transition:fill .18s}
+.buy-glare{position:absolute;inset:4px;z-index:-1;border-radius:7px;background:radial-gradient(140px 44px at var(--gx,22%) var(--gy,6%),rgba(255,228,216,.36),transparent 72%);mix-blend-mode:screen;pointer-events:none}
+.buy .b1{font-size:clamp(16px,1.45vw,19px);line-height:1.15}
+.buy .b2{font-size:11px;font-weight:700;letter-spacing:.13em;line-height:1.3;color:#FFE3D8}
+.buy .sht{display:none}
+.ar{display:inline-block;width:.66em;height:.66em;margin-left:.12em;vertical-align:.04em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;overflow:visible}
+.buy:hover,.buy:focus-visible{translate:0 -3px;rotate:0deg;filter:drop-shadow(0 2px 1px rgba(58,8,8,.4)) drop-shadow(0 20px 16px rgba(27,23,18,.3))}
+.buy:hover .buy-ink rect,.buy:focus-visible .buy-ink rect{fill:#B5242A}
+.buy:active{translate:0 1px;scale:.985;filter:drop-shadow(0 1px 1px rgba(58,8,8,.5)) drop-shadow(0 3px 4px rgba(27,23,18,.3));transition:none}
+.buy:focus-visible{outline:2px solid var(--ink);outline-offset:5px}
+.dark .buy:focus-visible{outline-color:var(--gaslight)}
+.buy.sm{padding:11px 14px 9px;gap:3px}
+.buy.sm .b1{font-size:12.5px;letter-spacing:.06em}
+.shelf .buy.sm .b1{white-space:nowrap}
+.buy.sm .b2{font-size:9px;letter-spacing:.1em}
+.buy.line{color:var(--stamp);text-shadow:none;filter:none}
+.buy.line .buy-ink rect{fill:none;stroke:var(--stamp);stroke-width:2.4;filter:url(#rough)}
+.buy.line .buy-glare{display:none}
+.buy.line:hover,.buy.line:focus-visible{color:#86141a;filter:none}
+.buy.line:hover .buy-ink rect,.buy.line:focus-visible .buy-ink rect{fill:rgba(163,30,34,.07);stroke:#86141a}
+.buy.line .b2{color:inherit}
+.dark .buy.line{background:var(--paper) var(--grain);box-shadow:var(--sh-m)}
+.panel .buy.line{background:none;box-shadow:none}
+.buy.live::after{content:"On sale";position:absolute;right:-9px;top:-12px;background:var(--manila);color:var(--ink);border:1px solid rgba(27,23,18,.45);box-shadow:var(--sh-s);text-shadow:none;font:700 9px/1 var(--type);letter-spacing:.14em;padding:5px 6px 3px;rotate:4deg}
+.buy.sm.live::after{display:none}
+.buy[data-cond="2"]:not(.line){filter:drop-shadow(2.6px 1.8px 0 rgba(163,30,34,.42)) drop-shadow(0 12px 11px rgba(27,23,18,.3))}
+.buy.line[data-cond="2"]{filter:drop-shadow(2.2px 1.5px 0 rgba(163,30,34,.38))}
+.buy[data-cond="3"]{margin-right:12px}
+.buy[data-cond="3"]::before{content:"";position:absolute;z-index:-1;left:calc(100% - 4px);top:12%;bottom:14%;width:18px;background:var(--stamp);opacity:.6;-webkit-mask-image:linear-gradient(90deg,#000 10%,transparent),repeating-linear-gradient(180deg,#000 0 1.6px,transparent 1.6px 3.6px);mask-image:linear-gradient(90deg,#000 10%,transparent),repeating-linear-gradient(180deg,#000 0 1.6px,transparent 1.6px 3.6px);-webkit-mask-composite:source-in;mask-composite:intersect}
+.micro{color:var(--muted);font-size:10.5px}
+/* not on sale yet: a manila tag on a string, as hung from every scaffold in the Gantries */
+.soon{position:relative;display:inline-block;margin-left:13px;background:linear-gradient(135deg,rgba(255,250,236,.55),transparent 55%),var(--manila) var(--grain);color:#3F3752;font:700 10px/1 var(--type);letter-spacing:.14em;text-transform:uppercase;padding:8px 10px 6px 21px;white-space:nowrap;clip-path:polygon(9px 0,100% 0,100% 100%,9px 100%,0 68%,0 32%);filter:drop-shadow(0 1px 0 rgba(27,23,18,.5)) drop-shadow(0 4px 4px rgba(27,23,18,.22));rotate:-1.2deg}
+.soon::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--paper);box-shadow:inset 0 1px 1px rgba(27,23,18,.55)}
+.ed-c{position:relative;display:inline-block}
+.ed-c:has(.soon)::before{content:"";position:absolute;left:-2px;top:50%;width:24px;height:1px;background:var(--scaffold);transform-origin:100% 50%;transform:rotate(-14deg)}
+.tile:nth-child(odd) .soon{rotate:1deg}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px}
+
+/* chits */
+.chit{position:relative;background:var(--manila) var(--grain);color:var(--carbon);font:400 10.5px/1.5 var(--type);letter-spacing:.07em;text-transform:uppercase;padding:9px 13px 8px 28px;border:1px solid rgba(27,23,18,.22);border-right:1px dashed rgba(27,23,18,.45);width:max-content;max-width:min(250px,calc(100vw - 32px))}
+.chit::before{content:"";position:absolute;left:9px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--paper);border:1px solid rgba(27,23,18,.4)}
+.chit::after{content:"";position:absolute;right:calc(100% - 13px);top:50%;width:34px;height:1px;background:var(--scaffold);transform-origin:100% 50%;transform:rotate(17deg)}
+.chit b{display:block;color:var(--ink);font-weight:700}
+.chit span{display:block}
+.chit i{font-style:normal}
+.chit.filed{position:absolute;right:16px;z-index:6;rotate:1.3deg;translate:calc(100% + 60px) 0;transition:translate .26s cubic-bezier(.2,.9,.3,1)}
+.chit.filed.in{translate:0 0}
+.chit.filed.tucked{right:8px;font-size:8.5px;letter-spacing:.05em;line-height:1.3;padding:5px 9px 3px 23px;white-space:nowrap;max-width:none;box-shadow:2px 2px 0 rgba(27,23,18,.1)}
+.chit.filed.tucked b,.chit.filed.tucked span{display:inline}
+.chit.filed.tucked b::after,.chit.filed.tucked span:first-of-type::after{content:" · ";font-weight:400}
+.chit.filed.tucked span:nth-of-type(2),.chit.filed.tucked i{display:none}
+.chit.filed.tucked::before{left:8px;width:7px;height:7px;margin-top:-3.5px}
+.chit.filed::after{right:auto;left:calc(100% - 3px);transform-origin:0 50%;transform:rotate(-9deg);width:60px}
+.sway{rotate:var(--sway,0deg);transform-origin:0 50%;transition:rotate .5s ease-out}
+.drop{position:relative;top:0}
+.drop.fell{animation:fall .46s cubic-bezier(.3,1.3,.5,1) forwards}
+.drop.still{animation:none;top:.35em}
+@keyframes fall{0%{top:0}46%{top:.45em}72%{top:.31em}100%{top:.35em}}
+.slipped{translate:var(--slip,3px) 0;animation:slip .1s steps(1)}
+@keyframes slip{0%{translate:calc(var(--slip,3px) * 1.9) 0}100%{translate:var(--slip,3px) 0}}
+.nomo,.nomo *{animation:none!important;transition:none!important}
+.prefiled-chit{display:none;position:absolute;right:16px;margin-top:14px;rotate:1.3deg}
+@media (max-width:1339px){.prefiled-chit{position:relative;right:auto;margin:16px 0 -14px auto}}
+
+/* print, don't fade */
+html.live [data-print]{visibility:hidden}
+html.live [data-print].in{visibility:visible;animation:print .09s steps(2,jump-none)}
+@keyframes print{from{scale:1.014}to{scale:1}}
+html.live [data-print="mirror"].in{animation:mirrorin .34s cubic-bezier(.2,.8,.2,1)}
+@keyframes mirrorin{from{translate:34px 0;opacity:0}to{translate:0 0;opacity:1}}
+.tilt{rotate:calc(var(--j,0) * var(--v,0) * 1.3deg)}
+
+/* covers */
+.plate{position:relative;display:block;width:100%;max-width:400px}
+.plate img{width:100%;box-shadow:0 0 0 1px rgba(27,23,18,.22),var(--sh-m)}
+.plate::before{content:"";position:absolute;z-index:1;left:-7px;top:-7px;width:30px;height:30px;background:var(--manila);border:1px solid rgba(27,23,18,.28);clip-path:polygon(0 0,100% 0,0 100%)}
+
+/* ENGRAVINGS — the scene plates, printed straight onto the page in one ink (their own paper is white and drops out).
+   The still is the picture itself, multiplied onto the stock; shade.js prints it again in ink, lit and alive, and hides the still. */
+.engr-wrap{position:relative;isolation:isolate;background:var(--stock);overflow:hidden}
+.engr-wrap picture{display:contents}
+.engr-wrap.shaded{isolation:auto;background:none}
+.engr-wrap.shaded .engr{opacity:0}
+.engr-wrap.shaded.inking .engr{opacity:.34}                 /* while the ink is being laid, the settled print shows faintly beneath it: a plate is never blank */
+.engr{width:100%;height:100%;object-fit:cover;object-position:var(--fx,50%) var(--fy,50%);mix-blend-mode:multiply;filter:contrast(1.08)}
+/* the plate mark: the bevel an intaglio plate leaves in damp paper */
+.band-art .engr-wrap::after,.place-art .engr-wrap::after,.close-art .engr-wrap::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;box-shadow:inset 1px 1px 0 rgba(27,23,18,.15),inset -1px -1px 0 rgba(255,255,255,.8),inset 3px 3px 5px -2px rgba(27,23,18,.1)}
+.b2 .band-art .engr-wrap::after{display:none}
+.place{position:relative;margin-top:clamp(22px,3vw,40px)}
+.place-art{position:relative;--s:1}
+.place-art .engr-wrap{aspect-ratio:var(--ia)}
+.dot{position:absolute;z-index:2;left:calc(var(--u) * 100%);top:calc((var(--v) - var(--f) * (1 - var(--s))) / var(--s) * 100%);translate:-50% -50%;width:23px;height:23px;border-radius:50%;background:var(--paper);border:1px solid var(--carbon);box-shadow:0 2px 4px rgba(27,23,18,.3);color:var(--carbon);font:700 11px/22px var(--type);font-style:normal;text-align:center}
+.place-notes{margin-top:clamp(20px,2.4vw,32px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.6vw,36px)}
+.note{border-top:3px double var(--fg);padding-top:13px}
+.note-k{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.note-k i{flex:none;width:20px;height:20px;border-radius:50%;border:1px solid currentColor;font:700 10.5px/19px var(--type);font-style:normal;text-align:center}
+.note p{margin-top:8px;font-weight:600;font-size:clamp(17px,1.5vw,21px);line-height:1.28;letter-spacing:-.006em;text-wrap:balance}
+.place figcaption{color:var(--muted);margin-top:18px}
+@media (min-width:900px){.place-art{--s:calc(var(--ia) / 1.9)}.place-art .engr-wrap{aspect-ratio:1.9}}
+@media (max-width:899px){
+  .place-art{margin-inline:calc(var(--pad) * -1)}
+  .place-notes{grid-template-columns:1fr 1fr;gap:18px 16px}
+  .note p{font-size:17px}
+}
+@media (max-width:520px){.place-notes{grid-template-columns:1fr}}
+
+/* EDITIONS — one thing you can pick up per tile; Read on the left, Listen on the right */
+.eds{margin-top:clamp(26px,3.4vw,44px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(30px,5vw,76px);grid-template-rows:auto auto auto auto auto}
+.eds-g{grid-row:1 / span 5;display:grid;grid-template-rows:subgrid;column-gap:clamp(12px,1.8vw,24px)}
+.eds-g{grid-template-columns:repeat(3,minmax(0,1fr))}
+.eds-g.r{--n:var(--nr)}.eds-g.l{--n:var(--nl)}
+.eds-h{grid-row:1;grid-column:1 / span var(--n);font:700 12px/1.2 var(--type);letter-spacing:.24em;text-transform:uppercase;text-shadow:none;padding-bottom:10px;border-bottom:3px double var(--fg);margin-bottom:24px}
+.tile{grid-row:2 / span 4;display:grid;grid-template-rows:subgrid;grid-template-columns:minmax(0,1fr);justify-items:start;min-width:0}
+.tile .buy.sm{max-width:100%}
+.obj{position:relative;align-self:end;width:100%;margin-bottom:16px}
+.obj img{position:relative;width:100%}
+.obj.dev{background:linear-gradient(135deg,#3A342C,#14110D 60%);border-radius:10px;padding:6% 6% 11%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),var(--sh-m)}
+.obj.dev::after{content:"";position:absolute;left:50%;bottom:3.4%;width:16%;height:2px;margin-left:-8%;background:rgba(242,237,226,.45)}
+.obj.pb img{box-shadow:0 0 0 1px rgba(27,23,18,.25),2px 0 0 #EDE6D6,3px 0 0 rgba(27,23,18,.3),5px 0 0 #EDE6D6,6px 0 0 rgba(27,23,18,.3),8px 0 0 #E4DCCA,0 14px 22px -10px rgba(27,23,18,.5),0 30px 44px -28px rgba(27,23,18,.4)}
+.obj.hb{padding:0 0 5px 6px}
+.obj.hb img{box-shadow:-6px 0 0 #2A2520,-6px 5px 0 #2A2520,0 5px 0 #2A2520,0 18px 24px -10px rgba(27,23,18,.55),0 34px 46px -28px rgba(27,23,18,.42)}
+.obj.hb::after{content:"";position:absolute;left:calc(6px + 5%);top:0;bottom:5px;width:1px;background:rgba(27,23,18,.28)}
+.obj.au{padding-top:44%}
+.obj.au::before{content:"";position:absolute;left:8%;top:0;width:84%;aspect-ratio:1;border-radius:50%;background:conic-gradient(from 20deg,rgba(255,255,255,.16),transparent 12%,transparent 46%,rgba(255,255,255,.12) 54%,transparent 64%),radial-gradient(circle,var(--manila) 0 15%,#1B1712 15.5% 17%,transparent 17.5%),repeating-radial-gradient(circle,#1B1712 0 1.5px,#332C24 1.5px 3.5px);box-shadow:var(--sh-s)}
+.obj.au img{box-shadow:0 0 0 1px rgba(27,23,18,.22),var(--sh-m)}
+.tile b{font:700 12.5px/1.25 var(--type);letter-spacing:.12em;text-transform:uppercase}
+.tile .d{font-size:15px;line-height:1.35;opacity:.86;margin:4px 0 12px}
+.tile.live b{color:var(--fg)}
+.eds.brief .tile b{margin-bottom:11px}
+@media (max-width:899px){
+  .eds{grid-template-columns:1fr;grid-template-rows:none;row-gap:30px}
+  .eds-g{grid-row:auto;grid-template-rows:auto auto auto auto auto;column-gap:12px}
+  .eds-h{margin-bottom:18px}
+  .tile b{font-size:11px;letter-spacing:.06em}
+  .tile .d{font-size:13.5px;margin-bottom:10px}
+  .buy .lng{display:none}.buy .sht{display:inline}
+  .tile .buy.sm{padding:9px 10px 7px}
+  .soon{font-size:9px;letter-spacing:.1em;padding:7px 8px 5px 19px;margin-left:9px}
+}
+
+/* footer: one filed sheet. The author's line, the colophon, plain links */
+.foot{position:relative;border-top:3px double var(--fg);padding:clamp(26px,3.4vw,44px) 0 124px;font-family:var(--type);font-size:11.5px;line-height:1.7;letter-spacing:.1em;text-transform:uppercase}
+.foot-by{max-width:30em;font-family:var(--serif);font-weight:600;font-size:clamp(18px,1.7vw,23px);line-height:1.32;letter-spacing:-.006em;text-transform:none;text-wrap:balance;margin-bottom:clamp(18px,2.2vw,28px)}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:10px clamp(24px,5vw,64px);align-items:start}
+.foot-grid ul{display:flex;flex-wrap:wrap;gap:2px 22px}
+.foot li a{display:inline-block;padding:2px 0}
+.foot-led span{display:block}
+.foot-led{color:var(--muted)}
+.foot-base{margin-top:22px;padding-top:14px;border-top:1px solid var(--hair);display:flex;flex-wrap:wrap;gap:4px 28px;justify-content:space-between;color:var(--muted)}
+@media (max-width:820px){.foot{font-size:10.5px;padding-bottom:104px}.foot-grid{grid-template-columns:1fr;gap:10px}.foot li a{padding:5px 0}}
+
+/* THE VARIANCE METER + the persistent buy slip.
+   Wide screens: both live in the ruled margin, so neither ever sits over the text.
+   Narrow screens: they dock as one bar along the bottom edge. */
+.dock{display:contents}
+.meter{position:fixed;left:18px;bottom:18px;z-index:42;font-family:var(--type)}
+.meter-btn{-webkit-appearance:none;appearance:none;border:0;background:none;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;display:block;position:relative;width:148px;text-align:center}
+.meter-dial{display:block;width:148px;height:112px;filter:drop-shadow(0 1px 1px rgba(27,23,18,.4)) drop-shadow(0 9px 9px rgba(27,23,18,.3))}
+.meter-fig{position:absolute;left:31px;right:31px;bottom:10.5px;height:15px;font:700 11.5px/15px var(--type);letter-spacing:.02em;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+.meter-fig .u{font-weight:400;font-size:9.5px;letter-spacing:.08em}
+.meter-lab{display:none}
+[data-wedge]{opacity:0}
+.meter[data-mode="bloom"] [data-wedge],.meter[data-mode="range"] [data-wedge]{opacity:1}
+.meter[data-mode="bloom"] .meter-fig{letter-spacing:-.02em;font-size:11px}
+.meter[data-mode="bloom"] .meter-fig .u{display:none}
+.docket{position:absolute;left:0;bottom:calc(100% + 12px);z-index:3;width:min(340px,calc(100vw - 36px));background:var(--paper) var(--grain);color:var(--ink);box-shadow:0 0 0 1px rgba(27,23,18,.5),var(--sh-l);padding:15px 15px 9px;text-align:left}
+.docket-h{font:700 11px/1.2 var(--type);letter-spacing:.18em;text-transform:uppercase;padding-bottom:9px;border-bottom:3px double var(--ink);margin-bottom:4px}
+.docket a{display:grid;grid-template-columns:3em 1fr auto;gap:6px;align-items:baseline;padding:7px 0 5px;border-bottom:1px dotted rgba(27,23,18,.4);font:400 11.5px/1.25 var(--type);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;font-variant-numeric:tabular-nums}
+.docket li:last-child a{border-bottom:0}
+.docket a span:first-child{color:var(--carbon)}
+.docket a span:last-child{color:var(--meter-bloom);font-weight:700}
+.docket a:hover span:nth-child(2),.docket a[aria-current] span:nth-child(2){font-weight:700}
+.docket a[aria-current] span:first-child::after{content:"\25B8";color:var(--ink);margin-left:.25em}
+.slip{position:fixed;z-index:41;left:18px;top:18px;width:148px;display:flex;flex-direction:column;gap:8px;background:var(--paper) var(--grain);color:var(--ink);box-shadow:0 0 0 1px rgba(27,23,18,.18),var(--sh-m);padding:7px 7px 10px}
+.slip-cv{display:block}
+.slip-cv img{width:100%;border:1px solid rgba(27,23,18,.3)}
+.slip-t{font-size:9px;letter-spacing:.1em;line-height:1.4;color:var(--carbon)}
+.slip-t b{display:block;color:var(--ink)}
+.slip .buy{align-self:stretch;rotate:0deg;padding:10px 10px 8px;filter:drop-shadow(0 1px 1px rgba(58,8,8,.4)) drop-shadow(0 5px 5px rgba(27,23,18,.25))}
+.slip .buy .b1{font-size:12px;letter-spacing:.03em;white-space:nowrap}
+.slip .buy.live::after{display:none}
+@media (min-width:1000px) and (max-height:640px){.slip-cv{display:none}}
+
+/* the spread ribbon */
+.ribbon{position:fixed;left:72px;top:0;width:40px;height:100vh;z-index:1;pointer-events:none;opacity:0}
+.ribbon.on{opacity:1}
+
+@media (max-width:999px){
+  .ribbon{display:none}
+  .dock{position:fixed;z-index:42;left:0;right:0;bottom:0;display:flex;align-items:stretch;gap:9px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));pointer-events:none}
+  .dock>*{pointer-events:auto}
+  .dock.on{background:var(--paper) var(--grain);border-top:3px double var(--ink)}
+  .meter{position:relative;left:auto;bottom:auto;display:flex}
+  .meter-btn{width:auto;min-width:92px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px;background:var(--paper) var(--grain);border:1.5px solid #7A6230;box-shadow:3px 3px 0 rgba(27,23,18,.14);padding:8px 10px 6px;color:var(--ink)}
+  .dock.on .meter-btn{box-shadow:none}
+  .meter-dial{display:none}
+  .meter-lab{display:block;font:400 8.5px/1 var(--type);letter-spacing:.18em;text-transform:uppercase;color:var(--carbon)}
+  .meter-fig{position:static;height:auto;font-size:12px;line-height:1;overflow:visible}
+  .meter[data-mode="bloom"] .meter-fig{font-size:11.5px;letter-spacing:-.02em}
+  .docket a{padding:11px 0 9px}
+  .slip{position:static;flex:1;min-width:0;width:auto;flex-direction:row;align-items:stretch;gap:8px;background:none;border:0;box-shadow:none;padding:0}
+  .slip-cv{flex:none;width:30px;align-self:center}
+  .slip-t{display:none}
+  .slip .buy{flex:1;min-width:0;justify-content:center;padding:8px 12px 6px}
+  .slip .buy .b1{font-size:13px}
+  .slip .buy .b2{font-size:8.5px;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .dock-bk:not(.on) .meter{visibility:hidden}
+}
+@media (max-width:760px){
+  body{font-size:17px}
+  .rule-end{display:none}
+  .rule{letter-spacing:.13em}
+  .buy:not(.sm) .b1{font-size:clamp(12.5px,3.95vw,17px)!important;white-space:nowrap}
+  .buy:not(.sm){padding:17px 20px 14px!important}
+  .buy .b2{font-size:10px;letter-spacing:.1em}
+}
+@media (max-width:359px){.slip-cv{display:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .prefiled-chit{display:block}
+  .rule.prefiled .rule-ln i:last-child{margin-left:6px;transform:translateY(2px) rotate(.4deg);transform-origin:100% 0}
+}
+
+.rain{position:absolute;z-index:0;pointer-events:none}
+.rain-still,.rain canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rain canvas{opacity:0}
+.rain.live canvas{opacity:1}
+.rain.live .still{display:none}
+.rain-lab{position:absolute;margin:0;font-size:10.5px;letter-spacing:.12em;color:var(--muted);text-align:right;white-space:nowrap}
+.rain-lab span{display:block}
+.rain-lab b{color:var(--meter-bloom);font-weight:700}
+
+/* BOOK PAGE */
+.bk-top{position:relative;z-index:3;display:flex;justify-content:space-between;gap:16px;padding:22px var(--pad) 0;font:700 11.5px/1.2 var(--type);letter-spacing:.17em;text-transform:uppercase}
+.bk-top a{text-decoration:none}
+.bk-top span{font-weight:400;color:var(--muted)}
+.bk-hero{position:relative;isolation:isolate;padding-bottom:clamp(36px,5vw,68px)}
+.strip{position:relative;height:clamp(150px,19vw,230px);margin-top:14px}
+.strip .rain{inset:0}
+.strip .rain-lab{left:var(--pad);right:auto;top:6px;text-align:left;z-index:1}
+@media (min-width:1000px){.strip .rain-lab{left:max(var(--gut),calc((100% - 1120px) / 2))}}
+.bk-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,372px);grid-template-areas:"head cover" "more cover";grid-template-rows:auto 1fr;column-gap:clamp(28px,5vw,76px);margin-top:clamp(6px,1vw,14px)}
+.bk-head{grid-area:head}.bk-more{grid-area:more}.bk-plate{grid-area:cover;justify-self:end;margin-top:6px}
+.bk-docket{color:var(--muted);margin-bottom:18px}
+.bk-docket b{color:var(--fg)}
+h1{font-size:clamp(var(--h1min,43px),var(--h1vw,5.7vw),var(--h1max,84px));line-height:.95;letter-spacing:-.022em;margin-left:-.04em}
+.bk-by{margin-top:18px;color:var(--fg);font-size:12.5px;font-weight:700;letter-spacing:.2em}
+.bk-by span{font-weight:400;color:var(--muted)}
+.bk-ask{margin-top:clamp(20px,2.6vw,32px);font-style:italic;font-size:clamp(20px,2vw,27px);line-height:1.34;max-width:22em;text-wrap:balance}
+.bk-cta{margin-top:clamp(26px,3.2vw,40px);display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.bk-cta .buy{padding:19px 28px 15px}
+.bk-cta .buy .b1{font-size:clamp(17px,1.6vw,21px)}
+.advisory{margin:clamp(26px,3vw,36px) 0 0;rotate:-1deg}
+.blurb{margin-top:clamp(30px,4vw,52px);max-width:37em;font-size:clamp(19px,1.95vw,26px);line-height:1.5;font-weight:400;letter-spacing:-.004em;text-wrap:pretty}
+.blurb b{font-weight:800}
+.facts{margin-top:22px;color:var(--muted)}
+.facts b{color:var(--fg)}
+.end{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px clamp(28px,5vw,72px);align-items:end}
+.comps{max-width:21em;font-size:clamp(21px,2.3vw,31px);line-height:1.28;font-weight:600;letter-spacing:-.008em;text-wrap:balance}
+.comps em{font-weight:400}
+.end .cta{flex-direction:column;align-items:flex-start;gap:16px}
+.next{margin-top:clamp(56px,7vw,96px);display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:3px double var(--fg);padding-top:26px}
+.next a{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;text-decoration:none}
+.next a:last-child{grid-template-columns:minmax(0,1fr) auto;text-align:right}
+.next img{width:clamp(64px,8vw,104px);border:1px solid rgba(27,23,18,.3)}
+.next a:last-child img{order:2}
+.next .t{color:var(--muted);display:block;margin-bottom:6px;white-space:nowrap}
+.next b{font-family:var(--serif);font-weight:800;font-size:clamp(19px,2.4vw,32px);line-height:1.1;letter-spacing:-.01em}
+.next a:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+@media (max-width:900px){
+  /* first screen on a phone: cover, title, button */
+  .bk-grid{grid-template-columns:36% minmax(0,1fr);grid-template-areas:"cover head" "more more";grid-template-rows:auto auto;column-gap:16px;align-items:center}
+  .bk-plate{justify-self:start;margin-top:0;max-width:none}
+  .bk-plate img{box-shadow:6px 6px 0 rgba(27,23,18,.1)}
+  h1{font-size:clamp(27px,8.2vw,52px)!important;line-height:.98}
+  .bk-docket{margin-bottom:10px;font-size:10px}
+  .bk-by{margin-top:12px;font-size:10px;letter-spacing:.12em}
+  .bk-by span{display:block}
+  .bk-ask{font-size:18.5px;margin-top:20px}
+  .bk-cta{margin-top:18px;align-items:stretch}
+  .bk-cta .buy{padding:16px 20px 13px}
+  .bk-cta .micro{display:none}
+  .bk-top span{display:none}
+  .strip{height:86px;margin-top:8px}
+  .strip .rain-lab{display:none}
+  .end{grid-template-columns:1fr}
+  .end .cta{align-items:stretch}
+  .next{gap:12px}
+  .next a{gap:9px;min-width:0}
+  .next img{width:42px}
+  .next b{font-size:15px;overflow-wrap:anywhere}
+  .next .t{white-space:normal;font-size:9.5px}
+}
+</style>
+<noscript><style>.prefiled-chit{display:block}.rule.prefiled .rule-ln i:last-child{margin-left:6px;transform:translateY(2px) rotate(.4deg);transform-origin:100% 0}</style></noscript>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"The Actuary's Burden","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"inLanguage":"en-GB","genre":["Literary science fiction","Dystopian fiction"],"description":"In Meridian nothing random ever happens — until a file returns marked RECONCILIATION FAILURE. Book 1 of The Calculus of Fortune: Kafkaesque literary SF.","isPartOf":{"@type":"BookSeries","name":"The Calculus of Fortune","url":"index.html"},"position":1,"numberOfPages":335}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the book</a>
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+<filter id="rough" x="-5%" y="-16%" width="110%" height="132%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="3" result="g"/><feColorMatrix in="g" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  2.6 0 0 0 -.6" result="ga"/><feComposite in="d" in2="ga" operator="in"/></filter>
+<filter id="wax" x="-8%" y="-30%" width="116%" height="160%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".018 .045" numOctaves="2" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="shape"/><feGaussianBlur in="shape" stdDeviation="3.4" result="soft"/><feTurbulence type="fractalNoise" baseFrequency=".09 .16" numOctaves="2" seed="4" result="grit"/><feColorMatrix in="grit" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .2 0" result="gritA"/><feComposite in="soft" in2="gritA" operator="arithmetic" k1="0" k2="1" k3="-.16" k4="0" result="bump"/><feDiffuseLighting in="bump" surfaceScale="5" diffuseConstant="1.08" lighting-color="#FFF4EE" result="diff"><feDistantLight azimuth="232" elevation="58"/></feDiffuseLighting><feComposite in="diff" in2="shape" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" result="lit"/><feSpecularLighting in="bump" surfaceScale="5" specularConstant=".85" specularExponent="24" lighting-color="#FFD9CC" result="spec"><feDistantLight azimuth="232" elevation="50"/></feSpecularLighting><feComposite in="spec" in2="shape" operator="in" result="specIn"/><feComposite in="specIn" in2="lit" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/></filter>
+</defs></svg>
+<canvas class="field" data-field aria-hidden="true"></canvas>
+<canvas class="ribbon" data-ribbon aria-hidden="true"></canvas>
+<div class="doc" data-doc>
+
+<header class="bk-hero" id="top" data-slip-after data-field-after data-sec="THE BOOK" data-mils="0.000" data-rib="0.08,0,0,0" data-v="0" style="--v:0">
+<div class="bk-top"><a href="index.html">← The Calculus of Fortune</a><span>Book 01 of 03</span></div>
+<!-- the spread strip: this book's own distribution. The SVG is the designed still; rain.js runs the 2D rain over it. -->
+<div class="strip"><div class="rain" data-rain="strip" data-renderer="2d" data-mode="bell" data-ink="#1B1712" data-floor="0.6" data-depth="0.8" data-sigma="0.07">
+<svg class="rain-still" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<g class="still" fill="none" stroke="#1B1712" stroke-linecap="round">
+<path d="M457 108.2h.01M680.5 54h.01M313.1 59.5h.01M585.4 79.4h.01M513.7 163.5h.01M586.2 8.2h.01M405.5 53.2h.01M503.3 146.3h.01M484.6 127.7h.01M390 10.6h.01M335.1 57.5h.01M591.1 127.2h.01M254.6 29.5h.01M350.2 25.1h.01M546.2 88.3h.01M357.2 122.3h.01M372.7 8.6h.01M605.7 92.1h.01M334.2 70h.01M406.7 10.9h.01M142.6 1.2h.01M360 155.5h.01M588.4 121.3h.01M596.3 8.1h.01M311.3 44h.01M618.1 130.1h.01M503.8 119.6h.01M629.9 90.4h.01M616.8 133.9h.01M491.7 173.8h.01M570.8 64.9h.01M677 85.2h.01M576 173.6h.01M562.3 117.2h.01M401.2 110.6h.01M397 79.4h.01M102.3 25.7h.01M575.4 108.4h.01M530.3 60.9h.01M553.5 129.3h.01M774.5 38.4h.01M594.3 103.7h.01M339.6 66.5h.01M420.2 95.2h.01M311.4 127.2h.01M629.9 56.3h.01M489.7 33h.01M483.6 131.8h.01M516.9 117.9h.01M557.8 176.4h.01M157.4 50.2h.01M393.5 120.3h.01M498.3 160.4h.01M585.8 128.1h.01M598.3 99.4h.01M447.8 145.9h.01M465 131.2h.01M579.7 50.9h.01M417.1 3.9h.01M521.4 159.4h.01M329 92.4h.01M514.7 135h.01M339.9 103.3h.01M740.5 33.1h.01M542.2 151.7h.01M383.3 16h.01M568.8 171.3h.01M654.1 43h.01M527.6 146.4h.01M557.4 155.3h.01M385.2 147.6h.01M507.6 121.5h.01M539.6 31.8h.01M592.7 1.6h.01M475.4 77.1h.01M470.8 103h.01M324.2 61.4h.01M376.2 137.2h.01M208.7 3h.01M392.4 12.9h.01M446.9 141.7h.01M620.9 77.7h.01M497.3 77.1h.01M559.8 29.9h.01M438.2 116.2h.01M657.1 79.4h.01M435.8 131.8h.01M652.2 119.7h.01M398.4 97.6h.01M603.2 161.7h.01M511.5 90.1h.01M460.7 174.6h.01M351 80.6h.01M497.1 83.3h.01M853 7h.01M294.6 42h.01M502.3 144.2h.01M652 51.6h.01M279.5 57h.01M569.9 26.8h.01M459.2 56.4h.01M510.1 159.9h.01M540.1 162.4h.01M508.8 30.5h.01M614.4 133.7h.01M541.6 85h.01M483.6 172.7h.01M382.7 111.5h.01M368.6 154.4h.01M406.9 18.4h.01M590.7 156h.01M515.8 112.5h.01M574.8 76.3h.01M826.1 19.5h.01M549.9 57.2h.01M137 26.5h.01M548.5 87.1h.01M517.3 132.2h.01M322.1 168.7h.01M331.4 48.2h.01M521.1 22.5h.01M316.6 67.3h.01M610.2 118.9h.01M476.9 75.7h.01M564.4 25.1h.01M582.2 154.9h.01M602.7 1.5h.01M571.5 145.9h.01M424.6 168.3h.01M517.3 120.8h.01M382.4 114.6h.01M383.4 121.2h.01M370.8 35.7h.01M405.8 132.5h.01M428.4 144.1h.01M571.7 50.2h.01M525.7 108.1h.01M575.3 107.5h.01M421.9 21.1h.01M467.4 163.4h.01M752.9 61.1h.01M478.6 167.2h.01M432.3 78.1h.01M369.8 74.8h.01M360.9 33h.01M517 171.7h.01M572.8 68.8h.01M467.8 153h.01M341.1 114.3h.01M344.9 12.8h.01M574.7 15.9h.01M551.4 168.4h.01M396.1 140.3h.01M515.3 94.6h.01M241.8 14.9h.01M413.9 146.1h.01M403.9 139.3h.01M516.5 42.7h.01M682.2 72.1h.01M400.6 164.6h.01M518.3 61.2h.01M333.9 25.8h.01M601.5 50.2h.01M602 16.8h.01M578.4 52.9h.01M398.2 119.7h.01M311.7 147.9h.01M463.9 11.8h.01M447.5 69.3h.01M695.2 62.8h.01M513.9 53.1h.01M601.7 156h.01M481.7 44.5h.01M534.2 87.9h.01M384.4 61.6h.01M588.3 16.4h.01M570.8 46h.01M394.1 145h.01M342.6 17.3h.01M795.3 46.1h.01M600.5 82.2h.01M339.8 67h.01M612.4 134.4h.01M393.7 132.7h.01M452.3 7h.01M473.9 95.6h.01M690.8 40.4h.01M354.8 76.1h.01M364.4 5h.01M338.2 82.1h.01M454 69.1h.01M696.7 138.3h.01M497.1 51.3h.01M487.8 130.5h.01M370 177h.01M512.2 60.8h.01M524.4 145h.01M495.8 29.4h.01M437.9 105.7h.01M518.6 115.3h.01M410.7 73h.01M400.1 49.6h.01M599.8 64.1h.01M677.4 27.5h.01M374.8 149h.01M330.1 78h.01M403.9 13.8h.01M568.5 19.3h.01M452.1 86.3h.01M403.5 128.6h.01M442.7 136h.01M683.7 42h.01M285 36.3h.01M359.7 9.9h.01M655.3 21.7h.01M637.4 72.9h.01M340.5 10.9h.01M570.1 74.4h.01M554.3 127h.01M701.1 41.6h.01M319.1 1.4h.01M657.9 117.1h.01M695.7 127.3h.01M299 14.1h.01M381.7 12.4h.01M495 53.8h.01M708.2 40.7h.01M322.9 31.1h.01M492.8 4.5h.01M495.4 132.5h.01M319.7 54.2h.01M489.5 156.6h.01M559 157.5h.01M329.7 39.1h.01M448.3 92.5h.01M427.9 152.9h.01M594.3 142.7h.01M506 155.8h.01M494.8 144h.01M381.1 80.5h.01M380.6 77.2h.01M542.6 40.6h.01M555.5 47.8h.01M368.4 115h.01M650 42.5h.01M515.6 29.3h.01M282.9 28.3h.01M588.8 57.6h.01M873.5 4.4h.01M727.5 74h.01M490.8 124.1h.01M492.9 15.2h.01M365.9 82h.01M586.2 99.3h.01M625.9 28.3h.01M444.3 108.4h.01M379.2 73h.01M425 10h.01M292.8 7.5h.01M497.6 87.6h.01M399.4 86.3h.01M409.2 158h.01M340.8 36.4h.01M476.6 168.9h.01M626.8 59.1h.01M318.1 66.5h.01M358 111h.01M466 145.6h.01M536.9 27.6h.01M513.1 131.6h.01M538.9 115.5h.01M413.8 2.6h.01M630.4 15.4h.01M437.5 94h.01M516.5 38.5h.01M382.7 109.1h.01M371.6 60.7h.01M445.7 162.4h.01M666.6 19.9h.01M489.8 116.9h.01M566.3 121.2h.01M359.4 49.4h.01M563.9 90.8h.01M696.6 58.6h.01M724.4 42.8h.01M345.2 31.6h.01M533.7 96h.01M497.5 94.4h.01M519.8 44.2h.01" stroke-width="2.2" stroke-opacity=".8" vector-effect="non-scaling-stroke"/>
+<path d="M419.9 18.4h.01M234.7 14.2h.01M530.4 133.3h.01M631.1 49.4h.01M419 68.1h.01M567.3 129.7h.01M491.8 148.2h.01M642 104.2h.01M602 87.3h.01M678.5 1.2h.01M482.6 23h.01M693.2 122.4h.01M292.8 119.9h.01M780.5 38.8h.01M604.9 163.6h.01M302.2 130.1h.01M480.6 23.2h.01M637.6 79.2h.01M750.1 56.5h.01M495.1 58.4h.01M520.9 103.2h.01M570.3 84.9h.01M436.8 100.4h.01M433.4 71.7h.01M314.5 55.5h.01M262.9 2.1h.01M465 173.8h.01M553.9 98.8h.01M564.6 26.4h.01M376.2 127.8h.01M516.5 65.9h.01M552 90h.01M605.2 24.5h.01M419.4 109h.01M560.4 12.4h.01M475.6 160.3h.01M463.1 22.2h.01M390.2 97.1h.01M247.5 100h.01M256.1 48h.01M648.8 72.7h.01M329.3 168.9h.01M481.3 90.3h.01M475.6 67.6h.01M765.7 93.3h.01M578.2 57.5h.01M608.4 1.3h.01M329.7 79.8h.01M546.9 109.1h.01M452.5 141.9h.01M594.5 122.4h.01M353.1 103.1h.01M543.4 96.4h.01M731.9 44.1h.01M426.2 167.6h.01M654.3 125.8h.01M425.3 133.5h.01M517.4 118.3h.01M715.9 9.6h.01M663.2 57.8h.01M599.5 94.7h.01M657.9 50.6h.01M599.1 36.8h.01M491.2 168.7h.01M456 41.9h.01M398.5 72h.01M467.2 57.4h.01M451 152.4h.01M553.9 178h.01M696.8 2.3h.01M445.8 61.5h.01M613.7 47.5h.01M398 2.9h.01M429 80.2h.01M722.1 2.5h.01M578.7 128.2h.01M577.7 47h.01M715.1 65.3h.01M661.4 166.8h.01M608.3 33.8h.01M796.2 27.9h.01M483.3 161.1h.01M536.7 155.3h.01M624 166.7h.01M637.9 128.7h.01M502.6 53.6h.01M424.8 74.2h.01M522.4 96.9h.01M517.2 52.2h.01M606.1 47.9h.01M515.7 146.9h.01M474.2 15.8h.01M450.7 120.7h.01M423.9 114.7h.01M235.4 16.4h.01M546.1 169.9h.01M334.6 44.8h.01M280.7 106.4h.01M564.6 92.8h.01M542.1 38h.01M450.9 88.7h.01M573.5 144.6h.01M710.6 9.2h.01M587.2 170.3h.01M539.1 166h.01M466.3 158.6h.01M548.5 132.6h.01M565.9 82.5h.01M755 21.8h.01M615 10.3h.01M566.5 156.9h.01M663.9 6h.01M422.5 87.7h.01M591.5 116.8h.01M682 78.6h.01M468 178.6h.01M323.4 24.3h.01M619.5 64.8h.01M388.2 8h.01M370.4 110.6h.01M264.3 29.8h.01M329.3 51.7h.01M538.5 35.4h.01M530.4 23.7h.01M426.2 5.6h.01M409.6 67.9h.01M521.5 164.3h.01M492.8 13.7h.01M653.4 56h.01M675.9 38.3h.01M541.4 144.4h.01M658.2 85h.01M454.6 131.9h.01M526.2 154.9h.01M504 160.4h.01M473.1 94.3h.01M398.3 54h.01M507 113h.01M580.6 65.4h.01M524.8 21.6h.01M818 13.9h.01M593 127.3h.01M491.7 118.1h.01M519.2 140.3h.01M573.7 114.5h.01M280.8 72.2h.01M416.1 107.9h.01M364.5 100h.01M434 22.9h.01M333.1 29.2h.01M608.7 97.2h.01M594 98.8h.01M404.7 83.1h.01M434.1 69.6h.01M490 142.5h.01M346.1 34.7h.01M546.2 2.2h.01M267.2 30.3h.01M536.6 9.9h.01M386.4 45.2h.01M674.7 6.5h.01M277.3 84.7h.01M744 11.2h.01M631.5 124.4h.01M384.1 149h.01M450.3 109.2h.01M714.9 53.5h.01M400 40.9h.01M455.8 16.2h.01M434 109h.01M471.5 177.6h.01M349.2 60.6h.01M279 26.7h.01M400.9 159.4h.01M529.4 68.6h.01M523.1 118.9h.01M414.3 65.8h.01M499.1 144.9h.01M444.1 137.1h.01M223.6 14.9h.01M362.8 113.2h.01M519.2 139.2h.01M385.3 147.2h.01M597 18.5h.01M499 1.2h.01M600.9 158.9h.01M383.6 57.6h.01M729.6 68.2h.01M679.8 79.8h.01M392.9 89.8h.01M561.4 103.6h.01M687.4 42.2h.01M373.4 112.2h.01M440.6 55.3h.01M571.8 125.5h.01M440.3 169.6h.01M387.3 44.8h.01M571.3 48.7h.01M573 98.9h.01M633.1 6.5h.01M476.1 151.5h.01M429.1 96.6h.01M707.8 57.5h.01M369 177.3h.01M706.1 48.4h.01M601.2 92.9h.01M385.1 49.3h.01M460.9 129.6h.01M731.7 13.3h.01M479.8 133.5h.01M617.4 143.5h.01M260 9.4h.01M479.6 85.1h.01M641 179.3h.01M562.4 92.7h.01M554.7 69.9h.01M676.2 47.2h.01M499.8 162.2h.01M372.1 24.7h.01M413.6 157.2h.01M466 128.6h.01M671 169.7h.01M437.3 107.4h.01M243.8 29.8h.01M481.3 174.5h.01M513 94.6h.01M531.3 169.7h.01M310.9 8.6h.01M576.4 0.5h.01M512.8 102.1h.01M542.3 100.6h.01M400.5 55.1h.01M576.3 106.3h.01M509.5 67.4h.01M505.4 70h.01M516.1 78.8h.01M434.9 73h.01M510.5 164h.01M649.5 90.1h.01M506 62.5h.01M282 62.1h.01M404.8 178.9h.01M528.7 135.7h.01M670.8 53.3h.01M357.8 119h.01M514.2 166.7h.01M493.3 2.2h.01M537.9 87.3h.01M506.3 90.3h.01M434 157.6h.01M458.9 151.8h.01M501.9 83.8h.01M589.4 1.7h.01M393.5 14.6h.01M413.5 92.2h.01M599.1 61.6h.01M346 160.3h.01M441.3 74.5h.01M585.6 97.6h.01M691 49.6h.01M495.8 115.7h.01M406.9 24.3h.01M417.2 22.4h.01M474.9 72.4h.01M323.9 24.9h.01M259.2 100h.01M465.9 124.7h.01M538 27.4h.01M410.3 4.3h.01M627.8 44.3h.01M428.4 155.7h.01M620.6 150.7h.01M676.1 43.9h.01M716.6 60.1h.01M645.9 86.2h.01M626.8 138.4h.01M577.8 159.2h.01M351.8 26.4h.01M514.5 95h.01M385.6 122.2h.01M695.1 9.4h.01M417.8 140.3h.01M359 83.1h.01M761 135.8h.01M341.1 1.1h.01M503 171.3h.01M447.3 64.8h.01M322.1 48.5h.01M708.9 78.2h.01M552 70.9h.01M537.3 116.3h.01M548.7 171h.01M416.5 77.9h.01M409.9 73.2h.01M279.2 0.5h.01M482.5 79.7h.01M513.2 153.8h.01M487.3 91.6h.01M288 112.1h.01M507.8 105.3h.01M489.5 139.9h.01M602.2 97.2h.01" stroke-width="1.7" stroke-opacity=".6" vector-effect="non-scaling-stroke"/>
+<path d="M0 180H1000" stroke-width="1" stroke-opacity=".72" stroke-linecap="butt" vector-effect="non-scaling-stroke"/>
+<path d="M273 181v0.5M280.1 181v0.7M287.2 181v0.9M294.3 181v1.3M301.4 181v1.7M308.5 181v2.3M315.6 181v3M322.7 181v3.9M329.8 181v5M336.9 181v6.4M344 181v8M351.1 181v10M358.2 181v12.3M365.2 181v15.1M372.3 181v18.2M379.4 181v21.8M386.5 181v25.8M393.6 181v30.3M400.7 181v35.1M407.8 181v40.3M414.9 181v45.8M422 181v51.6M429.1 181v57.5M436.2 181v63.3M443.3 181v69.1M450.4 181v74.7M457.4 181v79.8M464.5 181v84.4M471.6 181v88.4M478.7 181v91.7M485.8 181v94M492.9 181v95.5M500 181v96M507.1 181v95.5M514.2 181v94M521.3 181v91.7M528.4 181v88.4M535.5 181v84.4M542.6 181v79.8M549.6 181v74.7M556.7 181v69.1M563.8 181v63.3M570.9 181v57.5M578 181v51.6M585.1 181v45.8M592.2 181v40.3M599.3 181v35.1M606.4 181v30.3M613.5 181v25.8M620.6 181v21.8M627.7 181v18.2M634.8 181v15.1M641.8 181v12.3M648.9 181v10M656 181v8M663.1 181v6.4M670.2 181v5M677.3 181v3.9M684.4 181v3M691.5 181v2.3M698.6 181v1.7M705.7 181v1.3M712.8 181v0.9M719.9 181v0.7M727 181v0.5" stroke-width="1" stroke-opacity=".9" stroke-linecap="butt" vector-effect="non-scaling-stroke"/>
+
+</g></svg>
+<canvas data-rain-gl aria-hidden="true"></canvas><canvas data-rain-hist aria-hidden="true"></canvas>
+<p class="rain-lab t" aria-hidden="true"><span>Local spread, Book 01: a bell, widening</span></p>
+</div></div>
+<div class="wrap bk-grid">
+<div class="bk-head">
+<p class="bk-docket t">Book 01 of 03 · <b>The Calculus of Fortune</b></p>
+<h1>The Actuary’s <br>Burden</h1>
+<p class="bk-by t">A. P. Weiss <span>· Book one · the file</span></p>
+</div>
+<figure class="plate bk-plate" data-wax data-inc="card"><img src="assets/cover-the-actuarys-burden-760.jpg" srcset="assets/cover-the-actuarys-burden-760.jpg 491w, assets/cover-the-actuarys-burden.jpg 970w" sizes="(max-width:900px) 36vw, 372px" width="491" height="760" alt="Cover of The Actuary’s Burden by A. P. Weiss: an engraving of a great iron stamp press bearing down on one small scaffolded tenement, a red wax seal in the corner." fetchpriority="high"></figure>
+<div class="bk-more">
+<p class="bk-ask">“What does a decent clerk do on discovering that his signature is a murder weapon — and that it doesn’t work on one child?”</p>
+<div class="bk-cta">
+<a class="buy" data-buy="the-actuarys-burden" data-cond="1" data-live="Buy the book" href="https://orbandink.co.uk/en/books/the-actuarys-burden/" target="_blank" rel="noopener"><svg class="buy-ink" aria-hidden="true" focusable="false"><rect width="100%" height="100%" rx="7"/></svg><span class="buy-glare" aria-hidden="true"></span><span class="b1"><span data-b1>See the book at Orb &amp; Ink</span> <svg class="ar" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.8 8.2L8 2M3 2h5v5"/></svg><span class="vh"> (opens in a new tab)</span></span><span class="b2" data-b2>Forthcoming · no date certified</span></a>
+<p class="micro t" data-micro="the-actuarys-burden">No account. No newsletter. One click to the publisher.</p>
+</div>
+
+</div>
+</div>
+</header>
+
+<main id="main">
+<section class="sec" id="file" data-sec="THE FILE" data-mils="0.041" data-rib="0.14,0,0,0" data-v="0.05" style="--v:0.05;padding-top:clamp(20px,3vw,40px)">
+<div class="wrap">
+<div class="rule" data-inc="rule"><span>The book</span><span class="rule-ln" aria-hidden="true"><i></i><i></i></span></div>
+<p class="blurb">Anselm Serle, Actuary Second Grade, computes the schedule that keeps Meridian certain: every guaranteed outcome paid for with a misfortune shipped downriver. He is precise, incurious, and very good at his job. Then a file returns to his desk marked <b>reconciliation failure</b>: a nine-year-old scavenger has survived three fatal accidents he calculated, certified and stamped. The investigation will take him across the river, toward a child the machine cannot kill.</p>
+<p class="facts t">Book 01 of 03 · 335 pp. · Literary science fiction · <b>Forthcoming</b></p>
+</div>
+</section>
+
+<section class="sec" id="plate" data-sec="THE PLACE" data-mils="0.317" data-bloom data-rib="0.24,0,0,0" data-v="0.12" style="--v:0.12;padding-top:0">
+<div class="wrap">
+<div class="rule" data-inc="rule"><span>The place</span><span class="rule-ln" aria-hidden="true"><i></i><i></i></span></div>
+<div class="sec-head"><h2 data-inc="letter">The clerk goes looking for the accused.</h2></div>
+<figure class="place">
+<div class="place-art" style="--f:0.70;--ia:1.5000"><div class="engr-wrap" data-plate="gantries" data-fx=".3203,.4297,.288,.874" data-focus="50 70" data-feather=".03,0,.03,0" data-east="0.15" style="--fx:50%;--fy:70%"><img class="engr" src="assets/scenes/book1-place.jpg" srcset="assets/scenes/book1-place-900.jpg 900w, assets/scenes/book1-place.jpg 1536w" sizes="(max-width:1239px) 100vw, 1120px" width="1536" height="1024" alt="Engraving: the Gantries. A row of crooked brick tenements caged in timber scaffolding and hung with blank paper tags; one plot holds only an empty scaffold; a small girl with a blank tag at her back stands in the lane, seen from behind; a wayside shrine holds a pair of dice." loading="lazy" decoding="async"></div><i class="dot" style="--u:0.268;--v:0.335" aria-hidden="true">1</i><i class="dot" style="--u:0.495;--v:0.56" aria-hidden="true">2</i><i class="dot" style="--u:0.122;--v:0.705" aria-hidden="true">3</i><i class="dot" style="--u:0.945;--v:0.655" aria-hidden="true">4</i></div>
+<ol class="place-notes">
+<li class="note"><span class="note-k t"><i aria-hidden="true">1</i>The Gantries</span><p>A slum permanently scaffolded, because buildings fall.</p></li>
+<li class="note"><span class="note-k t"><i aria-hidden="true">2</i>The schedule</span><p>A stamped schedule is not an order for a death. It is the death, in transit.</p></li>
+<li class="note"><span class="note-k t"><i aria-hidden="true">3</i>Roll 7719</span><p>Near this child, his Variance Meter’s error bars bloom.</p></li>
+<li class="note"><span class="note-k t"><i aria-hidden="true">4</i>The dice-shrine</span><p>Here superstition is statistically valid.</p></li>
+</ol>
+<figcaption class="t"><b>Plate I</b> The Gantries, east bank. Kafka’s <i>Trial</i>, run in reverse.</figcaption>
+</figure>
+</div>
+</section>
+
+<section class="sec" id="editions" data-sec="EDITIONS" data-mils="2.700" data-rib="0.32,0,0,0" data-v="0.15" style="--v:0.15;padding-top:0">
+<div class="wrap">
+<div class="rule" data-inc="rule"><span>Editions</span><span class="rule-ln" aria-hidden="true"><i></i><i></i></span></div>
+<div class="sec-head"><h2 data-inc="letter">Read it. Or listen.</h2>
+<p class="lede">Six editions are in production at Orb &amp; Ink. None is on sale yet, and no dates are promised.</p></div>
+<div class="eds" style="--nr:3;--nl:3">
+<div class="eds-g r"><h3 class="eds-h">Read</h3>
+<article class="tile"><div class="obj dev"><img src="assets/cover-the-actuarys-burden-760.jpg" width="491" height="760" alt="The Actuary’s Burden: e-book edition" loading="lazy" decoding="async"></div><b>E-book</b><span class="d">On any screen.</span><span class="ed-c" data-ed="the-actuarys-burden:ebook"><span class="soon">Coming</span></span></article>
+<article class="tile"><div class="obj pb"><img src="assets/cover-the-actuarys-burden-760.jpg" width="491" height="760" alt="The Actuary’s Burden: paperback edition" loading="lazy" decoding="async"></div><b>Paperback</b><span class="d">In the hand.</span><span class="ed-c" data-ed="the-actuarys-burden:paperback"><span class="soon">Coming</span></span></article>
+<article class="tile"><div class="obj hb"><img src="assets/cover-the-actuarys-burden-760.jpg" width="491" height="760" alt="The Actuary’s Burden: hardcover edition" loading="lazy" decoding="async"></div><b>Hardcover</b><span class="d">Bound to be kept.</span><span class="ed-c" data-ed="the-actuarys-burden:hardcover"><span class="soon">Coming</span></span></article>
+</div>
+<div class="eds-g l"><h3 class="eds-h">Listen</h3>
+<article class="tile"><div class="obj au"><img src="assets/audio-the-actuarys-burden.jpg" width="640" height="640" alt="The Actuary’s Burden: audiobook edition" loading="lazy" decoding="async"></div><b>Audiobook</b><span class="d">Unabridged narration.</span><span class="ed-c" data-ed="the-actuarys-burden:audiobook"><span class="soon">Coming</span></span></article>
+<article class="tile"><div class="obj au"><img src="assets/audio-the-actuarys-burden-immersive.jpg" width="640" height="640" alt="The Actuary’s Burden: immersive audiobook edition" loading="lazy" decoding="async"></div><b>Immersive audiobook</b><span class="d">With score and sound design.</span><span class="ed-c" data-ed="the-actuarys-burden:immersive"><span class="soon">Coming</span></span></article>
+<article class="tile"><div class="obj au"><img src="assets/audio-the-actuarys-burden-drama.jpg" width="640" height="640" alt="The Actuary’s Burden: audio drama edition" loading="lazy" decoding="async"></div><b>Audio drama</b><span class="d">A full-cast dramatisation.</span><span class="ed-c" data-ed="the-actuarys-burden:drama"><span class="soon">Coming</span></span></article>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="next" data-sec="NEXT" data-mils="4.317" data-rib="0.38,0,0,0" data-v="0.2" style="--v:0.2;padding-top:0">
+<div class="wrap">
+<div class="end">
+<p class="comps" data-inc="letter">For readers of Kafka’s <em>The Trial</em>, Le Guin’s “Omelas”, Ishiguro and Ted Chiang.</p>
+<div class="cta"><a class="buy" data-buy="the-actuarys-burden" data-cond="1" data-live="Buy the book" href="https://orbandink.co.uk/en/books/the-actuarys-burden/" target="_blank" rel="noopener"><svg class="buy-ink" aria-hidden="true" focusable="false"><rect width="100%" height="100%" rx="7"/></svg><span class="buy-glare" aria-hidden="true"></span><span class="b1"><span data-b1>See the book at Orb &amp; Ink</span> <svg class="ar" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.8 8.2L8 2M3 2h5v5"/></svg><span class="vh"> (opens in a new tab)</span></span><span class="b2" data-b2>Forthcoming · no date certified</span></a><a class="go" href="index.html">Back to the series →</a></div>
+</div>
+<nav class="next" aria-label="The other books">
+<a href="the-unrigged.html"><img src="assets/cover-the-unrigged-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"><span><span class="t">← Book 03</span><b>The Unrigged</b></span></a>
+<a href="the-probability-war.html"><span><span class="t">Next book →</span><b>The Probability War</b></span><img src="assets/cover-the-probability-war-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"></a>
+</nav>
+</div>
+</section>
+</main>
+<footer class="foot" data-rib="0.38,0,0,0">
+<div class="wrap">
+<p class="foot-by">A. P. Weiss writes literary science fiction where the systems are characters and the ledgers always balance.</p>
+<div class="foot-grid">
+<p>The Calculus of Fortune · © 2026 A. P. Weiss · All outcomes reserved · Published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a></p>
+<ul aria-label="See the books at Orb &amp; Ink"><li><a href="https://orbandink.co.uk/en/books/the-actuarys-burden/">The Actuary’s Burden ↗</a></li><li><a href="https://orbandink.co.uk/en/books/the-probability-war/">The Probability War ↗</a></li><li><a href="https://orbandink.co.uk/en/books/the-unrigged/">The Unrigged ↗</a></li></ul>
+</div>
+<div class="foot-base"><p>No trackers. Nobody is counting you.</p><p class="foot-led" data-ledger></p></div>
+</div>
+</footer>
+</div>
+<div class="dock dock-bk" data-dock>
+<nav class="meter" data-meter hidden aria-label="Page position">
+<div class="docket" id="docket" data-docket-box hidden><p class="docket-h">Page position, in mils</p><ol data-docket></ol></div>
+<button type="button" class="meter-btn" aria-label="Page position: variance meter" aria-describedby="meter-fig" aria-expanded="false" aria-controls="docket"><svg class="meter-dial" viewBox="0 0 148 112" aria-hidden="true" focusable="false">
+<defs><linearGradient id="dl-brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EBD49A"/><stop offset=".3" stop-color="#C5A257"/><stop offset=".66" stop-color="#9C7B36"/><stop offset="1" stop-color="#6E5522"/></linearGradient><radialGradient id="dl-face" cx=".36" cy=".28" r=".95"><stop offset="0" stop-color="#FBF7EE"/><stop offset=".6" stop-color="#F2EDE2"/><stop offset="1" stop-color="#DACFB9"/></radialGradient><linearGradient id="dl-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+<rect x=".6" y=".6" width="146.8" height="110.8" rx="7" fill="url(#dl-brass)" stroke="#4A3915" stroke-width="1.2"/>
+<rect x="3.2" y="3.2" width="141.6" height="105.6" rx="5" fill="none" stroke="#F6E6B8" stroke-opacity=".8" stroke-width=".9"/>
+<rect x="7.6" y="7.6" width="132.8" height="96.8" rx="2.6" fill="#4A3915"/>
+<rect x="8.8" y="9" width="131" height="94.6" rx="2" fill="url(#dl-face)"/>
+<g fill="#4A3915"><circle cx="5" cy="5" r="1.3"/><circle cx="143" cy="5" r="1.3"/><circle cx="5" cy="107" r="1.3"/><circle cx="143" cy="107" r="1.3"/></g>
+<text x="75.3" y="20.4" text-anchor="middle" font-family="'Courier Prime',ui-monospace,monospace" font-weight="700" font-size="7.4" letter-spacing="2.6" fill="#1B1712">VARIANCE</text>
+<path d="M31.6 51.5A50 50 0 0 1 116.4 51.5" fill="none" stroke="#1B1712" stroke-width=".8"/>
+<path d="M31.6 51.5L25.7 47.8M40.7 40.7L37.6 37.3M54.3 32.0L52.5 27.8M70.0 28.2L69.6 23.6M82.1 28.7L82.8 24.1M95.5 32.9L97.5 28.7M105.0 38.8L107.8 35.1M111.6 45.0L115.0 42.0M116.4 51.5L122.3 47.8" fill="none" stroke="#1B1712" stroke-width=".9"/><path d="M31.6 51.5L30.1 50.6M33.2 49.2L31.7 48.1M34.8 46.9L33.4 45.8M36.6 44.8L35.3 43.6M38.6 42.7L37.3 41.4M40.6 40.8L39.4 39.4M42.8 39.0L41.6 37.6M45.0 37.3L44.0 35.8M47.3 35.7L46.4 34.2M49.8 34.3L48.9 32.7M52.3 33.0L51.5 31.4M54.8 31.8L54.1 30.2M57.4 30.8L56.9 29.1M60.1 30.0L59.6 28.2M62.8 29.3L62.4 27.5M65.6 28.7L65.3 26.9M68.4 28.3L68.2 26.5M71.2 28.1L71.1 26.3M74.0 28.0L74.0 26.2M76.8 28.1L76.9 26.3M79.6 28.3L79.8 26.5M82.4 28.7L82.7 26.9M85.2 29.3L85.6 27.5M87.9 30.0L88.4 28.2M90.6 30.8L91.1 29.1M93.2 31.8L93.9 30.2M95.7 33.0L96.5 31.4M98.2 34.3L99.1 32.7M100.7 35.7L101.6 34.2M103.0 37.3L104.0 35.8M105.2 39.0L106.4 37.6M107.4 40.8L108.6 39.4M109.4 42.7L110.7 41.4M111.4 44.8L112.7 43.6M113.2 46.9L114.6 45.8M114.8 49.2L116.3 48.1M116.4 51.5L117.9 50.6" fill="none" stroke="#1B1712" stroke-width=".45"/>
+<text x="25.6" y="61.5" font-family="'Courier Prime',ui-monospace,monospace" font-size="6.4" fill="#544A6B">0</text>
+<text x="111.4" y="61.5" font-family="'Courier Prime',ui-monospace,monospace" font-size="6.4" fill="#544A6B">100</text>
+<path data-wedge d="" fill="none" stroke="#3E7C6B" stroke-opacity=".36" stroke-width="9"/>
+<g data-needle transform="rotate(-58 74 78)"><path d="M75 83V33" stroke="#1B1712" stroke-opacity=".18" stroke-width="1.6"/><path d="M74 82V32" stroke="#2F6456" stroke-width="1.5" stroke-linecap="round"/><path d="M74 29l-2.1 6h4.2z" fill="#2F6456"/></g>
+<circle cx="74" cy="78" r="3.8" fill="url(#dl-brass)" stroke="#4A3915" stroke-width=".7"/>
+<rect x="29" y="86.5" width="90" height="15" fill="#E7DCC1" stroke="#5E4A20" stroke-width=".7"/>
+<path d="M8.8 9H96L40 103.6H8.8z" fill="url(#dl-glass)" opacity=".5"/>
+</svg><span class="meter-lab">Variance</span><span class="meter-fig" id="meter-fig"><span data-fig>0.000</span><span data-figerr></span> <span class="u" data-figunit>mils</span></span></button>
+</nav>
+<aside class="slip" data-slip hidden aria-label="Book One: The Actuary’s Burden">
+<a class="slip-cv" href="the-actuarys-burden.html" tabindex="-1" aria-hidden="true"><img src="assets/cover-the-actuarys-burden-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"></a>
+<p class="slip-t t"><b>Book One</b>The Actuary’s Burden</p>
+<a class="buy sm" data-buy="the-actuarys-burden" data-cond="1" data-live="Buy the book" href="https://orbandink.co.uk/en/books/the-actuarys-burden/" target="_blank" rel="noopener"><svg class="buy-ink" aria-hidden="true" focusable="false"><rect width="100%" height="100%" rx="7"/></svg><span class="buy-glare" aria-hidden="true"></span><span class="b1"><span data-b1>See the book</span> <svg class="ar" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.8 8.2L8 2M3 2h5v5"/></svg><span class="vh"> (opens in a new tab)</span></span><span class="b2" data-b2>at Orb &amp; Ink</span></a>
+</aside>
+</div>
+<script type="module">
+import { boot } from './calculus.js';
+boot({ page: 'book-1' });
+</script>
+</body>
+</html>

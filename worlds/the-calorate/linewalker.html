@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0A1520">
+  <meta name="description" content="Linewalker — Book I of The Calorate: literary dystopian science fiction where warmth is currency and weather is policy. For readers of Le Guin, The Fifth Season and Dune.">
+  <title>Linewalker — The Calorate, Book I | Alexey Belenkiy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>document.documentElement.classList.add('js');</script>
+<style>
+  /* assay: rows and stamp start hidden only when the script runs; without it the card stands complete */
+  [data-assay="stamp"] { transform: translate(-50%, -50%) rotate(-7deg) scale(1); }
+  .js [data-assay="row"] { clip-path: inset(0 100% 0 0); }
+  .js [data-assay="stamp"] { opacity: 0; transform: translate(-50%, -50%) rotate(-7deg) scale(1.6); }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #0A1520; -webkit-font-smoothing: antialiased; }
+    a { color: #FFD9A0; text-decoration-color: rgba(255, 158, 61, 0.45); text-underline-offset: 3px; }
+    a:hover { color: #FF9E3D; text-decoration-color: #FF9E3D; }
+    :focus-visible { outline: 2px solid #FF9E3D; outline-offset: 3px; }
+    ::selection { background: rgba(255, 158, 61, 0.3); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; } }
+    .hv-1:hover { background: rgba(255, 158, 61, 0.14); }
+    .hv-2:hover { color: #EDF4F7 !important; }
+    .hv-3:hover { color: #FFD9A0 !important; }
+    .hv-4:hover { background: rgba(255, 158, 61, 0.18) !important; }
+    .hv-5:hover { border-color: #FFD9A0 !important; color: #FFD9A0 !important; }
+    .hv-6:hover { color: #FF9E3D !important; }
+    .hv-7:hover { background: rgba(255, 158, 61, 0.12); }
+    @media (max-width: 719px) { .buy-bar { top: auto !important; right: 10px !important; left: 10px !important; bottom: 10px !important; } }
+    /* ── BUY CONTROLS · plain verb first, survey voice second. What is live comes from RETAIL in thermo.js.
+          Lit = on sale: an ember, with a top light, a halo and a press. Dashed = coming: a reserved plate. ── */
+    :root { --live-bg: #FF9E3D; --live-top: #FFBE78; --live-low: #F0862A; --live-edge: #FFC98F; --live-sheen: rgba(255, 244, 220, 0.55); --live-halo: rgba(255, 158, 61, 0.28); --live-glow: rgba(255, 158, 61, 0.7); --live-press: rgba(120, 48, 0, 0.45); --live-ink: #0A1520; --soon-ink: #A9C3D6; --soon-line: rgba(169, 195, 214, 0.5); --soon-hover: #FFD9A0; --soon-fill: rgba(169, 195, 214, 0.05); --focus: #FFD9A0; --rule: rgba(169, 195, 214, 0.28); --key-ink: #A9C3D6; --cover-cast: rgba(2, 8, 12, 0.95); }
+    .buy { position: relative; box-sizing: border-box; display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; max-width: 100%; padding: 13px 20px; border: 1px dashed var(--soon-line); background: var(--soon-fill); color: var(--soon-ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms, color 260ms, border-color 260ms, box-shadow 260ms, filter 260ms; }
+    .buy[hidden] { display: none; }
+    .nb { white-space: nowrap; }
+    .buy-main { font-size: 11.5px; letter-spacing: 0.15em; line-height: 1.4; }
+    .buy-main::after { content: '\2192'; display: inline-block; margin-left: 0.7em; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .buy:hover .buy-main::after { transform: translateX(4px); }
+    .buy-sub { font-size: 9.5px; letter-spacing: 0.14em; line-height: 1.5; opacity: 0.8; }
+    .buy.is-soon:hover { color: var(--soon-hover); border-color: var(--soon-hover); border-style: solid; }
+    .buy.is-soon:active { transform: translateY(1px); }
+    .buy.is-live { border: 1px solid var(--live-edge); background-color: var(--live-bg); background-image: linear-gradient(180deg, var(--live-top), var(--live-bg) 46%, var(--live-low)); color: var(--live-ink); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 16px 38px -14px var(--live-glow); }
+    .buy.is-live .buy-main { font-size: 13.5px; font-weight: 600; }
+    .buy.is-live .buy-sub { opacity: 0.86; }
+    .buy.is-live:hover { color: var(--live-ink); filter: brightness(1.07); transform: translateY(-2px); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 24px 48px -14px var(--live-glow); }
+    .buy.is-live:active { transform: translateY(1px); filter: brightness(0.95); box-shadow: inset 0 2px 8px var(--live-press), 0 0 0 1px var(--live-halo); }
+    .buy:focus-visible, .ed:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+    .buy--xl { padding: 17px 28px; }
+    .buy--xl.is-live .buy-main { font-size: 15.5px; }
+    @media (max-width: 719px) { .buy { padding: 12px 15px; } .buy--xl { padding: 15px 18px; } .buy--xl.is-live .buy-main { font-size: 14.5px; } }
+    .buy--bar { padding: 6px 12px; }
+    .buy--bar .buy-main, .buy--bar.is-live .buy-main { font-size: 11px; letter-spacing: 0.13em; }
+    .buy--bar.is-live { box-shadow: inset 0 1px 0 var(--live-sheen); }
+    .buy-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; }
+    @media (max-width: 719px) { .buy-bar { flex-wrap: nowrap !important; justify-content: space-between; } .buy-bar .buy { margin-left: auto; } }
+    @media (max-width: 479px) { .bar-more { display: none; } }
+    .buy-bar { --live-bg: #FF9E3D; --live-top: #FFBE78; --live-low: #F0862A; --live-edge: #FFC98F; --live-sheen: rgba(255, 244, 220, 0.55); --live-ink: #0A1520; --soon-ink: #FFD9A0; --soon-line: rgba(255, 158, 61, 0.55); --soon-hover: #FFFFFF; --soon-fill: transparent; }
+    /* ── THE COVER AS AN OBJECT · a spine crease, a top light and three depths of shadow ── */
+    .cover { position: relative; display: block; line-height: 0; background: #0A1520; box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 18px 28px -14px rgba(2, 8, 12, 0.75), 0 46px 84px -38px var(--cover-cast); transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .cover img { display: block; width: 100%; height: auto; }
+    .cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(255, 255, 255, 0.20) 0, rgba(255, 255, 255, 0.04) 0.9%, rgba(0, 0, 0, 0.26) 1.7%, rgba(0, 0, 0, 0) 4.2%, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.10) 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0) 14%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+    a.cover:hover { transform: translateY(-5px); box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 26px 36px -16px rgba(2, 8, 12, 0.8), 0 60px 96px -40px var(--cover-cast); }
+    /* ── LIVING PLATES · the <img> is the still plate (a scene made for the site, in assets/scenes/); the canvas over it is the same picture with the heat law acting on it ── */
+    [data-plate] { touch-action: pan-y; }
+    [data-plate] canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1); }
+    [data-hearth] { position: absolute; left: -130px; right: -130px; top: -120px; bottom: -120px; width: calc(100% + 260px); height: calc(100% + 240px); z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .hearth { position: relative; isolation: isolate; }
+    @media (max-width: 719px) { .hero-vein { left: 94.5% !important; } } /* on a phone the hero's vein keeps to the right edge, clear of the title */
+
+    /* ── EDITIONS · a tile per edition: lit when it is on sale, a quiet dashed chip while it is coming ── */
+    .eds { display: grid; grid-template-columns: 84px minmax(0, 1fr); max-width: 900px; margin: 34px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+    .eds dt { margin: 0; padding: 20px 0 0; border-top: 1px solid var(--rule); font-size: 11px; letter-spacing: 0.2em; color: var(--key-ink); }
+    .eds dd { margin: 0; padding: 14px 0 16px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+    .ed { box-sizing: border-box; display: flex; flex-direction: column; gap: 5px; width: 172px; padding: 12px 14px; border: 1px dashed var(--soon-line); background: var(--soon-fill); color: var(--soon-ink); text-decoration: none; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms, color 260ms, border-color 260ms, box-shadow 260ms, filter 260ms; }
+    .ed.is-soon, .ed.is-soon:hover { color: var(--soon-ink); cursor: default; }
+    .ed-name { font-size: 11.5px; letter-spacing: 0.15em; line-height: 1.45; text-transform: uppercase; }
+    .ed-note { font-size: 10.5px; letter-spacing: 0.03em; line-height: 1.5; opacity: 0.78; }
+    .ed-state { margin-top: auto; padding-top: 7px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.72; }
+    .ed.is-live { border: 1px solid var(--live-edge); background-color: var(--live-bg); background-image: linear-gradient(180deg, var(--live-top), var(--live-bg) 46%, var(--live-low)); color: var(--live-ink); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 16px 38px -14px var(--live-glow); }
+    .ed.is-live .ed-state { opacity: 1; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; }
+    .ed.is-live .ed-state::after { content: '\2192'; display: inline-block; margin-left: 0.6em; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .ed.is-live:hover { color: var(--live-ink); filter: brightness(1.07); transform: translateY(-2px); }
+    .ed.is-live:hover .ed-state::after { transform: translateX(4px); }
+    .ed.is-live:active { transform: translateY(1px); filter: brightness(0.95); }
+    .ed--art { padding: 0 0 12px; }
+    .ed--art img { display: block; width: 100%; height: auto; aspect-ratio: 1; margin-bottom: 7px; }
+    .ed--art > span { padding: 0 13px; }
+    @media (max-width: 719px) { .eds { grid-template-columns: minmax(0, 1fr); } .eds dd { border-top: none; padding-top: 10px; } .ed { width: calc(50% - 6px); } }
+
+    /* ── BOOK PAGE · cover, title and the button share the first screen; plates carry the rest ── */
+    .bk-hero { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: clamp(24px, 4vw, 56px); align-items: end; max-width: 1180px; }
+    .bk-cover { grid-column: 1; grid-row: 1 / span 5; align-self: end; width: clamp(180px, 20vw, 290px); }
+    .bk-hero > :not(.bk-cover) { grid-column: 2; min-width: 0; }
+    @media (max-width: 719px) {
+      .bk-hero { grid-template-columns: min(40vw, 172px) minmax(0, 1fr); column-gap: 16px; }
+      .bk-cover { grid-row: 1; width: min(40vw, 172px); }
+      .bk-hero > .bk-chips { grid-row: 1; align-self: end; }
+      .bk-hero > .bk-title, .bk-hero > .bk-hook, .bk-hero > .bk-cta, .bk-hero > .bk-note { grid-column: 1 / -1; }
+    }
+    .plate { position: relative; margin: 0; overflow: hidden; }
+    .plate img { display: block; width: 100%; height: clamp(260px, 62vh, 640px); object-fit: cover; object-position: 50% 42%; }
+    @media (max-width: 719px) { .plate img { object-position: 88% 50%; } }
+    .plate figcaption { position: absolute; left: var(--content-x); right: 20px; bottom: 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(237, 244, 247, 0.9); pointer-events: none; }
+    .plate figcaption span { padding: 5px 10px; background: rgba(10, 21, 32, 0.62); box-decoration-break: clone; -webkit-box-decoration-break: clone; line-height: 2.1; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"Linewalker","author":{"@type":"Person","name":"Alexey Belenkiy"},"position":1,"isPartOf":{"@type":"BookSeries","name":"The Calorate"},"description":"Book I of The Calorate. On Vesh there is no weather, only maintenance — and the Guild's instruments are wrong about Veya Marn.","workExample":[{"@type":"Book","bookFormat":"https://schema.org/EBook","offers":{"@type":"Offer","url":"https://www.amazon.com/dp/B0HF13VNMR","availability":"https://schema.org/InStock"}}]}</script>
+</head>
+<body>
+<div style="position: relative; overflow-x: clip; background: #0A1520; color: #EDF4F7; font-family: Newsreader, Georgia, 'Times New Roman', serif; --vein-x: clamp(16px, 4.5vw, 54px); --content-x: clamp(56px, 11vw, 150px);">
+
+  <div aria-hidden="true" style="position: absolute; z-index: 30; top: 0; bottom: 50px; left: var(--vein-x); width: 2px; background: linear-gradient(180deg, rgba(255, 158, 61, 0.55), rgba(255, 158, 61, 0.14)); pointer-events: none;"></div>
+
+  <!-- PERSISTENT BUY BAR — one job, in plain words; its link and state come from RETAIL in thermo.js -->
+  <div class="buy-bar" data-ref="buyBar" role="region" aria-label="Linewalker — buy bar" style="position: fixed; z-index: 60; top: 14px; right: 14px; display: none; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 9px 12px; background: rgba(10, 21, 32, 0.93); border: 1px solid rgba(255, 158, 61, 0.4); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.13em; color: #EDF4F7;">
+    <span style="opacity: 0.85; white-space: nowrap;">LINEWALKER<span class="bar-more"> · BOOK ONE</span></span>
+    <a class="buy buy--bar is-live" data-buy="linewalker" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span></a>
+    <button type="button" aria-label="Dismiss buy bar" data-ref="dismissBtn" class="hv-2" style="background: none; border: none; color: rgba(237, 244, 247, 0.6); font-family: inherit; font-size: 14px; line-height: 1; cursor: pointer; padding: 2px 5px;">×</button>
+  </div>
+
+  <!-- HERO — the vein under the ice, kept open by hand -->
+  <section data-ref="heroRef" style="position: relative; min-height: 92svh; overflow: hidden; background: #0A1520; touch-action: pan-y;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 1;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #1D3348 0%, #16283A 40%, #0A1520 100%);"></div>
+      <div style="position: absolute; left: 4%; top: 8%; width: 60%; height: 46%; background: radial-gradient(ellipse at 35% 40%, rgba(143, 188, 164, 0.13), rgba(143, 188, 164, 0) 65%);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: rgba(169, 195, 214, 0.1);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 62%; height: 1px; background: rgba(169, 195, 214, 0.07);"></div>
+      <div class="hero-vein" style="position: absolute; left: 60%; top: 0; bottom: 6%; width: 2px; background: linear-gradient(180deg, rgba(255, 158, 61, 0.35), rgba(255, 158, 61, 0.8) 60%, rgba(255, 217, 160, 0.95)); box-shadow: 0 0 18px 2px rgba(255, 158, 61, 0.4);"></div>
+      <div class="hero-vein" style="position: absolute; left: 60%; bottom: 5.4%; width: 3px; height: 3px; border-radius: 1px; background: #FFD9A0; box-shadow: 9px 1px 0 -1px #FF9E3D, -10px 2px 0 -1px #FF9E3D, 19px 0 0 -1px rgba(255, 158, 61, 0.75), -21px 1px 0 -1px rgba(255, 158, 61, 0.6), 0 0 16px 4px rgba(255, 158, 61, 0.35);"></div>
+      <div style="position: absolute; inset: 0; opacity: 0.05; background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27/%3E%3C/filter%3E%3Crect%20width=%27120%27%20height=%27120%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E);"></div>
+    </div>
+    <canvas data-ref="canvasRef" role="img" aria-label="A heat survey of Vesh: an ice field, one warm vein running down to a lit town, warmth drawn away at the top of the chart. A bare hand warms the stone; the line takes the rest." style="position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></canvas>
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(10, 21, 32, 0.1) 0%, rgba(10, 21, 32, 0) 30%, rgba(10, 21, 32, 0.2) 62%, rgba(10, 21, 32, 0.68) 92%);"></div>
+    <div style="position: relative; z-index: 4; min-height: 92svh; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: clamp(18px, 3.5vh, 40px) clamp(20px, 5vw, 64px) clamp(28px, 6vh, 56px) var(--content-x);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+        <a href="index.html" class="hv-3" style="padding: 5px 10px; background: rgba(10, 21, 32, 0.5); color: rgba(237, 244, 247, 0.85); text-decoration: none;">← THE CALORATE · A TRILOGY</a>
+        <span data-ref="counterRef" style="padding: 5px 10px; background: rgba(10, 21, 32, 0.55); color: #FFD9A0;">− 0 therms · your hand ░ + 0 therms · the line</span>
+      </div>
+      <div class="bk-hero">
+        <span class="cover bk-cover"><img src="assets/cover-linewalker.jpg" width="900" height="1399" alt="Linewalker — the cover: a rune-cut marker stone, a walker, a bright vein under the ice"></span>
+        <div class="bk-chips" style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+          <span style="border: 1px solid rgba(255, 158, 61, 0.6); color: #FFD9A0; padding: 5px 10px; background: rgba(10, 21, 32, 0.4);">BOOK I · AVAILABLE</span>
+          <span style="border: 1px solid rgba(169, 195, 214, 0.4); color: #A9C3D6; padding: 5px 10px; background: rgba(10, 21, 32, 0.4);">−41.0° · VESH · KELDER REACH</span>
+        </div>
+        <h1 class="bk-title" style="margin: 20px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 550; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(48px, 9.5vw, 136px); line-height: 0.95; letter-spacing: -0.015em; color: #EDF4F7;">Linewalker</h1>
+        <p class="bk-hook" style="margin: 20px 0 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.4vw, 28px); line-height: 1.4; color: #D4E2EC; max-width: 30ch; text-wrap: pretty;">How much is one person allowed to cost?</p>
+        <div class="bk-cta buy-row" style="margin-top: clamp(20px, 3.5vh, 32px);">
+          <a class="buy buy--xl is-live" data-buy="linewalker" data-sub-live="Linewalker · Kindle — walk the line" data-sub-soon="Linewalker · in the veins" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span><span class="buy-sub" data-buy-sub>Linewalker · Kindle — walk the line</span></a>
+          <a class="buy is-soon" data-buy-imprint="linewalker" href="https://orbandink.co.uk/en/books/linewalker/" target="_blank" rel="noopener"><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ENTRY — the assay leads, one paragraph follows -->
+  <section style="padding: clamp(48px, 8vh, 100px) clamp(20px, 6vw, 110px) clamp(48px, 8vh, 100px) var(--content-x); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(30px, 6vw, 90px);">
+    <div style="flex: 1 1 360px; max-width: 560px; min-width: min(100%, 270px);">
+      <h2 style="margin: 0 0 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.22em; color: rgba(169, 195, 214, 0.85);">EXHIBIT · HEARTH-BLOOD ASSAY</h2>
+      <div id="the-assay" data-ref="assayRef" style="scroll-margin-top: 90px; position: relative; max-width: 560px; background: #EDF4F7; color: #0A1520; border: 1px solid rgba(10, 21, 32, 0.3); box-shadow: 0 14px 34px -14px rgba(4, 10, 16, 0.7); padding: 15px 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; line-height: 1.7;">
+        <div data-assay="row" style="font-size: 9.5px; letter-spacing: 0.2em; color: rgba(10, 21, 32, 0.6); border-bottom: 1px solid rgba(10, 21, 32, 0.35); padding-bottom: 8px; transition: clip-path 420ms steps(24, end) 0ms;">STOKER GUILD — HEARTH-BLOOD ASSAY · FORM 7-C</div>
+        <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed rgba(10, 21, 32, 0.2); padding: 7px 0; transition: clip-path 420ms steps(24, end) 220ms;"><span style="opacity: 0.6;">SUBJECT</span><span style="text-align: right;">MARN, V. — KELDER REACH, VESH</span></div>
+        <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed rgba(10, 21, 32, 0.2); padding: 7px 0; transition: clip-path 420ms steps(24, end) 440ms;"><span style="opacity: 0.6;">RATING</span><span style="color: #B4472F;">0.4 — SPOILT</span></div>
+        <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; padding: 7px 0 2px; transition: clip-path 420ms steps(24, end) 660ms;"><span style="opacity: 0.6;">DISPOSITION</span><span>SET ASIDE</span></div>
+        <div data-assay="stamp" style="position: absolute; left: 50%; top: 54%; transition: opacity 200ms cubic-bezier(0.2, 0.8, 0.3, 1) 1350ms, transform 200ms cubic-bezier(0.2, 0.8, 0.3, 1) 1350ms; border: 2.5px solid #B4472F; color: #B4472F; padding: 8px 14px; font-weight: 600; font-size: clamp(11px, 2.4vw, 14.5px); letter-spacing: 0.13em; white-space: nowrap; background: rgba(237, 244, 247, 0.55);">THE INSTRUMENTS ARE WRONG.</div>
+      </div>
+    </div>
+    <div style="flex: 1 1 360px; max-width: 56ch; min-width: min(100%, 270px); font-size: clamp(17px, 1.7vw, 19.5px); line-height: 1.75; color: #D4E2EC;">
+      <p style="margin: 0; text-wrap: pretty;">They rated her four-tenths and set her aside. It was their first mistake. On Vesh there is no weather, only maintenance: the world's core was tapped centuries ago, and the linewalkers keep the last lines open by hand so the town does not die in the dark. Then the tithe assay comes down, and Veya Marn's brother Joren tests true. Veya does not accept the arithmetic. She stows away on the barge carrying the year's Candles up out of the cold.</p>
+      <p style="margin: 24px 0 0; font-style: italic;"><a href="#buy" class="hv-6" style="color: #FFD9A0;">How much is one person allowed to cost? — find out</a></p>
+    </div>
+  </section>
+
+  <!-- PLATE — the vein field of Kelder reach, full-bleed, with the heat law acting on it -->
+  <figure class="plate" data-plate="fever" data-heart="0.775,0.70" data-horizon="0.42">
+    <img src="assets/scenes/book1-place.jpg" width="1672" height="941" alt="An ice field at dusk: a row of marker stones follows one bright vein under the ice to the lit domes of a line-town; a ringed planet and a faint aurora above" loading="lazy" decoding="async">
+    <canvas aria-hidden="true"></canvas>
+    <figcaption><span>FIG. 2 · THE VEIN UNDER THE ICE — KELDER REACH, VESH</span></figcaption>
+  </figure>
+
+  <!-- EPIGRAPHS -->
+  <section style="border-top: 1px solid rgba(169, 195, 214, 0.15); border-bottom: 1px solid rgba(169, 195, 214, 0.15); background: rgba(22, 40, 58, 0.55); padding: clamp(44px, 7vh, 90px) clamp(20px, 6vw, 110px) clamp(44px, 7vh, 90px) var(--content-x); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(28px, 5vw, 64px); max-width: 100%;">
+    <figure style="margin: 0;">
+      <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.55; color: #EDF4F7; text-wrap: pretty;">The cold is not your enemy. The cold is the invoice.</blockquote>
+      <figcaption style="margin-top: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(169, 195, 214, 0.75);">— walker's primer, first page</figcaption>
+    </figure>
+    <figure style="margin: 0;">
+      <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.55; color: #EDF4F7; text-wrap: pretty;">Two mittens, one hand bare — the stone tells true what the gauges swear.</blockquote>
+      <figcaption style="margin-top: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(169, 195, 214, 0.75);">— tally-song, Kelder reach</figcaption>
+    </figure>
+  </section>
+
+  <!-- BUY -->
+  <section id="buy" data-ref="buyRef" style="scroll-margin-top: 40px; position: relative; padding: clamp(56px, 9vh, 120px) clamp(20px, 6vw, 110px) 40px var(--content-x);">
+    <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(169, 195, 214, 0.85);">
+      <span>ISOTHERM 01</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(169, 195, 214, 0.4), rgba(169, 195, 214, 0.06));"></span>
+      <span style="text-align: right;">−41.0° · KELDER REACH · THE LINE HOLDS</span>
+    </div>
+    <h2 style="margin: 30px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 560; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(38px, 5.5vw, 76px); line-height: 0.98; color: #EDF4F7;">Walk the line.</h2>
+    <p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; color: #A9C3D6;">BOOK I OF THE CALORATE · ~87,000 WORDS · LITERARY SCIENCE FICTION</p>
+    <div class="hearth">
+      <canvas data-hearth aria-hidden="true"></canvas>
+      <!-- EDITIONS — one tile per edition. Lit = on sale (RETAIL in thermo.js has its link); dashed = coming. -->
+      <dl class="eds">
+        <dt>READ</dt>
+        <dd>
+          <a class="ed is-live" data-edition="linewalker ebook" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="ed-name">E-book</span><span class="ed-state" data-edition-state>Buy the <span class="nb">e-book</span></span></a>
+          <a class="ed is-soon" data-edition="linewalker paperback"><span class="ed-name">Paperback</span><span class="ed-state" data-edition-state>Coming</span></a>
+          <a class="ed is-soon" data-edition="linewalker hardcover"><span class="ed-name">Hardcover</span><span class="ed-state" data-edition-state>Coming</span></a>
+        </dd>
+        <dt>LISTEN</dt>
+        <dd>
+          <a class="ed ed--art is-soon" data-edition="linewalker audiobook"><img src="assets/audio-linewalker.jpg" width="700" height="700" alt="Linewalker — audiobook cover" loading="lazy" decoding="async"><span class="ed-name">Audiobook</span><span class="ed-note">unabridged narration</span><span class="ed-state" data-edition-state>Coming</span></a>
+          <a class="ed ed--art is-soon" data-edition="linewalker immersive"><img src="assets/audio-linewalker-immersive.jpg" width="700" height="700" alt="Linewalker — immersive audiobook cover" loading="lazy" decoding="async"><span class="ed-name">Immersive audiobook</span><span class="ed-note">the narration set in score and sound design</span><span class="ed-state" data-edition-state>Coming</span></a>
+          <a class="ed is-soon" data-edition="linewalker drama"><span class="ed-name">Audio drama</span><span class="ed-note">full-cast dramatisation</span><span class="ed-state" data-edition-state>Coming</span></a>
+        </dd>
+        <dt>SEE</dt>
+        <dd>
+          <a class="ed is-soon" data-edition="linewalker graphic"><span class="ed-name">Graphic novel</span><span class="ed-state" data-edition-state>Coming</span></a>
+        </dd>
+      </dl>
+      <div class="buy-row" style="margin-top: 30px;">
+        <a class="buy buy--xl is-live" data-buy="linewalker" data-sub-live="Linewalker · Kindle — walk the line" data-sub-soon="Linewalker · in the veins" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span><span class="buy-sub" data-buy-sub>Linewalker · Kindle — walk the line</span></a>
+        <a class="buy is-soon" data-buy-imprint="linewalker" href="https://orbandink.co.uk/en/books/linewalker/" target="_blank" rel="noopener"><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+      </div>
+    </div>
+    <p style="margin: 28px 0 0; font-style: italic; font-size: 16.5px; line-height: 1.6; color: rgba(212, 226, 236, 0.85); max-width: 46ch; text-wrap: pretty;">Books II and III are in the veins — follow <a href="https://orbandink.co.uk/" target="_blank" rel="noopener">Orb &amp; Ink</a> for release day.</p>
+  </section>
+
+  <!-- CROSS-NAV + FOOTER -->
+  <section style="position: relative; padding: clamp(30px, 5vh, 60px) clamp(20px, 6vw, 110px) 130px var(--content-x);">
+    <nav aria-label="Series navigation" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 26px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em;">
+      <a href="index.html" class="hv-5" style="color: #A9C3D6; text-decoration: none; border: 1px solid rgba(169, 195, 214, 0.4); padding: 8px 13px;">← THE CALORATE — THE SERIES</a>
+      <a href="the-golden-shore.html" class="hv-7" style="color: #FFD9A0; text-decoration: none; border: 1px solid rgba(255, 158, 61, 0.45); padding: 8px 13px;">WARMER → THE GOLDEN SHORE · +35.5°</a>
+    </nav>
+    <div style="margin-top: clamp(40px, 6vh, 70px); border-top: 1px solid rgba(169, 195, 214, 0.2); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em; color: rgba(169, 195, 214, 0.7);">
+      <span>© Alexey Belenkiy · published by <a href="https://orbandink.co.uk/" target="_blank" rel="noopener" class="hv-3" style="color: inherit; text-decoration-color: rgba(169, 195, 214, 0.4);">Orb &amp; Ink</a></span>
+      <span>THERE IS NO WEATHER. THERE ARE ONLY DECISIONS.</span>
+    </div>
+    <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 39px; transform: translateX(-50%); width: 21px; height: 21px; border-radius: 50%; border: 1px solid rgba(255, 158, 61, 0.5);"></div>
+    <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 44px; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle, #FFD9A0 0%, #FF9E3D 60%, rgba(255, 158, 61, 0) 100%); box-shadow: 0 0 18px 5px rgba(255, 158, 61, 0.45);"></div>
+    <div style="position: absolute; left: calc(var(--vein-x) + 22px); bottom: 43px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(255, 217, 160, 0.75);">the line ends at a hearth</div>
+  </section>
+</div>
+<script type="module">
+const $ref = (n) => document.querySelector('[data-ref="' + n + '"]');
+// thermo.js does three things for this page once it has loaded: it sets every buy control from the
+// RETAIL map (the markup already carries today's state, so nothing moves if the module is slow or
+// missing), wakes the living plates, and lights the hearth behind the buy area
+import('./thermo.js').then((m) => {
+  m.wireRetail();
+  document.querySelectorAll('[data-plate]').forEach((fig) => m.mountPlate(fig));
+  document.querySelectorAll('.hearth').forEach((el) => m.mountHearth(el));
+}).catch((err) => console.warn('thermo.js unavailable — the still plates and the links in the markup hold', err));
+const heroEl = $ref('heroRef'), canvasEl = $ref('canvasRef'), counterEl = $ref('counterRef');
+const assayEl = $ref('assayRef'), buyEl = $ref('buyRef');
+const barEl = $ref('buyBar'), dismissBtn = $ref('dismissBtn');
+
+const state = { assayOn: false, dismissed: false, heroPast: false, buyIn: false, reduced: false };
+let h = null, tried = false, heroVisible = true, coolT = 0;
+
+const syncBar = () => { if (barEl) barEl.style.display = (state.heroPast && !state.buyIn && !state.dismissed) ? 'flex' : 'none'; };
+const revealAssay = () => {
+  document.querySelectorAll('[data-assay="row"]').forEach((el) => { el.style.clipPath = 'inset(0 0% 0 0)'; });
+  const stamp = document.querySelector('[data-assay="stamp"]');
+  if (stamp) { stamp.style.opacity = '1'; stamp.style.transform = 'translate(-50%, -50%) rotate(-7deg) scale(1)'; }
+};
+
+const rq = window.matchMedia('(prefers-reduced-motion: reduce)');
+const syncMq = () => { state.reduced = rq.matches; };
+syncMq();
+rq.addEventListener('change', syncMq);
+
+let ticking = false;
+const onScroll = () => {
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    ticking = false;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    coolT = Math.min(0.8, p * 1.3);
+    if (h) h.setCoolTarget(coolT);
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+
+const io = (el, cb, opts) => { if (!el) return null; const o = new IntersectionObserver(cb, opts); o.observe(el); return o; };
+io(heroEl, (es) => {
+  const e = es[0];
+  heroVisible = e.isIntersecting;
+  if (h) h.setVisible(e.isIntersecting);
+  const past = !e.isIntersecting && e.boundingClientRect.bottom < 120;
+  if (past !== state.heroPast) { state.heroPast = past; syncBar(); }
+}, { threshold: [0, 0.02] });
+const assayObs = io(assayEl, (es) => { if (es[0].isIntersecting) { state.assayOn = true; revealAssay(); assayObs.disconnect(); } }, { threshold: 0.6 });
+io(buyEl, (es) => { const v = es[0].isIntersecting; if (v !== state.buyIn) { state.buyIn = v; syncBar(); } }, { threshold: 0.1 });
+
+if (heroEl) {
+  const onPointer = (e) => {
+    mount();
+    const c = canvasEl; if (!c || !h) return;
+    const r = c.getBoundingClientRect(); if (!r.width) return;
+    const amp = (e.buttons & 1) || e.pointerType === 'touch' ? 0.4 : 0.14; // a bare hand on the stone
+    h.pointer((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height, amp);
+  };
+  heroEl.addEventListener('pointermove', onPointer);
+  heroEl.addEventListener('pointerdown', onPointer);
+}
+
+if (dismissBtn) dismissBtn.addEventListener('click', () => { state.dismissed = true; syncBar(); });
+
+const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 400));
+idle(() => mount());
+
+async function mount() {
+  if (tried || !canvasEl) return;
+  tried = true;
+  // The vein. On a phone the title is nearly as wide as the screen, so the vein keeps to the right
+  // edge, clear of the title (uVein: x = 1 on a phone, y = where it runs); on a wide screen nothing changes.
+  const VEIN = 'uniform vec2 uVein; float veinX(float y){ return mix(0.60 + 0.10*sin(y*3.2+0.4) + 0.04*sin(y*9.0), uVein.y + 0.012*sin(y*9.0), uVein.x); }';
+  const narrowMq = window.matchMedia('(max-width: 719px)');
+  const vein = { narrow: 0, x: 0.945 };
+  const measureVein = () => {
+    const r = canvasEl.getBoundingClientRect(), h1 = heroEl && heroEl.querySelector('h1');
+    if (!r.width) return;
+    vein.narrow = narrowMq.matches ? 1 : 0;
+    let right = 0;
+    if (h1) { const range = document.createRange(); range.selectNodeContents(h1); right = (range.getBoundingClientRect().right - r.left) / r.width; } // where the title's ink ends
+    vein.x = Math.min(0.975, Math.max(0.945, right + 0.04));
+  };
+  measureVein();
+  window.addEventListener('resize', measureVein);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureVein);
+  const INIT = 'precision highp float; varying vec2 vUv; ' + VEIN + ' void main(){ vec2 uv=vUv;' +
+    ' float t = 0.10 + 0.05*uv.y + 0.02*sin(uv.x*13.0+uv.y*7.0);' +
+    ' float dv = abs(uv.x - veinX(uv.y));' +
+    ' t = max(t, smoothstep(0.015,0.0,dv)*(0.58-0.18*uv.y));' +
+    ' float dt = distance(uv, vec2(veinX(0.10), 0.10));' +
+    ' t = max(t, 0.66*exp(-dt*dt*300.0));' +
+    ' gl_FragColor = vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const SIM = 'precision highp float; varying vec2 vUv; uniform sampler2D uPrev; uniform vec2 uTexel; uniform vec3 uBrush; uniform float uBrushMean; uniform float uCool; uniform float uAspect; ' + VEIN + ' void main(){ vec2 uv=vUv;' +
+    ' float c=texture2D(uPrev,uv).r;' +
+    ' float l=texture2D(uPrev,uv-vec2(uTexel.x,0.0)).r; float r=texture2D(uPrev,uv+vec2(uTexel.x,0.0)).r;' +
+    ' float d=texture2D(uPrev,uv-vec2(0.0,uTexel.y)).r; float u=texture2D(uPrev,uv+vec2(0.0,uTexel.y)).r;' +
+    ' float vein=smoothstep(0.015,0.0,abs(uv.x-veinX(uv.y)));' +
+    ' float k=mix(0.15,0.48,vein);' + // the vein conducts; the ice does not
+    ' float t=c+k*(l+r+u+d-4.0*c);' +
+    ' t=mix(t,0.04,smoothstep(0.90,1.0,uv.y)*(0.05+0.06*uCool));' + // topside extraction: the paying world draws
+    ' float dt=distance(uv,vec2(veinX(0.10),0.10));' +
+    ' t=mix(t,0.62,exp(-dt*dt*300.0)*0.03);' + // the town holds its hearth
+    ' float dd=distance(vec2(uv.x*uAspect,uv.y),vec2(uBrush.x*uAspect,uBrush.y));' +
+    ' t+=uBrush.z*exp(-dd*dd*700.0);' +
+    ' t-=uBrushMean;' +
+    ' gl_FragColor=vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const DISP = 'precision highp float; varying vec2 vUv; uniform sampler2D uField; uniform float uTime; uniform float uPulse; uniform float uMotion; ' + VEIN +
+    ' vec3 pal(float t){ vec3 c0=vec3(0.016,0.031,0.051),c1=vec3(0.039,0.082,0.125),c2=vec3(0.086,0.157,0.227),c3=vec3(0.369,0.478,0.549),c4=vec3(0.663,0.765,0.839),c5=vec3(1.0,0.851,0.627);' +
+    ' vec3 col=mix(c0,c1,smoothstep(0.0,0.18,t)); col=mix(col,c2,smoothstep(0.18,0.4,t)); col=mix(col,c3,smoothstep(0.4,0.6,t)); col=mix(col,c4,smoothstep(0.6,0.8,t)); return mix(col,c5,smoothstep(0.8,1.0,t)); }' +
+    ' void main(){ vec2 uv=vUv; float t=texture2D(uField,uv).r;' +
+    ' vec2 fp=floor(gl_FragCoord.xy); t+=(mod(fp.x,2.0)*2.0+mod(fp.y,2.0))*0.0035-0.005;' +
+    ' vec3 col=pal(t);' +
+    ' float f=abs(fract(t*15.0)-0.5); col*=1.0-(1.0-smoothstep(0.02,0.07,f))*0.12;' +
+    ' float g=exp(-pow(abs(uv.x-veinX(uv.y)),2.0)*14000.0);' +
+    ' float w=exp(-pow(fract(uTime*uPulse)-uv.y,2.0)*260.0)*uMotion;' + // pulses climb: heat leaving Vesh
+    ' col+=(vec3(1.0,0.62,0.24)*0.35+vec3(1.0,0.85,0.63)*0.5*w)*g*(0.25+0.75*t);' +
+    ' col+=vec3(0.56,0.74,0.64)*0.045*smoothstep(0.55,1.0,uv.y)*(0.5+0.5*sin(uv.x*5.0+uTime*0.12*uMotion));' + // faint aurora
+    ' gl_FragColor=vec4(col,1.0); }';
+  try {
+    const { mountThermo } = await import('./thermo.js');
+    h = mountThermo(canvasEl, {
+      initFrag: INIT, simFrag: SIM, dispFrag: DISP, own: true,
+      bpm: 57, reduced: state.reduced,
+      uniforms: (gl, p) => gl.uniform2f(gl.getUniformLocation(p, 'uVein'), vein.narrow, vein.x),
+      onTherms: (n) => { if (counterEl) counterEl.textContent = '\u2212 ' + n + ' therms \u00b7 your hand \u2591 + ' + n + ' therms \u00b7 the line'; }
+    });
+    if (h) { h.setVisible(heroVisible); h.setCoolTarget(coolT); }
+  } catch (err) { console.warn('hero shader unavailable — static composition holds', err); }
+}
+</script>
+</body>
+</html>

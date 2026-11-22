@@ -13,6 +13,12 @@ none, output dir: `/`).
   `_redirects`, `robots.txt`, `sitemap.xml` are **build output**.
   Never hand-edit them — edit `data/*.csv`, `templates/`, `assets/`,
   or `build.py`, then run `python3 build.py` and commit the result.
+- `worlds/<slug>/` are **mounted copies** of the series sites that live
+  in the folders beside this repo (`tools/sync_worlds.py`). Change a
+  series site in its own folder and re-mount; never edit it here. They
+  are the one place external requests happen (their Google Fonts).
+- `data/editions.csv` is written by `tools/sync_editions.py` from the
+  bookshelf's release sheet; edit the sheet, not the CSV.
 - All content and every UI string lives in `data/*.csv`. No hardcoded
   copy in HTML templates or JS.
 - Missing translations must degrade to `en`, never break a page.

@@ -1,9 +1,9 @@
 /* gl.js — single shared WebGL context for every shader effect.
-   Layers, all drawn into one fixed full-viewport canvas (#glfx, z:0):
+   Layers, both drawn into one fixed full-viewport canvas (#glfx, z:0):
      1. field   — the "world-lines" background, whole viewport, <5% weight
      2. erode   — temporal-erosion titles (DOM text stays real underneath)
-     3. cover   — per-book signature treatment over cover <img>s
-   Real DOM text/images are only ghosted AFTER a frame has rendered. */
+   Real DOM text is only ghosted AFTER a frame has rendered. Covers are not
+   drawn here: they are real <img>s on the 3D books (fx/book3d.js). */
 
 import * as sched from './scheduler.js';
 
@@ -46,10 +46,11 @@ void main(){
   // sparse slow "instants" (star points)
   vec2 g = floor(p*140.0);
   float h = hash(g);
-  float star = step(0.998, h) * (0.35 + 0.65*(0.5+0.5*sin(uTime*1.4+h*70.0)));
+  vec2 sc = fract(p*140.0) - 0.5;
+  float star = step(0.998, h) * smoothstep(0.42, 0.05, length(sc)) * (0.35 + 0.65*(0.5+0.5*sin(uTime*1.4+h*70.0)));
   vec3 col = nebula
            + uAccent * lines * (0.05 + uScroll*0.06)
-           + vec3(0.93,0.87,0.78) * star * 0.16;
+           + vec3(0.93,0.87,0.78) * star * 0.22;
   float vig = smoothstep(1.25, 0.35, length(vUv-0.5));
   col *= vig;
   gl_FragColor = vec4(col, 1.0); // additive blend
@@ -85,43 +86,12 @@ void main(){
   gl_FragColor = vec4(col*shimmer, a*shimmer);
 }`;
 
-const COVER_FRAG = `
-precision mediump float; varying vec2 vUv;
-uniform sampler2D uTex; uniform float uTime,uHover,uSeed,uMirror,uMirrorK;
-uniform vec2 uRes,uFit,uMouse; uniform vec3 uAccent;
-${NOISE}
-void main(){
-  // mirror: sample the source cover reflected about its bottom edge
-  vec2 base = uMirror > 0.5 ? vec2(vUv.x, (1.0 - vUv.y) * uMirrorK) : vUv;
-  vec2 uv = (base - 0.5) * uFit * (1.0 - 0.045*uHover) + 0.5;
-  uv += uMouse * 0.02 * (0.3 + 0.7*uHover);
-  // RGB split peaks mid-reveal, settles clean at both ends
-  float tr2 = uHover * (1.0 - uHover) * 4.0;
-  float ang = uSeed*6.2831;
-  vec2 off = vec2(cos(ang), sin(ang)) * (0.0018 + 0.010*tr2);
-  vec3 col;
-  col.r = texture2D(uTex, uv + off).r;
-  col.g = texture2D(uTex, uv).g;
-  col.b = texture2D(uTex, uv - off).b;
-  // at rest: a deep duotone plate — highlights crushed so the art (and
-  // its own typeset title) sinks to texture and the rained-in canvas
-  // title carries the name; hover clears the plate to the original art
-  float luma = dot(col, vec3(0.299,0.587,0.114));
-  float shaped = smoothstep(0.04, 1.55, luma);
-  vec3 duo = mix(vec3(0.05,0.045,0.04), uAccent*0.85, shaped);
-  float g = (0.78 + 0.08*fract(uSeed*5.7)) * (1.0 - 0.97*uHover);
-  col = mix(col, duo, g);
-  col *= 0.72 + 0.28*uHover;
-  float grain = (hash(vUv*uRes + fract(uTime)*7.0) - 0.5) * (0.05*(1.0-0.6*uHover) + 0.04*fract(uSeed*3.3));
-  col += grain;
-  col *= smoothstep(1.5, 0.42, length(vUv-0.5));
-  float a = uMirror > 0.5 ? pow(clamp(vUv.y, 0.0, 1.0), 1.5) * 0.30 : 1.0;
-  gl_FragColor = vec4(col * a, a);
-}`;
-
 let gl = null, canvas = null, W = 0, H = 0, DPR = 1;
 const progs = {};
 const effects = [];
+const layers = [];              // whole-scene passes other modules add (the orb)
+let quad = null;                // the one full-rectangle buffer every pass draws
+let stillQueued = false;
 let scrollS = 0, lastY = 0, burstV = 0;
 let nextGlitch = 4;
 let staticMode = false;
@@ -174,14 +144,13 @@ export function init({ statics = false } = {}) {
   try {
     progs.field = compile(FIELD_FRAG);
     progs.erode = compile(ERODE_FRAG);
-    progs.cover = compile(COVER_FRAG);
   } catch (e) {
     console.warn('shader compile failed', e);
     canvas.remove(); document.documentElement.classList.add('no-webgl'); gl = null; return false;
   }
 
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  quad = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quad);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
 
   canvas.addEventListener('webglcontextlost', ev => {
@@ -190,11 +159,18 @@ export function init({ statics = false } = {}) {
 
   resize();
   addEventListener('resize', () => { resize(); queueReraster(); }, { passive: true });
-  addEventListener('scroll', () => {}, { passive: true });
 
   if (staticMode) {
-    // designed stillness: one composed frame, no loop
-    requestAnimationFrame(() => renderFrame(11.7, 0));
+    // designed stillness: one composed frame, no loop — redrawn only when
+    // the page moves, so a title never stays behind on the fixed canvas
+    let queued = false;
+    const still = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; renderFrame(11.7, 0); });
+    };
+    still();
+    addEventListener('scroll', still, { passive: true });
     document.fonts?.ready.then(() => { rerasterAll(); });
   } else {
     removeLoop = sched.add((t, dt) => renderFrame(t, dt));
@@ -208,7 +184,8 @@ export function init({ statics = false } = {}) {
 function teardown() {
   removeLoop && removeLoop();
   document.querySelectorAll('.fx-ghost').forEach(el => el.classList.remove('fx-ghost'));
-  document.querySelectorAll('.fx-cover-live').forEach(el => el.classList.remove('fx-cover-live'));
+  document.documentElement.classList.remove('orb-live');
+  layers.length = 0;
   canvas && canvas.remove();
   document.documentElement.classList.add('no-webgl');
   gl = null;
@@ -248,6 +225,17 @@ function renderFrame(t, dt) {
   gl.uniform3f(f.u.uAccent, acc[0], acc[1], acc[2]);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
+  // 1b — scene layers (the orb): each draws into its own rectangle
+  if (layers.length) {
+    const ctx = { gl, t, dt, W, H, DPR, stress, staticMode, quality: sched.getQuality(), bindQuad, quad };
+    for (const l of layers) {
+      try { l.draw(ctx); } catch (err) { console.warn('layer disabled:', err); layers.splice(layers.indexOf(l), 1); break; }
+    }
+    gl.viewport(0, 0, W, H);
+    gl.disable(gl.SCISSOR_TEST);
+    gl.enable(gl.BLEND);
+  }
+
   // proximity typography on erosion titles: ease the warp amplitude and
   // re-raster while it changes (one title warps at a time — cheap)
   for (const e of effects) {
@@ -260,21 +248,19 @@ function renderFrame(t, dt) {
     }
   }
 
-  // 2+3 — element-scoped effects
+  // 2 — element-scoped effects (erosion titles)
   gl.enable(gl.SCISSOR_TEST);
   for (const e of effects) {
-    if (!(e.src ? e.src.ready : e.ready)) continue;
-    if (e.released && !e.src) continue;      // handed back to the DOM <img>
+    if (!e.ready) continue;
     const r = e.el.getBoundingClientRect();
     if (r.bottom < -60 || r.top > innerHeight + 60 || r.width === 0) continue;
-    const pad = e.type === 'erode' ? e.pad : 0;
+    const pad = e.pad;
     const x = (r.left - pad) * DPR, w = (r.width + pad * 2) * DPR;
     const yTop = (r.top - pad) * DPR, h = (r.height + pad * 2) * DPR;
     const yGl = H - yTop - h;
     gl.viewport(x, yGl, w, h);
     gl.scissor(Math.max(0, x), Math.max(0, yGl), w, h);
-    if (e.type === 'erode') drawErode(e, t, stress, glitch, w, h);
-    else drawCover(e, t, dt, w, h);
+    drawErode(e, t, stress, glitch, w, h);
     if (!e.ghosted) { e.ghosted = true; e.ghost(); }
   }
 }
@@ -305,39 +291,6 @@ function drawErode(e, t, stress, glitch, w, h) {
   gl.uniform3f(pr.u.uColor, e.color[0], e.color[1], e.color[2]);
   gl.uniform3f(pr.u.uAccent, e.accent[0], e.accent[1], e.accent[2]);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-}
-
-function drawCover(e, t, dt, w, h) {
-  const pr = progs.cover;
-  const S = e.src || e;
-  if (!e.src) S.hoverS += ((S.hover ? 1 : 0) - S.hoverS) * Math.min(1, (dt || 0.06) * (S.rate || 7));
-  let mk = 0;
-  if (e.src) {
-    const mr = e.el.getBoundingClientRect(), sr = S.el.getBoundingClientRect();
-    mk = sr.height ? mr.height / sr.height : 0.3;
-  }
-  gl.useProgram(pr.p); bindQuad(pr.p);
-  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-  gl.activeTexture(gl.TEXTURE0);
-  gl.bindTexture(gl.TEXTURE_2D, S.tex);
-  gl.uniform1i(pr.u.uTex, 0);
-  gl.uniform1f(pr.u.uTime, staticMode ? 3.3 : t);
-  // designed stillness shows the true art — a plate nobody can lift is a wall
-  gl.uniform1f(pr.u.uHover, staticMode ? 1 : S.hoverS);
-  gl.uniform1f(pr.u.uSeed, S.seed);
-  gl.uniform1f(pr.u.uMirror, e.src ? 1 : 0);
-  gl.uniform1f(pr.u.uMirrorK, mk);
-  gl.uniform2f(pr.u.uRes, w, h);
-  gl.uniform2f(pr.u.uFit, S.fit[0], S.fit[1]);
-  gl.uniform2f(pr.u.uMouse, S.mouse[0], S.mouse[1]);
-  gl.uniform3f(pr.u.uAccent, S.accent[0], S.accent[1], S.accent[2]);
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-  // once a pinned reveal has fully cleared, hand the box back to the real
-  // <img> (identical pixels) so CSS can tilt it in 3D — and stop drawing
-  if (!e.src && S.pinned && !S.released && S.hoverS > 0.985) {
-    S.released = true;
-    S.el.classList.remove('fx-cover-live');
-  }
 }
 
 /* ---- erosion titles ---- */
@@ -389,7 +342,7 @@ function rasterizeText(e) {
   let line = '';
   for (const wd of words) {
     const test = line ? line + ' ' + wd : wd;
-    if (line && x.measureText(test).width > maxW) { lines.push(line); line = wd; }
+    if (line && x.measureText(test).width > maxW * 1.03 + 2) { lines.push(line); line = wd; }
     else line = test;
   }
   if (line) lines.push(line);
@@ -433,71 +386,6 @@ function rerasterAll() {
   if (staticMode) requestAnimationFrame(() => renderFrame(11.7, 0));
 }
 
-/* ---- per-book cover treatment ---- */
-export function registerCover(box, accentHex, seedStr) {
-  if (!gl) return;
-  const img = box.querySelector('img');
-  if (!img) return;
-  const e = {
-    type: 'cover', el: box, seed: seedOf(seedStr || box.dataset.book || 'x'),
-    accent: hex(accentHex), tex: gl.createTexture(),
-    ready: false, ghosted: false, hover: false, hoverS: 0,
-    rate: 7, pinned: false,
-    mouse: [0, 0], fit: [1, 1],
-    ghost: () => box.classList.add('fx-cover-live'),
-  };
-  setupTex(e.tex);
-  const upload = () => {
-    if (!img.naturalWidth) return;
-    gl.bindTexture(gl.TEXTURE_2D, e.tex);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-    const br = box.getBoundingClientRect();
-    const ia = img.naturalWidth / img.naturalHeight, ba = br.width / Math.max(1, br.height);
-    e.fit = ia > ba ? [ba / ia, 1] : [1, ia / ba]; // object-fit: cover
-    e.ready = true;
-  };
-  if (img.complete && img.naturalWidth) upload();
-  else img.addEventListener('load', upload, { once: true });
-  if (!staticMode) {
-    // interim plates (data-plate) hold their veil — hover never lifts it
-    if (box.dataset.plate !== '1') {
-      box.addEventListener('pointerenter', () => { e.hover = true; });
-    }
-    box.addEventListener('pointerleave', () => {
-      if (!e.pinned) e.hover = false;        // a pinned reveal never re-veils
-      e.mouse = [0, 0];
-    });
-    box.addEventListener('pointermove', ev => {
-      const r = box.getBoundingClientRect();
-      e.mouse = [(ev.clientX - r.left) / r.width - 0.5, (ev.clientY - r.top) / r.height - 0.5];
-    }, { passive: true });
-  }
-  effects.push(e);
-}
-
-/** external reveal control for a registered cover — covertitle.js drives
-    the permanent reveal: opts.pin makes it one-way, opts.rate sets how
-    fast the veil clears (slow scroll-reveal vs quick hover) */
-export function setCoverHover(box, on, opts) {
-  if (!gl) return;
-  const e = effects.find(x => x.el === box && x.type === 'cover' && !x.src);
-  if (!e) return;
-  e.hover = !!on;
-  if (opts && opts.rate) e.rate = opts.rate;
-  if (opts && opts.pin) e.pinned = true;
-}
-
-/** reflection strip below a registered cover: same texture, mirrored,
-    fading out — shares the source's hover state */
-export function registerMirror(el, forBox) {
-  if (!gl) return;
-  const src = effects.find(x => x.el === forBox && x.type === 'cover' && !x.src);
-  if (!src) return;
-  effects.push({ type: 'cover', el, src, ghosted: true, ghost: () => {} });
-}
-
 function setupTex(tex) {
   gl.bindTexture(gl.TEXTURE_2D, tex);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -512,6 +400,28 @@ function seedOf(s) {
   for (let i = 0; i < (s || '').length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
   return ((h >>> 0) % 1000) / 1000;
 }
+
+/** Add a scene layer: `make({gl, compile})` returns `{draw(ctx)}`. Returns
+    the layer, or null when there is no context or its shader will not build. */
+export function addLayer(make) {
+  if (!gl) return null;
+  try {
+    const layer = make({ gl, compile });
+    layers.push(layer);
+    return layer;
+  } catch (err) {
+    console.warn('layer failed to build:', err);
+    return null;
+  }
+}
+/** In designed-stillness mode there is no loop: ask for one more frame
+    (a texture arrived, the layout moved). Harmless when the loop runs. */
+export function requestStill() {
+  if (!gl || !staticMode || stillQueued) return;
+  stillQueued = true;
+  requestAnimationFrame(() => { stillQueued = false; renderFrame(11.7, 0); });
+}
+export function isStatic() { return staticMode; }
 
 /** transition hook: spike temporal stress (dissolve), decays on its own */
 export function burst() { burstV = 1; }

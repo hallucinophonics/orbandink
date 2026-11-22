@@ -1,11 +1,9 @@
-<article class="card" style="--accent-book:{{C_ACCENT}}" data-series="{{C_SERIES}}" data-themes="{{C_THEMES}}" data-reveal>
-  <a href="{{REL}}{{LANG}}/books/{{C_SLUG}}/">
-    <div class="card-top mono-meta"><span class="idx">{{C_IDX}}</span><span>{{C_YEAR}} · {{C_META_RIGHT}}</span></div>
-    <div class="cover-box" data-fx data-book="{{C_ID}}" data-accent="{{C_ACCENT}}"{{C_PLATE}}>
-      <img src="{{REL}}{{C_COVER}}"{{C_SRCSET}} alt="{{C_ALT}}" width="800" height="1200" loading="lazy">
-      <span class="tick tk-a" aria-hidden="true"></span><span class="tick tk-b" aria-hidden="true"></span>
-    </div>
-    <h3 data-decode-hover>{{C_TITLE}}</h3>
+<article class="card" style="--accent-book:{{C_ACCENT}}" data-series="{{C_SERIES}}" data-themes="{{C_THEMES}}" data-ways="{{C_WAYS}}" data-byline="{{C_BYLINE_KEY}}" data-status="{{C_STATUS}}" data-search="{{C_SEARCH}}" data-reveal>
+  <a class="card-link" href="{{REL}}{{LANG}}/books/{{C_SLUG}}/">
+    {{C_BOOK3D}}
+    <div class="card-top mono-meta"><span class="idx">{{C_META_LEFT}}</span>{{C_PILL}}</div>
+    <h3>{{C_TITLE}}</h3>
     <p class="tagline">{{C_TAGLINE}}</p>
+    <div class="card-foot mono-meta"><span>{{C_BYLINE}}</span><span class="ways">{{C_WAYS_ICONS}}</span></div>
   </a>
 </article>

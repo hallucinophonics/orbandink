@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-tenant="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>No tenancy at this address · The Night Tenant</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="No tenancy is registered at this address. Search of the register returned nothing, day side or night side.">
+<meta name="author" content="Alec Blanc">
+<meta name="theme-color" content="#1B1007">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Reenie+Beanie&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+<script>/* which tenant holds the site, decided before first paint */(function(d){var h=d.documentElement,t=null;h.className+=' js';try{t=localStorage.getItem('nt.tenant')}catch(e){}if(location.hash==='#night-side')t='night';if(location.hash==='#day-side')t='day';var n=null;try{n=localStorage.getItem('nt.turned')}catch(e){}if(t!=='night'&&n!=='1')h.setAttribute('data-armed','');if(t==='night'){h.setAttribute('data-tenant','night');var m=d.querySelector('meta[name="theme-color"]');if(m)m.content='#14161A'}})(document)</script>
+<style>
+/* ---- base: one flat, two tenants, one seam (identical on every page) ----
+   The page is the flat on the covers: amber where the day side holds, blue where the night side holds,
+   divided by one hard vertical seam down the middle of every screen. "" blocks are expanded by
+   design/stamp_pages.py into the two ways the night side is reached: the engine (html[data-tenant="night"])
+   and, with JS off, a real link (#night-side:target). */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0A0806;scroll-padding-top:3.5rem}
+body{margin:0}
+img,svg,canvas{display:block}
+img{max-width:100%;height:auto}
+h1,h2,h3,p,ol,ul,dl,dt,dd,figure,table,blockquote{margin:0;padding:0}
+ol,ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+.tgt{position:fixed;top:0;left:0;width:0;height:0;overflow:hidden}
+.site [hidden]{display:none !important}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+.site{
+  /* what is written on the amber wall, and what is written on the blue one: the covers' own two inks */
+  --d-ink:#1A1108;--d-soft:#1E1306;--d-display:#0D3A57;--d-rule:rgba(26,17,8,.36);
+  --n-ink:#EDE5D3;--n-soft:#B9BBB8;--n-display:#F5B04A;--n-rule:rgba(237,229,211,.3);
+  --bone:#EDE5D3;--amber:#F5B04A;--navy:#0D3A57;--red:#B8402F;
+  --ground-l:#1B1007;--ground-r:#060B12;
+  /* left and right of the seam. By day the day side keeps the left half of every picture. */
+  --ink-l:var(--d-ink);--soft-l:var(--d-soft);--display-l:var(--d-display);--rule-l:var(--d-rule);
+  --ink-r:var(--n-ink);--soft-r:var(--n-soft);--display-r:var(--n-display);--rule-r:var(--n-rule);
+  --btn-l:#0D3A57;--on-btn-l:#F8F0DE;--btn-l-hi:#15507A;
+  --btn-r:#F5B04A;--on-btn-r:#17100A;--btn-r-hi:#FFC871;
+  --paper-l:#F1E2BF;--paper-r:#6F92B2;--paper-ink:#1A1108;
+  /* the day side's hand: Source Serif 4 and IBM Plex Sans. Civic, filed. */
+  --serif:"Source Serif 4","Source Serif Pro",Georgia,"Times New Roman",serif;
+  --label:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --display-w:600;--display-st:normal;--display-ls:-.024em;--display-k:1;
+  --tag-st:italic;--tag-w:400;
+  --lab-fs:.6875rem;--lab-ls:.16em;--lab-tt:uppercase;--lab-w:500;
+  --clock-w:600;--clock-ls:-.04em;--clock-k:1;
+  --fs:1.0625rem;--lh:1.55;
+  --seam:50%;--gut:1.25rem;
+  --hh:239deg;--mh:348deg;
+}
+html[data-tenant="night"] .site,html:not(.js) #night-side:target ~ .site{--ink-l:var(--n-ink);--soft-l:var(--n-soft);--display-l:var(--n-display);--rule-l:var(--n-rule);
+    --btn-l:var(--btn-r);--on-btn-l:var(--on-btn-r);--btn-l-hi:var(--btn-r-hi);
+    --ground-l:var(--ground-r);--paper-l:var(--paper-r);
+    /* the night side's hand: Newsreader and IBM Plex Mono. Later, tireder. */
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --label:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    --display-w:300;--display-st:italic;--display-ls:-.016em;--display-k:1.05;
+    --tag-st:normal;--tag-w:300;
+    --lab-fs:.75rem;--lab-ls:.01em;--lab-tt:lowercase;--lab-w:400;
+    --clock-w:300;--clock-ls:-.07em;--clock-k:.9;
+    --fs:1.125rem;
+    --hh:240deg;--mh:0deg;}
+
+/* Two occupants, never both at once. A .by-* element is a bare wrapper: layout goes on what is inside it. */
+.site .by-night{display:none}
+html[data-tenant="night"] .site .by-day,html:not(.js) #night-side:target ~ .site .by-day{display:none}
+html[data-tenant="night"] .site .by-night,html:not(.js) #night-side:target ~ .site .by-night{display:revert}
+html[data-tenant="night"] .site .annot.by-night,html:not(.js) #night-side:target ~ .site .annot.by-night{display:block}
+html[data-tenant="night"] .site .q.by-night,html:not(.js) #night-side:target ~ .site .q.by-night{display:block}
+
+
+.site{position:relative;min-height:100vh;overflow-x:hidden;overflow-x:clip;isolation:isolate;
+  background:linear-gradient(90deg,var(--ground-l) var(--seam),var(--ground-r) var(--seam));
+  color:var(--bone);font-family:var(--serif);font-size:var(--fs);line-height:var(--lh);font-weight:400;font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+.site ::selection{background:var(--amber);color:#17100A;-webkit-text-fill-color:#17100A}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+:focus-visible{outline:2px solid var(--bone);outline-offset:3px;box-shadow:0 0 0 6px rgba(10,8,6,.55)}
+.skip{position:absolute;left:-999rem;top:0;z-index:99;padding:.6rem 1rem;background:var(--bone);color:#17100A;font-family:var(--label);font-size:.8125rem}
+.skip:focus{left:.5rem;top:.5rem}
+
+/* Where a thing stands decides its ink. .on-l: wholly left of the seam. .on-r: wholly right of it.
+   .on-dark: on floor, wood or ground, which is dark under both tenants. */
+.on-l{--ink:var(--ink-l);--soft:var(--soft-l);--display:var(--display-l);--rule:var(--rule-l);--btn:var(--btn-l);--on-btn:var(--on-btn-l);--btn-hi:var(--btn-l-hi);color:var(--ink)}
+.on-r{--ink:var(--ink-r);--soft:var(--soft-r);--display:var(--display-r);--rule:var(--rule-r);--btn:var(--btn-r);--on-btn:var(--on-btn-r);--btn-hi:var(--btn-r-hi);color:var(--ink)}
+.on-dark{--ink:var(--n-ink);--soft:var(--n-soft);--display:var(--n-display);--rule:var(--n-rule);--btn:var(--btn-r);--on-btn:var(--on-btn-r);--btn-hi:var(--btn-r-hi);color:var(--ink)}
+/* .split: type that stands across the seam takes both inks, as the lettering on the covers does.
+   The element must be centred on the seam (a full-width block, or centred with equal margins). */
+.split{--sl:var(--ink-l);--sr:var(--ink-r);color:var(--sl)}
+.split.is-display{--sl:var(--display-l);--sr:var(--display-r)}
+.split.is-soft{--sl:var(--soft-l);--sr:var(--soft-r)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .split{background-image:linear-gradient(90deg,var(--sl) 50%,var(--sr) 50%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+
+h1,h2,h3,.display{font-family:var(--serif);font-weight:var(--display-w);font-style:var(--display-st);letter-spacing:var(--display-ls);line-height:1;text-wrap:balance}
+.on-l :is(h1,h2,h3),.on-r :is(h1,h2,h3),.on-dark :is(h1,h2,h3){color:var(--display)}
+.lab{font-family:var(--label);font-size:var(--lab-fs);font-weight:var(--lab-w);font-style:normal;letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);line-height:1.3}
+.rn{text-transform:uppercase}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+
+/* The two hands. Cedarville: the day side, schooled and careful. Reenie Beanie: the night side, fast. */
+.hand-d,.hand-n{font-style:normal;font-weight:400;letter-spacing:0;text-transform:none}
+.hand-d{font-family:"Cedarville Cursive","Snell Roundhand","Segoe Script",cursive;font-size:1.125rem;line-height:1.5}
+.hand-n{font-family:"Reenie Beanie","Bradley Hand","Segoe Print",cursive;font-size:1.625rem;line-height:1.02}
+/* what the night side writes over a page the day side has already read */
+.annot{display:block;font-family:"Reenie Beanie","Bradley Hand","Segoe Print",cursive;font-size:clamp(1.625rem,2.3vw,2.125rem);font-style:normal;font-weight:400;letter-spacing:0;line-height:1;text-transform:none;color:var(--amber);-webkit-text-fill-color:var(--amber);transform:rotate(-2.5deg);transform-origin:0 50%;text-shadow:0 1px 10px rgba(4,8,14,.7)}
+/* ---- shared: what every page is built from ---- */
+
+/* the bar: smoked glass over the rooms. The mark, public time on the seam, the way to the books, the Latch. */
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;font-family:var(--label);color:var(--bone);
+  background:linear-gradient(90deg,rgba(24,14,6,.66) var(--seam),rgba(5,10,17,.66) var(--seam));
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid rgba(237,229,211,.13);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+html[data-tenant="night"] .site .bar,html:not(.js) #night-side:target ~ .site .bar{background:rgba(5,10,17,.7)}
+
+.bar-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:3.25rem;padding:0 var(--gut)}
+.bar a{text-decoration:none}
+.brand{justify-self:start;display:inline-flex;align-items:center;gap:.625rem;min-height:2.75rem;color:var(--bone)}
+.brand-mark{flex:none;width:1.125rem;height:1.125rem;border-radius:50%;background:linear-gradient(90deg,#F5B04A 50%,#2C6C96 50%);box-shadow:0 0 0 1.5px rgba(237,229,211,.85)}
+.brand-name{display:none;font-size:.75rem;font-weight:600;letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);white-space:nowrap}
+.bar-clock{justify-self:center;font-size:.9375rem;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.04em;line-height:1;color:var(--bone);white-space:nowrap}
+.bar-clock i{font-style:normal;color:var(--amber)}
+.bar-end{justify-self:end;display:flex;align-items:center;gap:1.125rem}
+.bar-books{display:none;position:relative;padding:.35rem 0;font-size:var(--lab-fs);font-weight:var(--lab-w);letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);color:var(--bone);white-space:nowrap}
+.bar-books::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--amber);transform-origin:0 50%;transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+.bar-books:hover::after{transform:scaleX(.4)}
+.bar-books::before,.latch::before{content:"";position:absolute;left:-.4rem;right:-.4rem;top:-.7rem;bottom:-.7rem}
+/* the Latch: the control that hands the site over, in the property's own words */
+.latch{position:relative;display:inline-flex;align-items:center;gap:.55rem;height:2.125rem;padding:0 .8rem;border:1px solid rgba(237,229,211,.6);border-radius:2px;color:var(--bone);font-family:var(--label);font-size:var(--lab-fs);font-weight:var(--lab-w);letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);line-height:1;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background-color .18s,color .18s,border-color .18s,transform .18s}
+.latch:hover{background:var(--bone);border-color:var(--bone);color:#17100A}
+.latch:active{transform:translateY(1px)}
+.latch-ic{position:relative;flex:none;width:1.5rem;height:.6875rem;border:1.5px solid currentColor;border-radius:1px}
+.latch-ic::after{content:"";position:absolute;top:1px;bottom:1px;left:1px;width:calc(50% - 1px);background:var(--amber);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+html[data-tenant="night"] .site .latch-ic::after,html:not(.js) #night-side:target ~ .site .latch-ic::after{transform:translateX(calc(100% + 0px));background:#5FA3D6}
+
+
+/* a room: one full-bleed picture of the flat, amber left of the seam, blue right of it.
+   The <img> is the day; a second copy, regraded by the #nt-night filter and clipped at the seam, is the night.
+   light.js lays a canvas over both once it has a frame, and without it these two stand. */
+.sec{position:relative;isolation:isolate;--ar:var(--ar-d,1.7768);--pxf:var(--pxf-d,.5);--pyf:var(--pyf-d,.5)}
+.pic{position:absolute;inset:0;z-index:-1;overflow:hidden;background:#0A0806}
+.pic img,.pic canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:calc(var(--pxf) * 100%) calc(var(--pyf) * 100%)}
+.pic .pic-night{filter:url(#nt-night);-webkit-clip-path:inset(0 0 0 var(--seam));clip-path:inset(0 0 0 var(--seam))}
+html[data-tenant="night"] .site .pic .pic-night,html:not(.js) #night-side:target ~ .site .pic .pic-night{-webkit-clip-path:none;clip-path:none}
+
+.pic canvas{opacity:0;transition:opacity .7s linear}
+.pic.is-lit canvas{opacity:1}
+.pic.is-lit .pic-night{visibility:hidden;transition:visibility 0s linear .75s}
+/* the room's own shade: under the lintel at the top, into the floor at the bottom */
+.pic::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,5,2,.26),rgba(8,5,2,0) 9%,rgba(8,5,2,0) 78%,rgba(8,5,2,.42))}
+.sec + .sec > .pic{box-shadow:inset 0 1px 0 rgba(255,225,170,.16)}
+/* things pinned to a place in the picture, wherever the crop puts it (cover-fit, worked out in container units) */
+.over{position:absolute;inset:0;z-index:0;container-type:size;pointer-events:none}
+.pin{position:absolute;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);pointer-events:auto}
+@supports (width:1cqw){
+  .pin{--rw:max(100cqw,calc(100cqh * var(--ar)));--rh:max(100cqh,calc(100cqw / var(--ar)));
+    left:calc((100cqw - var(--rw)) * var(--pxf) + var(--x) * var(--rw));top:calc((100cqh - var(--rh)) * var(--pyf) + var(--y) * var(--rh))}
+}
+
+/* public time: the covers' lettering, alive. It stands across the seam and takes both inks. */
+.clock{font-family:var(--label);font-weight:var(--clock-w);font-variant-numeric:tabular-nums lining-nums;letter-spacing:var(--clock-ls);line-height:.82;white-space:nowrap;text-align:center}
+.axis{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:1.5rem;align-items:baseline}
+.axis > :first-child{justify-self:end;text-align:right;color:var(--soft-l)}
+.axis > :last-child{justify-self:start;text-align:left;color:var(--soft-r)}
+.axis b{font-weight:inherit;font-variant-numeric:tabular-nums}
+html:not([data-armed]) .u-armed,html[data-armed] .u-idle{display:none !important}
+
+/* covers: the real books, whole, standing in the room on the seam. Each cover is itself split amber and blue
+   down its middle, so its own seam continues the room's. */
+.book{position:relative;display:block;width:var(--bw,15rem);max-width:100%;aspect-ratio:491 / 760;text-decoration:none;transform-origin:50% 100%;transform:perspective(70rem) translateY(var(--lift,0)) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .45s cubic-bezier(.2,.75,.2,1)}
+.book::before{content:"";position:absolute;left:-12%;right:-12%;bottom:-3.4%;height:8%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.8),rgba(0,0,0,.4) 55%,transparent);filter:blur(6px);transition:transform .45s cubic-bezier(.2,.75,.2,1),opacity .45s}
+.book img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:1px 3px 3px 1px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.4),2px 1px 0 0 #D9C9A2,3px 2px 0 0 #8A7754,5px 3px 0 0 #D2C19A,6px 4px 0 0 #5E5038,
+    0 1.4em 1.7em -.7em rgba(0,0,0,.8),0 3.4em 4.4em -1.8em rgba(0,0,0,.75);
+  -webkit-box-reflect:below 5px linear-gradient(transparent 80%,rgba(0,0,0,.2))}
+.book::after{content:"";position:absolute;inset:0;border-radius:1px 3px 3px 1px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.42),rgba(255,255,255,.22) 1.3%,rgba(0,0,0,.14) 2.8%,rgba(0,0,0,0) 6.5%),
+    linear-gradient(98deg,rgba(255,220,160,.2),rgba(255,220,160,0) 30%),linear-gradient(262deg,rgba(130,180,235,.16),rgba(130,180,235,0) 26%)}
+a.book:hover{--lift:-.5rem}
+a.book:hover::before{transform:scale(.9);opacity:.75}
+a.book:active{--lift:-.125rem}
+a.book:focus-visible{outline-offset:8px}
+
+/* buying. The plain words first; the tenancy's own words, if any, on the second line. Solid, lit from above. */
+.buy{position:relative;display:inline-flex;max-width:100%;min-height:3.5rem;border-radius:2px;background:var(--btn);color:var(--on-btn);font-family:var(--label);text-align:left;text-decoration:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.26),inset 0 -2px 0 rgba(0,0,0,.2),0 1px 1px rgba(0,0,0,.45),0 16px 28px -14px rgba(0,0,0,.75);
+  transition:transform .2s cubic-bezier(.2,.75,.2,1),background-color .2s,box-shadow .2s,filter .2s}
+.buy-t{display:flex;flex-direction:column;justify-content:center;gap:.2rem;width:100%;padding:.75rem 3.5rem .75rem 1.375rem}
+.buy-verb{font-size:1.0625rem;font-weight:600;letter-spacing:.005em;line-height:1.2;text-transform:none}
+.buy-sub{font-size:var(--lab-fs);font-weight:var(--lab-w);letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);line-height:1.25;opacity:.84}
+.buy::after{content:"";position:absolute;right:1.375rem;top:50%;width:1.0625rem;height:.6875rem;margin-top:-.34375rem;background:currentColor;transition:transform .25s cubic-bezier(.2,.75,.2,1);
+  -webkit-mask:var(--arrow) center / contain no-repeat;mask:var(--arrow) center / contain no-repeat;
+  --arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 11' fill='none' stroke='%23000' stroke-width='1.7'%3E%3Cpath d='M0 5.5h15M10.5 1 15 5.5 10.5 10'/%3E%3C/svg%3E")}
+.buy:hover{background:var(--btn-hi);transform:translateY(-2px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),inset 0 1px 0 rgba(255,255,255,.32),inset 0 -2px 0 rgba(0,0,0,.2),0 2px 2px rgba(0,0,0,.4),0 24px 34px -14px rgba(0,0,0,.8)}
+.buy:hover::after{transform:translateX(5px)}
+.buy:active{transform:translateY(1px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 2px 3px rgba(0,0,0,.35),0 1px 1px rgba(0,0,0,.5);transition-duration:.06s}
+.buy:focus-visible{outline:2px solid var(--bone);outline-offset:4px;box-shadow:0 0 0 7px rgba(10,8,6,.6)}
+/* a button that stands across the seam is split like everything else that does */
+.buy--split{background:linear-gradient(90deg,var(--btn-l) 50%,var(--btn-r) 50%);color:var(--on-btn-r)}
+.buy--split:hover{background:linear-gradient(90deg,var(--btn-l-hi) 50%,var(--btn-r-hi) 50%)}
+.buy--split .buy-t{color:var(--on-btn-l)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .buy--split .buy-t{background-image:linear-gradient(90deg,var(--on-btn-l) 50%,var(--on-btn-r) 50%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .buy--split .buy-sub{opacity:1}
+}
+.buy.is-live{outline:1.5px solid var(--btn);outline-offset:3px}
+.chip{display:inline-block;padding:.25rem .7rem;border:1px dashed rgba(237,229,211,.42);border-radius:999px;font-family:var(--label);font-size:var(--lab-fs);font-weight:var(--lab-w);letter-spacing:var(--lab-ls);text-transform:var(--lab-tt);line-height:1.125rem;color:var(--n-soft);white-space:nowrap}
+
+/* the persistent buy control: one quiet button at the foot of the window, only while no main button is in sight */
+.dock{position:fixed;right:0;bottom:0;left:0;z-index:45;display:flex;justify-content:center;padding:.625rem var(--gut) calc(.625rem + env(safe-area-inset-bottom));pointer-events:none;opacity:0;visibility:hidden;transform:translateY(.75rem);transition:opacity .25s linear,transform .35s cubic-bezier(.2,.75,.2,1),visibility 0s linear .35s;
+  background:linear-gradient(180deg,rgba(6,8,10,0),rgba(6,8,10,.72) 62%)}
+html[data-dock] .dock{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+html:not(.js) .dock{display:none}
+.dock .buy{pointer-events:auto;min-height:3rem;width:100%;max-width:23rem}
+.dock .buy-t{flex-direction:row;align-items:center;gap:.75rem;padding:.4375rem 3.25rem .4375rem .4375rem}
+.dock-cover{flex:none;width:1.5rem;height:auto;border-radius:1px;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.dock .buy-verb{font-size:1rem}
+
+/* editions: one tile per edition, each shown as the object itself. A quiet chip while coming; a solid button once on sale. */
+.eds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2rem .875rem;align-items:end}
+.ed{grid-column:span 2;display:flex;flex-direction:column;min-width:0}
+.ed--audiobook,.ed--drama{grid-column:span 3}
+.ed-obj{position:relative;display:block;margin-bottom:.875rem}
+.ed-obj img{width:100%;height:auto}
+.ed--ebook .ed-obj{padding:8% 7% 14%;border-radius:.625rem;background:linear-gradient(160deg,#3a3936,#1b1a19 55%,#0c0c0d);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 1px 1px rgba(0,0,0,.4),0 18px 26px -12px rgba(0,0,0,.8)}
+.ed--ebook .ed-obj::after{content:"";position:absolute;left:7%;right:7%;top:8%;bottom:14%;background:linear-gradient(125deg,rgba(255,255,255,.18),transparent 38%);pointer-events:none}
+.ed--paperback .ed-obj{box-shadow:2px 0 0 -1px rgba(222,214,196,.9),3px 1px 0 -1px rgba(0,0,0,.4),0 16px 22px -10px rgba(0,0,0,.8)}
+.ed--paperback .ed-obj::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.34),rgba(255,255,255,.14) 2%,rgba(0,0,0,.1) 4%,transparent 8%);pointer-events:none}
+.ed--hardcover .ed-obj{padding:3% 4% 3% 5%;border-radius:2px 4px 4px 2px;background:#1B2B3A linear-gradient(90deg,rgba(0,0,0,.5),rgba(255,255,255,.12) 3%,transparent 7%);box-shadow:4px 1px 0 -2px #E6DED0,5px 2px 0 -2px rgba(0,0,0,.45),0 20px 28px -12px rgba(0,0,0,.85)}
+.ed--audiobook .ed-obj,.ed--drama .ed-obj{box-shadow:0 0 0 1px rgba(0,0,0,.4),0 18px 26px -12px rgba(0,0,0,.85)}
+.ed--audiobook .ed-obj::after,.ed--drama .ed-obj::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.14),transparent 34%);pointer-events:none}
+.ed-name{display:block;font-family:var(--serif);font-size:1.125rem;font-weight:var(--display-w);font-style:var(--display-st);letter-spacing:var(--display-ls);line-height:1.15;color:var(--bone)}
+.ed-what{display:block;margin-top:.1875rem;font-size:.875rem;line-height:1.3;color:var(--n-soft)}
+.ed-state{display:block;margin-top:.625rem}
+.ed .buy{display:flex;min-height:2.75rem}
+.ed .buy-t{padding:.5rem .75rem}
+.ed .buy::after{display:none}
+.ed .buy-verb{font-size:.875rem}
+.ed.is-live .ed-obj{outline:2px solid var(--amber);outline-offset:5px}
+
+/* paper lying in the room: lit amber left of the seam and blue right of it, like everything else. Its ink stays ink. */
+.paper{position:relative;color:var(--paper-ink);background-color:var(--paper-l);background-image:var(--paper-grain);
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 1px 2px rgba(0,0,0,.5),0 18px 30px -14px rgba(0,0,0,.8);
+  --paper-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .14 0 0 0 0 .06 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.paper--seam{background-image:var(--paper-grain),linear-gradient(90deg,var(--paper-l) 50%,var(--paper-r) 50%)}
+
+/* colophon: the floor by the door */
+.foot{position:relative;padding:clamp(3rem,7vw,5rem) var(--gut) calc(clamp(2.5rem,6vw,4rem) + 4.5rem + env(safe-area-inset-bottom));text-align:center;border-top:1px solid rgba(237,229,211,.1)}
+.foot-title{font-size:clamp(1.75rem,4vw,2.5rem)}
+.foot-by{margin-top:.75rem;font-size:1.0625rem}
+.foot-author{max-width:30rem;margin:1.25rem auto 0;font-size:1.0625rem;line-height:1.5;text-wrap:balance}
+.foot-fine{margin-top:1.75rem}
+.foot-fine + .foot-fine{margin-top:.5rem}
+.foot a{text-decoration-color:rgba(237,229,211,.4)}
+.foot a:hover{text-decoration-color:currentColor}
+
+/* THE HANDOVER. Not a fade: the seam itself crosses the page with one band of light on it. Night arrives from the
+   right and takes the day's half; day comes back from the left. Nothing else on the site moves like this. */
+::view-transition-old(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){mix-blend-mode:normal;animation:1.7s linear both}
+html[data-turning="night"]::view-transition-new(root){animation-name:seam-night}
+html[data-turning="day"]::view-transition-new(root){animation-name:seam-day}
+@keyframes seam-night{0%{clip-path:inset(0 0 0 100%)}20%{clip-path:inset(0 0 0 50%);animation-timing-function:cubic-bezier(.55,0,.2,1)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes seam-day{0%{clip-path:inset(0 100% 0 0);animation-timing-function:cubic-bezier(.55,0,.2,1)}80%{clip-path:inset(0 50% 0 0)}100%{clip-path:inset(0 0 0 0)}}
+.latchlight{position:fixed;inset:0;z-index:95;pointer-events:none;opacity:0;background-repeat:no-repeat;background-size:26vw 100%;background-position:120vw 0}
+html[data-turning] .latchlight{opacity:1;animation:1.7s linear both}
+html[data-turning="night"] .latchlight{animation-name:band-night;background-image:linear-gradient(90deg,rgba(245,176,74,0),rgba(245,176,74,.2) 34%,rgba(255,226,170,.75) 49.2%,#FFF6DF 50%,rgba(255,226,170,.8) 50.7%,rgba(245,176,74,.28) 58%,rgba(245,176,74,0) 72%)}
+html[data-turning="day"] .latchlight{animation-name:band-day;background-image:linear-gradient(90deg,rgba(245,176,74,0) 38%,rgba(255,226,170,.6) 49.2%,#FFF6DF 50%,rgba(255,226,170,.75) 50.8%,rgba(245,176,74,.2) 66%,rgba(245,176,74,0))}
+@keyframes band-night{0%{background-position:87vw 0}20%{background-position:37vw 0;animation-timing-function:cubic-bezier(.55,0,.2,1)}100%{background-position:-13vw 0}}
+@keyframes band-day{0%{background-position:-13vw 0;animation-timing-function:cubic-bezier(.55,0,.2,1)}80%{background-position:37vw 0}100%{background-position:87vw 0}}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none !important}
+  .latchlight,.dock,.pic canvas,.book,.book::before,.buy,.buy::after,.latch,.latch-ic::after{animation:none !important;transition:none !important}
+}
+
+/* the second hand: what the other tenant wrote appears as ink does, left to right */
+@keyframes ink{0%{-webkit-clip-path:inset(-20% 100% -20% 0);clip-path:inset(-20% 100% -20% 0);opacity:.25}100%{-webkit-clip-path:inset(-20% -6% -20% 0);clip-path:inset(-20% -6% -20% 0);opacity:1}}
+html.inks [data-seen-on]:not(.is-seen) .annot,html.inks [data-seen-on]:not(.is-seen) .q{opacity:0}
+html.inks .is-seen .annot,html.inks .is-seen .q{animation:ink 1.5s cubic-bezier(.3,.55,.3,1) calc(var(--i,0) * .32s + .2s) both}
+@media (prefers-reduced-motion:reduce){html.inks .is-seen .annot,html.inks .is-seen .q{animation:none}}
+
+@media (max-width:23.4em){
+  .site{--gut:.875rem}
+  .latch{gap:.4rem;padding:0 .55rem}
+  .latch-ic{width:1.125rem}
+  .bar-clock{font-size:.8125rem}
+}
+@media (min-width:44em){
+  .site{--gut:2rem}
+  .brand-name{display:inline}
+  .bar-books{display:block}
+  .dock{justify-content:flex-end;background:none;padding-bottom:calc(1.25rem + env(safe-area-inset-bottom))}
+  .dock .buy{width:auto}
+  .eds{grid-template-columns:repeat(5,minmax(0,1fr));gap:1.5rem clamp(1rem,2.4vw,2rem)}
+  .ed,.ed--audiobook,.ed--drama{grid-column:auto}
+}
+@media (min-width:62em){
+  .site{--gut:2.75rem;--fs:1.125rem}
+}
+@media (max-width:43.99em){
+  .sec{--ar:var(--ar-m,var(--ar-d,1.7768));--pxf:var(--pxf-m,var(--pxf-d,.5));--pyf:var(--pyf-m,var(--pyf-d,.5))}
+  .ed-what{display:none}
+}
+
+/* the held breath before the Latch: the bar's clock stands out, everything else waits */
+html[data-hush] .clock,html[data-hush] .bar-clock{transition:letter-spacing .5s ease;letter-spacing:.01em}
+@media (prefers-reduced-motion:reduce){html[data-hush] .clock,html[data-hush] .bar-clock{transition:none;letter-spacing:inherit}}
+/* ---- the rooms: landing page sections (the book and 404 pages build on these too) ---- */
+
+/* 1 · 19:58. The kitchen table; the clock, the title and the button stand on the wall, across the seam. */
+.hero{display:flex;flex-direction:column;min-height:100vh;min-height:100svh;padding-top:calc(3.25rem + clamp(.75rem,2.4svh,1.75rem))}
+.hero-in{text-align:center}
+.hero-axis{padding:0 var(--gut)}
+.hero-clock{margin-top:clamp(.5rem,1.4svh,1rem);font-size:calc(min(30vw,24svh) * var(--clock-k))}
+.hero h1{margin-top:clamp(.5rem,1.5svh,1rem);padding:0 var(--gut);font-size:calc(min(11vw,7.4svh) * var(--display-k));line-height:1.04}
+.tagline{margin-top:clamp(.25rem,.9svh,.625rem);padding:0 var(--gut);font-size:min(5vw,3svh);font-style:var(--tag-st);font-weight:var(--tag-w);line-height:1.25}
+.hero-annot{margin:.125rem auto -.25rem;width:max-content;max-width:100%}
+.byline{margin-top:clamp(.375rem,1svh,.75rem);padding:0 var(--gut)}
+.hero-buy{display:flex;justify-content:center;margin-top:clamp(.875rem,2.2svh,1.5rem);padding:0 var(--gut)}
+
+/* 2 · the Act, on the street outside. Each line is broken at the seam: its first half on the day side, its second on the night side. */
+.act{display:flex;flex-direction:column;justify-content:flex-end;min-height:max(35rem,min(100svh,56.25vw))}
+.act-in{position:relative;padding:7rem 0 clamp(2rem,5svh,3.25rem);background:linear-gradient(180deg,rgba(8,5,2,0),rgba(8,5,2,.7) 34%,rgba(8,5,2,.86))}
+html[data-tenant="night"] .site .act-in,html:not(.js) #night-side:target ~ .site .act-in{background:linear-gradient(180deg,rgba(3,7,12,0),rgba(3,7,12,.62) 34%,rgba(3,7,12,.82))}
+
+.act-h{text-align:center;color:var(--amber)}
+.act-lines{display:grid;gap:clamp(.75rem,2svh,1.375rem);margin-top:clamp(.875rem,2svh,1.5rem);padding:0 var(--gut)}
+.act-lines li{column-gap:clamp(1.5rem,4.2vw,4rem);font-family:var(--serif);font-size:clamp(1.0625rem,2.25vw,2.125rem);font-weight:var(--display-w);font-style:var(--display-st);letter-spacing:var(--display-ls);line-height:1.16}
+.act-lines .axis > span{color:var(--bone);text-wrap:balance}
+.act-n{margin-right:.7em;font-family:var(--label);font-size:.5em;font-style:normal;font-weight:500;letter-spacing:.1em;color:var(--amber);vertical-align:.35em}
+.act-lines .annot{margin-top:.25rem;font-size:clamp(1.375rem,2vw,1.875rem)}
+/* the municipal clock: the face is drawn in the picture, the hands are the site clock */
+.pubclock{width:14rem;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+@supports (width:1cqw){.pubclock{width:calc(var(--d) * var(--rh))}}
+.pubclock svg{width:100%;height:100%;overflow:visible}
+.pc-glass{fill:#FFE6AE;opacity:0;transition:opacity 2.5s linear 1s}
+html[data-tenant="night"] .site .pc-glass,html:not(.js) #night-side:target ~ .site .pc-glass{opacity:.9}
+
+.pc-ticks line{stroke:#17100A;stroke-width:1.5;opacity:.75}
+.pc-h,.pc-m{transform-box:view-box;transform-origin:50px 50px}
+.pc-h{transform:rotate(var(--hh))}
+.pc-m{transform:rotate(var(--mh))}
+.pc-h line{stroke:#17100A;stroke-width:4.2;stroke-linecap:round}
+.pc-m line{stroke:#17100A;stroke-width:2.6;stroke-linecap:round}
+.pc-pin{fill:#B8402F}
+
+/* 3 · the three books, each standing on the seam in its own room. On a phone the room is the whole panel: the
+   title is on the wall across the seam, the book stands on the floor in front of the furniture, and the hook and
+   the button lie on the boards. From a tablet up the words take the wall beside the book. */
+.bk{display:flex;flex-direction:column;align-items:center;min-height:49rem;padding:0 0 1.75rem;text-align:center;overflow:hidden;overflow:clip}
+.bk > .pic{top:-15%}
+.bk-book{--bw:36vw}
+.bk > .pic::after{background:linear-gradient(180deg,rgba(8,5,2,.3),rgba(8,5,2,0) 22%,rgba(8,5,2,0) 62%,rgba(8,5,2,.74) 80%,rgba(8,5,2,.9))}
+.bk-head{order:1;width:100%;padding-top:4.5rem}
+.bk-lab,.bk-title{padding:0 var(--gut)}
+.bk-title{margin-top:.5rem;font-size:calc(clamp(2.125rem,9.6vw,2.75rem) * var(--display-k));line-height:1.02}
+.bk-title a{text-decoration:none}
+.bk-book{order:2;margin-top:auto}
+.bk-say{order:3;width:100%;max-width:30rem;margin-top:1.375rem;padding:0 var(--gut);color:var(--n-ink)}
+.bk-hook{font-size:1.0625rem;line-height:1.4;text-wrap:pretty;text-shadow:0 1px 10px rgba(6,4,2,.6)}
+.bk-say .annot{margin:.375rem auto 0;width:max-content;max-width:100%}
+.bk-buy{order:4;display:flex;justify-content:center;width:100%;margin-top:1rem;padding:0 var(--gut);--btn:var(--btn-r);--on-btn:var(--on-btn-r);--btn-hi:var(--btn-r-hi)}
+@media (max-width:43.99em){.bk--c .bk-buy{--btn-l:var(--btn-r);--on-btn-l:var(--on-btn-r);--btn-l-hi:var(--btn-r-hi)}}
+.bk-lab{color:var(--soft-l)}
+.bk-title{color:var(--display-l)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .bk-lab,.bk-title{background-image:linear-gradient(90deg,var(--sl) 50%,var(--sr) 50%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .bk-lab{--sl:var(--soft-l);--sr:var(--soft-r)}
+  .bk-title{--sl:var(--display-l);--sr:var(--display-r)}
+}
+
+/* 4 · the shared ledger, on the kitchen table, from above. The leaves are in the picture; the entries are a real table. */
+.led-h{padding:clamp(2.75rem,7vw,5rem) var(--gut) clamp(1.25rem,3vw,2.25rem);font-size:calc(clamp(1.875rem,6.4vw,5.5rem) * var(--display-k));column-gap:clamp(.875rem,2.6vw,2.5rem);color:var(--n-display)}
+.led-h > span{color:inherit !important}
+.led-scene{aspect-ratio:var(--ar)}
+.led-pages{--x:.062;--y:.036;width:87.6%;height:92.8%;font-size:3vw}
+@supports (width:1cqw){.led-pages{width:calc(.876 * var(--rw));height:calc(.928 * var(--rh));font-size:calc(var(--rw) * .0298)}}
+/* where the night side holds the page the paper is blue: a faint wash of lamplight keeps both hands legible on it */
+.led-pages::before{content:"";position:absolute;inset:1.5% 1%;background:linear-gradient(90deg,rgba(220,234,246,0) 50%,rgba(220,234,246,.26) 50%);filter:blur(10px);pointer-events:none}
+html[data-tenant="night"] .site .led-pages::before,html:not(.js) #night-side:target ~ .site .led-pages::before{background:rgba(220,234,246,.26)}
+
+.led{position:relative;width:100%;height:100%;table-layout:fixed;color:#1B1711;--row:1.46em;--hd:.96;--hn:1.06}
+.led th,.led td{padding:0 5% 0 6.5%;vertical-align:top;text-align:left;font-weight:400}
+.led thead th{padding-top:4%;padding-bottom:1%;font-family:var(--label);font-size:.6em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.3;color:#3A2A14}
+.led thead th span{display:block;font-weight:400;letter-spacing:.06em;opacity:.8}
+.led-day th{padding-top:2.5%;font-family:var(--label);font-size:.56em;font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1.2;color:#7A2D21}
+.led-day th span{display:block;padding-bottom:.35em;border-bottom:1px solid rgba(122,45,33,.4)}
+.led td{padding-top:.2em;background-image:repeating-linear-gradient(180deg,transparent 0 calc(var(--row) - 1px),rgba(30,50,80,.2) calc(var(--row) - 1px) var(--row));background-position:0 .2em;background-origin:content-box;background-clip:content-box}
+.led td > span{display:block;line-height:var(--row)}
+.led .hand-d{color:#16365A}
+.led .hand-d > span:first-child{font-size:calc(1em * var(--hd));line-height:calc(var(--row) / var(--hd))}
+.led .hand-n{color:#2A2622}
+.led .hand-n > span:first-child{font-size:calc(1em * var(--hn));line-height:calc(var(--row) / var(--hn))}
+.led .q.hand-d{font-size:calc(.94em * var(--hd));line-height:calc(var(--row) / var(--hd) / .94);color:#801F13}
+.led .q.hand-n{font-size:calc(1em * var(--hn));line-height:calc(var(--row) / var(--hn));color:#4B3A78}
+.uq-d{text-decoration:underline wavy rgba(128,31,19,.9) 1px;text-underline-offset:.16em}
+.uq-n{text-decoration:none}
+html[data-tenant="night"] .site .uq-d,html:not(.js) #night-side:target ~ .site .uq-d{text-decoration:none}
+html[data-tenant="night"] .site .uq-n,html:not(.js) #night-side:target ~ .site .uq-n{text-decoration:underline wavy rgba(75,58,120,.9) 1px;text-underline-offset:.16em}
+
+
+/* 5 · THE HANDOVER: the bare wall between the two windows, at the minute it changes hands */
+.turn{display:flex;flex-direction:column;justify-content:center;min-height:min(82svh,52rem);padding:5rem 0 3rem;text-align:center}
+.turn-in > .axis{padding:0 var(--gut)}
+.turn-clock{margin-top:.875rem;font-size:calc(min(19vw,30svh) * var(--clock-k))}
+.turn h2{margin-top:clamp(1.25rem,3svh,2rem);padding:0 var(--gut);font-size:calc(clamp(1.75rem,4.8vw,4rem) * var(--display-k));line-height:1.04}
+.turn-p{margin-top:.75rem;padding:0 var(--gut);font-size:clamp(1.0625rem,1.7vw,1.375rem);line-height:1.4}
+.turn-act{display:flex;justify-content:center;margin-top:1.75rem}
+.latch--big{height:3.25rem;padding:0 1.5rem;gap:.75rem;font-size:.8125rem;background:rgba(10,8,6,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-color:rgba(237,229,211,.75)}
+.turnlog{min-height:1.4em;margin-top:1.125rem;padding:0 var(--gut);color:var(--bone);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.turnlog li{display:none}
+.turnlog li:last-child{display:block}
+.turnlog b{font-weight:600;font-variant-numeric:tabular-nums}
+
+/* 6 · the notice on the front door, and the three books */
+.close-room{display:flex;align-items:center;justify-content:center;min-height:min(64svh,46rem);padding:4.5rem var(--gut) 3.5rem}
+.notice{width:min(20.5rem,100%);padding:1.375rem 1.5rem 1.125rem;transform:rotate(-1.4deg);text-align:left}
+.notice::before{content:"";position:absolute;left:50%;top:-.7rem;width:4.75rem;height:1.5rem;margin-left:-2.375rem;background:rgba(244,232,200,.55);box-shadow:0 1px 2px rgba(0,0,0,.25);transform:rotate(1.5deg)}
+.notice-head{padding-bottom:.5rem;border-bottom:1.5px solid rgba(26,17,8,.75);font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;font-size:.6875rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#1A1108}
+.notice-line{margin-top:.875rem;font-family:"Source Serif 4",Georgia,serif;font-size:1.25rem;font-weight:400;line-height:1.3;text-wrap:balance}
+.notice-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-top:1.125rem}
+.stamp{display:inline-block;padding:.35rem .6rem .3rem;border:2px solid var(--red);outline:1px solid var(--red);outline-offset:2px;border-radius:2px;color:var(--red);font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;font-size:.5625rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;line-height:1.3;text-align:center;transform:rotate(-4deg);opacity:.9}
+.stamp b{display:block;font-size:.875rem;letter-spacing:.1em}
+.sig{font-size:1.125rem;color:#16365A;transform:rotate(-3deg)}
+.notice .annot{position:absolute;right:.5rem;bottom:-2.4rem;white-space:nowrap}
+.close-in{padding:clamp(2.5rem,6vw,4.5rem) var(--gut) clamp(3rem,7vw,5rem);text-align:center}
+.close-h{font-size:calc(clamp(2.125rem,7.4vw,6.25rem) * var(--display-k));column-gap:clamp(.625rem,2vw,2rem)}
+.close-h > span{color:var(--display) !important}
+.shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.75rem 1.25rem;align-items:end;max-width:68rem;margin:clamp(2.25rem,5vw,3.75rem) auto 0}
+.shelf-book{display:flex;flex-direction:column;align-items:center;min-width:0}
+.shelf-book.is-lead{grid-column:1 / -1}
+.shelf-book .book{--bw:36vw}
+.shelf-book.is-lead .book{--bw:54vw}
+.shelf-book .lab{margin-top:1.75rem;color:var(--soft)}
+.shelf-book h3{margin-top:.375rem;font-size:calc(1.375rem * var(--display-k));line-height:1.08}
+.shelf-book.is-lead h3{font-size:calc(1.875rem * var(--display-k))}
+.shelf-book h3 a{text-decoration:none}
+.shelf-book h3 a:hover{text-decoration:underline;text-decoration-thickness:.05em;text-underline-offset:.14em}
+.shelf-book .buy{margin-top:1rem;width:100%;max-width:21rem}
+.shelf-book:not(.is-lead) .buy-t{padding:.625rem .75rem}
+.shelf-book:not(.is-lead) .buy::after{display:none}
+.shelf-book:not(.is-lead) .buy-verb{font-size:.9375rem}
+.close-eds{margin-top:clamp(2rem,4vw,3rem);color:var(--soft)}
+
+@media (min-width:44em){
+  .act-in{padding-top:9rem}
+  .turn{min-height:min(94svh,52rem);padding:5.5rem 0 3.5rem}
+  .close-room{min-height:min(78svh,46rem);padding:5rem var(--gut) 4rem}
+  .bk{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:1fr auto auto auto 1.15fr;column-gap:clamp(1.75rem,4.4vw,5rem);align-items:start;min-height:max(34rem,min(100svh,58vw));padding:5.25rem var(--gut) 0;text-align:left}
+  .bk{overflow:visible}
+  .bk > .pic{top:0}
+  .bk > .pic::after{background:linear-gradient(180deg,rgba(8,5,2,.26),rgba(8,5,2,0) 9%,rgba(8,5,2,0) 78%,rgba(8,5,2,.42))}
+  .bk-book{grid-column:2;grid-row:1 / -1;align-self:end;margin:0 0 max(2.25rem,6.5svh);--bw:min(23vw,calc(60svh * 491 / 760))}
+  .bk-head,.bk-say,.bk-buy{width:min(27rem,100%);max-width:none;padding:0}
+  .bk-lab,.bk-title{padding:0;background-image:none;-webkit-text-fill-color:currentColor}
+  .bk-lab{color:var(--soft)}
+  .bk-title{margin-top:.625rem;color:var(--display);font-size:calc(clamp(2.25rem,4.7vw,4.75rem) * var(--display-k))}
+  .bk-title a:hover{text-decoration:underline;text-decoration-thickness:.045em;text-underline-offset:.14em}
+  .bk-say{margin-top:1rem;color:var(--ink)}
+  .bk-hook{font-size:clamp(1.0625rem,1.55vw,1.4375rem);text-shadow:none}
+  .bk-say .annot{margin:.5rem 0 0;width:auto}
+  .bk-buy{margin-top:1.75rem;justify-content:flex-start}
+  .bk--l .bk-head,.bk--l .bk-say,.bk--l .bk-buy{grid-column:1;justify-self:end}
+  .bk--r .bk-head,.bk--r .bk-say,.bk--r .bk-buy{grid-column:3;justify-self:start}
+  .bk--l .bk-head,.bk--r .bk-head{grid-row:2}
+  .bk--l .bk-say,.bk--r .bk-say{grid-row:3}
+  .bk--l .bk-buy,.bk--r .bk-buy{grid-row:4}
+  .bk--l .bk-buy{--btn:var(--btn-l);--on-btn:var(--on-btn-l);--btn-hi:var(--btn-l-hi)}
+  .bk--c{grid-template-rows:auto auto 1fr auto}
+  .bk--c .bk-head,.bk--c .bk-say{grid-column:1 / -1;justify-self:stretch;width:auto;text-align:center}
+  .bk--c .bk-head{grid-row:1;padding-top:clamp(.25rem,2svh,1.5rem)}
+  .bk--c .bk-say{grid-row:2;margin-top:.75rem}
+  .bk--c .bk-say .annot{margin:.375rem auto 0;width:max-content}
+  .bk--c .bk-book{grid-row:3;align-self:end;margin:1rem 0 1.25rem;--bw:min(19vw,calc(46svh * 491 / 760))}
+  .bk--c .bk-buy{grid-column:1 / -1;grid-row:4;justify-self:stretch;width:auto;justify-content:center;margin:0 0 max(1.75rem,4.5svh)}
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .bk--c .bk-lab,.bk--c .bk-title,.bk--c .bk-hook{background-image:linear-gradient(90deg,var(--sl) 50%,var(--sr) 50%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+    .bk--c .bk-hook{--sl:var(--ink-l);--sr:var(--ink-r)}
+  }
+  .led{--row:1.56em;--hd:1.14;--hn:1.38}
+  .led-pages{--x:.24;--y:.055;width:52%;height:88%;font-size:1.8vw}
+  @supports (width:1cqw){.led-pages{width:calc(.52 * var(--rw));height:calc(.88 * var(--rh));font-size:calc(var(--rw) * .018)}}
+  .shelf{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,4vw,4rem)}
+  .shelf-book.is-lead{grid-column:auto}
+  .shelf-book .book,.shelf-book.is-lead .book{--bw:min(100%,15.5rem)}
+  .shelf-book.is-lead .book{--bw:min(100%,18rem)}
+  .shelf-book h3,.shelf-book.is-lead h3{font-size:calc(clamp(1.375rem,2.2vw,2rem) * var(--display-k))}
+  .shelf-book:not(.is-lead) .buy-t{padding:.75rem 3.25rem .75rem 1.25rem}
+  .shelf-book:not(.is-lead) .buy::after{display:block}
+  .shelf-book:not(.is-lead) .buy-verb{font-size:1rem}
+  .notice{width:21.5rem}
+}
+@media (min-width:62em){
+  .hero-clock{font-size:calc(min(20vw,23svh) * var(--clock-k))}
+  .hero h1{font-size:calc(min(6.2vw,7.8svh) * var(--display-k))}
+  .tagline{font-size:min(2.2vw,2.9svh)}
+}
+/* ---- 404: no tenancy at this address ---- */
+.lost{display:flex;align-items:center;justify-content:center;min-height:100vh;min-height:100svh;padding:6rem 0 4rem;text-align:center}
+.lost-in{width:100%}
+.lost-in > *{padding-left:var(--gut);padding-right:var(--gut)}
+.lost h1{max-width:none;margin-top:1rem;font-size:calc(clamp(2.125rem,6.4vw,5.25rem) * var(--display-k));line-height:1.03}
+.lost-p{margin-top:1.125rem;font-size:clamp(1.0625rem,1.8vw,1.375rem);line-height:1.4}
+.lost-go,.lost-buy{display:flex;justify-content:center;margin-top:1.75rem}
+.lost-buy{margin-top:1.125rem}
+</style>
+</head>
+<body>
+<span class="tgt" id="night-side"></span><span class="tgt" id="day-side"></span>
+<div class="site">
+<a class="skip" href="#main">Skip to the text</a>
+<header class="bar">
+<div class="bar-in">
+<a class="brand" href="index.html" aria-label="The Night Tenant, front page"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">The Night Tenant</span></a>
+<span class="bar-clock" role="timer" aria-label="Site time"><span data-clock="hm"><span class="by-day">19:58</span><span class="by-night">20:00</span></span><i>:</i><span data-clock="s">00</span></span>
+<span class="bar-end">
+<a class="bar-books" href="index.html#buy">The books</a>
+<span class="latchpair" data-latchpair>
+<span class="by-day"><a class="latch" data-latch="night" href="#night-side"><span class="latch-ic" aria-hidden="true"></span><span>Hand over<span class="sr"> to the night side: sound the Latch</span></span></a></span>
+<span class="by-night"><a class="latch" data-latch="day" href="#day-side"><span class="latch-ic" aria-hidden="true"></span><span>Hand back<span class="sr"> to the day side: sound the Latch</span></span></a></span>
+</span>
+</span>
+</div>
+</header>
+
+<main id="main">
+<section class="sec lost" aria-labelledby="h-lost" style="--ar-d:1.7768;--pxf-d:0.5;--pyf-d:0.6;--pxf-m:0.5;--pyf-m:0.6">
+<div class="pic" data-pic data-kind="room" data-sun="0.05 0.3 0.4 0.62 0.2" data-lamp="0.74 0.9 0.11 0.05 -1.2"><picture><source media="(max-width:43.99em)" srcset="assets/scenes/turn-s.jpg" width="1100" height="619"><img class="pic-day" src="assets/scenes/turn.jpg" width="1672" height="941" alt="A bare wall of the flat between two tall windows, amber on the left and blue on the right." fetchpriority="high"></picture><picture aria-hidden="true"><source media="(max-width:43.99em)" srcset="assets/scenes/turn-s.jpg" width="1100" height="619"><img class="pic-night" src="assets/scenes/turn.jpg" width="1672" height="941" alt="" fetchpriority="high"></picture></div>
+<div class="lost-in">
+<p class="lab split is-soft">Register of tenancies · result of search</p>
+<h1 class="split is-display" id="h-lost">No tenancy is registered at this address.</h1>
+<p class="lost-p split">The page you asked for is not let to anyone, day side or night side.</p>
+<p class="lost-go"><a class="latch latch--big" href="index.html">Go to the front page</a></p>
+<p class="lost-buy"><a class="buy buy--split" data-buy="the-night-tenant" data-buy-as="one" data-sub="Book One · The Night Tenant" href="https://orbandink.co.uk/en/books/the-night-tenant/"><span class="buy-t"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span><span class="buy-sub" data-buy-sub>Book One · The Night Tenant</span></span></a></p>
+</div>
+</section>
+</main>
+
+<footer class="foot on-dark">
+<p class="foot-title display">The Night Tenant</p>
+<p class="foot-by">by Alec Blanc · published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a></p>
+<p class="foot-author">Alec Blanc writes thrillers about administered lives.</p>
+<p class="foot-fine lab"><a data-reset href="index.html">Return the clock to 19:58</a></p>
+<p class="foot-fine lab">© Alec Blanc 2026</p>
+</footer>
+
+<aside class="dock on-dark" data-dock aria-label="Get the book">
+<a class="buy" data-buy="the-night-tenant" data-buy-as="short" href="https://orbandink.co.uk/en/books/the-night-tenant/"><span class="buy-t"><img class="dock-cover" src="assets/cover-the-night-tenant-s.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span></span></a>
+</aside>
+<p class="sr" aria-live="polite" data-announce></p>
+<div class="latchlight" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="nt-night" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix type="matrix" values=".299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0.0078 0.0196 0.0353 0.0510 0.0745 0.1137 0.1686 0.2588 0.5020"/><feFuncG type="table" tableValues="0.0157 0.0745 0.1333 0.1922 0.2588 0.3412 0.4314 0.5569 0.7373"/><feFuncB type="table" tableValues="0.0353 0.1255 0.2039 0.2863 0.3804 0.4941 0.6039 0.7608 0.8941"/></feComponentTransfer></filter></svg>
+</div>
+<script type="module">
+import { boot } from './latch.js';
+boot({ page: 'lost' });
+</script>
+</body>
+</html>

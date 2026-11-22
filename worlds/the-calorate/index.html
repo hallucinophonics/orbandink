@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0A1520">
+<meta name="description" content="The Calorate — a literary science-fiction trilogy by Alexey Belenkiy. An empire where warmth is money, weather is policy, and the poor are the radiators. Read Linewalker, Book I.">
+<title>The Calorate — a science-fiction trilogy | Alexey Belenkiy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  /* assay: rows and stamp start hidden only when the script runs; without it the card stands complete */
+  [data-assay="stamp"] { transform: translate(-50%, -50%) rotate(-7deg) scale(1); }
+  .js [data-assay="row"] { clip-path: inset(0 100% 0 0); }
+  .js [data-assay="stamp"] { opacity: 0; transform: translate(-50%, -50%) rotate(-7deg) scale(1.6); }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0A1520; -webkit-font-smoothing: antialiased; }
+  a { color: #FFD9A0; text-decoration-color: rgba(255, 158, 61, 0.45); text-underline-offset: 3px; }
+  a:hover { color: #FF9E3D; text-decoration-color: #FF9E3D; }
+  :focus-visible { outline: 2px solid #FF9E3D; outline-offset: 3px; }
+  ::selection { background: rgba(255, 158, 61, 0.3); }
+  @keyframes cal-throb { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+  @keyframes cal-drift { 0% { top: -4%; opacity: 0; } 6% { opacity: 0.85; } 94% { opacity: 0.85; } 100% { top: 103%; opacity: 0; } }
+  @keyframes cal-steam { 0% { transform: translateY(30px) scale(0.9); opacity: 0; } 30% { opacity: 0.55; } 100% { transform: translateY(-260px) scale(1.65); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; } }
+  .hv-1:hover { background: rgba(255, 158, 61, 0.14); }
+  .hv-2:hover { color: #EDF4F7 !important; }
+  .hv-3:hover { background: rgba(255, 158, 61, 0.18) !important; }
+  .hv-4:hover { color: #FFD9A0 !important; }
+  .hv-5:hover { color: #FF9E3D !important; }
+  .hv-6:hover { border-color: #FFD9A0 !important; color: #FFD9A0 !important; }
+  .hv-7:hover { background: rgba(237, 244, 247, 0.6); }
+  .hv-8:hover { color: #B4472F !important; }
+  .hv-9:hover { border-color: #8FBCA4 !important; background: rgba(143, 188, 164, 0.1); }
+  .hv-10:hover { color: #D9EDE2 !important; }
+  .hv-11:hover { background: rgba(255, 158, 61, 0.12); }
+  .hv-12:hover { border-color: #8FBCA4 !important; color: #D9EDE2 !important; }
+  @media (max-width: 719px) { .buy-bar { top: auto !important; right: 10px !important; left: 10px !important; bottom: 10px !important; } }
+  /* ── BUY CONTROLS · plain verb first, survey voice second. What is live comes from RETAIL in thermo.js.
+        Lit = on sale: an ember, with a top light, a halo and a press. Dashed = coming: a reserved plate. ── */
+  :root { --live-bg: #FF9E3D; --live-top: #FFBE78; --live-low: #F0862A; --live-edge: #FFC98F; --live-sheen: rgba(255, 244, 220, 0.55); --live-halo: rgba(255, 158, 61, 0.28); --live-glow: rgba(255, 158, 61, 0.7); --live-press: rgba(120, 48, 0, 0.45); --live-ink: #0A1520; --soon-ink: #A9C3D6; --soon-line: rgba(169, 195, 214, 0.5); --soon-hover: #FFD9A0; --soon-fill: rgba(169, 195, 214, 0.05); --focus: #FFD9A0; --rule: rgba(169, 195, 214, 0.28); --key-ink: #A9C3D6; --cover-cast: rgba(2, 8, 12, 0.95); }
+  .buy { position: relative; box-sizing: border-box; display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; max-width: 100%; padding: 13px 20px; border: 1px dashed var(--soon-line); background: var(--soon-fill); color: var(--soon-ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms, color 260ms, border-color 260ms, box-shadow 260ms, filter 260ms; }
+  .buy[hidden] { display: none; }
+  .nb { white-space: nowrap; }
+  .buy-main { font-size: 11.5px; letter-spacing: 0.15em; line-height: 1.4; }
+  .buy-main::after { content: '\2192'; display: inline-block; margin-left: 0.7em; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .buy:hover .buy-main::after { transform: translateX(4px); }
+  .buy-sub { font-size: 9.5px; letter-spacing: 0.14em; line-height: 1.5; opacity: 0.8; }
+  .buy.is-soon:hover { color: var(--soon-hover); border-color: var(--soon-hover); border-style: solid; }
+  .buy.is-soon:active { transform: translateY(1px); }
+  .buy.is-live { border: 1px solid var(--live-edge); background-color: var(--live-bg); background-image: linear-gradient(180deg, var(--live-top), var(--live-bg) 46%, var(--live-low)); color: var(--live-ink); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 16px 38px -14px var(--live-glow); }
+  .buy.is-live .buy-main { font-size: 13.5px; font-weight: 600; }
+  .buy.is-live .buy-sub { opacity: 0.86; }
+  .buy.is-live:hover { color: var(--live-ink); filter: brightness(1.07); transform: translateY(-2px); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 24px 48px -14px var(--live-glow); }
+  .buy.is-live:active { transform: translateY(1px); filter: brightness(0.95); box-shadow: inset 0 2px 8px var(--live-press), 0 0 0 1px var(--live-halo); }
+  .buy:focus-visible, .ed:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+  .buy--xl { padding: 17px 28px; }
+  .buy--xl.is-live .buy-main { font-size: 15.5px; }
+  @media (max-width: 719px) { .buy { padding: 12px 15px; } .buy--xl { padding: 15px 18px; } .buy--xl.is-live .buy-main { font-size: 14.5px; } }
+  .buy--bar { padding: 6px 12px; }
+  .buy--bar .buy-main, .buy--bar.is-live .buy-main { font-size: 11px; letter-spacing: 0.13em; }
+  .buy--bar.is-live { box-shadow: inset 0 1px 0 var(--live-sheen); }
+  .buy-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; }
+  @media (max-width: 719px) { .buy-bar { flex-wrap: nowrap !important; justify-content: space-between; } .buy-bar .buy { margin-left: auto; } }
+  @media (max-width: 479px) { .bar-more { display: none; } }
+  .buy-bar { --live-bg: #FF9E3D; --live-top: #FFBE78; --live-low: #F0862A; --live-edge: #FFC98F; --live-sheen: rgba(255, 244, 220, 0.55); --live-ink: #0A1520; --soon-ink: #FFD9A0; --soon-line: rgba(255, 158, 61, 0.55); --soon-hover: #FFFFFF; --soon-fill: transparent; }
+  /* ── THE COVER AS AN OBJECT · a spine crease, a top light and three depths of shadow ── */
+  .cover { position: relative; display: block; line-height: 0; background: #0A1520; box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 18px 28px -14px rgba(2, 8, 12, 0.75), 0 46px 84px -38px var(--cover-cast); transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .cover img { display: block; width: 100%; height: auto; }
+  .cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(255, 255, 255, 0.20) 0, rgba(255, 255, 255, 0.04) 0.9%, rgba(0, 0, 0, 0.26) 1.7%, rgba(0, 0, 0, 0) 4.2%, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.10) 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0) 14%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+  a.cover:hover { transform: translateY(-5px); box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 26px 36px -16px rgba(2, 8, 12, 0.8), 0 60px 96px -40px var(--cover-cast); }
+  /* ── LIVING PLATES · the <img> is the still plate (a scene made for the site, in assets/scenes/); the canvas over it is the same picture with the heat law acting on it ── */
+  [data-plate] { touch-action: pan-y; }
+  [data-plate] canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1); }
+  [data-hearth] { position: absolute; left: -130px; right: -130px; top: -120px; bottom: -120px; width: calc(100% + 260px); height: calc(100% + 240px); z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .hearth { position: relative; isolation: isolate; }
+  /* the hero's vein on a phone: it leaves the survey above the title and runs down the page's own spine, so it never crosses the type */
+  .hero-vein-narrow { display: none; }
+  @media (max-width: 719px) { .hero-vein-wide { display: none; } .hero-vein-narrow { display: block; } }
+
+  /* ── LANDING · each ledger entry is led by a living plate; the page closes on the shelf ── */
+  .hook { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(26px, 5vw, 76px); }
+  .hook--flip { flex-direction: row-reverse; }
+  .hook-plate { margin: 0; flex: 0 1 clamp(260px, 31vw, 430px); min-width: min(100%, 260px); }
+  .plate-frame { position: relative; display: block; line-height: 0; background: #0A1520; box-shadow: 0 0 0 1px rgba(74, 52, 23, 0.55), 0 2px 3px rgba(34, 24, 8, 0.4), 0 22px 34px -18px rgba(34, 24, 8, 0.7), 0 54px 90px -40px rgba(34, 24, 8, 0.85); }
+  .plate-frame img { display: block; width: 100%; height: auto; }
+  .hook-plate figcaption { margin-top: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.12em; line-height: 1.7; color: rgba(74, 52, 23, 0.85); }
+  .hook-copy { flex: 1 1 340px; min-width: min(100%, 270px); }
+  @media (max-width: 719px) { .hook-plate { flex-basis: 100%; } }
+  .shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3.4vw, 48px); max-width: 930px; margin-top: clamp(30px, 5vh, 52px); }
+  .shelf-book { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .shelf-kicker { margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em; }
+  .shelf-title { margin: 7px 0 14px; font-family: Fraunces, Georgia, serif; font-weight: 560; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(23px, 2.2vw, 30px); line-height: 1.05; color: #EDF4F7; }
+  @media (max-width: 719px) { .shelf { grid-template-columns: minmax(0, 1fr); gap: 28px; } .shelf-book { flex-direction: row; align-items: flex-end; } .shelf-book .cover { flex: 0 0 96px; } }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BookSeries","name":"The Calorate","author":{"@type":"Person","name":"Alexey Belenkiy"},"genre":["Literary science fiction","Dystopian fiction"],"description":"An empire where warmth is money, weather is policy, and the poor are the radiators. One woman follows the heat home.","hasPart":[{"@type":"Book","name":"Linewalker","position":1,"author":{"@type":"Person","name":"Alexey Belenkiy"}},{"@type":"Book","name":"The Golden Shore","position":2,"author":{"@type":"Person","name":"Alexey Belenkiy"}},{"@type":"Book","name":"The Even Cold","position":3,"author":{"@type":"Person","name":"Alexey Belenkiy"}}]}</script>
+</head>
+<body>
+<div style="position: relative; overflow-x: clip; background: #0A1520; color: #EDF4F7; font-family: Newsreader, Georgia, 'Times New Roman', serif; --vein-x: clamp(16px, 4.5vw, 54px); --content-x: clamp(56px, 11vw, 150px);">
+
+  <!-- SET-PIECE 1 · THE VEIN — site spine + scroll progress -->
+  <div aria-hidden="true" style="position: absolute; z-index: 40; top: 0; bottom: 50px; left: var(--vein-x); width: 2px; pointer-events: none;">
+    <div style="position: absolute; inset: 0; background: rgba(255, 158, 61, 0.15);"></div>
+    <div data-ref="veinLitRef" style="position: absolute; inset: 0; transform: scaleY(0); transform-origin: top; background: linear-gradient(180deg, #FFD9A0, #FF9E3D 30%, rgba(255, 158, 61, 0.85)); box-shadow: 0 0 12px 1px rgba(255, 158, 61, 0.5);"></div>
+    <div style="position: absolute; left: 0; width: 2px; height: 26px; background: linear-gradient(180deg, rgba(255, 217, 160, 0), #FFD9A0, rgba(255, 217, 160, 0)); filter: blur(0.5px); animation: cal-drift 8.4s linear infinite;"></div>
+    <div data-ref="veinHeadRef" style="position: absolute; top: 0%; left: 50%; width: 9px; height: 9px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, #FFD9A0 0%, #FF9E3D 55%, rgba(255, 158, 61, 0) 78%); box-shadow: 0 0 14px 3px rgba(255, 158, 61, 0.55); animation: cal-throb 1.05s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- PERSISTENT BUY BAR — one job, in plain words; its link and state come from RETAIL in thermo.js -->
+  <div role="region" aria-label="Linewalker — buy bar" class="buy-bar" data-ref="buyBar" style="position: fixed; z-index: 60; top: 14px; right: 14px; display: none; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 9px 12px; background: rgba(10, 21, 32, 0.93); border: 1px solid rgba(255, 158, 61, 0.4); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.13em; color: #EDF4F7;">
+    <span style="opacity: 0.85; white-space: nowrap;">LINEWALKER<span class="bar-more"> · BOOK ONE</span></span>
+    <a class="buy buy--bar is-live" data-buy="linewalker" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span></a>
+    <button type="button" aria-label="Dismiss buy bar" data-ref="dismissBtn" class="hv-2" style="background: none; border: none; color: rgba(237, 244, 247, 0.6); font-family: inherit; font-size: 14px; line-height: 1; cursor: pointer; padding: 2px 5px;">×</button>
+  </div>
+
+  <!-- HERO · SET-PIECE 2 — THE LEDGER BALANCES -->
+  <section data-ref="heroRef" style="position: relative; min-height: 100svh; overflow: hidden; background: #0A1520; touch-action: pan-y;">
+    <!-- designed static composition: no-WebGL / reduced-motion / pre-init state -->
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 1;">
+      <div style="position: absolute; left: 0; right: 0; top: 0; height: 34%; background: linear-gradient(180deg, #F4E8CE 0%, #E3BE6E 55%, #C9932F 100%);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 34%; bottom: 0; background: linear-gradient(180deg, #24425C 0%, #16283A 45%, #0A1520 100%);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 34%; height: 1px; background: rgba(255, 217, 160, 0.5);"></div>
+      <div style="position: absolute; left: 6%; top: 40%; width: 52%; height: 42%; background: radial-gradient(ellipse at 30% 40%, rgba(143, 188, 164, 0.13), rgba(143, 188, 164, 0) 65%);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 52%; height: 1px; background: rgba(169, 195, 214, 0.1);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 70%; height: 1px; background: rgba(169, 195, 214, 0.07);"></div>
+      <div class="hero-vein-wide" style="position: absolute; left: 56%; top: 6%; bottom: 8%; width: 2px; background: linear-gradient(180deg, rgba(255, 217, 160, 0.95), rgba(255, 158, 61, 0.8) 40%, rgba(255, 158, 61, 0.3)); box-shadow: 0 0 18px 2px rgba(255, 158, 61, 0.4);"></div>
+      <svg class="hero-vein-narrow" viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 7px rgba(255, 158, 61, 0.55));"><path d="M 55 0 C 55 9 53 13 50 17 C 40 28 4.6 26 4.6 42 L 4.6 100" fill="none" stroke="#FFB868" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+      <div class="hero-vein-wide" style="position: absolute; left: 56%; bottom: 7.4%; width: 3px; height: 3px; border-radius: 1px; background: #FFD9A0; box-shadow: 9px 1px 0 -1px #FF9E3D, -10px 2px 0 -1px #FF9E3D, 19px 0 0 -1px rgba(255, 158, 61, 0.75), -21px 1px 0 -1px rgba(255, 158, 61, 0.6), 0 0 16px 4px rgba(255, 158, 61, 0.35);"></div>
+      <div class="hero-vein-wide" style="position: absolute; left: 58.5%; top: 41%; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(237, 244, 247, 0.6);">+ 40 therms · aurentine ░ − 40 therms · kelder reach</div>
+      <div style="position: absolute; inset: 0; opacity: 0.05; background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27/%3E%3C/filter%3E%3Crect%20width=%27120%27%20height=%27120%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E);"></div>
+    </div>
+    <canvas data-ref="canvasRef" role="img" aria-label="A live heat survey of the Calorate: warmth pooled at the golden shore, one bright vein carrying it down into the ice. Touch moves heat; the total never changes." style="position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></canvas>
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(10, 21, 32, 0) 40%, rgba(10, 21, 32, 0.18) 58%, rgba(10, 21, 32, 0.62) 88%, rgba(10, 21, 32, 0.75) 100%);"></div>
+    <div style="position: relative; z-index: 4; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: clamp(18px, 3.5vh, 40px) clamp(20px, 5vw, 64px) clamp(28px, 6vh, 60px) var(--content-x);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+        <span style="padding: 5px 10px; background: rgba(10, 21, 32, 0.5); color: rgba(237, 244, 247, 0.8);">STOKER GUILD · FLOW SURVEY · ALL SECTORS</span>
+        <span data-ref="counterRef" style="padding: 5px 10px; background: rgba(10, 21, 32, 0.55); color: #FFD9A0;">+ 0 therms · here ░ − 0 therms · everywhere else</span>
+      </div>
+      <div style="max-width: 920px;">
+        <h1 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 550; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(52px, 9vw, 148px); line-height: 0.95; letter-spacing: -0.015em; color: #EDF4F7;">The Calorate</h1>
+        <p style="margin: 18px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(10.5px, 1.3vw, 12.5px); letter-spacing: 0.22em; color: #FFD9A0;">A TRILOGY BY ALEXEY BELENKIY</p>
+        <p style="margin: 20px 0 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 31px); line-height: 1.35; color: #EDF4F7; max-width: 24ch; text-wrap: pretty;">There is no weather. There are only decisions.</p>
+        <p style="margin: 13px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: clamp(10px, 1.2vw, 12px); letter-spacing: 0.15em; color: rgba(169, 195, 214, 0.85);">WARMTH IS CURRENCY. WEATHER IS POLICY.</p>
+        <div style="margin-top: clamp(20px, 3.5vh, 34px); display: flex; align-items: center; flex-wrap: wrap; gap: 16px 20px;">
+          <a class="cover" href="linewalker.html" style="flex: none; width: clamp(56px, 5.2vw, 74px);"><img src="assets/cover-linewalker.jpg" width="900" height="1399" alt="Linewalker — the cover"></a>
+          <a class="buy buy--xl is-live" data-buy="linewalker" data-sub-live="Linewalker · Book One" data-sub-soon="Linewalker · Book One" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span><span class="buy-sub" data-buy-sub>Linewalker · Book One</span></a>
+          <a href="#premise" class="hv-4" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.15em; text-decoration: none; color: rgba(237, 244, 247, 0.72); padding: 6px 2px;">↓ FOLLOW THE HEAT HOME</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE THERMOCLINE — everything below the hero descends one continuous gradient -->
+  <div style="background: linear-gradient(180deg, #F4E8CE 0%, #EFE1C2 8%, #E7D6B0 15%, #DCCCA4 21%, #BCBAA4 30%, #8CA0A8 40%, #5E7A8C 50%, #3A5570 60%, #22374E 70%, #16283A 80%, #0A1520 94%, #0A1520 100%);">
+
+    <div style="display: flex; align-items: center; gap: 16px; padding: 34px clamp(20px, 6vw, 110px) 10px var(--content-x); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(90, 67, 28, 0.9);">
+      <span>ISOTHERM 01</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(90, 67, 28, 0.45), rgba(90, 67, 28, 0.06));"></span>
+      <span style="text-align: right;">+34.0° · AURENTINE — THE PAYING WORLD</span>
+    </div>
+
+    <!-- HOOK 01 · the mechanic — the plate leads, the ledger follows -->
+    <section id="premise" class="hook" style="scroll-margin-top: 40px; padding: clamp(44px, 8vh, 100px) clamp(24px, 7vw, 140px) clamp(44px, 8vh, 100px) var(--content-x); color: #4A3417;">
+      <figure class="hook-plate" data-plate="noon" data-heart="0.47,0.48">
+        <span class="plate-frame"><img src="assets/scenes/ledger-gauge.jpg" width="880" height="1100" alt="A brass assay gauge lying on a block of blue ice, iron pipework behind it" loading="lazy" decoding="async"><canvas aria-hidden="true"></canvas></span>
+        <figcaption>assay gauge · every miracle has an invoice</figcaption>
+      </figure>
+      <div class="hook-copy">
+        <p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.2em; color: rgba(90, 67, 28, 0.75);">LEDGER ENTRY 01 · THE MECHANIC</p>
+        <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: clamp(23px, 3.1vw, 38px); line-height: 1.35; max-width: 27ch; text-wrap: pretty;">There is no natural weather in the Calorate. Summer is administered. Winter is billed.</p>
+        <div style="margin-top: 30px; max-width: 430px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.05em;">
+          <div style="display: flex; justify-content: space-between; gap: 18px; padding: 8px 0; border-top: 1px solid rgba(90, 67, 28, 0.4); color: #4A3417;"><span>+ 1 early spring</span><span>Aurentine</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 18px; padding: 8px 0; border-top: 1px solid rgba(90, 67, 28, 0.4); color: #B4472F;"><span>− 1 world's core</span><span>Vesh</span></div>
+          <div style="border-top: 3px double rgba(90, 67, 28, 0.55); padding-top: 9px; font-size: 10.5px; letter-spacing: 0.2em; color: rgba(90, 67, 28, 0.85);">THE LEDGER BALANCES.</div>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: flex; align-items: center; gap: 16px; padding: 10px clamp(20px, 6vw, 110px) 10px var(--content-x); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(90, 67, 28, 0.9);">
+      <span>ISOTHERM 02</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(90, 67, 28, 0.45), rgba(90, 67, 28, 0.06));"></span>
+      <span style="text-align: right;">+18.2° · THERMOCLINE</span>
+    </div>
+
+    <!-- HOOK 02 · the tally-song, beside the marker stone -->
+    <section class="hook hook--flip" style="padding: clamp(44px, 8vh, 100px) clamp(24px, 7vw, 140px) clamp(44px, 8vh, 100px) var(--content-x); color: #4A3417;">
+      <figure class="hook-plate" data-plate="fever" data-heart="0.50,0.475">
+        <span class="plate-frame"><img src="assets/scenes/ledger-stone.jpg" width="880" height="1100" alt="A frost-rimed marker stone, its cut traces lit from within; beyond it the ice, one bright vein and the lit domes of a line-town" loading="lazy" decoding="async"><canvas aria-hidden="true"></canvas></span>
+        <figcaption>marker stone · honest about a fever</figcaption>
+      </figure>
+      <div class="hook-copy">
+        <p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.2em; color: rgba(90, 67, 28, 0.75);">LEDGER ENTRY 02 · RECOVERED VERSE</p>
+        <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.55; max-width: 36ch; text-wrap: pretty;">One coal for the paying world, two for the cold.<br>Walk the line, walker, and come home old.</blockquote>
+        <p style="margin: 18px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; color: rgba(90, 67, 28, 0.75);">— tally-song, Kelder reach</p>
+      </div>
+    </section>
+
+    <div style="display: flex; align-items: center; gap: 16px; padding: 10px clamp(20px, 6vw, 110px) 10px var(--content-x); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(74, 52, 23, 0.9);">
+      <span>ISOTHERM 03</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(74, 52, 23, 0.45), rgba(74, 52, 23, 0.06));"></span>
+      <span style="text-align: right;">+4.6° · THE VEINS</span>
+    </div>
+
+    <!-- HOOK 03 · the Candles, beside the first hearth -->
+    <section class="hook" style="padding: clamp(44px, 8vh, 100px) clamp(24px, 7vw, 140px) clamp(52px, 9vh, 110px) var(--content-x); color: #4A3417;">
+      <figure class="hook-plate" data-plate="even" data-heart="0.745,0.23">
+        <span class="plate-frame"><img src="assets/scenes/ledger-frost.jpg" width="880" height="1100" alt="A frost fern grown across a dark iron slab; far down the works, one red light" loading="lazy" decoding="async"><canvas aria-hidden="true"></canvas></span>
+        <figcaption>frost on the slab · a god's stolen warmth</figcaption>
+      </figure>
+      <div class="hook-copy">
+        <p style="margin: 0 0 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.2em; color: rgba(74, 52, 23, 0.75);">LEDGER ENTRY 03 · THE REGULATORS</p>
+        <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: clamp(23px, 3.1vw, 38px); line-height: 1.35; max-width: 26ch; text-wrap: pretty;">The conduits need living regulators — people born with hearth-blood, tithed away and never seen again. The empire calls it ascension.</p>
+        <p style="margin: 26px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; color: #B4472F;">ASSESSED: 1 CANDLE · PER TOWN · PER GENERATION</p>
+      </div>
+    </section>
+
+    <!-- SET-PIECE 5 · THE STEAMING SEA -->
+    <section data-ref="seaRef" style="position: relative; height: clamp(460px, 86vh, 840px); overflow: hidden; touch-action: pan-y;">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, #F4E8CE 0%, #EEDCA8 32%, #E3BE6E 54%, #C9932F 58%, #A87824 76%, #8A6420 100%);"></div>
+      <canvas data-ref="seaCanvasRef" role="img" aria-label="Harbour Station 9, live survey: a golden sea quietly warmer than it should be. Stir the water and the station's reading climbs; the report stays suppressed." style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></canvas>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 58%; bottom: 0; opacity: 0.6; background: repeating-linear-gradient(180deg, rgba(244, 232, 206, 0.14) 0px, rgba(244, 232, 206, 0.14) 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 9px);"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 58%; height: 1px; background: rgba(58, 40, 10, 0.45);"></div>
+      <div aria-hidden="true" style="position: absolute; left: 7%; top: 56.6%; width: 31%; opacity: 0.85;">
+        <div style="position: absolute; top: -12px; left: 12%; width: 24px; height: 12px; background: #3A2B10;"></div>
+        <div style="position: absolute; top: -9px; left: 58%; width: 15px; height: 9px; background: #3A2B10;"></div>
+        <div style="height: 3px; background: #3A2B10;"></div>
+        <div style="height: 22px; background: repeating-linear-gradient(90deg, #3A2B10 0px, #3A2B10 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 30px);"></div>
+      </div>
+      <div aria-hidden="true" style="position: absolute; right: 9%; top: 57.2%; width: 19%; opacity: 0.8;">
+        <div style="position: absolute; top: -8px; left: 30%; width: 13px; height: 8px; background: #3A2B10;"></div>
+        <div style="height: 2px; background: #3A2B10;"></div>
+        <div style="height: 16px; background: repeating-linear-gradient(90deg, #3A2B10 0px, #3A2B10 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 24px);"></div>
+      </div>
+      <div data-ref="steamRef" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0.3; transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);"></div>
+      <div data-ref="seaChipRef" style="position: absolute; top: 22px; right: clamp(20px, 6vw, 110px); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em; color: rgba(90, 67, 28, 0.9); padding: 5px 10px; background: rgba(244, 232, 206, 0.55);">HARBOUR STATION 9 · SURFACE +31.1°</div>
+      <div style="position: absolute; left: var(--content-x); right: 20px; bottom: 26px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; color: rgba(244, 232, 206, 0.92);">Aurentine harbour · water temp: anomalous · report suppressed</div>
+    </section>
+
+    <div style="display: flex; align-items: center; gap: 16px; padding: 34px clamp(20px, 6vw, 110px) 10px var(--content-x); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(237, 244, 247, 0.9);">
+      <span style="padding: 4px 9px; background: rgba(10, 21, 32, 0.5);">ISOTHERM 04</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(237, 244, 247, 0.4), rgba(237, 244, 247, 0.06));"></span>
+      <span style="padding: 4px 9px; background: rgba(10, 21, 32, 0.5); text-align: right;">−41.0° · VESH · KELDER REACH</span>
+    </div>
+
+    <!-- THE BOOKS — each with its cover, its hook and its own button -->
+    <section id="books" style="scroll-margin-top: 40px; padding: clamp(40px, 7vh, 90px) clamp(20px, 6vw, 110px) clamp(40px, 7vh, 90px) var(--content-x);">
+      <h2 style="margin: 0 0 30px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.22em; color: #EDF4F7;"><span style="padding: 6px 12px; background: rgba(10, 21, 32, 0.55);">THE BOOKS · THREE ENTRIES</span></h2>
+
+      <!-- BOOK I · LINEWALKER -->
+      <article data-ref="lwRef" style="position: relative; max-width: 1120px; background: rgba(22, 40, 58, 0.95); border: 1px solid rgba(169, 195, 214, 0.22); border-left: 2px solid rgba(255, 158, 61, 0.4); box-shadow: 0 34px 90px -34px rgba(4, 10, 16, 0.85); padding: clamp(22px, 4vw, 52px); display: flex; flex-wrap: wrap; gap: clamp(26px, 4vw, 56px);">
+        <div data-ref="capLwRef" aria-hidden="true" style="position: absolute; top: 48px; right: 100%; width: calc(var(--content-x) - var(--vein-x) - 1px); height: 2px; background: linear-gradient(90deg, rgba(255, 158, 61, 0.9), rgba(255, 158, 61, 0.3)); box-shadow: 0 0 10px rgba(255, 158, 61, 0.5); opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></div>
+        <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27/%3E%3C/filter%3E%3Crect%20width=%27120%27%20height=%27120%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E);"></div>
+        <div style="flex: 1 1 320px; max-width: 440px; min-width: min(100%, 240px); position: relative;">
+          <a class="cover" href="linewalker.html"><img src="assets/cover-linewalker.jpg" width="900" height="1399" alt="Linewalker — the cover: a rune-cut marker stone, a walker, a bright vein under the ice" loading="lazy" decoding="async"></a>
+        </div>
+        <div style="flex: 1 1 380px; min-width: min(100%, 300px); position: relative;">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+            <span style="border: 1px solid rgba(255, 158, 61, 0.6); color: #FFD9A0; padding: 5px 10px;">BOOK I · AVAILABLE</span>
+            <span style="border: 1px solid rgba(169, 195, 214, 0.4); color: #A9C3D6; padding: 5px 10px;">−41.0° · VESH</span>
+          </div>
+          <h3 style="margin: 22px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 560; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(38px, 5vw, 64px); line-height: 1; color: #EDF4F7;">Linewalker</h3>
+
+          <!-- SET-PIECE 3 · THE ASSAY -->
+          <div id="the-assay" data-ref="assayRef" style="scroll-margin-top: 90px; position: relative; margin-top: 28px; max-width: 520px; background: #EDF4F7; color: #0A1520; border: 1px solid rgba(10, 21, 32, 0.3); box-shadow: 0 14px 34px -14px rgba(4, 10, 16, 0.7); padding: 15px 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; line-height: 1.7;">
+            <div data-assay="row" style="font-size: 9.5px; letter-spacing: 0.2em; color: rgba(10, 21, 32, 0.6); border-bottom: 1px solid rgba(10, 21, 32, 0.35); padding-bottom: 8px; transition: clip-path 420ms steps(24, end) 0ms;">STOKER GUILD — HEARTH-BLOOD ASSAY · FORM 7-C</div>
+            <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed rgba(10, 21, 32, 0.2); padding: 7px 0; transition: clip-path 420ms steps(24, end) 220ms;"><span style="opacity: 0.6;">SUBJECT</span><span style="text-align: right;">MARN, V. — KELDER REACH, VESH</span></div>
+            <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px dashed rgba(10, 21, 32, 0.2); padding: 7px 0; transition: clip-path 420ms steps(24, end) 440ms;"><span style="opacity: 0.6;">RATING</span><span style="color: #B4472F;">0.4 — SPOILT</span></div>
+            <div data-assay="row" style="display: flex; justify-content: space-between; gap: 16px; padding: 7px 0 2px; transition: clip-path 420ms steps(24, end) 660ms;"><span style="opacity: 0.6;">DISPOSITION</span><span>SET ASIDE</span></div>
+            <div data-assay="stamp" style="position: absolute; left: 50%; top: 54%; transition: opacity 200ms cubic-bezier(0.2, 0.8, 0.3, 1) 1350ms, transform 200ms cubic-bezier(0.2, 0.8, 0.3, 1) 1350ms; border: 2.5px solid #B4472F; color: #B4472F; padding: 8px 14px; font-weight: 600; font-size: clamp(11px, 2.4vw, 14.5px); letter-spacing: 0.13em; white-space: nowrap; background: rgba(237, 244, 247, 0.55);">THE INSTRUMENTS ARE WRONG.</div>
+          </div>
+
+          <p style="margin: 28px 0 0; font-size: clamp(18px, 1.9vw, 23px); line-height: 1.5; color: #EDF4F7; max-width: 32ch; text-wrap: pretty;">They rated her four-tenths and set her aside. It was their first mistake.</p>
+          <div class="buy-row" style="margin-top: 26px;">
+            <a class="buy is-live" data-buy="linewalker" data-sub-live="Linewalker · Kindle — walk the line" data-sub-soon="Linewalker · in the veins" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span><span class="buy-sub" data-buy-sub>Linewalker · Kindle — walk the line</span></a>
+            <a class="buy is-soon" data-buy-imprint="linewalker" href="https://orbandink.co.uk/en/books/linewalker/" target="_blank" rel="noopener"><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+          </div>
+          <p style="margin: 18px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em;"><a href="linewalker.html" class="hv-4" style="color: #A9C3D6; text-decoration-color: rgba(169, 195, 214, 0.4);">ABOUT THE BOOK →</a></p>
+        </div>
+      </article>
+
+      <div style="max-width: 1120px; margin-top: clamp(26px, 4vh, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: clamp(20px, 3vw, 36px); align-items: stretch;">
+        <!-- BOOK II · THE GOLDEN SHORE — SET-PIECE 4: frost as luxury -->
+        <div style="position: relative;">
+          <div data-ref="capGsRef" aria-hidden="true" style="position: absolute; top: 48px; right: 100%; width: calc(var(--content-x) - var(--vein-x) - 1px); height: 2px; background: linear-gradient(90deg, rgba(255, 158, 61, 0.9), rgba(255, 158, 61, 0.3)); box-shadow: 0 0 10px rgba(255, 158, 61, 0.5); opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></div>
+          <article data-ref="gsRef" style="position: relative; overflow: hidden; height: 100%; background: #F4E8CE; color: #5A431C; border: 1px solid rgba(201, 147, 47, 0.55); box-shadow: 26px 34px 80px -38px rgba(58, 40, 10, 0.6); padding: clamp(22px, 3.5vw, 42px); --soon-ink: #5A431C; --soon-line: rgba(122, 83, 16, 0.7); --soon-hover: #B4472F; --soon-fill: rgba(244, 232, 206, 0.4); --live-bg: #5A431C; --live-top: #71572A; --live-low: #453110; --live-edge: #3F2E12; --live-sheen: rgba(255, 236, 190, 0.3); --live-halo: rgba(90, 67, 28, 0.22); --live-glow: rgba(58, 40, 10, 0.6); --live-press: rgba(20, 12, 0, 0.5); --live-ink: #F4E8CE; --cover-cast: rgba(58, 40, 10, 0.8);">
+            <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; opacity: 0.035; background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27/%3E%3C/filter%3E%3Crect%20width=%27120%27%20height=%27120%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E);"></div>
+            <svg data-ref="frostSvg" viewBox="0 0 400 300" aria-hidden="true" style="position: absolute; top: -6px; right: -6px; width: min(360px, 80%); height: auto; pointer-events: none;"></svg>
+            <div style="position: relative;">
+              <div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+                <span style="border: 1px solid rgba(201, 147, 47, 0.7); color: #5A431C; padding: 5px 10px;">BOOK II</span>
+                <span style="border: 1px solid rgba(201, 147, 47, 0.5); color: rgba(90, 67, 28, 0.85); padding: 5px 10px;">+35.5° · AURENTINE</span>
+                <span style="border: 1px solid rgba(180, 71, 47, 0.6); color: #B4472F; padding: 5px 10px; transform: rotate(-1.5deg);">IN THE VEINS · FORTHCOMING</span>
+              </div>
+              <h3 data-ref="gsTitle" style="margin: 20px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 500; font-variation-settings: 'SOFT' 100, 'WONK' 1; transition: font-variation-settings 1400ms cubic-bezier(0.22, 1, 0.36, 1); font-size: clamp(32px, 3.6vw, 48px); line-height: 1.02; color: #5A431C;">The Golden Shore</h3>
+              <a class="cover" href="the-golden-shore.html" style="margin-top: 24px; max-width: 340px;"><img src="assets/cover-the-golden-shore.jpg" width="900" height="1399" alt="The Golden Shore — the cover: an iron cuff and a brass assay gauge on blue ice" loading="lazy" decoding="async"></a>
+              <p style="margin: 24px 0 0; font-style: italic; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.45; max-width: 26ch; color: rgba(90, 67, 28, 0.95);">When the arithmetic of empire is genuinely correct — who signs?</p>
+              <div class="buy-row" style="margin-top: 20px;">
+                <a class="buy is-soon" data-buy="the-golden-shore" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span></a>
+                <a class="buy is-soon" data-buy-imprint="the-golden-shore" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener" hidden><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+              </div>
+              <p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em;"><a href="the-golden-shore.html" class="hv-8" style="color: #7A5310; text-decoration-color: rgba(122, 83, 16, 0.4);">ABOUT THE BOOK →</a></p>
+            </div>
+          </article>
+        </div>
+
+        <!-- BOOK III · THE EVEN COLD -->
+        <article data-ref="ecRef" style="position: relative; background: rgba(8, 18, 26, 0.93); color: #A9C3D6; border: 1px solid rgba(62, 107, 82, 0.55); box-shadow: 0 34px 80px -38px rgba(2, 8, 12, 0.9); padding: clamp(22px, 3.5vw, 42px); --soon-ink: #C7DCD2; --soon-line: rgba(143, 188, 164, 0.5); --soon-hover: #D9EDE2; --soon-fill: rgba(143, 188, 164, 0.05);">
+          <div data-ref="capEcRef" aria-hidden="true" style="position: absolute; top: 48px; left: -15px; width: 15px; height: 2px; background: linear-gradient(90deg, rgba(255, 158, 61, 0.85), rgba(255, 158, 61, 0.3)); box-shadow: 0 0 10px rgba(255, 158, 61, 0.5); opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></div>
+          <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, rgba(143, 188, 164, 0.65), rgba(143, 188, 164, 0.05));"></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+            <span style="border: 1px solid rgba(143, 188, 164, 0.55); color: #8FBCA4; padding: 5px 10px;">BOOK III</span>
+            <span style="border: 1px solid rgba(143, 188, 164, 0.35); color: rgba(143, 188, 164, 0.9); padding: 5px 10px;">0.000° · EVEN</span>
+            <span style="border: 1px solid rgba(180, 71, 47, 0.7); color: #C96A50; padding: 5px 10px; transform: rotate(-1.5deg);">IN THE VEINS · FORTHCOMING</span>
+          </div>
+          <h3 style="margin: 20px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 540; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.02; color: #EDF4F7;">The Even Cold</h3>
+          <a class="cover" href="the-even-cold.html" style="margin-top: 24px; max-width: 340px;"><img src="assets/cover-the-even-cold.jpg" width="900" height="1399" alt="The Even Cold — the cover: a frost fern on a dark slab, one red light far down the works" loading="lazy" decoding="async"></a>
+          <p style="margin: 24px 0 0; font-style: italic; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.45; max-width: 26ch; color: #8FBCA4;">What is owed to a starving god?</p>
+          <div class="buy-row" style="margin-top: 20px;">
+            <a class="buy is-soon" data-buy="the-even-cold" href="https://orbandink.co.uk/en/books/the-even-cold/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span></a>
+            <a class="buy is-soon" data-buy-imprint="the-even-cold" href="https://orbandink.co.uk/en/books/the-even-cold/" target="_blank" rel="noopener" hidden><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+          </div>
+          <p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em;"><a href="the-even-cold.html" class="hv-10" style="color: #8FBCA4; text-decoration-color: rgba(143, 188, 164, 0.4);">ABOUT THE BOOK →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CLOSING — START WITH BOOK ONE · the three covers in order, each with its button; the lit one is the hearth -->
+    <section id="buy" data-ref="buyRef" style="scroll-margin-top: 40px; position: relative; padding: clamp(56px, 9vh, 120px) clamp(20px, 6vw, 110px) 150px var(--content-x);">
+      <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(169, 195, 214, 0.85);">
+        <span>ISOTHERM 05</span>
+        <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(169, 195, 214, 0.4), rgba(169, 195, 214, 0.06));"></span>
+        <span style="text-align: right;">−55.0° · END OF LINE</span>
+      </div>
+      <div class="hearth">
+        <canvas data-hearth aria-hidden="true"></canvas>
+        <h2 style="margin: 34px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 560; font-variation-settings: 'SOFT' 0, 'WONK' 0; font-size: clamp(40px, 6vw, 84px); line-height: 0.98; color: #EDF4F7;">Start with Book One.</h2>
+        <div class="shelf">
+          <div class="shelf-book">
+            <a class="cover" href="linewalker.html"><img src="assets/cover-linewalker.jpg" width="900" height="1399" alt="Linewalker — the cover" loading="lazy" decoding="async"></a>
+            <div>
+              <p class="shelf-kicker" style="color: #FFD9A0;">BOOK ONE</p>
+              <h3 class="shelf-title">Linewalker</h3>
+              <a class="buy is-live" data-buy="linewalker" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span></a>
+            </div>
+          </div>
+          <div class="shelf-book">
+            <a class="cover" href="the-golden-shore.html"><img src="assets/cover-the-golden-shore.jpg" width="900" height="1399" alt="The Golden Shore — the cover" loading="lazy" decoding="async"></a>
+            <div>
+              <p class="shelf-kicker" style="color: #A9C3D6;">BOOK TWO</p>
+              <h3 class="shelf-title">The Golden Shore</h3>
+              <a class="buy is-soon" data-buy="the-golden-shore" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span></a>
+            </div>
+          </div>
+          <div class="shelf-book">
+            <a class="cover" href="the-even-cold.html"><img src="assets/cover-the-even-cold.jpg" width="900" height="1399" alt="The Even Cold — the cover" loading="lazy" decoding="async"></a>
+            <div>
+              <p class="shelf-kicker" style="color: #8FBCA4;">BOOK THREE</p>
+              <h3 class="shelf-title">The Even Cold</h3>
+              <a class="buy is-soon" data-buy="the-even-cold" href="https://orbandink.co.uk/en/books/the-even-cold/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="margin: clamp(34px, 6vh, 56px) 0 0; max-width: 780px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; line-height: 1.9; color: rgba(169, 195, 214, 0.8);">ALSO COMING · paperback, hardcover, audiobook, immersive audiobook, audio drama, graphic novel</p>
+      <p style="margin: 22px 0 0; font-style: italic; font-size: 16.5px; line-height: 1.6; color: rgba(212, 226, 236, 0.85); max-width: 52ch; text-wrap: pretty;">Alexey Belenkiy writes literary science fiction about large systems and the people who hold them open. Books II and III are in the veins — follow <a href="https://orbandink.co.uk/" target="_blank" rel="noopener">Orb &amp; Ink</a> for release day.</p>
+      <div style="margin-top: clamp(44px, 7vh, 80px); border-top: 1px solid rgba(169, 195, 214, 0.2); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em; color: rgba(169, 195, 214, 0.7);">
+        <span>© Alexey Belenkiy · published by <a href="https://orbandink.co.uk/" target="_blank" rel="noopener" class="hv-4" style="color: inherit; text-decoration-color: rgba(169, 195, 214, 0.4);">Orb &amp; Ink</a></span>
+        <span>THERE IS NO WEATHER. THERE ARE ONLY DECISIONS.</span>
+      </div>
+      <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 39px; transform: translateX(-50%); width: 21px; height: 21px; border-radius: 50%; border: 1px solid rgba(255, 158, 61, 0.5);"></div>
+      <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 44px; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle, #FFD9A0 0%, #FF9E3D 60%, rgba(255, 158, 61, 0) 100%); box-shadow: 0 0 18px 5px rgba(255, 158, 61, 0.45);"></div>
+      <div style="position: absolute; left: calc(var(--vein-x) + 22px); bottom: 43px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(255, 217, 160, 0.75);">the line ends at a hearth</div>
+    </section>
+  </div>
+</div>
+<script type="module">
+const $ref = (n) => document.querySelector('[data-ref="' + n + '"]');
+// thermo.js does three things for this page once it has loaded: it sets every buy control from the
+// RETAIL map (the markup already carries today's state, so nothing moves if the module is slow or
+// missing), wakes the living plates, and lights the hearth behind the buy area
+import('./thermo.js').then((m) => {
+  m.wireRetail();
+  document.querySelectorAll('[data-plate]').forEach((fig) => m.mountPlate(fig));
+  document.querySelectorAll('.hearth').forEach((el) => m.mountHearth(el));
+}).catch((err) => console.warn('thermo.js unavailable — the still plates and the links in the markup hold', err));
+const heroEl = $ref('heroRef'), canvasEl = $ref('canvasRef'), counterEl = $ref('counterRef');
+const veinLit = $ref('veinLitRef'), veinHead = $ref('veinHeadRef'), steamEl = $ref('steamRef');
+const assayEl = $ref('assayRef'), gsEl = $ref('gsRef'), lwEl = $ref('lwRef'), ecEl = $ref('ecRef'), buyEl = $ref('buyRef');
+const capLw = $ref('capLwRef'), capGs = $ref('capGsRef'), capEc = $ref('capEcRef');
+const seaEl = $ref('seaRef'), seaCanvas = $ref('seaCanvasRef'), seaChip = $ref('seaChipRef');
+const gsTitle = $ref('gsTitle'), frostSvg = $ref('frostSvg');
+const barEl = $ref('buyBar'), dismissBtn = $ref('dismissBtn');
+
+const PULSE_BPM = 57;
+const state = { assayOn: false, frostOn: false, dismissed: false, heroPast: false, buyIn: false, reduced: false };
+let cool = 0, coolTarget = 0;
+const brush = { x: 0.5, y: 0.5, amp: 0 };
+let lastPointer = 0, thermAcc = 0, thermShown = 0;
+let heroVisible = true, glTried = false, glDead = false, raf = 0;
+let hs = null, seaTried = false, seaVisible = false;
+
+const rq = window.matchMedia('(prefers-reduced-motion: reduce)');
+const syncMq = () => { state.reduced = rq.matches; };
+syncMq();
+rq.addEventListener('change', syncMq);
+
+const syncBar = () => { if (barEl) barEl.style.display = (state.heroPast && !state.buyIn && !state.dismissed) ? 'flex' : 'none'; };
+if (dismissBtn) dismissBtn.addEventListener('click', () => { state.dismissed = true; syncBar(); });
+
+let ticking = false;
+const onScroll = () => {
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    ticking = false;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    if (veinLit) veinLit.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+    if (veinHead) veinHead.style.top = (p * 100).toFixed(2) + '%';
+    coolTarget = Math.max(coolTarget, Math.min(0.85, p * 1.4)); // one-way: decisions are not refunds
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+const setAssayOn = () => {
+  if (state.assayOn) return;
+  state.assayOn = true;
+  document.querySelectorAll('[data-assay="row"]').forEach((el) => { el.style.clipPath = 'inset(0 0% 0 0)'; });
+  const stamp = document.querySelector('[data-assay="stamp"]');
+  if (stamp) { stamp.style.opacity = '1'; stamp.style.transform = 'translate(-50%, -50%) rotate(-7deg) scale(1)'; }
+};
+
+function buildFrost() {
+  const out = []; const ox = 396, oy = 4;
+  const arms = [[100, 235], [122, 300], [146, 255], [170, 195], [88, 150]];
+  arms.forEach(([ang, len]) => {
+    const a = ang * Math.PI / 180, dx = Math.cos(a), dy = Math.sin(a);
+    let d = 'M ' + ox + ' ' + oy + ' L ' + (ox + dx * len).toFixed(1) + ' ' + (oy + dy * len).toFixed(1);
+    let total = len;
+    [0.28, 0.46, 0.64, 0.8].forEach((f) => {
+      const bx = ox + dx * len * f, by = oy + dy * len * f, bl = (1 - f) * 52 + 10;
+      [-58, 58].forEach((off) => {
+        const b = (ang + off) * Math.PI / 180;
+        d += ' M ' + bx.toFixed(1) + ' ' + by.toFixed(1) + ' L ' + (bx + Math.cos(b) * bl).toFixed(1) + ' ' + (by + Math.sin(b) * bl).toFixed(1);
+        total += bl;
+      });
+    });
+    out.push({ d, total: Math.round(total) });
+  });
+  return out;
+}
+const frostPaths = [];
+if (frostSvg) {
+  buildFrost().forEach((p, i) => {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    el.setAttribute('d', p.d);
+    el.style.stroke = '#D7E9F4';
+    el.style.strokeWidth = '1.3';
+    el.style.fill = 'none';
+    el.style.filter = 'drop-shadow(0 0 3px rgba(237, 244, 247, 0.7))';
+    el.style.strokeDasharray = String(p.total);
+    el.style.strokeDashoffset = String(p.total);
+    el.style.transition = 'stroke-dashoffset 700ms cubic-bezier(0.22, 1, 0.36, 1) ' + (i * 90) + 'ms';
+    frostSvg.appendChild(el);
+    frostPaths.push(el);
+  });
+}
+const setFrostOn = () => {
+  if (state.frostOn) return;
+  state.frostOn = true;
+  frostPaths.forEach((el) => { el.style.strokeDashoffset = '0'; });
+  if (gsTitle) gsTitle.style.fontVariationSettings = "'SOFT' 0, 'WONK' 0";
+};
+
+(function buildWisps() {
+  if (!steamEl) return;
+  let seed = 7;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  for (let i = 0; i < 11; i++) {
+    const d = document.createElement('div');
+    d.style.position = 'absolute';
+    d.style.left = (2 + rnd() * 90) + '%';
+    d.style.bottom = (32 + rnd() * 20) + '%';
+    d.style.width = (70 + rnd() * 150) + 'px';
+    d.style.height = (90 + rnd() * 140) + 'px';
+    d.style.borderRadius = '50%';
+    d.style.background = 'radial-gradient(closest-side, rgba(244, 232, 206, 0.75), rgba(244, 232, 206, 0))';
+    d.style.filter = 'blur(' + (10 + rnd() * 10).toFixed(0) + 'px)';
+    d.style.animation = 'cal-steam ' + (9 + rnd() * 8).toFixed(1) + 's linear ' + (-rnd() * 12).toFixed(1) + 's infinite';
+    d.style.opacity = '0';
+    d.style.willChange = 'transform, opacity';
+    steamEl.appendChild(d);
+  }
+})();
+
+const io = (el, cb, opts) => { if (!el) return null; const o = new IntersectionObserver(cb, opts); o.observe(el); return o; };
+const once = (el, threshold, fn) => { const o = io(el, (es) => { if (es[0].isIntersecting) { fn(); o.disconnect(); } }, { threshold }); };
+io(heroEl, (es) => {
+  const e = es[0];
+  heroVisible = e.isIntersecting;
+  const past = !e.isIntersecting && e.boundingClientRect.bottom < 120;
+  if (past !== state.heroPast) { state.heroPast = past; syncBar(); }
+}, { threshold: [0, 0.02] });
+once(assayEl, 0.6, () => setAssayOn());
+once(gsEl, 0.35, () => { setFrostOn(); if (capGs) capGs.style.opacity = '1'; });
+once(lwEl, 0.18, () => { if (capLw) capLw.style.opacity = '1'; });
+once(ecEl, 0.35, () => { if (capEc) capEc.style.opacity = '1'; });
+io(buyEl, (es) => { const v = es[0].isIntersecting; if (v !== state.buyIn) { state.buyIn = v; syncBar(); } }, { threshold: 0.1 });
+io(steamEl, (es) => { const r = es[0].intersectionRatio; if (steamEl) steamEl.style.opacity = (0.15 + 0.85 * r).toFixed(2); }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+io(seaEl, (es) => {
+  const e = es[0];
+  seaVisible = e.isIntersecting;
+  if (hs) hs.setVisible(e.isIntersecting);
+  if (e.isIntersecting) mountSea();
+}, { threshold: [0, 0.05] });
+if (seaEl) {
+  const onSeaPointer = (e) => {
+    const c = seaCanvas; if (!c || !hs) return;
+    const r = c.getBoundingClientRect(); if (!r.width) return;
+    const amp = (e.buttons & 1) || e.pointerType === 'touch' ? 0.35 : 0.14; // stirring the harbour
+    hs.pointer((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height, amp);
+  };
+  seaEl.addEventListener('pointermove', onSeaPointer);
+  seaEl.addEventListener('pointerdown', onSeaPointer);
+}
+
+if (heroEl) {
+  const onPointer = (e) => {
+    maybeInitGL();
+    const c = canvasEl; if (!c) return;
+    const r = c.getBoundingClientRect(); if (!r.width) return;
+    brush.x = (e.clientX - r.left) / r.width;
+    brush.y = 1 - (e.clientY - r.top) / r.height;
+    brush.amp = (e.buttons & 1) || e.pointerType === 'touch' ? 0.5 : 0.16;
+    lastPointer = performance.now();
+  };
+  heroEl.addEventListener('pointermove', onPointer);
+  heroEl.addEventListener('pointerdown', onPointer);
+}
+const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 400));
+idle(() => maybeInitGL());
+
+// Harbour Station 9 — the sea, quietly warmer than it should be. Stirring raises the reading.
+async function mountSea() {
+  if (seaTried || !seaCanvas) return;
+  seaTried = true;
+  const INIT = 'precision highp float; varying vec2 vUv; void main(){ vec2 uv=vUv;' +
+    ' float t = 0.5 + 0.02*sin(uv.x*10.0);' +
+    ' t = mix(t, 0.85, step(0.42, uv.y));' + // sky above the horizon
+    ' t += (0.15*exp(-pow(distance(uv,vec2(0.33,0.1)),2.0)*40.0) + 0.12*exp(-pow(distance(uv,vec2(0.78,0.12)),2.0)*40.0))*step(uv.y,0.42);' +
+    ' gl_FragColor = vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const SIM = 'precision highp float; varying vec2 vUv; uniform sampler2D uPrev; uniform vec2 uTexel; uniform vec3 uBrush; uniform float uBrushMean; uniform float uCool; uniform float uAspect; void main(){ vec2 uv=vUv;' +
+    ' float c=texture2D(uPrev,uv).r;' +
+    ' float l=texture2D(uPrev,uv-vec2(uTexel.x,0.0)).r; float r=texture2D(uPrev,uv+vec2(uTexel.x,0.0)).r;' +
+    ' float d=texture2D(uPrev,uv-vec2(0.0,uTexel.y)).r; float u=texture2D(uPrev,uv+vec2(0.0,uTexel.y)).r;' +
+    ' float t=c+0.2*(l+r+u+d-4.0*c);' +
+    ' t=mix(t,0.85,step(0.42,uv.y)*0.4);' + // the sky holds its noon
+    ' t=mix(t,0.8,exp(-pow(distance(vec2(uv.x*uAspect,uv.y),vec2(0.33*uAspect,0.05)),2.0)*60.0)*0.012);' + // something warms it from below
+    ' t=mix(t,0.78,exp(-pow(distance(vec2(uv.x*uAspect,uv.y),vec2(0.78*uAspect,0.08)),2.0)*60.0)*0.01);' +
+    ' float dd=distance(vec2(uv.x*uAspect,uv.y),vec2(uBrush.x*uAspect,uBrush.y));' +
+    ' t+=uBrush.z*exp(-dd*dd*700.0);' +
+    ' t-=uBrushMean;' +
+    ' gl_FragColor=vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const DISP = 'precision highp float; varying vec2 vUv; uniform sampler2D uField; uniform float uTime; uniform float uPulse; uniform float uMotion;' +
+    ' vec3 seaPal(float t){ vec3 c0=vec3(0.541,0.392,0.125),c1=vec3(0.659,0.471,0.141),c2=vec3(0.788,0.576,0.184),c3=vec3(0.890,0.745,0.431),c4=vec3(0.957,0.910,0.808);' +
+    ' vec3 col=mix(c0,c1,smoothstep(0.0,0.3,t)); col=mix(col,c2,smoothstep(0.3,0.5,t)); col=mix(col,c3,smoothstep(0.5,0.72,t)); return mix(col,c4,smoothstep(0.72,0.95,t)); }' +
+    ' void main(){ vec2 uv=vUv; float t=texture2D(uField,uv).r;' +
+    ' vec2 fp=floor(gl_FragCoord.xy); t+=(mod(fp.x,2.0)*2.0+mod(fp.y,2.0))*0.0035-0.005;' +
+    ' vec3 col;' +
+    ' if (uv.y > 0.42) {' +
+    '   col=mix(vec3(0.890,0.745,0.431), vec3(0.957,0.910,0.808), smoothstep(0.42,1.0,uv.y));' +
+    '   col=mix(col, vec3(0.96,0.92,0.83), exp(-(uv.y-0.42)*9.0)*0.4);' + // haze off the water
+    ' } else {' +
+    '   col=seaPal(t);' +
+    '   col*=0.9+0.1*(uv.y/0.42);' +
+    '   float rip=sin(uv.y*160.0+sin(uv.x*24.0+uTime*0.35*uMotion)*0.8)*0.5+0.5;' +
+    '   col+=vec3(0.05,0.042,0.02)*rip*smoothstep(0.42,0.28,uv.y);' +
+    '   float f=abs(fract(t*18.0)-0.5); col*=1.0-(1.0-smoothstep(0.02,0.06,f))*0.05;' +
+    ' }' +
+    ' col*=1.0-smoothstep(0.006,0.0,abs(uv.y-0.42))*0.25;' + // horizon
+    ' gl_FragColor=vec4(col,1.0); }';
+  try {
+    const { mountThermo } = await import('./thermo.js');
+    hs = mountThermo(seaCanvas, {
+      initFrag: INIT, simFrag: SIM, dispFrag: DISP, simW: 384, simH: 128,
+      bpm: PULSE_BPM, reduced: state.reduced,
+      onTherms: (n) => {
+        if (!seaChip) return;
+        const temp = 31.1 + Math.min(3.8, n * 0.012);
+        seaChip.textContent = 'HARBOUR STATION 9 · SURFACE +' + temp.toFixed(1) + '°' + (temp > 31.3 ? ' · RISING' : '');
+      }
+    });
+    if (hs) hs.setVisible(seaVisible);
+  } catch (err) { console.warn('harbour shader unavailable — painted sea holds', err); }
+}
+
+function updateCounter() {
+  const n = Math.round(thermAcc * 60);
+  if (n === thermShown || !counterEl) return;
+  thermShown = n;
+  counterEl.textContent = '+ ' + n + ' therms · here ░ − ' + n + ' therms · everywhere else';
+}
+
+function maybeInitGL() {
+  if (glTried || glDead) return;
+  const canvas = canvasEl; if (!canvas) return;
+  glTried = true;
+  try { initGL(canvas); } catch (err) { console.warn('hero shader unavailable — static composition holds', err); }
+}
+
+// Hand-written conserved-heat diffusion: heat is never created, only moved.
+function initGL(canvas) {
+  // The vein. On a wide screen it runs the height of the survey. On a phone the title is as wide as the
+  // screen, so the vein leaves the survey above it (uBend: where the turn ends and begins) and runs down
+  // the page's own spine (uVein.y), where the scroll vein already is: it never crosses the type.
+  const VEIN = 'uniform vec3 uVein; uniform vec2 uBend;' + // uVein: x = 1 on a phone, y = the spine's x, z = canvas width / height
+    ' float veinWide(float y){ return 0.56 + 0.085*sin(y*4.4+1.8) + 0.035*sin(y*11.0+0.6); }' +
+    ' float veinX(float y){ return mix(veinWide(y), mix(uVein.y, veinWide(y), smoothstep(uBend.x, uBend.y, y)), uVein.x); }' +
+    ' float veinD(vec2 uv){ float d = abs(uv.x - veinX(uv.y));' + // on the turn the line leans, so its width is measured across it, not along x
+    ' float s = (veinX(uv.y + 0.004) - veinX(uv.y - 0.004)) / 0.008 * uVein.z; return d / mix(1.0, sqrt(1.0 + s * s), uVein.x); }';
+  const narrowMq = window.matchMedia('(max-width: 719px)');
+  const vein = { narrow: 0, x: 0.045, wh: 1, y0: 0.6, y1: 0.84 };
+  const measureVein = () => {
+    const r = canvas.getBoundingClientRect(), h1 = heroEl && heroEl.querySelector('h1');
+    if (!r.width || !r.height) return;
+    vein.narrow = narrowMq.matches ? 1 : 0;
+    vein.wh = r.width / r.height;
+    vein.x = (parseFloat(getComputedStyle(veinLit.parentElement).left) + 1) / r.width;
+    const top = h1 ? 1 - (h1.getBoundingClientRect().top - r.top) / r.height : 0.56; // the title's top edge, from the bottom of the survey
+    vein.y0 = Math.min(0.80, top + 0.035);
+    vein.y1 = Math.min(0.93, vein.y0 + 0.25);
+  };
+  measureVein();
+  const veinUniforms = (p) => { gl.uniform3f(gl.getUniformLocation(p, 'uVein'), vein.narrow, vein.x, vein.wh); gl.uniform2f(gl.getUniformLocation(p, 'uBend'), vein.y0, vein.y1); };
+  const VERT = 'attribute vec2 aP; varying vec2 vUv; void main(){ vUv = aP*0.5+0.5; gl_Position = vec4(aP,0.0,1.0); }';
+  const INIT = 'precision highp float; varying vec2 vUv; ' + VEIN +
+    ' void main(){ vec2 uv=vUv;' +
+    ' float t = 0.10 + 0.06*uv.y;' +
+    ' t += 0.85*smoothstep(0.80,0.95,uv.y);' +
+    ' float dv = veinD(uv);' +
+    ' t = max(t, smoothstep(0.016,0.0,dv)*(0.30+0.45*uv.y));' +
+    ' t += 0.025*sin(uv.x*21.0)*sin(uv.y*17.0);' +
+    ' gl_FragColor = vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const SIM = 'precision highp float; varying vec2 vUv;' +
+    ' uniform sampler2D uPrev; uniform vec2 uTexel; uniform vec3 uBrush; uniform float uBrushMean; uniform float uCool; uniform float uAspect; ' + VEIN +
+    ' void main(){ vec2 uv=vUv;' +
+    ' float c=texture2D(uPrev,uv).r;' +
+    ' float l=texture2D(uPrev,uv-vec2(uTexel.x,0.0)).r;' +
+    ' float r=texture2D(uPrev,uv+vec2(uTexel.x,0.0)).r;' +
+    ' float d=texture2D(uPrev,uv-vec2(0.0,uTexel.y)).r;' +
+    ' float u=texture2D(uPrev,uv+vec2(0.0,uTexel.y)).r;' +
+    ' float vein=smoothstep(0.016,0.0,veinD(uv));' +
+    ' float k=mix(0.16,0.46,vein);' +
+    ' float t=c+k*(l+r+u+d-4.0*c);' +
+    ' t=mix(t,0.95*(1.0-0.8*uCool),smoothstep(0.86,0.97,uv.y)*0.05);' + // top boundary: scroll cools paradise, one-way
+    ' t=mix(t,0.05,smoothstep(0.05,0.0,uv.y)*0.04);' +
+    ' float dd=distance(vec2(uv.x*uAspect,uv.y),vec2(uBrush.x*uAspect,uBrush.y));' +
+    ' t+=uBrush.z*exp(-dd*dd*700.0);' +
+    ' t-=uBrushMean;' + // conservation: injected warmth subtracted from the whole field
+    ' gl_FragColor=vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const DISP = 'precision highp float; varying vec2 vUv;' +
+    ' uniform sampler2D uField; uniform float uTime; uniform float uPulse; uniform float uMotion; ' + VEIN +
+    ' vec3 pal(float t){' +
+    ' vec3 c0=vec3(0.039,0.082,0.125),c1=vec3(0.086,0.157,0.227),c2=vec3(0.663,0.765,0.839),c3=vec3(1.0,0.62,0.239),c4=vec3(1.0,0.851,0.627),c5=vec3(0.957,0.910,0.808);' +
+    ' vec3 col=mix(c0,c1,smoothstep(0.0,0.22,t));' +
+    ' col=mix(col,c2,smoothstep(0.22,0.5,t));' +
+    ' col=mix(col,c3,smoothstep(0.5,0.68,t));' +
+    ' col=mix(col,c4,smoothstep(0.68,0.86,t));' +
+    ' return mix(col,c5,smoothstep(0.86,1.0,t)); }' +
+    ' void main(){ vec2 uv=vUv;' +
+    ' float t=texture2D(uField,uv).r;' +
+    ' vec2 fp=floor(gl_FragCoord.xy);' +
+    ' t+=(mod(fp.x,2.0)*2.0+mod(fp.y,2.0))*0.0035-0.005;' + // ordered dither
+    ' vec3 col=pal(t);' +
+    ' float f=abs(fract(t*13.0)-0.5);' +
+    ' col*=1.0-(1.0-smoothstep(0.02,0.07,f))*0.10;' + // isotherm contour bands
+    ' float g=exp(-pow(veinD(uv),2.0)*14000.0);' +
+    ' float w=exp(-pow(fract(uTime*uPulse)-(1.0-uv.y),2.0)*260.0)*uMotion;' +
+    ' col+=(vec3(1.0,0.62,0.24)*0.30+vec3(1.0,0.85,0.63)*0.55*w)*g*(0.30+0.7*t);' +
+    ' gl_FragColor=vec4(col,1.0); }';
+  let gl = canvas.getContext('webgl2', { alpha: false, antialias: false, depth: false, stencil: false });
+  const isGL2 = !!gl; let halfType = 0;
+  if (gl) { if (gl.getExtension('EXT_color_buffer_float') || gl.getExtension('EXT_color_buffer_half_float')) halfType = gl.HALF_FLOAT; else return; } // a canvas keeps its first context type: no second try on this one
+  if (!gl) {
+    gl = canvas.getContext('webgl', { alpha: false, antialias: false, depth: false, stencil: false });
+    if (!gl) return;
+    const hf = gl.getExtension('OES_texture_half_float'); gl.getExtension('OES_texture_half_float_linear');
+    if (!hf) return;
+    halfType = hf.HALF_FLOAT_OES;
+  }
+  const compile = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh)); return sh; };
+  const program = (fs) => { const p = gl.createProgram(); gl.attachShader(p, compile(gl.VERTEX_SHADER, VERT)); gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p)); return p; };
+  const pInit = program(INIT), pSim = program(SIM), pDisp = program(DISP);
+  const quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  const SW = 320, SH = 180, aspect = SW / SH; // sim well under the 512x288 cap
+  const mkTarget = () => {
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, isGL2 ? gl.RGBA16F : gl.RGBA, SW, SH, 0, gl.RGBA, halfType, null);
+    const fbo = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw new Error('fbo incomplete');
+    return { tex, fbo };
+  };
+  let A = mkTarget(), B = mkTarget();
+  const draw = (p, fbo, w, h, setup) => {
+    gl.useProgram(p); gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.viewport(0, 0, w, h);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+    const loc = gl.getAttribLocation(p, 'aP'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    if (setup) setup(p);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  };
+  draw(pInit, A.fbo, SW, SH, veinUniforms);
+  const dpr = Math.min(1.5, window.devicePixelRatio || 1); // DPR cap
+  const resize = () => { const w = Math.max(2, Math.round(canvas.clientWidth * dpr)), h = Math.max(2, Math.round(canvas.clientHeight * dpr)); if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; } measureVein(); };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureVein); // the title settles once its face has loaded
+  resize();
+  window.addEventListener('resize', resize);
+  const simStep = (amp) => {
+    draw(pSim, B.fbo, SW, SH, (p) => {
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A.tex);
+      gl.uniform1i(gl.getUniformLocation(p, 'uPrev'), 0);
+      gl.uniform2f(gl.getUniformLocation(p, 'uTexel'), 1 / SW, 1 / SH);
+      gl.uniform3f(gl.getUniformLocation(p, 'uBrush'), brush.x, brush.y, amp);
+      gl.uniform1f(gl.getUniformLocation(p, 'uBrushMean'), amp * Math.PI / (700 * aspect));
+      gl.uniform1f(gl.getUniformLocation(p, 'uCool'), cool);
+      gl.uniform1f(gl.getUniformLocation(p, 'uAspect'), aspect);
+      veinUniforms(p);
+    });
+    const t = A; A = B; B = t;
+  };
+  const display = (time) => {
+    draw(pDisp, null, canvas.width, canvas.height, (p) => {
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A.tex);
+      gl.uniform1i(gl.getUniformLocation(p, 'uField'), 0);
+      gl.uniform1f(gl.getUniformLocation(p, 'uTime'), time);
+      gl.uniform1f(gl.getUniformLocation(p, 'uPulse'), PULSE_BPM / 360);
+      gl.uniform1f(gl.getUniformLocation(p, 'uMotion'), state.reduced ? 0 : 1);
+      veinUniforms(p);
+    });
+  };
+  const onLost = (e) => { e.preventDefault(); glDead = true; if (raf) cancelAnimationFrame(raf); raf = 0; canvas.style.opacity = '0'; };
+  canvas.addEventListener('webglcontextlost', onLost);
+  if (state.reduced) { for (let i = 0; i < 160; i++) simStep(0); display(0); canvas.style.opacity = '1'; return; } // one settled frame
+  const t0 = performance.now(); let shown = false;
+  const loop = (now) => {
+    raf = requestAnimationFrame(loop);
+    if (glDead || document.hidden || !heroVisible) return; // paused off-screen and on hidden tabs
+    cool += (coolTarget - cool) * 0.02;
+    const active = performance.now() - lastPointer < 160;
+    const amp = active ? brush.amp : 0;
+    simStep(amp * 0.5); simStep(amp * 0.5);
+    if (amp > 0) { thermAcc += amp; updateCounter(); }
+    display((now - t0) / 1000);
+    if (!shown) { shown = true; canvas.style.opacity = '1'; }
+  };
+  raf = requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1A1714">
+<title>The Human Factor — a first-contact trilogy by Alessio Bianco</title>
+<meta name="description" content="The Human Factor, a first-contact satire in three books by Alessio Bianco. Three units on the lot: The Assessment, The Asset, Full Disclosure. Inspection is free. Appraisal is included.">
+<meta name="author" content="Alessio Bianco">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Human Factor">
+<meta property="og:title" content="The Human Factor — They didn’t come for our science.">
+<meta property="og:description" content="A small-time car salesman is abducted by an empire ten thousand years old. He finds every vice he ever practised there, perfected. A trilogy by Alessio Bianco.">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A car lot at night under a sky of hanging velvet. On a lit billboard, a printed poster of a yellow convertible lifted in a cone of light. Signage reads: They didn’t come for our science.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400..700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BookSeries", "name": "The Human Factor", "description": "A small-time car salesman is abducted by an empire ten thousand years old in which lying is the sacrament of creation and sincerity the only obscenity. A first-contact satire in three books.", "genre": ["Science fiction", "Satire"], "inLanguage": "en", "author": {"@type": "Person", "name": "Alessio Bianco"}, "publisher": {"@type": "Organization", "name": "Orb & Ink", "url": "https://orbandink.co.uk/"}, "numberOfBooks": 3, "hasPart": [{"@type": "Book", "name": "The Assessment", "position": 1, "numberOfPages": 307, "author": {"@type": "Person", "name": "Alessio Bianco"}, "publisher": {"@type": "Organization", "name": "Orb & Ink", "url": "https://orbandink.co.uk/"}}, {"@type": "Book", "name": "The Asset", "position": 2, "numberOfPages": 353, "author": {"@type": "Person", "name": "Alessio Bianco"}, "publisher": {"@type": "Organization", "name": "Orb & Ink", "url": "https://orbandink.co.uk/"}}, {"@type": "Book", "name": "Full Disclosure", "position": 3, "numberOfPages": 333, "author": {"@type": "Person", "name": "Alessio Bianco"}, "publisher": {"@type": "Organization", "name": "Orb & Ink", "url": "https://orbandink.co.uk/"}}]}</script>
+<style>
+/* ── SHARED BASE — identical in every page of the site; change it in all five ── */
+:root{
+  --dusk:#1A1714; --asphalt:#2B2622; --gilt:#C9A24B; --gilt-hi:#F3E2AC; --red:#B23A2E; --red-ink:#9A2C22;
+  --white:#F2EFE6; --velvet:#4A2F3C; --violet:#5B4A7A; --paper:#DAC8BA; --ink:#14244A;
+  --f-d:'Bodoni Moda','Bodoni 72',Didot,'Times New Roman',serif;
+  --f-l:'Archivo Narrow','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+  --f-b:'Spectral',Georgia,'Times New Roman',serif;
+  --settle:cubic-bezier(.16,.84,.24,1);
+  --gut:max(clamp(20px,5.2vw,76px),env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --bar:calc(46px + env(safe-area-inset-top,0px));
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--bar) + 18px);background:var(--dusk)}
+body{margin:0;background:var(--dusk);color:var(--white);font-family:var(--f-b);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+.page{position:relative;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration-color:rgba(201,162,75,.55);text-underline-offset:.22em;text-decoration-thickness:1px}
+a:hover{text-decoration-color:var(--gilt)}
+:focus-visible{outline:2px solid var(--gilt);outline-offset:4px;border-radius:2px}
+.on-paper :focus-visible{outline-color:var(--ink)}
+::selection{background:var(--gilt);color:var(--dusk)}
+h1,h2,h3,h4,p,ol,ul,dl,dd,figure,blockquote{margin:0;padding:0}
+ol,ul{list-style:none}
+.num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.nw{white-space:nowrap}
+.wrap{max-width:1240px;margin:0 auto}
+.sec{position:relative;padding:clamp(72px,12vh,150px) var(--gut)}
+.h2{font-family:var(--f-d);font-weight:500;font-size:clamp(38px,5.6vw,84px);line-height:.98;letter-spacing:-.015em;text-wrap:balance}
+.h2 em{font-style:italic}
+
+/* labels: signage, price stickers */
+.label{font-family:var(--f-l);font-weight:600;font-size:12px;line-height:1.3;letter-spacing:.2em;text-transform:uppercase}
+.step{display:flex;align-items:center;gap:14px;font-family:var(--f-l);font-weight:600;font-size:12px;line-height:1.3;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt)}
+.step::before{content:'';flex:none;width:34px;height:1px;background:currentColor;opacity:.7}
+.step>span{flex:none;white-space:nowrap}
+.step i{font-style:normal;opacity:.62}
+.step b{font-weight:600;color:var(--white);opacity:.86}
+.on-paper .step{color:var(--red-ink)}
+.on-paper .step b{color:var(--ink);opacity:.9}
+
+/* the bar: where you are in the sale, and the one control that is always within reach */
+.bar{position:fixed;z-index:80;top:0;left:0;right:0;height:var(--bar);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:env(safe-area-inset-top,0px) var(--gut) 0;background:rgba(22,19,17,.94);-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);border-bottom:1px solid rgba(201,162,75,.22);font-family:var(--f-l);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.bar a{text-decoration:none}
+.bar-mark{color:var(--white);flex:none}
+.bar-step{color:rgba(242,239,230,.6);overflow:hidden;text-overflow:ellipsis;min-width:0}
+.bar-buy{position:relative;overflow:hidden;flex:none;display:inline-flex;align-items:center;gap:.7em;height:30px;padding:1px 13px 0;border-radius:3px;background:var(--red);color:var(--white);font-weight:700;letter-spacing:.15em;opacity:0;visibility:hidden;transform:translateY(-5px);transition:opacity .6s var(--settle),transform .6s var(--settle),visibility .6s,background .4s}
+.past-hero .bar-buy{opacity:1;visibility:visible;transform:none}
+.bar-buy::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 46% 160% at var(--lx,84%) var(--ly,-30%),rgba(255,255,255,.3),rgba(255,255,255,0) 64%);mix-blend-mode:screen}
+.bar-buy:hover{background:#C4473A}
+.bar-buy:active{transform:translateY(1px)}
+.bar-buy.is-live{background:linear-gradient(180deg,#CB4A3C,#B23A2E);box-shadow:inset 0 0 0 1.5px var(--gilt-hi)}
+.bar-buy-book{font-weight:600;opacity:.88}
+.bar-buy-book::after{content:'·';margin-left:.7em;opacity:.7}
+.bar-buy i{font-style:normal;display:inline-block;transition:transform .6s var(--settle)}
+.bar-buy:hover i{transform:translateX(4px)}
+.bar-buy .short{display:none}
+@media (max-width:860px){
+  .bar{font-size:10.5px;letter-spacing:.16em;gap:10px}
+  .bar-step{display:none}
+  .appraised .bar-step{display:block;color:var(--gilt);opacity:.9}
+  .appraised .bar-step .bs-long{display:none}
+  .bar-buy{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;height:34px;padding:1px 11px 0;letter-spacing:.12em;line-height:1.15}
+  .bar-buy-book{font-size:8.5px;letter-spacing:.16em}
+  .bar-buy-book::after{content:none}
+  .bar-buy .long{display:none}
+  .bar-buy .short{display:inline}
+}
+@media (max-width:359px){ .bar{letter-spacing:.1em} .appraised .bar-step{display:none} }
+
+/* buttons: a plain verb first, the floor's voice second */
+.btn{position:relative;overflow:hidden;display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:54px;padding:11px 22px 10px;border:1.5px solid var(--red);border-radius:4px;background:var(--red);color:var(--white);font-family:var(--f-l);text-transform:uppercase;text-decoration:none;text-align:left;box-shadow:0 18px 34px -18px rgba(0,0,0,.75);transition:background .5s var(--settle),border-color .5s var(--settle),color .5s var(--settle),box-shadow .5s var(--settle)}
+.btn::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 46% 130% at var(--lx,84%) var(--ly,-30%),rgba(255,255,255,.3),rgba(255,255,255,0) 64%);mix-blend-mode:screen}
+.btn--ghost::after{opacity:.5}
+.btn:active{transform:translateY(1px);box-shadow:0 6px 14px -8px rgba(0,0,0,.8)}
+.btn-main{display:flex;align-items:center;gap:.7em;font-weight:700;font-size:14px;line-height:1.2;letter-spacing:.15em}
+.btn-main>span{text-wrap:balance}
+.btn-main i{font-style:normal;display:inline-block;transition:transform .6s var(--settle)}
+.btn:hover .btn-main i{transform:translateX(5px)}
+.btn-sub{font-weight:500;font-size:11px;line-height:1.3;letter-spacing:.15em;opacity:.88}
+.btn:hover{background:#C4473A;border-color:#C4473A}
+.btn--xl{min-height:66px;padding:14px 28px 13px}
+.btn--xl .btn-main{font-size:16.5px}
+.btn--xl .btn-sub{font-size:11.5px}
+.btn--sm{min-height:0;padding:8px 12px 7px;box-shadow:none}
+.btn--sm .btn-main{font-size:11px;letter-spacing:.14em}
+.btn--wide{display:flex;width:100%}
+.btn--ghost{background:transparent;border-color:rgba(242,239,230,.5);box-shadow:none}
+.btn--ghost:hover{background:rgba(242,239,230,.1);border-color:var(--white)}
+.on-paper .btn--ghost{color:var(--ink);border-color:rgba(20,36,74,.55)}
+.on-paper .btn--ghost:hover{background:rgba(20,36,74,.07);border-color:var(--ink)}
+/* live: a filled slot in the RETAIL map. Always solid, and it wears a gilt keyline. */
+.btn.is-live,.on-paper .btn.is-live{background:linear-gradient(180deg,#CB4A3C,#B23A2E);border-color:#C4473A;color:var(--white);box-shadow:inset 0 0 0 1.5px var(--gilt-hi),0 0 0 3px rgba(201,162,75,.22),0 18px 34px -18px rgba(0,0,0,.75)}
+.btn.is-live:hover{background:linear-gradient(180deg,#D4574A,#BE4336)}
+.more{display:inline-block;font-family:var(--f-l);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(201,162,75,.6);padding:6px 0 3px}
+.more i{font-style:normal;display:inline-block;transition:transform .6s var(--settle)}
+.more:hover i{transform:translateX(4px)}
+.on-paper .more{border-color:rgba(20,36,74,.45)}
+.chip{display:inline-flex;align-items:center;gap:.6em;font-family:var(--f-l);font-weight:600;font-size:10.5px;line-height:1.2;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;color:var(--gilt);opacity:.86}
+.chip::before{content:'';width:6px;height:6px;border-radius:50%;border:1px solid currentColor}
+.on-paper .chip{color:var(--red-ink)}
+
+/* printed matter: sticker stock, laminate, dot-matrix */
+.stock{position:relative;background:linear-gradient(176deg,#F5F2E9 0%,#EBE6D8 100%);color:var(--ink);border-radius:7px;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 26px 60px -22px rgba(0,0,0,.75),0 3px 10px rgba(0,0,0,.35)}
+.stock::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image:radial-gradient(rgba(20,36,74,.13) .55px,transparent .75px);background-size:3px 3px;opacity:.55}
+.stock::after{content:'';position:absolute;z-index:5;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse 62% 78% at var(--lx,82%) var(--ly,-6%),rgba(255,255,255,.62) 0%,rgba(255,255,255,.2) 34%,rgba(255,255,255,0) 66%),linear-gradient(118deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.1) 47%,rgba(255,255,255,0) 56%);mix-blend-mode:screen}
+.band{display:flex;align-items:baseline;justify-content:space-between;gap:14px;background:var(--red);color:var(--white);font-family:var(--f-l);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding:9px 16px 8px;border-radius:7px 7px 0 0}
+.band small{font-size:inherit;font-weight:500;letter-spacing:.14em;opacity:.86;white-space:nowrap}
+@media (max-width:560px){.wide{display:none}}
+.sticker{display:block;width:max-content;max-width:100%}
+.sticker-body{display:block;padding:12px 16px 12px}
+.sticker-fig{display:block;font-family:var(--f-d);font-weight:700;font-size:var(--fig,36px);line-height:1;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.sticker-foot{display:block;margin-top:8px;font-family:var(--f-l);font-weight:600;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(20,36,74,.76)}
+.sticker .curl{position:absolute;right:0;bottom:0;width:26px;height:26px;border-radius:0 0 7px 0;background:linear-gradient(135deg,rgba(255,255,255,0) 48%,rgba(20,36,74,.2) 50%,#d9d4c6 52%,#f7f4ec 100%);box-shadow:-2px -2px 4px -2px rgba(0,0,0,.28)}
+.odo{display:inline-flex;align-items:flex-start;height:1em;overflow:hidden;vertical-align:top}
+.odo-c{display:inline-block;height:1em;overflow:hidden}
+.odo-s{display:block;transition:transform var(--d,2.4s) var(--settle)}
+.odo-s b{display:block;height:1em;line-height:1;font-weight:inherit;text-align:center}
+
+/* the fluorescent tube */
+.tube{position:relative;height:5px;margin:clamp(40px,7vh,72px) 3% 0;border-radius:3px;background:#fffdf3;box-shadow:0 0 12px 2px rgba(255,252,238,.75),0 0 70px 16px rgba(242,239,230,.22),0 26px 120px 30px rgba(242,239,230,.1)}
+.tube.strike{animation:tube 1.5s linear both}
+@keyframes tube{0%{opacity:.08}7%{opacity:.9}10%{opacity:.12}22%{opacity:.16}25%{opacity:1}29%{opacity:.3}44%{opacity:.36}47%{opacity:1}100%{opacity:1}}
+
+/* shader layers: drawn over a composition that is already in the markup, and only once they have a frame */
+.fx{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
+.fx.on{opacity:1}
+.fx.snap{transition:none}
+[data-fx="plate"]{position:relative}
+.art.lit>img,.art .lit>img{opacity:0}
+
+/* the painted art, let into the same paper the books are printed on */
+.paper{background:var(--paper);color:var(--ink)}
+.paper::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.3;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .42 0 0 0 0 .3 0 0 0 .34 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23p)'/%3E%3C/svg%3E")}
+.paper>.wrap{position:relative}
+.paper::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 18px 26px -18px rgba(40,22,10,.5),inset 0 -18px 26px -18px rgba(40,22,10,.4)}
+.art{position:relative;margin:0}
+.art img{width:100%;height:auto;-webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent);mask-composite:intersect}
+/* a print: three plates laid on the page by lot.js. The picture in the markup is the same job printed flat. */
+.print{position:relative;margin:0}
+.print img{position:relative;display:block;width:100%;height:auto}
+.print>.fx{left:-8%;top:-8%;width:116%;height:116%}
+.print.lit>img{opacity:0}
+
+/* velvet rope */
+.rope{position:absolute;z-index:2;left:-7%;right:-7%;bottom:-16px;height:clamp(96px,14vh,124px);pointer-events:none}
+.rope svg{position:absolute;overflow:visible}
+.rope .r-line{left:9px;right:9px;top:8px;width:calc(100% - 18px);height:calc(100% - 22px)}
+.rope .r-post{bottom:0;width:36px;height:100%}
+.rope .r-post.l{left:-9px}.rope .r-post.r{right:-9px}
+
+/* gilt foil: catches only on hover */
+.foil{color:var(--gilt);background:linear-gradient(105deg,var(--gilt) 0%,var(--gilt) 38%,var(--gilt-hi) 50%,var(--gilt) 62%,var(--gilt) 100%);background-size:280% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:background-position 1.5s var(--settle)}
+a:hover .foil,.foil:hover,.foil-host:hover .foil{background-position:0 0}
+
+/* the old label and the new one share a cell; the floor decides which is showing */
+.swap{display:inline-grid;vertical-align:baseline;align-items:start}
+.swap>*{grid-area:1/1;transition:opacity 1.1s var(--settle)}
+.swap[data-fit]{justify-items:start;transition:width 1.1s var(--settle)}
+.swap[data-fit]>*{white-space:nowrap}
+.swap>.was{opacity:0;visibility:hidden}
+.live .swap>.was,.swap.live>.was{opacity:1;visibility:visible}
+.live .swap>.now,.swap.live>.now{opacity:0}
+.live .swap.flipped>.was,.swap.live.flipped>.was{opacity:0}
+.live .swap.flipped>.now,.swap.live.flipped>.now{opacity:1}
+
+/* the signature: a flourish, never the control */
+.sig{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:end;max-width:520px}
+.sig-x{font-family:var(--f-l);font-weight:500;font-size:24px;line-height:1;color:var(--red-ink);transform:translateY(-6px)}
+.sig-line{position:relative;height:64px;border-bottom:1px solid currentColor}
+.sig-line svg{position:absolute;left:0;bottom:-12px;height:84px;width:auto;max-width:100%;overflow:visible}
+.sig-line path{fill:none;stroke:url(#ink) currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 1.2;stroke-dashoffset:1.1;transition:stroke-dashoffset 2.6s cubic-bezier(.4,0,.2,1)}
+.sig.signed .sig-line path{stroke-dashoffset:0}
+.dated{display:flex;flex-wrap:wrap;gap:6px clamp(20px,3vw,44px);font-family:var(--f-l);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(20,36,74,.8)}
+.dated b{font-weight:700;color:var(--ink)}
+
+/* editions: six ways to take it home, standing on a shelf */
+.eds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,5vw,80px)}
+.eds-h{font-family:var(--f-d);font-weight:500;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-.01em}
+.eds-row{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto;column-gap:clamp(12px,2vw,30px);margin-top:clamp(18px,3vh,30px)}
+.ed{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:0}
+.ed-pic{position:relative;align-self:end;display:block;margin-bottom:22px}
+.ed-pic img{position:relative;width:100%;height:auto}
+/* the shelf, and what the lamps leave on it */
+.ed-pic::after{content:'';position:absolute;left:-14%;right:-14%;top:calc(100% + 1px);height:22px;border-top:1px solid rgba(201,162,75,.55);background:linear-gradient(180deg,rgba(242,239,230,.13),rgba(242,239,230,0));pointer-events:none}
+.ed--read .ed-pic{width:72%}
+.ed--ebook .ed-pic{padding:7% 6% 15%;background:linear-gradient(160deg,#2c2724,#0e0b0a);border-radius:9px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.2),0 22px 26px -16px rgba(0,0,0,.9)}
+.ed--ebook .ed-pic::before{content:'';position:absolute;left:50%;bottom:5.5%;width:16%;height:3px;border-radius:2px;transform:translateX(-50%);background:rgba(255,255,255,.22)}
+.ed--ebook .ed-pic::after{left:-20%;right:-20%}
+.ed--paperback .ed-pic img{border-radius:1px 3px 3px 1px;box-shadow:2px 0 0 #efe9da,3px 0 0 #b9b09d,5px 0 0 #efe9da,6px 0 0 #b9b09d,0 22px 26px -16px rgba(0,0,0,.9)}
+.ed--hardcover .ed-pic{padding-left:6.5%;background:linear-gradient(90deg,#0d1a3a,#1b2e5c 60%,#0d1a3a);border-radius:3px 2px 2px 3px;box-shadow:0 0 0 2.5px #101d3f,0 24px 28px -16px rgba(0,0,0,.95)}
+.ed--hardcover .ed-pic::before{content:'';position:absolute;left:0;top:7%;bottom:7%;width:6.5%;border-top:1.5px solid var(--gilt);border-bottom:1.5px solid var(--gilt);opacity:.8}
+/* a sleeve, and the record it came in */
+.ed--listen .ed-pic{width:80%}
+.ed--listen .ed-pic img{border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.35),6px 0 14px -6px rgba(0,0,0,.7),0 22px 26px -16px rgba(0,0,0,.9)}
+.ed--listen .ed-pic::before{content:'';position:absolute;top:4%;right:-23%;height:92%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--disc,#B23A2E) 0 17%,#0c0a09 17.5% 19%,#1c1917 19.5%,#0e0c0b 33%,#211d1a 34%,#0e0c0b 46%,#1d1917 47%,#0c0a09 62%,#1a1715 63%,#0b0908 70%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 14px 18px -12px rgba(0,0,0,.9)}
+.ed--listen .ed-pic img{z-index:1}
+.ed--listen .ed-pic::before{background-image:conic-gradient(from 30deg,rgba(255,255,255,.16),rgba(255,255,255,0) 11%,rgba(255,255,255,0) 46%,rgba(255,255,255,.11) 54%,rgba(255,255,255,0) 64%,rgba(255,255,255,0)),radial-gradient(circle,var(--disc,#B23A2E) 0 17%,#0c0a09 17.5% 19%,#1c1917 19.5%,#0e0c0b 33%,#211d1a 34%,#0e0c0b 46%,#1d1917 47%,#0c0a09 62%,#1a1715 63%,#0b0908 70%)}
+.ed--immersive{--disc:#5B4A7A}
+.ed--drama{--disc:#C9A24B}
+.ed-text{display:grid;row-gap:5px;justify-items:start;align-content:start}
+.ed-name{font-family:var(--f-b);font-weight:600;font-size:18px;line-height:1.2}
+.ed-note{font-size:14.5px;line-height:1.35;opacity:.8}
+.ed-act{margin-top:6px}
+@media (max-width:860px){
+  .eds{grid-template-columns:1fr;gap:44px}
+  .ed-name{font-size:16px}
+  .ed-note{font-size:13.5px}
+}
+
+/* a stock tag: the red-banded sticker that hangs on anything for sale */
+.unit-tag{position:relative;z-index:2;align-self:flex-end;width:min(72%,232px);margin:-24px -8px 0 0;transform:rotate(-2.4deg)}
+.unit-tag .band{padding:7px 13px 6px;font-size:11px;letter-spacing:.2em}
+.unit-note{position:relative;display:block;padding:9px 13px 11px;font-style:italic;font-size:15.5px;line-height:1.3}
+
+/* taking delivery */
+.delivery{background:linear-gradient(180deg,var(--asphalt) 0%,#231e1b 70%,var(--dusk) 100%)}
+.delivery-h{margin:18px 0 clamp(34px,6vh,64px)}
+
+/* a book with its button: used wherever the sale is closed */
+.closer-cover{position:relative;align-self:end;display:block;transition:transform 1.1s var(--settle)}
+.closer-cover:hover{transform:translateY(-6px)}
+.closer-cover img{width:100%;height:auto;box-shadow:0 0 0 1px rgba(20,36,74,.2),0 40px 50px -26px rgba(20,36,74,.75),0 10px 16px -8px rgba(20,36,74,.3)}
+.closer-text{display:grid;row-gap:6px;align-content:start;justify-items:start}
+.closer-text .label{color:var(--red-ink)}
+.closer-title{font-family:var(--f-d);font-weight:600;font-size:clamp(22px,2vw,29px);line-height:1.02;letter-spacing:-.012em}
+.closer-title a{text-decoration:none}
+.closer .btn{margin-top:10px}
+
+/* footer */
+.foot{position:relative;padding:clamp(48px,8vh,84px) var(--gut) calc(clamp(34px,6vh,56px) + env(safe-area-inset-bottom,0px));background:#141110;color:rgba(242,239,230,.74);font-size:15.5px;line-height:1.55}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:30px clamp(28px,5vw,70px);align-items:start}
+.foot h2{font-family:var(--f-l);font-weight:600;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt);margin-bottom:12px}
+.foot-mark{font-family:var(--f-d);font-weight:500;font-size:26px;line-height:1.1;color:var(--white);letter-spacing:-.005em}
+.foot li{padding:3px 0}
+.foot a{text-decoration-color:rgba(201,162,75,.4)}
+.foot a:hover{color:var(--white)}
+.foot-base{margin-top:clamp(34px,6vh,56px);padding-top:18px;border-top:1px solid rgba(201,162,75,.2);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 28px;font-family:var(--f-l);font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,239,230,.6)}
+
+/* arrivals: slow, confident. Nothing bounces. */
+.pre-rise{opacity:0;transform:translateY(16px)}
+.rise{transition:opacity 1.2s var(--settle),transform 1.2s var(--settle)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+}
+
+/* ── THIS PAGE ── */
+/* 1 — THE FORECOURT */
+.hero{--ground:24vh;--leg:58px;position:relative;isolation:isolate;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;background:#120e0f}
+@supports (height:1svh){.hero{--ground:24svh}}
+.hero-sky{position:absolute;z-index:0;left:0;right:0;top:0;bottom:var(--ground);background:
+  linear-gradient(180deg,rgba(10,7,9,.9) 0%,rgba(10,7,9,.42) 46%,rgba(70,44,30,.08) 100%),
+  repeating-linear-gradient(90deg,#1b1218 0,#2b1b25 2.1%,#4a2f3c 4%,#33202b 5.5%,#191116 7.4%,#3b2531 9.2%,#21151c 11%),#2a1b24}
+.hero-ground{position:absolute;z-index:0;left:0;right:0;bottom:0;height:var(--ground);background:
+  radial-gradient(ellipse 46% 60% at 70% 18%,rgba(242,239,230,.13),rgba(242,239,230,0) 70%),
+  radial-gradient(ellipse 30% 44% at 18% 8%,rgba(242,239,230,.08),rgba(242,239,230,0) 70%),
+  linear-gradient(180deg,#322b26 0%,#28221e 26%,#1c1815 70%,#171311 100%)}
+.hero-ground svg{position:absolute;inset:0;width:100%;height:100%}
+.hero>.fx{z-index:1}
+.hero::after{content:'';position:absolute;z-index:1;left:0;right:0;top:0;height:34%;pointer-events:none;background:linear-gradient(180deg,rgba(18,14,15,.6),rgba(18,14,15,0))}
+.hero-horizon{position:absolute;z-index:2;left:0;right:0;bottom:var(--ground);height:clamp(76px,13.5vh,132px)}
+.hero-horizon svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hero-in{position:relative;z-index:5;flex:1;width:100%;max-width:1560px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(24px,4vw,70px);padding:calc(var(--bar) + clamp(20px,5vh,56px)) var(--gut) 0}
+.hero-copy{align-self:start;padding-bottom:clamp(24px,5vh,56px)}
+.eyebrow{font-family:var(--f-l);font-weight:600;font-size:12.5px;line-height:1.5;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt)}
+.eyebrow i{font-style:normal;opacity:.55;margin:0 .6em}
+.eyebrow b{font-weight:600;color:var(--white)}
+.hero h1{margin-top:clamp(12px,2.2vh,24px);font-family:var(--f-d);font-weight:500;font-size:clamp(44px,min(6.7vw,11.8vh),118px);line-height:.9;letter-spacing:-.012em;text-transform:uppercase;color:var(--white);text-shadow:0 2px 34px rgba(10,7,9,.6)}
+.hero h1 .ln{display:block;white-space:nowrap}
+.sign-strip{margin-top:clamp(16px,2.8vh,28px);display:inline-flex;flex-wrap:wrap;gap:6px 0;border-top:1px solid rgba(201,162,75,.6);border-bottom:1px solid rgba(201,162,75,.6);padding:8px 0 7px;font-family:var(--f-l);font-weight:600;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt)}
+.sign-strip span{padding:0 16px;border-left:1px solid rgba(201,162,75,.45)}
+.sign-strip span:first-child{padding-left:2px;border-left:0}
+.hero-act{margin-top:clamp(20px,3.6vh,36px);display:flex;flex-wrap:wrap;align-items:center;gap:14px clamp(18px,2.4vw,34px)}
+.cue{display:inline-flex;align-items:center;gap:12px;font-family:var(--f-l);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:rgba(242,239,230,.86);padding:6px 0;border-bottom:1px solid rgba(201,162,75,.6)}
+.cue i{font-style:normal;color:var(--gilt);display:inline-block;transition:transform .8s var(--settle)}
+.cue:hover{color:var(--white)}
+.cue:hover i{transform:translateY(4px)}
+
+/* the billboard: a poster printed for the lot, pasted up, lit, on two legs, roped off */
+.board{position:relative;align-self:end;margin:0 clamp(8px,3vw,60px) calc(var(--ground)*.3) 0;padding-bottom:var(--leg)}
+.board::before,.board::after{content:'';position:absolute;z-index:0;bottom:0;width:10px;height:calc(var(--leg) + 14px);background:linear-gradient(90deg,#070505,#332a25 45%,#0b0808);box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+.board::before{left:17%}.board::after{right:17%}
+.board-face{position:relative;z-index:1;border:8px solid #17110f;border-radius:3px;background:var(--paper);box-shadow:0 0 0 1px rgba(201,162,75,.5),0 2px 0 1px rgba(255,255,255,.06) inset,0 36px 60px -24px rgba(0,0,0,.85),0 0 120px rgba(255,248,226,.16)}
+/* the poster as it stands without script: the same plates, printed flat. lot.js prints it properly. */
+.poster{display:block;overflow:hidden;height:min(56vh,620px);aspect-ratio:1094/1200;background:radial-gradient(ellipse 90% 60% at 50% 0%,rgba(255,250,236,.4),rgba(255,250,236,0) 70%),var(--paper)}
+@supports (height:1svh){.poster{height:min(56svh,620px)}}
+.poster-beam{position:absolute;left:0;right:0;top:0;bottom:15.5%;-webkit-clip-path:polygon(46.5% 0,53.5% 0,94.5% 100%,5.5% 100%);clip-path:polygon(46.5% 0,53.5% 0,94.5% 100%,5.5% 100%);background:radial-gradient(circle,rgba(23,116,128,.5) 1.3px,rgba(23,116,128,0) 1.7px) 0 0/7px 7px}
+.poster-shade{position:absolute;left:18%;right:18%;bottom:12.8%;height:5.4%;border-radius:50%;background:radial-gradient(ellipse,rgba(20,36,74,.5),rgba(20,36,74,0) 70%)}
+.poster-car{position:absolute;left:2.5%;top:30.5%;width:95%;height:auto;max-width:none;transform:rotate(3.5deg)}
+.poster.lit>:not(canvas){opacity:0}
+.board-face::after{content:'';position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 40px rgba(60,40,20,.22),inset 0 14px 18px -12px rgba(0,0,0,.4)}
+.board .tube{position:absolute;z-index:3;left:9%;right:9%;top:-23px;margin:0}
+.board .tube::before,.board .tube::after{content:'';position:absolute;top:3px;width:3px;height:22px;background:#17110f}
+.board .tube::before{left:10%}.board .tube::after{right:10%}
+.board .rope{z-index:3;left:-9%;right:-9%;bottom:-18px;height:clamp(84px,12vh,112px)}
+.hero-sticker{position:absolute;z-index:4;right:clamp(-52px,-3.4vw,-20px);bottom:calc(var(--leg) + 1.5%);transform:rotate(3.2deg);--fig:clamp(22px,2.1vw,31px)}
+
+@media (max-width:820px){
+  .hero{--ground:176px;--leg:44px;display:block;min-height:0}
+  .hero-in{display:block;padding:calc(var(--bar) + 18px) var(--gut) 0}
+  .hero-copy{padding-bottom:0}
+  .eyebrow{font-size:11px;letter-spacing:.2em}
+  .eyebrow i{display:none}
+  .eyebrow span{display:block}
+  .hero h1{font-size:clamp(34px,12vw,96px);line-height:.93;margin-top:12px}
+  .sign-strip{display:none}
+  .hero-act{margin-top:18px;gap:10px 20px}
+  .hero-act .btn{display:flex;width:100%}
+  .cue{font-size:11px;letter-spacing:.18em}
+  .board{width:max-content;max-width:100%;margin:34px auto 48px}
+  .board-face{border-width:6px}
+  .poster{height:auto;width:min(70vw,330px)}
+  .board .tube{top:-19px}
+  .board .rope{height:88px;bottom:-16px}
+  .hero-sticker{right:-24px;--fig:20px}
+  .hero-sticker .band{font-size:9.5px;padding:6px 11px 5px}
+  .hero-sticker .sticker-body{padding:8px 11px 9px}
+  .hero-sticker .sticker-foot{font-size:9px;margin-top:6px;letter-spacing:.16em}
+  .hero-sticker .curl{width:20px;height:20px}
+}
+@media (max-width:359px){ .hero-sticker{--fig:17px;right:-12px} .cue{letter-spacing:.12em} }
+/* a phone on its side: the whole pitch still fits one screen */
+@media (max-height:520px) and (min-width:560px){
+  .hero{--ground:22vh;--leg:22px;display:flex;min-height:100vh;min-height:100svh}
+  .hero-in{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:calc(var(--bar) + 10px) var(--gut) 0}
+  .hero-copy{padding-bottom:14px}
+  .eyebrow{font-size:10.5px}
+  .eyebrow i{display:inline}
+  .eyebrow span{display:inline}
+  .hero h1{font-size:clamp(28px,11.4vh,64px);margin-top:8px}
+  .sign-strip,.cue{display:none}
+  .hero-act{margin-top:12px}
+  .hero-act .btn{display:inline-flex;width:auto;min-height:48px;padding:8px 18px}
+  .hero-act .btn .btn-main{font-size:13.5px}
+  .board{width:auto;margin:0 16px calc(var(--ground)*.3) 0}
+  .board-face{border-width:5px}
+  .poster{height:52vh;width:auto}
+  .board .tube{top:-14px}
+  .board .tube::before,.board .tube::after{height:12px}
+  .board .rope{height:52px;bottom:-10px}
+  .hero-sticker{right:-14px;--fig:15px}
+  .hero-sticker .band{font-size:8.5px;padding:4px 9px 3px}
+  .hero-sticker .sticker-body{padding:6px 9px 7px}
+  .hero-sticker .sticker-foot{font-size:8px;margin-top:4px;letter-spacing:.14em}
+  .hero-sticker .curl{width:16px;height:16px}
+}
+
+/* 2 — THE PITCH: velvet, and the close stamped into it in gilt */
+.pitch{overflow:hidden;padding-top:clamp(92px,15vh,170px);padding-bottom:clamp(112px,18vh,210px);background:
+  radial-gradient(ellipse 62% 52% at 50% 34%,#5a3848 0%,rgba(74,47,60,0) 74%),#21151b}
+.pitch>.fx{z-index:0}
+.pitch::before{content:'';position:absolute;z-index:1;left:0;right:0;top:0;height:min(24vh,200px);pointer-events:none;background:linear-gradient(180deg,#120e0f 0%,rgba(18,14,15,.72) 36%,rgba(18,14,15,0) 100%)}
+.pitch-in{position:relative;z-index:2;max-width:1180px;margin:0 auto}
+.pitch-art{margin:0 auto}
+.pitch-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 2px 0 rgba(0,0,0,.5))}
+.pitch.lit .pitch-art img{opacity:0}
+.pitch-copy{margin-top:clamp(40px,7.5vh,90px);display:grid;grid-template-columns:minmax(0,8fr) minmax(0,5fr);column-gap:clamp(28px,5vw,84px);align-items:end}
+.pitch-copy .h2{font-size:clamp(38px,4.9vw,76px);text-shadow:0 2px 30px rgba(20,10,16,.75)}
+.pitch-copy .h2 em{display:block;white-space:nowrap;color:var(--gilt-hi)}
+.pitch-lines{padding-bottom:.35em}
+.pitch-line{font-size:clamp(19px,1.6vw,22px);line-height:1.5;color:rgba(242,239,230,.93);text-wrap:pretty;text-shadow:0 1px 18px rgba(20,10,16,.85)}
+.pitch-line+.pitch-line{margin-top:.7em;font-style:italic;color:var(--gilt-hi)}
+/* the hem: a gilt braid and its fringe, hanging over the lot */
+.pitch-hem{position:absolute;z-index:3;left:0;right:0;bottom:0;height:34px;pointer-events:none;background:
+  linear-gradient(180deg,#5b4519 0,#e8cd7f 2px,#c9a24b 5px,#7c6126 9px,rgba(0,0,0,.55) 9px,rgba(0,0,0,0) 15px),
+  linear-gradient(180deg,rgba(23,19,17,0) 0,rgba(23,19,17,0) 58%,#171311 100%),
+  repeating-linear-gradient(90deg,#d8b65e 0,#d8b65e 1.5px,#7c6126 1.5px,#7c6126 3px,#171311 3px,#171311 4.5px)}
+@media (max-width:820px){
+  .pitch{padding-top:38px;padding-bottom:76px}
+  .pitch-art{width:134%;margin-left:-17%}
+  .pitch-copy{grid-template-columns:1fr;row-gap:18px;margin-top:34px}
+  .pitch-copy .h2{font-size:clamp(30px,9.6vw,60px)}
+  .pitch-hem{height:26px}
+}
+
+/* 3 — THE WALK-AROUND: three units under the tube, on wet asphalt */
+.walk{overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,.6) 0,rgba(0,0,0,0) 110px),linear-gradient(180deg,#171311 0%,var(--asphalt) 26%,#221d1a 78%,var(--dusk) 100%);padding-top:clamp(64px,10vh,120px)}
+.walk::before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.walk>.wrap{position:relative}
+.walk .tube{margin-top:clamp(28px,4.6vh,52px)}
+.lineup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,4.4vw,72px);margin-top:clamp(34px,5.6vh,64px)}
+.unit{position:relative;display:flex;flex-direction:column}
+.unit-cover{position:relative;display:block;width:100%;max-width:372px;text-decoration:none}
+/* a book: boards, a spine's shadow, the edge of the pages, and the lamp on its laminate */
+.face{position:relative;z-index:1;display:block;border-radius:1px 3px 3px 1px;box-shadow:2px 0 0 #efe9da,3px 0 0 #b9b09d,5px 0 0 #efe9da,6px 0 0 #a39a86,0 0 0 1px rgba(0,0,0,.45),0 34px 50px -24px rgba(0,0,0,.95),0 0 90px rgba(255,250,232,.10);transition:transform 1.1s var(--settle)}
+.face img{display:block;width:100%;height:auto;border-radius:inherit}
+.face::before{content:'';position:absolute;z-index:1;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(20,10,0,.24) 0,rgba(255,255,255,.18) 1.4%,rgba(20,10,0,.13) 2.8%,rgba(20,10,0,0) 5.6%)}
+.face::after{content:'';position:absolute;z-index:1;inset:0;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 85% 60% at var(--lx,70%) var(--ly,0%),rgba(255,252,240,.5),rgba(255,252,240,0) 62%);mix-blend-mode:soft-light}
+.unit-cover:hover .face{transform:translateY(-8px)}
+.unit-cover:active .face{transform:translateY(-3px)}
+.unit-cover .refl{position:absolute;z-index:0;left:0;top:calc(100% + 2px);width:100%;height:auto;transform:scaleY(-1);opacity:.2;filter:blur(2px) saturate(.7);-webkit-mask-image:linear-gradient(to top,#000,transparent 13%);mask-image:linear-gradient(to top,#000,transparent 13%);pointer-events:none}
+.unit-title{margin-top:clamp(18px,2.6vh,28px);font-family:var(--f-d);font-weight:500;font-size:clamp(32px,3.2vw,46px);line-height:1;letter-spacing:-.012em}
+.unit-title a{text-decoration:none}
+.unit-hook{margin-top:12px;font-size:clamp(18px,1.5vw,20.5px);line-height:1.45;color:rgba(242,239,230,.9);max-width:21em;text-wrap:pretty}
+.unit-act{margin-top:auto;padding-top:22px;display:grid;gap:10px;justify-items:start}
+@media (max-width:820px){
+  .walk{padding-top:56px;padding-bottom:64px}
+  .walk .h2{font-size:clamp(36px,10.4vw,60px)}
+  .lineup{grid-template-columns:1fr;gap:42px;margin-top:30px}
+  .unit-cover{width:min(50vw,250px)}
+  .unit .more{display:none}
+  .unit-tag{align-self:flex-start;margin:-24px 0 0 min(22vw,110px)}
+  .unit-title{margin-top:16px}
+  .unit-act{padding-top:16px}
+}
+
+/* 4 — THE PARTICULARS, which are yours: a sticker on the inside of a windscreen */
+.appr{background:#0e0a0c;overflow:hidden;padding-top:clamp(60px,9vh,110px);padding-bottom:clamp(60px,9vh,110px)}
+/* what the glass shows of the room: a still drape in the stylesheet, and over it the one that moves */
+.ap-fx{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(ellipse 70% 50% at 72% 50%,rgba(91,74,122,.34),rgba(91,74,122,0) 70%),
+  repeating-linear-gradient(90deg,#1b1218 0,#2b1b25 2.1%,#3d2732 4%,#2c1c26 5.5%,#191116 7.4%,#33212b 9.2%,#21151c 11%)}
+.ap-glass{--rim:clamp(7px,.85vw,12px);position:absolute;z-index:1;top:clamp(24px,4.4vh,50px);bottom:clamp(24px,4.4vh,50px);left:clamp(10px,2.6vw,44px);right:clamp(10px,2.6vw,44px);border-radius:44% 44% 6% 6%/16% 16% 7% 7%;pointer-events:none;box-shadow:0 0 0 100vmax #0b0809;background:
+  linear-gradient(112deg,rgba(255,253,243,.085) 0,rgba(255,253,243,.085) 8%,rgba(255,253,243,0) 8.2%,rgba(255,253,243,0) 19%,rgba(255,253,243,.045) 19.2%,rgba(255,253,243,.045) 23%,rgba(255,253,243,0) 23.2%),
+  linear-gradient(180deg,rgba(8,5,7,.5) 0,rgba(8,5,7,0) 22%,rgba(8,5,7,0) 72%,rgba(8,5,7,.6) 100%)}
+.ap-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:var(--rim);background:linear-gradient(100deg,#5e5a52,#f7f4ea 9%,#8c877b 17%,#c9c4b6 42%,#fffdf3 52%,#9a9588 61%,#edeadf 84%,#5e5a52);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.ap-glass::after{content:'';position:absolute;inset:var(--rim);border-radius:inherit;box-shadow:inset 0 0 0 3px rgba(4,3,3,.85),inset 0 0 0 4px rgba(255,255,255,.08),inset 0 46px 80px -34px rgba(0,0,0,.8)}
+.ap-mirror{position:absolute;z-index:1;left:50%;top:clamp(34px,5.6vh,64px);width:clamp(96px,11vw,156px);aspect-ratio:3.5;transform:translateX(-50%);border-radius:10px;pointer-events:none;background:linear-gradient(170deg,#4a3640 0%,#241820 55%,#120c10 100%);box-shadow:0 0 0 2px #070505,0 0 0 3px rgba(237,234,223,.45),0 16px 22px -8px rgba(0,0,0,.85)}
+.ap-mirror::before{content:'';position:absolute;left:50%;bottom:100%;width:9px;height:26px;margin-left:-4.5px;background:linear-gradient(90deg,#070505,#3a302c 50%,#070505)}
+.ap-stage{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:clamp(28px,5vw,90px);align-items:center;padding:clamp(84px,13vh,150px) clamp(18px,4.6vw,80px) clamp(70px,11vh,120px)}
+.ap-copy p.ap-lede{margin-top:clamp(16px,2.6vh,26px);font-size:clamp(18px,1.5vw,20.5px);line-height:1.55;color:rgba(242,239,230,.88);max-width:25em;text-wrap:pretty}
+.ap-pad{position:relative;justify-self:end;width:min(100%,560px);transform:rotate(1.3deg)}
+.ap-sheet{position:relative;width:100%;border-radius:9px;box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 0 0 1px rgba(20,36,74,.12),0 50px 90px -30px rgba(0,0,0,.9),0 8px 18px rgba(0,0,0,.4),0 0 140px rgba(255,250,232,.1)}
+.ap-sheet .band{border-radius:9px 9px 0 0;padding:14px 22px 11px;font-size:12.5px}
+.ap-sheet.jolt{animation:jolt .22s cubic-bezier(.3,0,.2,1)}
+@keyframes jolt{0%{transform:translate(0,0)}22%{transform:translate(-2px,5px) rotate(.35deg)}60%{transform:translate(1px,-1px) rotate(-.1deg)}100%{transform:none}}
+.ap-sub{position:relative;display:flex;justify-content:space-between;gap:12px;padding:12px 22px 11px;font-family:var(--f-l);font-weight:600;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(20,36,74,.76);border-bottom:2px solid var(--ink)}
+.ap-rows{position:relative;padding:0 22px}
+.ap-row{display:grid;grid-template-columns:minmax(96px,31%) 1fr;column-gap:16px;align-items:baseline;padding:14px 0 13px;border-bottom:1px dashed rgba(20,36,74,.36)}
+.ap-row dt{font-family:var(--f-l);font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(20,36,74,.74)}
+.ap-row dt span{white-space:nowrap}
+.ap-row dd{font-family:var(--f-d);font-weight:600;font-size:clamp(20px,1.9vw,25px);line-height:1.18;letter-spacing:-.008em;color:var(--ink)}
+.ap-row .swap,.ap-fine .swap{display:grid}
+.live .ap-rows .swap,.live .ap-fine .swap{transition:height 1.1s var(--settle)}
+.ap-fine{position:relative;padding:12px 22px 16px;font-style:italic;font-size:15px;line-height:1.4;color:rgba(20,36,74,.82)}
+/* settled (no script, or reduced motion): the corrected sticker — the new reading, with any changed label struck through beside it */
+.appr:not(.live) .swap>.was{display:none}
+.appr:not(.live) dt .swap{display:block}
+.appr:not(.live) dt .swap>.was{display:inline;opacity:.5;visibility:visible;text-decoration:line-through;margin-right:.7em}
+.ap-hold{position:absolute;z-index:6;right:-16px;top:-20px;transform:rotate(6deg);background:linear-gradient(170deg,#C4473A,var(--red) 60%);color:var(--white);padding:9px 15px 8px;border-radius:4px;font-family:var(--f-l);font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;box-shadow:0 12px 22px -8px rgba(0,0,0,.65),0 1px 0 rgba(255,255,255,.3) inset}
+.ap-hold small{display:block;font-weight:600;font-size:9.5px;letter-spacing:.2em;opacity:.85;margin-top:2px}
+.ap-sheet.live .ap-hold{opacity:0}
+.ap-sheet.live.held .ap-hold{opacity:1;animation:slap .15s cubic-bezier(.5,0,.9,.4) both}
+@keyframes slap{0%{opacity:0;transform:rotate(19deg) scale(2.7) translate(18px,-30px)}100%{opacity:1;transform:rotate(6deg) scale(1)}}
+@media (max-width:900px){
+  .appr{padding-top:40px;padding-bottom:40px}
+  .ap-glass{border-radius:22% 22% 5% 5%/7% 7% 4% 4%;left:8px;right:8px}
+  .ap-mirror{display:none}
+  .ap-stage{grid-template-columns:1fr;row-gap:22px;padding:64px 16px 54px}
+  .ap-pad{justify-self:stretch;width:100%;max-width:560px;transform:rotate(.8deg)}
+  .ap-copy .h2{font-size:clamp(36px,10.4vw,60px)}
+  .ap-copy p.ap-lede{margin-top:8px;font-size:16px;line-height:1.4}
+  .ap-hold{right:-6px;top:-14px;font-size:11.5px}
+}
+@media (max-width:420px){
+  .ap-sheet .band{padding:11px 14px 8px;font-size:11px;letter-spacing:.18em}
+  .ap-sub{padding:8px 14px 7px;font-size:10px;letter-spacing:.12em}
+  .ap-rows{padding:0 14px}
+  .ap-row{grid-template-columns:30% 1fr;column-gap:12px;padding:10px 0 9px}
+  .ap-row dt{font-size:10px;letter-spacing:.14em}
+  .ap-row dd{font-size:19px}
+  .ap-fine{padding:8px 14px 11px;font-size:13px;line-height:1.36}
+  .ap-hold{padding:6px 11px 5px;font-size:10.5px;top:-13px}
+  .ap-hold small{font-size:8.5px;margin-top:1px}
+}
+@media (max-width:359px){
+  .ap-sheet .band{letter-spacing:.1em}
+  .ap-stage{padding-left:10px;padding-right:10px}
+  .ap-hold{right:-4px;letter-spacing:.14em}
+  .ap-hold small{font-size:8px;letter-spacing:.1em}
+}
+
+/* 5 — TAKING DELIVERY, and THE MAKER'S PLATE */
+.delivery-k{color:var(--gilt)}
+.delivery-h{margin-top:14px}
+.maker{position:relative;padding:clamp(40px,7vh,90px) var(--gut) clamp(54px,9vh,110px);background:linear-gradient(180deg,var(--dusk) 0%,#141110 100%)}
+.maker-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(26px,5vw,84px);align-items:center}
+.plate{position:relative;isolation:isolate;overflow:hidden;min-width:min(100%,440px);padding:clamp(26px,3.2vw,42px) clamp(30px,3.8vw,54px);border-radius:5px;color:#2B1E08;background:linear-gradient(172deg,#DDBF6C 0%,#B98F38 36%,#E3C87C 50%,#A67D2C 76%,#C9A24B 100%);box-shadow:inset 0 1px 0 rgba(255,244,200,.85),inset 0 -2px 0 rgba(60,40,6,.6),inset 0 0 0 1px rgba(60,40,6,.5),0 30px 54px -24px rgba(0,0,0,.95),0 0 60px rgba(201,162,75,.12)}
+.plate .fx{z-index:-1}
+.plate::before,.plate::after,.plate i::before,.plate i::after{content:'';position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F3E2AC,#8D6C25 55%,#3C2A08);box-shadow:0 1px 0 rgba(255,240,190,.5),inset 0 0 0 1px rgba(40,26,4,.5)}
+.plate::before{left:11px;top:11px}.plate::after{right:11px;top:11px}
+.plate i::before{left:11px;bottom:11px}.plate i::after{right:11px;bottom:11px}
+.plate-k{font-family:var(--f-l);font-weight:700;font-size:11.5px;letter-spacing:.34em;text-transform:uppercase;color:rgba(43,30,8,.82);text-shadow:0 1px 0 rgba(255,240,190,.55)}
+.plate-name{margin-top:10px;font-family:var(--f-d);font-weight:600;font-size:clamp(38px,4.6vw,66px);line-height:.95;letter-spacing:-.015em;color:#2B1E08;text-shadow:0 1px 0 rgba(255,240,190,.6)}
+.maker-p{font-family:var(--f-d);font-style:italic;font-weight:400;font-size:clamp(24px,2.7vw,38px);line-height:1.2;letter-spacing:-.008em;max-width:19em;text-wrap:balance}
+@media (max-width:820px){
+  .delivery{padding-top:52px;padding-bottom:36px}
+  .delivery-h{margin-bottom:28px}
+  .eds{gap:34px}
+  .maker{padding-top:26px;padding-bottom:46px}
+  .delivery .h2{font-size:clamp(36px,10.4vw,60px)}
+  .maker-grid{grid-template-columns:1fr}.plate{min-width:0}
+}
+
+/* 6 — THE CLOSE: on the paper the books are printed on */
+.closer-cover .face img{box-shadow:none}
+.close-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:clamp(30px,5vw,84px);align-items:end}
+.close .h2{font-size:clamp(46px,6.2vw,96px);line-height:.94}
+.close-lede{margin-top:clamp(14px,2.4vh,24px);font-style:italic;font-size:clamp(19px,1.7vw,23px);line-height:1.5}
+.close-head .sig{margin-top:30px;color:var(--ink)}
+.close-head .dated{margin-top:clamp(22px,3.6vh,34px)}
+.closers{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto;column-gap:clamp(18px,2.6vw,40px)}
+.closer{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:18px}
+.closer--lead .closer-title{font-size:clamp(28px,2.8vw,40px)}
+.closer .btn{padding-left:14px;padding-right:14px}
+.closer:not(.closer--lead) .btn-main{font-size:11.5px;letter-spacing:.11em;gap:.5em}
+.closer--lead .btn-main{font-size:13.5px;letter-spacing:.12em}
+.closer-cover .face{box-shadow:2px 0 0 #f4eee0,3px 0 0 #b9b09d,5px 0 0 #f4eee0,6px 0 0 #a39a86,0 0 0 1px rgba(20,36,74,.2),0 40px 50px -26px rgba(20,36,74,.75),0 10px 16px -8px rgba(20,36,74,.3)}
+@media (max-width:1080px){
+  .close-grid{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  /* on a phone the books come first; the signature is what you leave behind */
+  .close{padding-top:50px;padding-bottom:50px}
+  .close-head>.sig{display:none}
+  .close-grid{display:flex;flex-direction:column;gap:0}
+  .close-head{display:contents}
+  .close-head>.h2{order:2}
+  .close-head>.close-lede{order:3}
+  .closers{order:4;margin-top:26px}
+  .close-head>.dated{order:6;margin-top:30px}
+  .closers{grid-template-columns:1fr;row-gap:32px}
+  .closer{grid-row:auto;grid-template-rows:none}
+  .closer--lead .closer-cover{width:min(52vw,250px)}
+  .closer--lead .btn-main{font-size:14px;letter-spacing:.15em}
+  .closer:not(.closer--lead){grid-template-columns:minmax(96px,30%) 1fr;column-gap:18px;align-items:center}
+  .closer:not(.closer--lead) .closer-cover{align-self:center}
+  .closer:not(.closer--lead) .btn-main{font-size:12px}
+  .foot{font-size:14.5px;padding-top:40px;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  .foot-grid{gap:20px}
+  .foot-base{margin-top:24px}
+}
+
+</style>
+<noscript><style>.bar-buy{opacity:1!important;visibility:visible!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="page">
+
+<header class="bar" data-bar>
+  <a class="bar-mark" href="#top">The Human Factor</a>
+  <span class="bar-step" data-bar-step>Step 1 of 6 · The greeting</span>
+  <a class="bar-buy" data-buy="the-assessment" href="https://orbandink.co.uk/en/books/the-assessment/"><span class="bar-buy-book">The Assessment</span><span class="bar-buy-verb"><span class="long" data-buy-label>See the book at Orb &amp; Ink</span><span class="short" data-buy-label>See the book</span> <i aria-hidden="true">→</i></span></a>
+</header>
+
+<main>
+
+<!-- 1 · THE GREETING — the forecourt: velvet where the sky was, wet asphalt, the stock, and a poster on the billboard -->
+<section class="hero" id="top" data-step="1" data-step-name="The greeting" data-hero data-fx="forecourt">
+  <div class="hero-sky" aria-hidden="true"></div>
+  <div class="hero-horizon" aria-hidden="true"><svg viewBox="0 0 1800 170" preserveAspectRatio="xMidYMax slice" focusable="false"><defs><radialGradient id="lamp" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFFDF3" stop-opacity=".62"/><stop offset=".35" stop-color="#F2EFE6" stop-opacity=".16"/><stop offset="1" stop-color="#F2EFE6" stop-opacity="0"/></radialGradient><linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9B47A" stop-opacity="0"/><stop offset="1" stop-color="#E9B47A" stop-opacity=".2"/></linearGradient></defs><rect x="0" y="100" width="1800" height="70" fill="url(#glow)"/><path fill="#120E0D" d="M1180 170V134h64v-14h392v14h56v36z"/><defs><linearGradient id="carbody" gradientUnits="userSpaceOnUse" x1="0" y1="-47" x2="0" y2="-8"><stop offset="0" stop-color="#6a5650"/><stop offset=".1" stop-color="#3a2e2b"/><stop offset=".42" stop-color="#1a1413"/><stop offset=".5" stop-color="#2c2321"/><stop offset=".58" stop-color="#120e0d"/><stop offset="1" stop-color="#060404"/></linearGradient><linearGradient id="carglass" gradientUnits="userSpaceOnUse" x1="60" y1="-45" x2="120" y2="-30"><stop offset="0" stop-color="#b98aa2" stop-opacity=".55"/><stop offset=".45" stop-color="#6b4a5c" stop-opacity=".5"/><stop offset=".55" stop-color="#f2efe6" stop-opacity=".5"/><stop offset=".62" stop-color="#4a2f3c" stop-opacity=".6"/><stop offset="1" stop-color="#2a1b24" stop-opacity=".7"/></linearGradient><filter id="wet" x="-5%" y="-20%" width="110%" height="140%"><feGaussianBlur stdDeviation="1.2 3.5"/></filter><linearGradient id="wetfade" x1="0" y1="170" x2="0" y2="215" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="wetmask" maskUnits="userSpaceOnUse" x="-100" y="170" width="2000" height="60"><rect x="-100" y="170" width="2000" height="60" fill="url(#wetfade)"/></mask></defs><g mask="url(#wetmask)"><g transform="translate(0 340) scale(1 -1)" filter="url(#wet)"><g transform="translate(0 170) scale(1.28) translate(0 -170)"><g transform="translate(26 170)"><path d="M3-8V-21Q4-27 13-28L50-30 64-45Q66-46.5 70-46.5H112Q116-46.5 119-44L134-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M67-43H111L127-31H56Z" fill="url(#carglass)"/><path d="M90-43V-31" stroke="#0C0908" stroke-width="2"/><path d="M67-46.5H113" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M136-29.6 181-27.2M15-28.4 48-30.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M113-41l8 6h-6l-8-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(454 170) scale(-1 1)"><path d="M3-8V-22Q4-28 14-28.500L60-30Q64-36 70-36 76-36 79-30L96-30Q100-36 106-36 112-36 115-30L183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M117-30 108-45 130-30Z" fill="url(#carglass)"/><path d="M107.500-45.500 129-30.500" stroke="#FFFDF3" stroke-opacity=".7" stroke-width="1.3"/><path d="M134-29.600 181-27.200M15-28.900 58-30.200" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M112-40l7 6h-5.500l-7-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(498 170)"><path d="M3-8V-22Q3-29 9-31L20-45Q22-47 27-47H110Q114-47 117-44.500L133-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M24-43.500H109L125-31H14Z" fill="url(#carglass)"/><path d="M52-43.500V-31M84-43.500V-31" stroke="#0C0908" stroke-width="2"/><path d="M24-47H111" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M135-29.6 181-27.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M111-41.500l8 6.500h-6l-8-6.500z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(942 170) scale(-1 1)"><path d="M3-8V-21Q4-27 13-28L50-30 64-45Q66-46.5 70-46.5H112Q116-46.5 119-44L134-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M67-43H111L127-31H56Z" fill="url(#carglass)"/><path d="M90-43V-31" stroke="#0C0908" stroke-width="2"/><path d="M67-46.5H113" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M136-29.6 181-27.2M15-28.4 48-30.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M113-41l8 6h-6l-8-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(968 170)"><path d="M3-8V-22Q4-28 14-28.500L60-30Q64-36 70-36 76-36 79-30L96-30Q100-36 106-36 112-36 115-30L183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M117-30 108-45 130-30Z" fill="url(#carglass)"/><path d="M107.500-45.500 129-30.500" stroke="#FFFDF3" stroke-opacity=".7" stroke-width="1.3"/><path d="M134-29.600 181-27.200M15-28.900 58-30.200" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M112-40l7 6h-5.500l-7-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g></g></g></g><g class="stock-row" transform="translate(0 170) scale(1.28) translate(0 -170)"><g transform="translate(26 170)"><path d="M3-8V-21Q4-27 13-28L50-30 64-45Q66-46.5 70-46.5H112Q116-46.5 119-44L134-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M67-43H111L127-31H56Z" fill="url(#carglass)"/><path d="M90-43V-31" stroke="#0C0908" stroke-width="2"/><path d="M67-46.5H113" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M136-29.6 181-27.2M15-28.4 48-30.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M113-41l8 6h-6l-8-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(454 170) scale(-1 1)"><path d="M3-8V-22Q4-28 14-28.500L60-30Q64-36 70-36 76-36 79-30L96-30Q100-36 106-36 112-36 115-30L183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M117-30 108-45 130-30Z" fill="url(#carglass)"/><path d="M107.500-45.500 129-30.500" stroke="#FFFDF3" stroke-opacity=".7" stroke-width="1.3"/><path d="M134-29.600 181-27.200M15-28.900 58-30.200" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M112-40l7 6h-5.500l-7-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(498 170)"><path d="M3-8V-22Q3-29 9-31L20-45Q22-47 27-47H110Q114-47 117-44.500L133-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M24-43.500H109L125-31H14Z" fill="url(#carglass)"/><path d="M52-43.500V-31M84-43.500V-31" stroke="#0C0908" stroke-width="2"/><path d="M24-47H111" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M135-29.6 181-27.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M111-41.500l8 6.500h-6l-8-6.500z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(942 170) scale(-1 1)"><path d="M3-8V-21Q4-27 13-28L50-30 64-45Q66-46.5 70-46.5H112Q116-46.5 119-44L134-30 183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M67-43H111L127-31H56Z" fill="url(#carglass)"/><path d="M90-43V-31" stroke="#0C0908" stroke-width="2"/><path d="M67-46.5H113" stroke="#FFFDF3" stroke-opacity=".6" stroke-width="1"/><path d="M136-29.6 181-27.2M15-28.4 48-30.2" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M113-41l8 6h-6l-8-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g><g transform="translate(968 170)"><path d="M3-8V-22Q4-28 14-28.500L60-30Q64-36 70-36 76-36 79-30L96-30Q100-36 106-36 112-36 115-30L183-27Q196-26 197-19L198-8Z" fill="url(#carbody)"/><path d="M117-30 108-45 130-30Z" fill="url(#carglass)"/><path d="M107.500-45.500 129-30.500" stroke="#FFFDF3" stroke-opacity=".7" stroke-width="1.3"/><path d="M134-29.600 181-27.200M15-28.900 58-30.200" stroke="#FFFDF3" stroke-opacity=".5" stroke-width="1"/><path d="M112-40l7 6h-5.500l-7-6z" fill="#F2EFE6" fill-opacity=".85"/><path d="M195-15h5.500v4.500H195zM-1.500-15H4v4.500h-5.500z" fill="#EDEADF" fill-opacity=".8"/><circle cx="196.500" cy="-21" r="1.600" fill="#FFF3CF"/><path d="M12-18.500 190-17.500" stroke="#F2EFE6" stroke-opacity=".55" stroke-width=".9"/><circle cx="42" cy="-9.500" r="10.500" fill="#090706"/><circle cx="42" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="42" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/><circle cx="158" cy="-9.500" r="10.500" fill="#090706"/><circle cx="158" cy="-9.500" r="5.200" fill="none" stroke="#EDEADF" stroke-opacity=".42" stroke-width="1.300"/><circle cx="158" cy="-9.500" r="1.400" fill="#EDEADF" fill-opacity=".5"/></g></g><rect x="1264" y="130" width="352" height="30" fill="#FFFDF3" fill-opacity=".2"/><rect x="1308" y="130" width="3" height="30" fill="#120E0D"/><rect x="1352" y="130" width="3" height="30" fill="#120E0D"/><rect x="1396" y="130" width="3" height="30" fill="#120E0D"/><rect x="1440" y="130" width="3" height="30" fill="#120E0D"/><rect x="1484" y="130" width="3" height="30" fill="#120E0D"/><rect x="1528" y="130" width="3" height="30" fill="#120E0D"/><rect x="1572" y="130" width="3" height="30" fill="#120E0D"/><rect x="1356" y="98" width="168" height="22" fill="#120E0D"/><rect x="1356.5" y="98.5" width="167" height="21" fill="none" stroke="#C9A24B" stroke-opacity=".7"/><text x="1443" y="114" text-anchor="middle" font-family="'Archivo Narrow',Arial,sans-serif" font-weight="700" font-size="12" letter-spacing="6" fill="#F2EFE6" fill-opacity=".86">OPEN</text><path d="M-150 30Q0.0 90 150 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(-126.9 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(-103.8 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(-80.8 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(-57.7 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(-34.6 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(-11.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(11.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(34.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(57.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(80.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(103.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(126.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M150 30Q300.0 90 450 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(173.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(196.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(219.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(242.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(265.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(288.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(311.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(334.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(357.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(380.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(403.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(426.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M450 30Q600.0 90 750 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(473.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(496.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(519.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(542.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(565.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(588.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(611.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(634.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(657.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(680.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(703.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(726.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M750 30Q900.0 90 1050 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(773.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(796.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(819.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(842.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(865.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(888.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(911.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(934.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(957.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(980.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1003.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1026.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M1050 30Q1200.0 90 1350 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(1073.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1096.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1119.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1142.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1165.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1188.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1211.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1234.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1257.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1280.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1303.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1326.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M1350 30Q1500.0 90 1650 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(1373.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1396.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1419.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1442.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1465.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1488.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1511.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1534.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1557.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1580.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1603.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1626.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path d="M1650 30Q1800.0 90 1950 30" fill="none" stroke="#0E0B0A" stroke-width="1.2"/><path transform="translate(1673.1 38.5) rotate(18.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1696.2 45.6) rotate(15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1719.2 51.3) rotate(12.2)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1742.3 55.6) rotate(8.7)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1765.4 58.4) rotate(5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1788.5 59.8) rotate(1.8)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1811.5 59.8) rotate(-1.8)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1834.6 58.4) rotate(-5.3)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1857.7 55.6) rotate(-8.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><path transform="translate(1880.8 51.3) rotate(-12.2)" d="M-6.5 0h13L0 17z" fill="#C9A24B" fill-opacity="0.78"/><path transform="translate(1903.8 45.6) rotate(-15.5)" d="M-6.5 0h13L0 17z" fill="#B23A2E" fill-opacity="0.78"/><path transform="translate(1926.9 38.5) rotate(-18.7)" d="M-6.5 0h13L0 17z" fill="#F2EFE6" fill-opacity="0.6"/><circle cx="-138.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-138.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="-115.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-115.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="-92.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-92.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="-69.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-69.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="-46.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-46.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="-23.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="-23.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="0.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="0.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="23.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="23.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="46.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="46.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="69.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="69.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="92.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="92.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="115.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="115.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="138.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="138.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="161.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="161.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="184.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="184.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="207.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="207.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="230.8" cy="55.1" r="2" fill="#3A2F2A"/><circle cx="253.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="253.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="276.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="276.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="300.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="300.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="323.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="323.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="346.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="346.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="369.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="369.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="392.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="392.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="415.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="415.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="438.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="438.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="461.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="461.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="484.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="484.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="507.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="507.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="530.8" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="530.8" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="553.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="553.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="576.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="576.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="600.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="600.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="623.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="623.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="646.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="646.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="669.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="669.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="692.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="692.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="715.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="715.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="738.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="738.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="761.5" cy="35.9" r="2" fill="#3A2F2A"/><circle cx="784.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="784.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="807.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="807.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="830.8" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="830.8" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="853.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="853.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="876.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="876.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="900.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="900.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="923.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="923.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="946.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="946.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="969.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="969.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="992.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="992.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1015.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1015.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1038.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1038.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1061.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1061.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1084.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1084.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1107.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1107.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1130.8" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1130.8" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1153.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1153.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1176.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1176.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="1200.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1200.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="1223.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1223.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="1246.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1246.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1269.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1269.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1292.3" cy="50.1" r="2" fill="#3A2F2A"/><circle cx="1315.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1315.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1338.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1338.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1361.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1361.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1384.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1384.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1407.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1407.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1430.8" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1430.8" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1453.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1453.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1476.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1476.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="1500.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1500.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="1523.1" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1523.1" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="1546.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1546.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1569.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1569.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1592.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1592.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1615.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1615.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1638.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1638.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1661.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1661.5" cy="35.9" r="2" fill="#FFF3CF"/><circle cx="1684.6" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1684.6" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1707.7" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1707.7" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1730.8" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1730.8" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1753.8" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1753.8" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1776.9" cy="60.8" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1776.9" cy="60.8" r="2" fill="#FFF3CF"/><circle cx="1800.0" cy="61.5" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1800.0" cy="61.5" r="2" fill="#FFF3CF"/><circle cx="1823.1" cy="60.8" r="2" fill="#3A2F2A"/><circle cx="1846.2" cy="58.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1846.2" cy="58.7" r="2" fill="#FFF3CF"/><circle cx="1869.2" cy="55.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1869.2" cy="55.1" r="2" fill="#FFF3CF"/><circle cx="1892.3" cy="50.1" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1892.3" cy="50.1" r="2" fill="#FFF3CF"/><circle cx="1915.4" cy="43.7" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1915.4" cy="43.7" r="2" fill="#FFF3CF"/><circle cx="1938.5" cy="35.9" r="7.500" fill="url(#lamp)" opacity=".7"/><circle cx="1938.5" cy="35.9" r="2" fill="#FFF3CF"/><circle data-lamp cx="150" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M148.4 26h3.2V170h-3.2zM116 24h68v2.4h-68z"/><rect x="115" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="161" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><circle data-lamp cx="450" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M448.4 26h3.2V170h-3.2zM416 24h68v2.4h-68z"/><rect x="415" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="461" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><circle data-lamp cx="750" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M748.4 26h3.2V170h-3.2zM716 24h68v2.4h-68z"/><rect x="715" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="761" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><circle data-lamp cx="1050" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M1048.4 26h3.2V170h-3.2zM1016 24h68v2.4h-68z"/><rect x="1015" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="1061" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><circle data-lamp cx="1350" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M1348.4 26h3.2V170h-3.2zM1316 24h68v2.4h-68z"/><rect x="1315" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="1361" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><circle data-lamp cx="1650" cy="24" r="64" fill="url(#lamp)"/><path fill="#0E0B0A" d="M1648.4 26h3.2V170h-3.2zM1616 24h68v2.4h-68z"/><rect x="1615" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/><rect x="1661" y="26" width="24" height="4.5" rx="1" fill="#FFFDF3"/></svg></div>
+  <div class="hero-ground" aria-hidden="true">
+    <svg viewBox="0 0 1600 300" preserveAspectRatio="none"><g fill="none" stroke="#F2EFE6" stroke-opacity=".13" stroke-width="2.5"><path vector-effect="non-scaling-stroke" d="M1040-30-420 300M1040-30-20 300M1040-30 380 300M1040-30 780 300M1040-30 1180 300M1040-30 1580 300M1040-30 1980 300"/></g></svg>
+  </div>
+
+  <div class="hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow"><b>The Human Factor</b><i>·</i><span>a trilogy by Alessio Bianco</span></p>
+      <h1><span class="vh">The Human Factor. </span><span class="ln">They didn’t</span> <span class="ln">come for</span> <span class="ln">our science.</span></h1>
+      <p class="sign-strip"><span>Open</span><span>Walk-ins welcome</span><span>Est. ten thousand years</span></p>
+      <div class="hero-act">
+        <a class="btn btn--xl" data-buy="the-assessment" data-hero-buy href="https://orbandink.co.uk/en/books/the-assessment/">
+          <span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span>
+          <span class="btn-sub" data-buy-sub data-live-sub="Book One · The Assessment">Book One · The Assessment · coming soon</span>
+        </a>
+      </div>
+    </div>
+
+    <figure class="board">
+      <div class="tube" aria-hidden="true"></div>
+      <div class="board-face poster" data-fx="poster">
+        <span class="poster-beam" aria-hidden="true"></span>
+        <span class="poster-shade" aria-hidden="true"></span>
+        <img class="poster-car" src="assets/scenes/car-print.webp" data-plates="assets/scenes/car.webp" data-tilt="3.5" width="1000" height="449" alt="The poster on the lot’s billboard, printed in yellow, teal and navy: an engraved convertible with its door open, lifted clear of the ground in a cone of light." fetchpriority="high" decoding="async">
+      </div>
+      <aside class="sticker stock hero-sticker" aria-label="Windscreen sticker">
+        <span class="band"><span data-relabel="Your stock no.">Asking</span></span>
+        <span class="sticker-body">
+          <span class="sticker-fig num" data-odo>8,241,907,366</span>
+          <span class="sticker-foot">No currency quoted</span>
+        </span>
+        <span class="curl" aria-hidden="true"></span>
+      </aside>
+      <div class="rope" aria-hidden="true"><svg class="r-line" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false"><path d="M0 3C26 118 74 118 100 3" fill="none" stroke="#5E3348" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/><path d="M0 1.500C26 114 74 114 100 1.500" fill="none" stroke="#A56884" stroke-opacity=".7" stroke-width="1.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg><svg class="r-post l" viewBox="0 0 36 124" preserveAspectRatio="xMidYMax meet" focusable="false"><defs><linearGradient id="xpl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A6C2A"/><stop offset=".4" stop-color="#E8CD7F"/><stop offset=".7" stop-color="#C9A24B"/><stop offset="1" stop-color="#7C6126"/></linearGradient></defs><ellipse cx="18" cy="120" rx="17" ry="3.500" fill="#000" fill-opacity=".5"/><path fill="url(#xpl)" d="M15 14h6v100h-6zM3 118q0-5 15-5t15 5v2H3z"/><circle cx="18" cy="9" r="7.500" fill="url(#xpl)"/><rect x="13" y="15" width="10" height="4" rx="1" fill="#7C6126"/></svg><svg class="r-post r" viewBox="0 0 36 124" preserveAspectRatio="xMidYMax meet" focusable="false"><defs><linearGradient id="xpr" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A6C2A"/><stop offset=".4" stop-color="#E8CD7F"/><stop offset=".7" stop-color="#C9A24B"/><stop offset="1" stop-color="#7C6126"/></linearGradient></defs><ellipse cx="18" cy="120" rx="17" ry="3.500" fill="#000" fill-opacity=".5"/><path fill="url(#xpr)" d="M15 14h6v100h-6zM3 118q0-5 15-5t15 5v2H3z"/><circle cx="18" cy="9" r="7.500" fill="url(#xpr)"/><rect x="13" y="15" width="10" height="4" rx="1" fill="#7C6126"/></svg></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 2 · THE PITCH — the premise, and the close stamped in gilt into velvet -->
+<section class="sec pitch" id="pitch" data-step="2" data-step-name="The pitch" data-fx="foil">
+  <div class="pitch-in">
+    <figure class="pitch-art" data-rise>
+      <img src="assets/scenes/handshake-print.webp" data-plates="assets/scenes/handshake.webp" width="1000" height="404" alt="Stamped in gilt foil on velvet: an engraving of two hands held in a handshake, one in a plain suit cuff, one in a braided velvet sleeve." loading="lazy" decoding="async">
+    </figure>
+    <div class="pitch-copy">
+      <h2 class="h2" data-rise>He was the best liar on the lot. <em>He was an amateur.</em></h2>
+      <div class="pitch-lines">
+        <p class="pitch-line" data-rise>A small-time car salesman, abducted by an empire ten thousand years old, where lying is the sacrament of creation and sincerity the only obscenity.</p>
+        <p class="pitch-line" data-rise>He finds every vice he ever practised there, perfected.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pitch-hem" aria-hidden="true"></div>
+</section>
+
+<!-- 3 · THE WALK-AROUND — the three books, lined up under the tube -->
+<section class="sec walk" id="units" data-step="3" data-step-name="The walk-around">
+  <div class="wrap">
+    <h2 class="h2 walk-h" data-rise>Three units, <em>taken in trade.</em></h2>
+    <div class="tube" data-tube aria-hidden="true"></div>
+    <ol class="lineup">
+      <li class="unit" data-rise>
+        <a class="unit-cover" href="the-assessment.html"><span class="face"><img src="assets/cover-the-assessment-760.jpg" srcset="assets/cover-the-assessment-760.jpg 491w, assets/cover-the-assessment.jpg 970w" sizes="(max-width: 820px) 62vw, 372px" width="491" height="760" alt="Cover of The Assessment: a yellow convertible lifted off the ground by a teal saucer, a man in a blue suit hanging from its open door." loading="lazy" decoding="async"></span><img class="refl" src="assets/cover-the-assessment-760.jpg" width="491" height="760" alt="" aria-hidden="true" loading="lazy" decoding="async"></a>
+        <p class="unit-tag stock"><span class="band num"><span>HF-001</span><small>Book One</small></span><span class="unit-note">Brother-in-law included.</span></p>
+        <h3 class="unit-title"><a href="the-assessment.html">The Assessment</a></h3>
+        <p class="unit-hook">Abducted mid test drive. Sell hard, close daily, or be concluded on schedule.</p>
+        <div class="unit-act">
+          <a class="btn btn--wide" data-buy="the-assessment" href="https://orbandink.co.uk/en/books/the-assessment/"><span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span></a>
+          <a class="more" href="the-assessment.html">About this book <i aria-hidden="true">→</i></a>
+        </div>
+      </li>
+      <li class="unit" data-rise>
+        <a class="unit-cover" href="the-asset.html"><span class="face"><img src="assets/cover-the-asset-760.jpg" srcset="assets/cover-the-asset-760.jpg 491w, assets/cover-the-asset.jpg 970w" sizes="(max-width: 820px) 62vw, 372px" width="491" height="760" alt="Cover of The Asset: a man in a suit and a small yellow convertible on the page of an open ledger, a fleet of paper craft rising from the facing page." loading="lazy" decoding="async"></span><img class="refl" src="assets/cover-the-asset-760.jpg" width="491" height="760" alt="" aria-hidden="true" loading="lazy" decoding="async"></a>
+        <p class="unit-tag stock"><span class="band num"><span>HF-002</span><small>Book Two</small></span><span class="unit-note">Bids invited.</span></p>
+        <h3 class="unit-title"><a href="the-asset.html">The Asset</a></h3>
+        <p class="unit-hook">He sold lemons on Earth. Now an empire is bidding on him.</p>
+        <div class="unit-act">
+          <a class="btn btn--wide" data-buy="the-asset" href="https://orbandink.co.uk/en/books/the-asset/"><span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span></a>
+          <a class="more" href="the-asset.html">About this book <i aria-hidden="true">→</i></a>
+        </div>
+      </li>
+      <li class="unit" data-rise>
+        <a class="unit-cover" href="full-disclosure.html"><span class="face"><img src="assets/cover-full-disclosure-760.jpg" srcset="assets/cover-full-disclosure-760.jpg 491w, assets/cover-full-disclosure.jpg 970w" sizes="(max-width: 820px) 62vw, 372px" width="491" height="760" alt="Cover of Full Disclosure: a man in a suit at a lectern mounted above a caged globe, six craft held around it on struts." loading="lazy" decoding="async"></span><img class="refl" src="assets/cover-full-disclosure-760.jpg" width="491" height="760" alt="" aria-hidden="true" loading="lazy" decoding="async"></a>
+        <p class="unit-tag stock"><span class="band num"><span>HF-003</span><small>Book Three</small></span><span class="unit-note">Sold with full disclosure.</span></p>
+        <h3 class="unit-title"><a href="full-disclosure.html">Full Disclosure</a></h3>
+        <p class="unit-hook">He forged the evidence for the invasion. Now he’s telling the truth.</p>
+        <div class="unit-act">
+          <a class="btn btn--wide" data-buy="full-disclosure" href="https://orbandink.co.uk/en/books/full-disclosure/"><span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span></a>
+          <a class="more" href="full-disclosure.html">About this book <i aria-hidden="true">→</i></a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4 · THE PARTICULARS — a sticker on the inside of a windscreen, which corrects itself, while it is being read, into THE APPRAISAL -->
+<section class="sec appr" id="particulars" data-step="4" data-step-name="The particulars" data-step-after="The appraisal" data-appraisal>
+  <div class="ap-fx" data-fx="room" data-fx-ap aria-hidden="true"></div>
+  <div class="ap-glass" aria-hidden="true"></div>
+  <div class="ap-mirror" aria-hidden="true"></div>
+  <div class="wrap ap-stage">
+    <div class="ap-copy">
+      <h2 class="h2"><span class="swap" data-ap-at=".46" data-fit><span class="was" aria-hidden="true">The</span><span class="now">Your</span></span> particulars.</h2>
+      <p class="ap-lede">Read down the sticker. Take as long as you like.</p>
+    </div>
+
+    <div class="ap-pad">
+    <div class="ap-sheet stock" data-ap-sheet>
+      <div class="band"><span class="swap" data-ap-at=".2"><span class="was" aria-hidden="true">Particulars of sale</span><span class="now">Particulars of the unit</span></span></div>
+      <div class="ap-sub num">
+        <span class="swap" data-ap-at=".2"><span class="was" aria-hidden="true">Stock nos. HF-001 – 003</span><span class="now">Stock no. 8,241,907,366</span></span>
+        <span class="swap wide" data-ap-at=".2" style="text-align:right"><span class="was" aria-hidden="true">Seen on the lot</span><span class="now" data-live="presented">Seen on the lot</span></span>
+      </div>
+      <dl class="ap-rows">
+        <div class="ap-row"><dt>Make</dt>
+          <dd><span class="swap" data-ap-at=".06"><span class="was" aria-hidden="true">The Human Factor</span><span class="now">Human</span></span></dd></div>
+        <div class="ap-row"><dt>Mileage</dt>
+          <dd><span class="swap" data-ap-at=".32"><span class="was" aria-hidden="true">993 pages. All original.</span><span class="now num" data-live="mileage">This page, so far. By hand.</span></span></dd></div>
+        <div class="ap-row"><dt><span class="swap" data-ap-at=".46"><span class="was" aria-hidden="true">Term</span><span class="now">Time on lot</span></span></dt>
+          <dd><span class="swap" data-ap-at=".46"><span class="was" aria-hidden="true">Three evenings. Perhaps four.</span><span class="now num" data-live="time">Long enough. And counting.</span></span></dd></div>
+        <div class="ap-row"><dt>Condition</dt>
+          <dd><span class="swap" data-ap-at=".6"><span class="was" aria-hidden="true">Satire, played completely straight.</span><span class="now" data-live="condition">Still reading. No resistance noted.</span></span></dd></div>
+      </dl>
+      <p class="ap-fine"><span class="swap" data-ap-at=".74"><span class="was" aria-hidden="true">Particulars are given in good faith and are not a warranty.</span><span class="now">This appraisal is kept on the lot. It goes nowhere. It doesn’t need to.</span></span></p>
+      <p class="ap-hold" data-ap-hold>Hold<small>Manager to see</small></p>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · TAKING DELIVERY — Book One's six editions -->
+<section class="sec delivery" id="delivery" data-step="5" data-step-name="Taking delivery">
+  <div class="wrap">
+    <p class="label delivery-k" data-rise>Book One · The Assessment</p>
+    <h2 class="h2 delivery-h" data-rise>Read it. <em>Or have it read to you.</em></h2>
+    <div class="eds">
+<div class="eds-group" data-rise><h3 class="eds-h">Read</h3><ul class="eds-row">
+<li class="ed ed--read ed--ebook"><span class="ed-pic"><img src="assets/cover-the-assessment-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">E-book</span><span class="ed-act" data-edition="the-assessment:ebook"><span class="chip">Coming soon</span></span></span></li>
+<li class="ed ed--read ed--paperback"><span class="ed-pic"><img src="assets/cover-the-assessment-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">Paperback</span><span class="ed-act" data-edition="the-assessment:paperback"><span class="chip">Coming soon</span></span></span></li>
+<li class="ed ed--read ed--hardcover"><span class="ed-pic"><img src="assets/cover-the-assessment-760.jpg" width="491" height="760" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">Hardcover</span><span class="ed-act" data-edition="the-assessment:hardcover"><span class="chip">Coming soon</span></span></span></li>
+</ul></div>
+<div class="eds-group" data-rise><h3 class="eds-h">Listen</h3><ul class="eds-row">
+<li class="ed ed--listen ed--audiobook"><span class="ed-pic"><img src="assets/audio-the-assessment.jpg" width="700" height="700" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">Audiobook</span><span class="ed-act" data-edition="the-assessment:audiobook"><span class="chip">Coming soon</span></span></span></li>
+<li class="ed ed--listen ed--immersive"><span class="ed-pic"><img src="assets/audio-the-assessment-immersive.jpg" width="700" height="700" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">Immersive audiobook</span><span class="ed-act" data-edition="the-assessment:immersive"><span class="chip">Coming soon</span></span></span></li>
+<li class="ed ed--listen ed--drama"><span class="ed-pic"><img src="assets/audio-the-assessment-drama.jpg" width="700" height="700" alt="" loading="lazy" decoding="async"></span><span class="ed-text"><span class="ed-name">Audio drama</span><span class="ed-act" data-edition="the-assessment:drama"><span class="chip">Coming soon</span></span></span></li>
+</ul></div>
+</div>
+  </div>
+</section>
+
+<!-- THE MAKER'S PLATE — the author -->
+<section class="maker" id="maker" aria-label="The author">
+  <div class="wrap maker-grid">
+    <div class="plate" data-fx="brass" data-rise><i aria-hidden="true"></i>
+      <p class="plate-k">Built by</p>
+      <h2 class="plate-name">Alessio Bianco</h2>
+    </div>
+    <p class="maker-p" data-rise>Alessio Bianco writes satires in which the paperwork is the monster.</p>
+  </div>
+</section>
+
+<!-- 6 · THE CLOSE — start with Book One -->
+<section class="sec close paper on-paper" id="close" data-step="6" data-step-name="The close">
+  <div class="wrap">
+    <div class="close-grid">
+      <div class="close-head">
+        <h2 class="h2" data-rise>Start with <em>Book One.</em></h2>
+        <p class="close-lede" data-rise>Everything above was the paperwork.</p>
+        <div class="sig" data-sign data-rise aria-hidden="true"><span class="sig-x">✕</span><span class="sig-line"><svg viewBox="0 0 330 66" focusable="false"><defs><linearGradient id="ink" gradientUnits="userSpaceOnUse" x1="-120" x2="450" y1="0" y2="0"><stop offset="0" stop-color="#14244A"/><stop offset=".44" stop-color="#14244A"/><stop offset=".5" stop-color="#7E96DA"/><stop offset=".56" stop-color="#14244A"/><stop offset="1" stop-color="#14244A"/></linearGradient></defs><path pathLength="1" d="M9 56C20 39 36 15 45 5c2 16 1 34 5 51M23 40c22-6 44-5 60 0 4-10 9-11 11-1s7 9 10-1 8-9 10 1 6 8 10-2c6-16 14-36 22-44 5-5 9 0 5 10-6 15-12 30-8 38 3 6 10 2 14-6 3-7 8-8 10 0s8 8 14 2c22-17 62-22 128-21M60 62c62-6 150-9 250-6"/></svg></span></div>
+        <p class="dated num" data-rise><span>Dated <b data-today>today</b></span><span data-consideration>In consideration of <b>one reader</b></span></p>
+      </div>
+    <ol class="closers">
+        <li class="closer closer--lead" data-rise>
+          <a class="closer-cover" href="the-assessment.html"><span class="face"><img src="assets/cover-the-assessment.jpg" srcset="assets/cover-the-assessment-760.jpg 491w, assets/cover-the-assessment.jpg 970w" sizes="(max-width: 820px) 62vw, 400px" width="970" height="1500" alt="The Assessment, Book One" loading="lazy" decoding="async"></span></a>
+          <div class="closer-text">
+            <p class="label">Book One</p>
+            <h3 class="closer-title"><a href="the-assessment.html">The Assessment</a></h3>
+            <a class="btn btn--xl btn--wide" data-buy="the-assessment" href="https://orbandink.co.uk/en/books/the-assessment/">
+              <span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span>
+              <span class="btn-sub" data-buy-sub data-live-sub="Start here">Coming soon</span>
+            </a>
+          </div>
+        </li>
+        <li class="closer" data-rise>
+          <a class="closer-cover" href="the-asset.html"><span class="face"><img src="assets/cover-the-asset-760.jpg" width="491" height="760" alt="The Asset, Book Two" loading="lazy" decoding="async"></span></a>
+          <div class="closer-text">
+            <p class="label">Book Two</p>
+            <h3 class="closer-title"><a href="the-asset.html">The Asset</a></h3>
+            <a class="btn btn--wide" data-buy="the-asset" href="https://orbandink.co.uk/en/books/the-asset/"><span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span></a>
+          </div>
+        </li>
+        <li class="closer" data-rise>
+          <a class="closer-cover" href="full-disclosure.html"><span class="face"><img src="assets/cover-full-disclosure-760.jpg" width="491" height="760" alt="Full Disclosure, Book Three" loading="lazy" decoding="async"></span></a>
+          <div class="closer-text">
+            <p class="label">Book Three</p>
+            <h3 class="closer-title"><a href="full-disclosure.html">Full Disclosure</a></h3>
+            <a class="btn btn--wide" data-buy="full-disclosure" href="https://orbandink.co.uk/en/books/full-disclosure/"><span class="btn-main"><span data-buy-label>See the book at Orb &amp; Ink</span> <i aria-hidden="true">→</i></span></a>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-mark">The Human Factor</p>
+        <p style="margin-top:10px">A first-contact satire in three books, by Alessio Bianco.</p>
+      </div>
+      <nav aria-label="The three books">
+        <h2>The books</h2>
+        <ul>
+          <li><a href="the-assessment.html">The Assessment</a> · Book One</li>
+          <li><a href="the-asset.html">The Asset</a> · Book Two</li>
+          <li><a href="full-disclosure.html">Full Disclosure</a> · Book Three</li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Colophon</h2>
+        <p><i>The Human Factor</i> by Alessio Bianco is published by <a href="https://orbandink.co.uk/" rel="noopener">Orb &amp; Ink</a>.</p>
+      </div>
+    </div>
+    <p class="foot-base"><span>© Alessio Bianco</span><span>They didn’t come for our science.</span></p>
+  </div>
+</footer>
+
+</div>
+
+<script type="module">
+import { boot } from './floor.js';
+boot({ page: 'landing' });
+</script>
+</body>
+</html>

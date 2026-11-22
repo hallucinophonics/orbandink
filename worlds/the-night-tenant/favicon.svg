@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- one body, two tenants: the day side's paper, the night side's dark, and the hands at eight -->
+  <defs><clipPath id="r"><rect width="64" height="64" rx="12"/></clipPath></defs>
+  <g clip-path="url(#r)">
+    <rect width="32" height="64" fill="#EFE9DE"/>
+    <rect x="32" width="32" height="64" fill="#14161A"/>
+    <path d="M32 14a18 18 0 0 0 0 36z" fill="none" stroke="#3A5A78" stroke-width="5"/>
+    <path d="M32 14a18 18 0 0 1 0 36z" fill="none" stroke="#C98A3C" stroke-width="5"/>
+    <path d="M32 32L21.6 38" stroke="#3A5A78" stroke-width="5" stroke-linecap="round"/>
+    <path d="M32 32V19" stroke="#C98A3C" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

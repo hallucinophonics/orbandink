@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Drowned Houses — a duology by A. P. Weiss</title>
+<meta name="description" content="The Drowned Houses, a duology by A. P. Weiss. In the Amaranth Reach the great houses do not die. They sink toward a black hole, where one year of theirs is a century above, and rule by letters that arrive generations late.">
+<meta name="theme-color" content="#E8E2D6">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Drowned Houses — a duology by A. P. Weiss">
+<meta property="og:description" content="The dead are not gone. Only slow.">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BookSeries","name":"The Drowned Houses","description":"A duology of dynastic gothic hard science fiction. In the Amaranth Reach the great houses do not die: they sink toward a black hole called the Well, where one year of theirs is a century above, and rule the surface through instructions that arrive generations late.","genre":["Science fiction","Gothic fiction"],"inLanguage":"en","author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"hasPart":[{"@type":"Book","name":"The Resurfacing","position":1,"author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"sameAs":"https://orbandink.co.uk/en/books/the-resurfacing/"},{"@type":"Book","name":"The Undertow","position":2,"author":{"@type":"Person","name":"A. P. Weiss"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"sameAs":"https://orbandink.co.uk/en/books/the-undertow/"}]}</script>
+<style>
+/* ---- 1 · the rim: the surface is a sheet of paper, and the Stair is seen through an oval cut in it ------------- */
+.rim{position:relative;min-height:100vh;min-height:100svh;color:var(--fg);
+  --ow:min(45vw,86vh);--oh:calc(var(--ow)*.84);--ox:calc(100vw - var(--gr) - var(--ow)*.5 - 2vw);--oy:51vh}
+.rim-paper{position:absolute;inset:0;
+  -webkit-mask:linear-gradient(#000 0 0),radial-gradient(closest-side,#000 98.8%,transparent 100%) calc(var(--ox) - var(--ow)*.475) calc(var(--oy) - var(--oh)*.475)/calc(var(--ow)*.95) calc(var(--oh)*.95) no-repeat;-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0),radial-gradient(closest-side,#000 98.8%,transparent 100%) calc(var(--ox) - var(--ow)*.475) calc(var(--oy) - var(--oh)*.475)/calc(var(--ow)*.95) calc(var(--oh)*.95) no-repeat;mask-composite:exclude}
+.rim-well{position:absolute;left:calc(var(--ox) - var(--ow)*.5);top:calc(var(--oy) - var(--oh)*.5);width:var(--ow);height:var(--oh);pointer-events:none}
+.rim-still{position:absolute;left:2.5%;top:2.5%;width:95%;height:95%;max-width:none;border-radius:50%;object-fit:cover;transition:opacity 1100ms linear}
+.scene-live .rim-still{opacity:0}
+.rim-oval{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.rim-thread{position:absolute;left:var(--ox);top:0;width:1px;height:calc(var(--oy) - var(--oh)*.468);background:linear-gradient(rgba(138,86,39,.25),#8A5627);box-shadow:1px 1px 1px rgba(40,26,12,.25)}
+.rim-copy{position:relative;display:grid;align-content:center;justify-items:start;gap:clamp(12px,2.4vh,26px);min-height:100vh;min-height:100svh;padding:clamp(70px,10vh,110px) 0 clamp(60px,9vh,100px) var(--gl);width:calc(var(--ox) - var(--ow)*.5 - 2vw)}
+.rim-by{margin:0;color:var(--fg2)}
+.rim-title{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(46px,5.5vw,100px);line-height:.9;letter-spacing:.035em;text-transform:uppercase}
+.rim-title span{display:block;font-size:.34em;letter-spacing:.42em;margin-bottom:.7em;font-weight:600}
+.rim-line{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(25px,2.7vw,46px);line-height:1.04;letter-spacing:-.008em}
+.rim-line em{display:block;animation:surface 5s linear .5s both}
+@keyframes surface{from{opacity:0}to{opacity:1}}
+.rim-rule{width:84px;height:2px;background:var(--foil) var(--sheen) 0/260% 100%;box-shadow:0 1px 0 rgba(60,32,10,.3)}
+.rim .rest{position:absolute;top:15px;right:var(--gl);text-align:right;font-size:9.5px}
+@media (max-width:899px){
+  .rim{--ow:min(82vw,43vh);--oy:max(60vh,calc(262px + var(--oh)*.5));--ox:50vw}
+  .rim-copy{width:auto;min-height:0;display:block;text-align:center;padding:clamp(54px,8.6vh,76px) var(--gl) 0}
+  .rim-by{font-size:9.5px}
+  .rim-title{margin-top:10px;font-size:clamp(38px,11.6vw,62px)}
+  .rim-line{margin-top:12px;font-size:clamp(22px,6.2vw,30px)}
+  .rim-rule{display:none}
+  .rim-line em{display:inline}
+  .rim-thread{top:calc(var(--oy) - var(--oh)*.468 - 30px);height:30px;background:linear-gradient(rgba(138,86,39,0),#8A5627)}
+  .rim-copy .buy{position:absolute;left:50%;transform:translateX(-50%);top:calc(100vh - 92px - env(safe-area-inset-bottom,0px));width:max-content;max-width:calc(100vw - 2*var(--gl))}
+  .rim-copy .buy:hover{transform:translate3d(-50%,-2px,0)}
+  .rim-copy .buy:active{transform:translate3d(-50%,1px,0)}
+}
+@supports (height:100svh){@media (max-width:899px){.rim{--ow:min(82vw,43svh);--oy:max(60svh,calc(262px + var(--oh)*.5))}.rim-copy .buy{top:calc(100svh - 92px - env(safe-area-inset-bottom,0px))}}}
+
+/* ---- below the surface: one thing at a time, with the Stair behind it ------------------------- */
+.reach{--pt:clamp(96px,20vh,220px);--pb:clamp(40px,8vh,90px);min-height:92vh}
+.reach::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(rgba(2,8,11,.8),rgba(2,8,11,0));pointer-events:none}
+.reach-lines{list-style:none;margin:0;padding:0;display:grid;gap:clamp(18px,4vh,46px);--step:clamp(14px,3.4vw,60px);width:fit-content}
+.reach-lines li{font-family:var(--display);font-weight:400;font-size:clamp(29px,4.2vw,66px);line-height:1.04;letter-spacing:-.01em;max-width:14em;text-wrap:balance}
+.reach-lines li:nth-child(2){margin-left:var(--step)}
+.reach-lines li:nth-child(3){margin-left:calc(var(--step)*2)}
+
+.bookat{min-height:104vh;display:grid;align-items:center;isolation:isolate}
+.bookat::before,.stairhall::before,.reach::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(4,11,14,.80),rgba(4,11,14,.52) 46%,rgba(4,11,14,0) 76%);-webkit-mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent)}
+.bookat--sink::before{background:linear-gradient(270deg,rgba(4,11,14,.80),rgba(4,11,14,.52) 46%,rgba(4,11,14,0) 76%)}
+.reach,.stairhall{isolation:isolate}
+@media (max-width:859px){.bookat::before,.bookat--sink::before,.stairhall::before,.reach::after{background:rgba(4,11,14,.40)}}
+.bookat-grid{display:grid;gap:clamp(26px,6vw,104px);align-items:center}
+.bookat-copy{display:grid;gap:clamp(13px,2.4vh,26px);justify-items:start}
+.bookat-no{color:var(--fg2)}
+.bookat-no b{font-weight:500;color:var(--copper);margin-right:.5em}
+.bookat-copy .hook{max-width:20em}
+.bookat-cover{order:-1;justify-self:center;width:min(56vw,270px)}
+@media (min-width:860px){
+  .bookat-grid{grid-template-columns:minmax(0,1fr) auto}
+  .bookat--sink .bookat-grid{grid-template-columns:auto minmax(0,1fr)}
+  .bookat-cover{order:0;width:clamp(290px,29vw,450px);margin-right:3vw}
+  .bookat--sink .bookat-cover{order:-1;margin:0 2vw 0 1vw}
+}
+@media (max-width:859px){.bookat{--pt:54px;--pb:54px;min-height:0}.bookat-cover{width:min(50vw,240px)}}
+
+/* ---- the Stair of Years: five clocks, each at its own depth, each running at its own rate ---------------- */
+.stairhall{display:grid;gap:clamp(44px,9vh,110px);--pb:clamp(70px,12vh,150px)}
+.stair-head{max-width:min(100%,640px)}
+.stair-head h2{margin:0 0 .3em;font-family:var(--display);font-weight:500;font-size:clamp(40px,5.2vw,82px);line-height:.96;letter-spacing:-.008em}
+.stair-head p{max-width:25em;font-size:clamp(19px,1.5vw,23px);text-wrap:pretty}
+.clocks.slip{background:linear-gradient(rgba(8,19,24,.66),rgba(6,15,19,.80)),url(assets/scenes/cloth.jpg) 0 0/340px}
+.clocks{list-style:none;margin:0;padding:clamp(16px,2.4vw,34px) clamp(10px,2.4vw,40px) clamp(18px,2.6vw,36px);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:clamp(6px,1.6vw,26px);align-items:start;width:min(100%,980px);--step:clamp(9px,2.6vh,30px)}
+.clocks li{margin-top:calc(var(--i)*var(--step));display:grid;justify-items:center}
+.clocks .dial{gap:9px;width:100%}
+.clocks .dial-case{width:min(100%,150px)}
+.clocks figcaption b{font-family:var(--mono);font-weight:300;font-size:clamp(15px,2vw,29px);letter-spacing:-.04em;min-width:0;color:var(--copper-hi)}
+.clocks figcaption span{font-size:8.5px;letter-spacing:.1em;text-align:center}
+@media (max-width:599px){.clocks figcaption span{display:none}}
+.holy{margin:0;font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(46px,7.4vw,124px);line-height:.94;letter-spacing:-.014em;text-align:center}
+
+/* a deep letter: paper, folded and sealed, lying on the cloth. It is not opened here. */
+.letter-grid{display:grid;gap:clamp(30px,6vw,100px);align-items:center}
+@media (min-width:900px){.letter-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px)}}
+.lagfig{display:grid;gap:6px;margin:0}
+.lagfig b{font-family:var(--mono);font-weight:300;font-size:clamp(96px,15vw,230px);line-height:.82;letter-spacing:-.06em;font-variant-numeric:tabular-nums;margin-left:-.05em}
+.lagfig span{font-family:var(--display);font-style:italic;font-size:clamp(23px,2.4vw,36px);line-height:1.12;max-width:13em}
+.letter{position:relative;isolation:isolate;margin:0;justify-self:center;width:min(100%,520px);aspect-ratio:1.56;background:#EAE4D8;color:#1A2126;transform:rotate(-2.2deg);box-shadow:0 60px 100px -30px #000,0 14px 30px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.5)}
+.letter::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+   linear-gradient(to bottom right,transparent calc(50% - 1.2px),rgba(32,35,42,.20) 50%,rgba(255,255,255,.75) calc(50% + 1px),rgba(255,255,255,0) calc(50% + 12px)) 0 0/50% 58% no-repeat,
+   linear-gradient(to bottom left,transparent calc(50% - 1.2px),rgba(32,35,42,.20) 50%,rgba(255,255,255,.75) calc(50% + 1px),rgba(255,255,255,0) calc(50% + 12px)) 100% 0/50% 58% no-repeat,
+   linear-gradient(to right,transparent calc(33.3% - 14px),rgba(32,35,42,.045) calc(33.3% - 1px),rgba(32,35,42,.12) 33.3%,rgba(255,255,255,.6) calc(33.3% + 1px),transparent calc(33.3% + 16px)),
+   linear-gradient(to right,transparent calc(66.6% - 14px),rgba(32,35,42,.045) calc(66.6% - 1px),rgba(32,35,42,.12) 66.6%,rgba(255,255,255,.6) calc(66.6% + 1px),transparent calc(66.6% + 16px)),
+   linear-gradient(168deg,#F1ECE1,#E3DCCE)}
+.letter::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--tooth) 0 0/300px,var(--fibre) 0 0/900px 620px;background-blend-mode:multiply;mix-blend-mode:multiply;opacity:.7}
+.letter-seal{position:absolute;left:50%;top:58%;width:19%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(8deg);filter:drop-shadow(0 3px 3px rgba(40,26,12,.45))}
+.stamp-sent{position:absolute;right:6%;top:8%;width:25%;height:auto;color:#7A3B22;transform:rotate(-11deg);opacity:.85;font-family:var(--mono)}
+.stamp-sent text{fill:currentColor}
+.stamp-recv{position:absolute;left:6%;bottom:9%;display:grid;gap:3px;padding:9px 13px 8px;border:1.5px solid currentColor;outline:1px solid currentColor;outline-offset:2.5px;color:#3F5E58;transform:rotate(3.5deg);font-size:clamp(8px,2.3vw,9.5px);letter-spacing:.16em;line-height:1.5;opacity:.92}
+.stamp-recv b{font-size:1.5em;font-weight:500;letter-spacing:.1em}
+
+/* the Well: the scene is the picture. The creed is set where nothing else is. */
+.wellhall{--pt:0px;--pb:24vh;min-height:124vh;text-align:center;padding-left:var(--gr)}
+.well-words{position:sticky;top:62vh;display:grid;gap:clamp(12px,2vh,20px);justify-items:center}
+.well-words .mono{color:var(--fg2)}
+.wellhall .creed{font-size:clamp(40px,6.2vw,104px)}
+.wellhall .threshold{position:absolute;left:0;right:0;bottom:9vh;margin:0}
+.ascent{--pt:46vh;min-height:120vh}
+@media (max-width:859px){.reach{min-height:0;--pt:84px;--pb:70px}.stairhall{--pt:50px;--pb:56px;gap:38px}.wellhall{min-height:90vh}.ascent{--pt:26vh;min-height:74vh}.closing{gap:34px;--pt:50px;--pb:26px}.closing .shelf{row-gap:22px}}
+
+/* ---- the surface, later: where the eye lands ---------------------------------------------------- */
+.closing{display:grid;gap:clamp(40px,7vh,88px)}
+.closing-top{display:grid;gap:clamp(22px,4vh,44px);align-items:end}
+@media (min-width:900px){.closing-top{grid-template-columns:minmax(0,1fr) auto}}
+.closing-kicker{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.2vw,32px);color:var(--fg2);margin-bottom:8px}
+.pair{display:grid;gap:clamp(34px,5vw,84px)}
+.pair-book{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:clamp(18px,3vw,44px);align-items:center}
+.pair-cover{display:block;width:100%;max-width:300px;justify-self:center}
+.pair-copy{display:grid;gap:12px;justify-items:start}
+.pair-copy>.mono{color:var(--fg2)}
+.pair-copy .title{font-size:clamp(25px,6.8vw,40px)}
+@media (min-width:900px){.pair{grid-template-columns:1fr 1fr}.pair-copy .title{font-size:clamp(30px,3vw,50px)}}
+@media (max-width:420px){.pair-copy .buy{padding:10px 10px 11px 13px;column-gap:8px}.pair-copy .buy-main{font-size:16.5px;white-space:normal}.pair-copy .buy-sub{font-size:8.5px}}
+</style>
+</head>
+<body>
+<svg class="vh" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="g-foil" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7E4E22"/><stop offset=".2" stop-color="#C58B52"/><stop offset=".36" stop-color="#F4D9B0"/><stop offset=".5" stop-color="#B9773C"/><stop offset=".68" stop-color="#8A5627"/><stop offset=".84" stop-color="#E0AD73"/><stop offset="1" stop-color="#7E4E22"/></linearGradient>
+  <radialGradient id="g-face" cx=".4" cy=".32" r=".8"><stop offset="0" stop-color="#1B3440"/><stop offset="1" stop-color="#081419"/></radialGradient>
+  <radialGradient id="g-edge" cx=".5" cy=".5" r=".5"><stop offset=".80" stop-color="#000" stop-opacity="0"/><stop offset=".93" stop-color="#000" stop-opacity=".34"/><stop offset="1" stop-color="#000" stop-opacity=".82"/></radialGradient>
+  <symbol id="dial-face" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="58" fill="url(#g-foil)"/><circle cx="60" cy="60" r="57.5" fill="none" stroke="#3A1F0A" stroke-opacity=".7"/>
+    <circle cx="60" cy="60" r="55.1" fill="none" stroke="#2A1608" stroke-opacity=".5" stroke-width="2.6" stroke-dasharray=".8 1.6"/>
+    <circle cx="60" cy="60" r="52.7" fill="none" stroke="#FFE9C4" stroke-opacity=".65" stroke-width=".7"/>
+    <circle cx="60" cy="60" r="51.5" fill="url(#g-face)" stroke="#2A1608" stroke-width="1.2"/>
+    <circle cx="60" cy="60" r="46" fill="none" stroke="#C98F52" stroke-opacity=".55" stroke-width="3" stroke-dasharray=".7 4.117"/>
+    <circle cx="60" cy="60" r="44.5" fill="none" stroke="#F4D9B0" stroke-width="6" stroke-dasharray="1.300 22"/>
+    <circle cx="60" cy="60" r="37" fill="none" stroke="#C98F52" stroke-opacity=".3" stroke-width=".6"/>
+    <ellipse cx="60" cy="80" rx="9" ry="3.6" fill="#03080A" stroke="#C4A968" stroke-opacity=".8" stroke-width=".8"/>
+  </symbol>
+  <symbol id="dial-glass" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="2.8" fill="url(#g-foil)" stroke="#2A1608" stroke-width=".5"/>
+    <path d="M22 46A42 42 0 0 1 84 26" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="12" stroke-linecap="round"/>
+    <path d="M96 78A40 40 0 0 1 74 97" fill="none" stroke="#F4D9B0" stroke-opacity=".06" stroke-width="5" stroke-linecap="round"/>
+  </symbol>
+</defs></svg>
+<div class="scene" aria-hidden="true"></div>
+<main>
+
+<!-- 1 · THE RIM — the surface: paper, the title, the way to the book, and the Stair seen through the oval cut in the sheet -->
+<header class="rim" id="rim" data-st data-tone="paper" data-lag-top="1.0005" data-lag-bottom="1.0005">
+  <div class="sheet rim-paper" aria-hidden="true"></div>
+  <div class="rim-well" aria-hidden="true">
+    <img class="rim-still" src="assets/scenes/well.jpg" width="1000" height="840" alt="" decoding="async">
+    <svg class="rim-oval" viewBox="0 0 400 336" preserveAspectRatio="none">
+      <ellipse cx="200" cy="168" rx="190" ry="159.600" fill="url(#g-edge)"/>
+      <ellipse cx="200" cy="168" rx="194" ry="163" fill="none" stroke="#2A1608" stroke-opacity=".45" stroke-width="9" transform="translate(1.2 2.4)"/>
+      <ellipse cx="200" cy="168" rx="194" ry="163" fill="none" stroke="url(#g-foil)" stroke-width="8"/>
+      <ellipse cx="200" cy="168" rx="197.600" ry="166.600" fill="none" stroke="#FFE9C4" stroke-opacity=".6" stroke-width=".8"/>
+      <ellipse cx="200" cy="168" rx="194" ry="163" fill="none" stroke="#4A2A0E" stroke-opacity=".55" stroke-width="1" stroke-dasharray="1.6 4"/>
+      <ellipse cx="200" cy="168" rx="190.200" ry="159.800" fill="none" stroke="#1B0E05" stroke-opacity=".85" stroke-width="1"/>
+    </svg>
+  </div>
+  <i class="rim-thread" aria-hidden="true"></i>
+  <div class="rim-copy">
+    <p class="mono rim-by">A duology by A. P. Weiss</p>
+    <h1 class="rim-title"><span>The</span> Drowned Houses</h1>
+    <i class="rim-rule" aria-hidden="true"></i>
+    <p class="rim-line">The dead are not gone. <em>Only slow.</em></p>
+    <a class="buy buy--lg" data-buy="the-resurfacing" href="https://orbandink.co.uk/en/books/the-resurfacing/"><span class="buy-main">See the book at Orb &amp; Ink</span><span class="buy-sub">Book One · The Resurfacing</span></a>
+  </div>
+  <p class="mono rest" data-rest>Instrument at rest · this page is being read without its clock</p>
+  <i class="horizon" aria-hidden="true"></i>
+</header>
+
+<!-- 2 · THE REACH IN THREE LINES — through the mouth of the Stair -->
+<section class="st reach on-scene" id="reach" data-tone="deep" data-lag-top="1.001" data-lag-bottom="1.008">
+  <ol class="reach-lines scrim">
+    <li data-rise>In the Amaranth Reach, the great houses do not die.</li>
+    <li data-rise="1">They sink toward the Well, to where one year of theirs is a century above.</li>
+    <li data-rise="2">From there they rule the living, by letters that arrive generations late.</li>
+  </ol>
+</section>
+
+<!-- 3 · BOOK ONE — it has surfaced, and it is still rising -->
+<section class="st bookat bookat--rise" id="book-one" data-tone="deep" data-lag="1.03">
+  <div class="bookat-grid">
+    <div class="bookat-copy on-scene scrim">
+      <p class="mono bookat-no" data-rise><b>↑</b>Book One</p>
+      <h2 class="title" data-rise><a href="the-resurfacing.html"><span>The</span> Resurfacing</a></h2>
+      <p class="hook" data-rise="1">House Vhast was driven down nine hundred years ago and presumed extinct past the Threshold. It has just climbed out — young, rich beyond audit, and holding a claim to half the Reach.</p>
+      <div class="buybox" data-rise="2">
+        <a class="buy" data-buy="the-resurfacing" href="https://orbandink.co.uk/en/books/the-resurfacing/"><span class="buy-main">See the book at Orb &amp; Ink</span><span class="buy-sub">Book One · The Resurfacing</span></a>
+      </div>
+      <a class="more" href="the-resurfacing.html" data-rise="2">About this book</a>
+    </div>
+    <figure class="book bookat-cover" data-drift="0.06">
+      <a class="book-in" href="the-resurfacing.html"><img data-gl="plate" src="assets/cover-the-resurfacing.jpg" srcset="assets/cover-the-resurfacing-760.jpg 491w, assets/cover-the-resurfacing.jpg 970w" sizes="(min-width:860px) 29vw, 56vw" width="970" height="1500" alt="Cover of The Resurfacing: a copper station, point down, hung above the rimmed black oval of the Well, on deep teal cloth." loading="lazy" decoding="async"></a>
+    </figure>
+  </div>
+</section>
+
+<!-- 4 · THE STAIR OF YEARS — five clocks at five depths, and one letter -->
+<section class="st stairhall" id="descent" data-st data-tone="deep" data-lag-top="1.06" data-lag-bottom="40">
+  <div class="stair-head on-scene scrim" data-rise>
+    <h2 class="foil">The Stair of Years</h2>
+    <p>Descent is rank. The deeper a patriarch holds, the slower his clock runs: a year of his is a century above.</p>
+  </div>
+  <ol class="clocks slip" data-rise aria-label="Five clocks, each running at the rate of its own depth">
+    <li style="--i:0"><figure class="dial" data-dial="depth" data-rate="1"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><b>×1</b><span>the surface</span></figcaption></figure></li>
+    <li style="--i:1"><figure class="dial" data-dial="depth" data-rate="2"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><b>×2</b><span>2 years above</span></figcaption></figure></li>
+    <li style="--i:2"><figure class="dial" data-dial="depth" data-rate="5"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><b>×5</b><span>5 years above</span></figcaption></figure></li>
+    <li style="--i:3"><figure class="dial" data-dial="depth" data-rate="20"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><b>×20</b><span>20 years above</span></figcaption></figure></li>
+    <li style="--i:4"><figure class="dial" data-dial="depth" data-rate="100"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><b>×100</b><span>a century above</span></figcaption></figure></li>
+  </ol>
+  <p class="holy on-scene">Sinking is holy.</p>
+  <div class="letter-grid">
+    <p class="lagfig on-scene scrim" data-rise><b class="foil">400</b><span>years between the day a deep letter was dated and the day it was read. It was obeyed anyway.</span></p>
+    <figure class="letter" data-rise="1" role="img" aria-label="A deep letter, folded and sealed: stamped where it was sealed, below, and stamped again where it was received, above, four hundred years later.">
+      <svg class="stamp-sent" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="stamp-ring" d="M16 60a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs><circle cx="60" cy="60" r="56.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="60" cy="60" r="33" fill="none" stroke="currentColor" stroke-width="1"/><text font-size="8.200" letter-spacing="1.800"><textPath href="#stamp-ring" textLength="270" lengthAdjust="spacing">SEALED BELOW · SEALED BELOW ·</textPath></text><ellipse cx="60" cy="60" rx="17" ry="8" fill="none" stroke="currentColor" stroke-width="2.200"/><ellipse cx="60" cy="60" rx="11" ry="4.200" fill="currentColor"/></svg>
+      <svg class="letter-seal" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="url(#g-foil)"/><circle cx="50" cy="50" r="46.500" fill="none" stroke="#3A1F0A" stroke-opacity=".7"/><circle cx="50" cy="50" r="38" fill="none" stroke="#3A1F0A" stroke-opacity=".5" stroke-width="1.400" stroke-dasharray="1.200 2.600"/><ellipse cx="50" cy="58" rx="20" ry="8.500" fill="#12090A" stroke="#F4D9B0" stroke-opacity=".7" stroke-width="1.400"/><path d="M50 16l-6 9 4 26h4l4-26z" fill="#4A2A0E" fill-opacity=".8"/><path d="M26 30A34 34 0 0 1 60 17" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round"/></svg>
+      <div class="mono stamp-recv" aria-hidden="true"><span>Received above</span><b>400 years later</b><span>Obeyed</span></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 · BOOK TWO — a hundred years to the year, and still going down; then the Well -->
+<section class="st bookat bookat--sink" id="book-two" data-tone="deep" data-lag-top="100" data-lag-bottom="100">
+  <div class="bookat-grid">
+    <div class="bookat-copy on-scene scrim">
+      <p class="mono bookat-no" data-rise><b>↓</b>Book Two</p>
+      <h2 class="title" data-rise><a href="the-undertow.html"><span>The</span> Undertow</a></h2>
+      <p class="hook" data-rise="1">The transmission is answered. What comes back up is not what was sent down.</p>
+      <div class="buybox" data-rise="2">
+        <a class="buy" data-buy="the-undertow" href="https://orbandink.co.uk/en/books/the-undertow/"><span class="buy-main">See the book at Orb &amp; Ink</span><span class="buy-sub">Book Two · The Undertow</span></a>
+      </div>
+      <a class="more" href="the-undertow.html" data-rise="2">About this book</a>
+    </div>
+    <figure class="book bookat-cover" data-drift="-0.06">
+      <a class="book-in" href="the-undertow.html"><img data-gl="plate" src="assets/cover-the-undertow.jpg" srcset="assets/cover-the-undertow-760.jpg 491w, assets/cover-the-undertow.jpg 970w" sizes="(min-width:860px) 29vw, 56vw" width="970" height="1500" alt="Cover of The Undertow: a slate-blue station, point up, cut into worn gold above the rimmed black oval of the Well." loading="lazy" decoding="async"></a>
+    </figure>
+  </div>
+</section>
+
+<section class="st wellhall on-scene" id="well" data-tone="deep" data-lag-top="100" data-lag-bottom="316">
+  <div class="well-words">
+    <p class="creed">Heaven is the horizon.</p>
+    <p class="mono">The Undertow · the creed of the deep</p>
+  </div>
+  <div class="threshold" data-lag="280"><span class="mono">The Threshold<span class="th-more"> · past this line, no reply is expected</span></span></div>
+</section>
+
+<!-- THE WAY BACK UP — faster than the way down -->
+<section class="st ascent on-scene" data-st data-tone="deep" data-lag-top="316" data-lag-bottom="1.0005">
+  <p>Surfacing is priced.</p>
+</section>
+
+<!-- 6 · THE SURFACE, LATER — two clocks with no explanation, both books, every edition -->
+<div class="sheet sheet--foot">
+<section class="st closing" id="books" data-tone="paper" data-lag-top="1.0005" data-lag-bottom="1.0005">
+  <div class="closing-top">
+    <div>
+      <p class="closing-kicker" data-rise>The surface, later.</p>
+      <h2 class="display" data-rise>Start with Book One.</h2>
+    </div>
+    <div class="dials" data-rise="1">
+      <figure class="dial" data-dial="yours"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><span>Your clock</span><b data-clock="yours">at rest</b></figcaption></figure>
+      <figure class="dial" data-dial="surface"><span class="dial-case"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#dial-face"/><g stroke-linecap="round"><line class="dial-h" x1="60" y1="64" x2="60" y2="36" stroke="#EFE8DA" stroke-width="3.200"/><line class="dial-m" x1="60" y1="66" x2="60" y2="21" stroke="#EFE8DA" stroke-width="1.800"/><line class="dial-s" x1="60" y1="72" x2="60" y2="17" stroke="#F0B46E" stroke-width=".9"/></g><use href="#dial-glass"/></svg></span><figcaption class="mono"><span>The surface</span><b data-clock="surface">at rest</b></figcaption></figure>
+    </div>
+  </div>
+  <div class="pair">
+    <article class="pair-book" data-rise>
+      <a class="book pair-cover" href="the-resurfacing.html"><span class="book-in"><img data-gl="plate" src="assets/cover-the-resurfacing-760.jpg" width="491" height="760" alt="The Resurfacing — cover" loading="lazy" decoding="async"></span></a>
+      <div class="pair-copy">
+        <p class="mono">Book One</p>
+        <h3 class="title"><a href="the-resurfacing.html"><span>The</span> Resurfacing</a></h3>
+        <a class="buy" data-buy="the-resurfacing" href="https://orbandink.co.uk/en/books/the-resurfacing/"><span class="buy-main">See the book at Orb &amp; Ink</span><span class="buy-sub">Book One · start here</span></a>
+        <a class="more" href="the-resurfacing.html">About this book</a>
+      </div>
+    </article>
+    <article class="pair-book" data-rise="1">
+      <a class="book pair-cover" href="the-undertow.html"><span class="book-in"><img data-gl="plate" src="assets/cover-the-undertow-760.jpg" width="491" height="760" alt="The Undertow — cover" loading="lazy" decoding="async"></span></a>
+      <div class="pair-copy">
+        <p class="mono">Book Two</p>
+        <h3 class="title"><a href="the-undertow.html"><span>The</span> Undertow</a></h3>
+        <a class="buy" data-buy="the-undertow" href="https://orbandink.co.uk/en/books/the-undertow/"><span class="buy-main">See the book at Orb &amp; Ink</span><span class="buy-sub">Book Two · the close</span></a>
+        <a class="more" href="the-undertow.html">About this book</a>
+      </div>
+    </article>
+  </div>
+  <div class="eds" id="editions" data-art="the-resurfacing">
+    <div class="eds-head" data-rise>
+      <h3>Read it, or listen.</h3>
+    </div>
+    <ul class="shelf" data-rise>
+      <li class="ed" data-edition="ebook" data-books="the-resurfacing the-undertow"><span class="ed-pic"><span class="obj obj--ebook"><img src="assets/cover-the-resurfacing-360.jpg" width="233" height="360" alt="" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>E-book</b></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+      <li class="ed" data-edition="paperback" data-books="the-resurfacing the-undertow"><span class="ed-pic"><span class="obj obj--paper"><img src="assets/cover-the-resurfacing-360.jpg" width="233" height="360" alt="" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>Paperback</b></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+      <li class="ed" data-edition="hardcover" data-books="the-resurfacing the-undertow"><span class="ed-pic"><span class="obj obj--hard"><img src="assets/cover-the-resurfacing-360.jpg" width="233" height="360" alt="" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>Hardcover</b></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+      <li class="ed" data-edition="audiobook" data-books="the-resurfacing the-undertow"><span class="ed-pic"><span class="obj obj--sq"><img src="assets/sq-the-resurfacing-audiobook.jpg" width="700" height="700" alt="The Resurfacing — audiobook cover" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>Audiobook</b></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+      <li class="ed" data-edition="immersive" data-books="the-resurfacing"><span class="ed-pic"><span class="obj obj--sq"><img src="assets/sq-the-resurfacing-immersive.jpg" width="700" height="700" alt="The Resurfacing — immersive audiobook cover" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>Immersive audiobook</b><span>Book One</span></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+      <li class="ed" data-edition="drama" data-books="the-resurfacing the-undertow"><span class="ed-pic"><span class="obj obj--sq"><img src="assets/sq-the-resurfacing-drama.jpg" width="700" height="700" alt="The Resurfacing — audio drama cover" loading="lazy" decoding="async"></span></span><span class="ed-name"><b>Audio drama</b></span><span class="ed-act"><i class="chip">Coming</i></span></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="st colophon" data-tone="paper" data-lag-top="1.0005" data-lag-bottom="1.0005">
+  <p class="colophon-line">The dead are not gone. Only slow.</p>
+  <p class="colophon-about">A. P. Weiss writes the dark line: cold physics, formal grief.</p>
+  <nav class="mono" aria-label="The duology">
+    <a href="#rim">The Drowned Houses</a>
+    <a href="the-resurfacing.html">I · The Resurfacing</a>
+    <a href="the-undertow.html">II · The Undertow</a>
+  </nav>
+  <hr class="colophon-rule">
+  <p class="mono colophon-small"><span>A duology by A. P. Weiss · published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a></span><span>© A. P. Weiss</span></p>
+</footer>
+</div><!-- /sheet -->
+</main>
+
+<script type="module">
+import { boot } from './stair.js';
+boot({ page: 'landing', buy: 'the-resurfacing' });
+</script>
+</body>
+</html>

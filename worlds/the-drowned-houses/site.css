@@ -1,0 +1,302 @@
+/* ---- the material world, taken from the two covers: teal book-cloth, copper foil, a black well.
+   Paper only at the surface. Pale gold only at the horizon. ------------------------------------ */
+:root{
+  --cloth:#0F2129;--cloth-2:#0A171C;--bone:#EFE8DA;--bone-2:#B9B3A5;--paper:#E8E2D6;--ink:#1A2126;--ink-2:#4B5157;
+  --copper:#C98F52;--copper-hi:#F4D9B0;--copper-lo:#7A4B21;--rim:#C4A968;
+  --foil:linear-gradient(100deg,#7E4E22 0%,#B9773C 13%,#F2D3A6 26%,#C58B52 37%,#8A5627 51%,#D9A066 65%,#F6DFBA 75%,#B9773C 87%,#7E4E22 100%);
+  --sheen:30%;--slow:1;
+  --display:"Cormorant Garamond","EB Garamond",Garamond,"Times New Roman",serif;
+  --body:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --gl:22px;--gr:46px;
+  --tooth:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' lighting-color='%23fff' surfaceScale='0.9' diffuseConstant='1.16'%3E%3CfeDistantLight azimuth='235' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");--fibre:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='620'%3E%3Cfilter id='t' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.07' numOctaves='3' seed='4' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' lighting-color='%23fff' surfaceScale='1.1' diffuseConstant='1.16'%3E%3CfeDistantLight azimuth='235' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");
+}
+@media (max-width:369px){:root{--gl:18px;--gr:42px}}
+@media (min-width:700px){:root{--gl:44px;--gr:72px}}
+@media (min-width:1000px){:root{--gl:clamp(76px,7.4vw,118px);--gr:clamp(150px,11.6vw,184px)}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-bottom:76px;background:#0A171C}
+html.gauged{scrollbar-width:none}
+html.gauged::-webkit-scrollbar{width:0;height:0;display:none}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:#0C1B21 url(assets/scenes/cloth.jpg) 0 0/420px;color:var(--bone);font-family:var(--body);font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:clip}
+@media (min-width:1280px){body{font-size:21px}}
+img{display:block;max-width:100%;height:auto}
+p{margin:0}
+a{color:inherit;text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--hair2,currentColor);transition:text-decoration-color calc(var(--slow)*220ms) linear,color calc(var(--slow)*220ms) linear}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:2px solid var(--copper-hi);outline-offset:4px}
+::selection{background:#C98F52;color:#0A171C}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ---- the Stair: one fixed scene behind the page. The still is there before (and without) the shader. */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden;background:#0A171C url(assets/scenes/still.jpg) 50% 50%/cover no-repeat}
+@media (max-aspect-ratio:4/5){.scene{background-image:url(assets/scenes/still-phone.jpg)}}
+.scene::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 100% at 50% 45%,transparent 55%,rgba(4,10,13,.4))}
+.scene-gl{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1100ms linear}
+main,.over{position:relative;z-index:1}
+main{overflow-x:clip}
+.plate-gl{position:absolute;opacity:0;transition:opacity 700ms linear;pointer-events:none}
+/* ---- type -------------------------------------------------------------------------------------- */
+.mono{font-family:var(--mono);font-size:10.5px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;font-variant-numeric:tabular-nums;line-height:1.65}
+@media (min-width:1000px){.mono{font-size:11px}}
+.display{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(46px,7vw,112px);line-height:.96;letter-spacing:-.012em;text-wrap:balance}
+.title{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(40px,12.4vw,58px);line-height:.92;letter-spacing:.03em;text-transform:uppercase}
+.title span{display:block;font-size:.36em;letter-spacing:.34em;margin-bottom:.5em;font-weight:500}
+.title a{text-decoration:none}
+@media (min-width:700px){.title{font-size:clamp(58px,6.6vw,104px)}}
+.hook{font-family:var(--display);font-weight:500;font-size:clamp(23px,2.2vw,33px);line-height:1.24;text-wrap:pretty}
+.more{font-style:italic}
+/* foil: stamped copper that takes the light as the page moves (--sheen is set from the scroll) */
+.foil{color:#C98F52;background:var(--foil) var(--sheen) 0/260% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 1px 0 rgba(0,0,0,.6)) drop-shadow(0 3px 14px rgba(0,0,0,.5))}
+.on-scene{text-shadow:0 2px 30px rgba(3,9,12,.95),0 1px 3px rgba(3,9,12,.75)}
+.scrim{position:relative}
+.scrim::before{content:"";position:absolute;inset:-46px -70px;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(4,12,16,.62),rgba(4,12,16,.36) 62%,rgba(4,12,16,0))}
+/* ---- strata. Below the surface a stratum is open air over the Stair; at the surface it is paper. */
+[data-tone="deep"]{--fg:#EFE8DA;--fg2:#B9B3A5;--hair:rgba(239,232,218,.16);--hair2:rgba(239,232,218,.4);--shade:rgba(0,0,0,.85)}
+[data-tone="paper"]{--fg:#1A2126;--fg2:#4B5157;--hair:rgba(26,33,38,.18);--hair2:rgba(26,33,38,.42);--shade:rgba(30,36,40,.55)}
+.st{position:relative;color:var(--fg);padding:var(--pt,clamp(90px,16vh,190px)) var(--gr) var(--pb,clamp(90px,16vh,190px)) var(--gl)}
+.sheet{position:relative;isolation:isolate;color:var(--fg);background:radial-gradient(80% 70% at 24% 8%,#F3EEE3,rgba(243,238,227,0) 72%),linear-gradient(#E8E2D6,#E2DBCD)}
+.sheet::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--tooth) 0 0/300px,var(--fibre) 0 0/900px 620px;background-blend-mode:multiply;opacity:.5;mix-blend-mode:multiply}
+.sheet--top{box-shadow:0 34px 70px -10px rgba(2,8,11,.9),0 6px 14px rgba(2,8,11,.6)}
+.sheet--foot::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--foil) var(--sheen) 0/260% 100%;box-shadow:0 1px 0 rgba(60,32,10,.35)}
+.sheet--foot{box-shadow:0 -34px 70px -10px rgba(2,8,11,.9),0 -6px 14px rgba(2,8,11,.6)}
+.sheet .st{padding-top:var(--pt,clamp(80px,13vh,150px));padding-bottom:var(--pb,clamp(80px,13vh,150px))}
+/* a slip: a panel bound in the same cloth, ruled in foil. Running text below the surface sits on one. */
+.slip{position:relative;isolation:isolate;padding:clamp(26px,3.4vw,48px) clamp(22px,3.4vw,52px);background:linear-gradient(rgba(8,19,24,.80),rgba(6,15,19,.92)),url(assets/scenes/cloth.jpg) 0 0/340px;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 1px 0 0 rgba(255,255,255,.07) inset,0 50px 90px -30px #000,0 14px 30px -12px rgba(0,0,0,.8)}
+.slip::before{content:"";position:absolute;inset:9px;z-index:-1;pointer-events:none;border:1px solid transparent;border-image:var(--foil) 1;opacity:.72}
+.slip::after{content:"";position:absolute;inset:13px;z-index:-1;pointer-events:none;border:1px solid rgba(201,143,82,.22)}
+/* ---- motion: things settle downward on the way down, upward on the way up; slower with depth ---- */
+[data-rise]{transition:opacity var(--dur,900ms) cubic-bezier(.22,.61,.24,1),transform var(--dur,900ms) cubic-bezier(.22,.61,.24,1)}
+.will-rise{opacity:0;transform:translate3d(0,var(--from,-18px),0)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-delay:0s!important;transition-duration:.001s!important}}
+/* ---- the buy button: a copper plate, struck. Plain verb first. -------------------------------- */
+.buybox{display:grid;gap:12px;justify-items:start}
+.buy{position:relative;isolation:isolate;display:inline-grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:22px;padding:14px 20px 15px 24px;color:#1B1107;text-decoration:none;text-align:left;border-radius:2px;
+  background:var(--foil) var(--sheen) 0/260% 100%;
+  box-shadow:0 0 0 1px #5B3716,inset 0 1px 0 rgba(255,243,220,.75),inset 0 -2px 0 rgba(70,36,10,.5),inset 0 0 0 4px rgba(255,236,205,.0),0 18px 34px -14px rgba(0,0,0,.85),0 3px 6px rgba(0,0,0,.45);
+  transition:transform calc(var(--slow)*160ms) cubic-bezier(.3,.7,.2,1),box-shadow calc(var(--slow)*160ms) linear,background-position calc(var(--slow)*700ms) cubic-bezier(.2,.7,.2,1)}
+.buy::before{content:"";position:absolute;inset:4px;z-index:-1;border:1px solid rgba(72,38,10,.38);border-radius:1px;box-shadow:0 1px 0 rgba(255,240,215,.45)}
+.buy::after{content:"\2192";grid-column:2;grid-row:1/span 2;font-family:var(--mono);font-size:17px;line-height:1;text-shadow:0 1px 0 rgba(255,236,205,.5);transition:transform calc(var(--slow)*200ms) cubic-bezier(.3,.7,.2,1)}
+.buy:hover{background-position:calc(var(--sheen) + 34%) 0;transform:translate3d(0,-2px,0);box-shadow:0 0 0 1px #5B3716,inset 0 1px 0 rgba(255,243,220,.85),inset 0 -2px 0 rgba(70,36,10,.5),0 26px 40px -14px rgba(0,0,0,.9),0 5px 10px rgba(0,0,0,.5)}
+.buy:hover::after{transform:translate3d(5px,0,0)}
+.buy:active{transform:translate3d(0,1px,0);box-shadow:0 0 0 1px #5B3716,inset 0 2px 5px rgba(60,30,8,.55),0 6px 12px -8px rgba(0,0,0,.8)}
+.buy:focus-visible{outline:2px solid var(--copper-hi);outline-offset:4px}
+[data-tone="paper"] .buy:focus-visible{outline-color:#1A2126}
+.buy-main{grid-column:1;font-family:var(--display);font-weight:700;font-size:clamp(21px,1.7vw,26px);line-height:1.08;text-shadow:0 1px 0 rgba(255,236,205,.5)}
+.buy-sub{grid-column:1;margin-top:3px;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;line-height:1.4;opacity:.82}
+.buy--lg{padding:17px 24px 18px 28px;column-gap:28px}
+.buy--lg .buy-main{font-size:clamp(23px,2vw,30px)}
+@media (max-width:420px){.buy--lg{padding:14px 16px 15px 20px;column-gap:14px}.buy--lg .buy-main{font-size:20px;white-space:nowrap}.buy-main{white-space:nowrap}}
+.th-more{}
+@media (max-width:699px){.th-more{display:none}}
+@media (max-width:999px){.colophon{padding-bottom:calc(var(--pb) + 64px + env(safe-area-inset-bottom,0px))}}
+.buy--tile .buy-main{white-space:normal}
+.buy--tile{padding:8px 11px 9px 13px;column-gap:9px;text-align:left}
+.buy--tile::before{inset:3px}
+.buy--tile .buy-main{font-size:16.5px;line-height:1.1}
+.buy--tile .buy-sub{font-size:8.5px;margin-top:2px}
+.buy--tile::after{font-size:13px}
+.buy-note{color:var(--fg2)}
+.buy-note::before{content:"";display:inline-block;width:7px;height:7px;margin-right:.9em;border:1px solid currentColor;border-radius:50%;vertical-align:.02em}
+.buy-note.is-live{color:var(--fg)}
+.buy-note.is-live::before{background:var(--copper);border-color:var(--copper)}
+/* "coming": blind-stamped, no foil */
+.chip{display:inline-block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;line-height:1.3;color:var(--fg2);padding:5px 9px 4px;white-space:nowrap;border-radius:1px;box-shadow:inset 0 1px 2px rgba(0,0,0,.28),inset 0 0 0 1px var(--hair),0 1px 0 rgba(255,255,255,.35)}
+[data-tone="deep"] .chip{box-shadow:inset 0 1px 2px rgba(0,0,0,.6),inset 0 0 0 1px var(--hair),0 1px 0 rgba(255,255,255,.05)}
+/* ---- the covers, as the cloth-bound books they are: boards, a block of pages, a spine, a shadow --------- */
+.book{position:relative;margin:0;display:block;--th:clamp(12px,1.7vw,24px)}
+.book-in{position:relative;display:block;transform:perspective(1500px) rotateY(-17deg) rotateX(1.5deg);transform-origin:38% 50%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform calc(var(--slow)*900ms) cubic-bezier(.2,.7,.16,1)}
+.book:hover .book-in,a:focus-visible .book-in{transform:perspective(1500px) rotateY(-7deg) rotateX(.5deg)}
+.book img{position:relative;width:100%;border-radius:1px 3px 3px 1px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),-1px 0 0 rgba(0,0,0,.55)}
+.book .plate-gl{border-radius:1px 3px 3px 1px}
+/* the block of pages, seen at the fore-edge */
+.book-in::after{content:"";position:absolute;top:.9%;bottom:.9%;left:100%;width:var(--th);margin-left:-1px;transform-origin:0 50%;transform:rotateY(90deg);
+  background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 6%,rgba(0,0,0,0) 94%,rgba(0,0,0,.34)),repeating-linear-gradient(90deg,#EDE6D8 0 1px,#CDC5B4 1px 2px,#E3DCCD 2px 3px,#B9B1A0 3px 4px)}
+/* the hinge of the front board, and the light along it */
+.book-in::before{content:"";position:absolute;top:0;bottom:0;left:3.4%;width:1.8%;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.36),rgba(255,255,255,.11) 62%,transparent)}
+/* its shadow on whatever is behind it */
+.book::before{content:"";position:absolute;left:6%;right:-12%;top:7%;bottom:-7%;z-index:-1;pointer-events:none;background:radial-gradient(closest-side,var(--shade),transparent);opacity:.9;transform:skewX(-8deg)}
+.book--flat .book-in{transform:none}
+/* ---- a plate: a picture of the Stair, tipped in and framed in foil ---------------------------------------- */
+.plate{position:relative;margin:0;padding:10px;background:linear-gradient(rgba(8,19,24,.6),rgba(6,15,19,.9)),url(assets/scenes/cloth.jpg) 0 0/340px;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 50px 90px -30px #000,0 14px 30px -12px rgba(0,0,0,.8)}
+.plate::before{content:"";position:absolute;inset:4px;pointer-events:none;border:1px solid transparent;border-image:var(--foil) 1;opacity:.8}
+.plate-pic{position:relative;display:block;overflow:hidden}
+.plate img{display:block;width:100%;height:auto}
+.plate-pic::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.7),inset 0 0 40px rgba(0,0,0,.55)}
+.plate figcaption{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 2px;color:var(--bone-2)}
+.plate figcaption b{font-weight:500;color:var(--copper)}
+/* ---- the editions: six things you can pick up, standing on a shelf bound in the same cloth ------------------ */
+.eds{display:grid;gap:clamp(22px,3.6vh,40px)}
+.eds-head h2,.eds-head h3{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(34px,4.6vw,72px);line-height:1;letter-spacing:-.01em}
+.shelf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:clamp(26px,4vh,44px)}
+.ed{display:grid;grid-template-rows:auto auto 1fr;justify-items:center;text-align:center;row-gap:9px;min-width:0}
+/* the shelf itself: each thing stands on its own length of it, and the lengths join */
+.ed-pic{position:relative;display:grid;align-items:end;justify-items:center;width:100%;height:clamp(112px,31vw,214px);padding:0 8% 0;margin-bottom:22px}
+.ed-pic::before{content:"";position:absolute;left:0;right:0;top:100%;height:13px;background:linear-gradient(rgba(255,236,205,.0),rgba(0,0,0,.42)),url(assets/scenes/cloth.jpg) 0 0/260px;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 14px 18px -8px var(--shade),0 30px 34px -22px var(--shade)}
+.ed-pic::after{content:"";position:absolute;left:0;right:0;top:100%;height:2px;background:var(--foil) var(--sheen) 0/260% 100%}
+.ed:first-child .ed-pic::before,.ed:nth-child(3n+1) .ed-pic::before{border-radius:2px 0 0 2px}
+.ed:nth-child(3n) .ed-pic::before{border-radius:0 2px 2px 0}
+.ed-name{display:grid;gap:1px;justify-items:center}
+.ed-name b{font-family:var(--display);font-weight:600;font-size:clamp(17px,1.5vw,22px);line-height:1.1}
+.ed-name span{font-style:italic;color:var(--fg2);font-size:.8em;line-height:1.25}
+.ed-act{display:grid;gap:6px;justify-items:center;align-self:start}
+.obj{position:relative;display:block;width:var(--w,62%);transform-origin:50% 100%;transition:transform calc(var(--slow)*520ms) cubic-bezier(.2,.7,.16,1)}
+.ed:hover .obj{transform:translate3d(0,-5px,0) rotate(-1.2deg)}
+.obj img{position:relative;width:100%}
+/* where it stands: the dark under its foot */
+.obj::before{content:"";position:absolute;left:-6%;right:-14%;bottom:-5px;height:12px;background:radial-gradient(closest-side,rgba(0,0,0,.62),transparent);z-index:-1}
+/* the light that crosses every cover as the page moves */
+.obj::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 30%,rgba(255,240,214,.20) 46%,transparent 60%) var(--sheen) 0/300% 100%;mix-blend-mode:screen}
+.obj--ebook{--w:60%;padding:5% 4.4% 7%;background:linear-gradient(160deg,#2A3036,#0C0F12);border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 0 0 2px #0A0C0E,2px 0 0 #050607,0 4px 8px -2px var(--shade)}
+.obj--ebook::after{border-radius:8px}
+.obj--paper{--w:58%}
+.obj--paper img{box-shadow:1px 0 0 #E4DDCE,2px 0 0 #B7B0A2,3px 0 0 #E4DDCE,4px 0 0 #B7B0A2,5px 0 0 #D8D1C2,0 4px 8px -2px var(--shade)}
+.obj--hard{--w:63%}
+.obj--hard img{border-radius:1px 2px 2px 1px;box-shadow:0 0 0 2px var(--board,#1D3742),3px 0 0 1px #E4DDCE,5px 0 0 1px #B7B0A2,7px 0 0 1px #DCD5C6,9px 0 0 2px var(--board-2,#122630),0 5px 10px -2px var(--shade)}
+.obj--paper::after,.obj--hard::after{background:linear-gradient(90deg,rgba(0,0,0,.26) 2.5%,rgba(255,255,255,.08) 5%,transparent 7%),linear-gradient(105deg,transparent 30%,rgba(255,240,214,.20) 46%,transparent 60%) var(--sheen) 0/300% 100%}
+.obj--sq{--w:78%}
+.obj--sq img{border-radius:2px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),2px 0 0 #0C161B,3px 0 0 #2B3A40,0 4px 8px -2px var(--shade)}
+.eds[data-art="the-undertow"]{--board:#A17C3F;--board-2:#6C5126}
+@media (min-width:860px){
+  .shelf{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .shelf--5{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .ed-pic{height:clamp(150px,15.5vw,236px)}
+  .ed:nth-child(3n+1) .ed-pic::before,.ed:nth-child(3n) .ed-pic::before{border-radius:0}
+  .ed:first-child .ed-pic::before{border-radius:2px 0 0 2px}
+  .ed:last-child .ed-pic::before{border-radius:0 2px 2px 0}
+}
+@media (max-width:859px){.shelf--5 .ed:nth-child(5) .ed-pic::before{border-radius:0 2px 2px 0}}
+/* ---- clocks: copper instruments. They are given no caption beyond their names. ----------------------------- */
+.dials{display:flex;gap:clamp(18px,2.6vw,36px);margin:0}
+.dial{display:grid;justify-items:center;gap:10px;margin:0}
+.dial-case{position:relative;display:block;width:clamp(92px,10.5vw,148px)}
+.dial-case svg{position:relative;width:100%;height:auto;display:block}
+.dial-case::before{content:"";position:absolute;left:4%;right:-10%;top:12%;bottom:-16%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent 78%);z-index:0}
+.dial figcaption{display:grid;justify-items:center;gap:2px;color:var(--fg2)}
+.dial figcaption b{font-weight:500;color:var(--fg);font-size:1.16em;letter-spacing:.08em;min-width:11ch;text-align:center}
+/* ---- colophon ------------------------------------------------------------------------------------- */
+.colophon{--pt:clamp(40px,6vh,64px);--pb:clamp(40px,6vh,70px);display:grid;gap:22px}
+.colophon-line{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(26px,2.8vw,40px);line-height:1.1}
+.colophon-about{max-width:30em;color:var(--fg2);font-style:italic}
+.colophon nav{display:flex;flex-wrap:wrap;gap:6px 26px}
+.colophon nav a{text-decoration:none}
+.colophon nav a:hover{text-decoration:underline}
+.colophon-rule{height:1px;background:var(--hair2);border:0;margin:0}
+.colophon-small{display:flex;flex-wrap:wrap;gap:6px 30px;justify-content:space-between;color:var(--fg2)}
+.colophon-small a{color:var(--fg)}
+/* ---- the horizon: the one place the pale gold is allowed ------------------------------------------ */
+.horizon{position:absolute;left:0;right:0;bottom:0;height:2px;pointer-events:none;background:linear-gradient(#D9BE80,#D9BE80) 0 0/100% 1px no-repeat,linear-gradient(rgba(118,95,50,.6),rgba(118,95,50,.6)) 0 1px/100% 1px no-repeat}
+.horizon::before{content:"";position:absolute;left:0;right:0;bottom:2px;height:120px;background:linear-gradient(to top,rgba(196,169,104,.24),rgba(196,169,104,0))}
+[data-tone="deep"]>.horizon::before{height:170px;background:linear-gradient(to top,rgba(196,169,104,.16),rgba(196,169,104,.03) 45%,rgba(196,169,104,0))}
+.threshold{position:relative;height:0;pointer-events:none;border-top:1px dashed rgba(239,232,218,.5);margin:0 calc(var(--gr)*-1) 0 calc(var(--gl)*-1)}
+.threshold span{position:absolute;left:var(--gl);top:10px;color:var(--fg2);text-align:left;white-space:nowrap}
+.creed{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(50px,8.4vw,136px);line-height:.94;letter-spacing:-.012em;text-wrap:balance}
+/* ---- a book's own page ------------------------------------------------------------------------------ */
+.bk-hero{--pt:clamp(92px,13vh,150px);--pb:clamp(56px,9vh,110px);min-height:100vh;min-height:100svh;display:grid;align-items:center}
+.bk-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,13,17,.86),rgba(5,13,17,.55) 55%,rgba(5,13,17,.2))}
+.bk-hero--mirror::before{background:linear-gradient(270deg,rgba(5,13,17,.86),rgba(5,13,17,.55) 55%,rgba(5,13,17,.2))}
+.bk-hero{isolation:isolate}
+.bk-grid{display:grid;gap:clamp(18px,6vw,104px);align-items:center}
+.bk-cover{justify-self:center;width:min(46vw,214px)}
+.bk-copy{display:grid;gap:clamp(12px,2.3vh,24px);justify-items:start}
+.bk-no{color:var(--fg2)}
+.bk-no b{font-weight:500;color:var(--copper);margin-right:.5em}
+.bk-copy .hook{max-width:22em;order:2}
+.bk-copy .buybox{order:1}
+@media (max-width:899px){.bk-hero{--pt:96px;align-items:start}.bk-hero::before{background:linear-gradient(rgba(5,13,17,.7),rgba(5,13,17,.82))}}
+@media (min-width:700px){.bk-cover{width:min(40vw,310px)}}
+@media (min-width:900px){
+  .bk-grid{grid-template-columns:auto minmax(0,1fr)}
+  .bk-cover{width:clamp(280px,28vw,430px);margin:0 2vw}
+  .bk-hero--mirror .bk-grid{grid-template-columns:minmax(0,1fr) auto}
+  .bk-hero--mirror .bk-cover{order:2}
+  .bk-copy .hook{order:1}
+  .bk-copy .buybox{order:2}
+}
+.bk-lead{--pt:0px;--pb:0px;min-height:112vh}
+.lead{position:sticky;top:58vh;font-family:var(--display);font-weight:400;font-size:clamp(31px,3.9vw,62px);line-height:1.04;letter-spacing:-.01em;max-width:min(12em,100%);text-wrap:balance}
+@media (min-width:900px){.lead{top:30vh;max-width:min(9.5em,40vw)}}
+.bk-blurb{min-height:104vh;display:grid;align-content:center}
+.bk-blurb-grid{display:grid;gap:clamp(34px,6vw,100px);align-items:center}
+.bk-blurb .plate{justify-self:center;width:min(78vw,340px)}
+.bk-text{font-size:clamp(19.5px,1.55vw,23px);line-height:1.52;text-wrap:pretty}
+.bk-blurb .slip{max-width:34em}
+@media (min-width:900px){
+  .bk-blurb-grid{grid-template-columns:minmax(0,1fr) auto}
+  .bk-blurb--mirror .bk-blurb-grid{grid-template-columns:auto minmax(0,1fr)}
+  .bk-blurb--mirror .plate{order:-1}
+  .bk-blurb .plate{width:clamp(300px,29vw,440px)}
+}
+.bk-end{display:grid;gap:clamp(50px,9vh,110px)}
+.bk-call{display:grid;gap:clamp(26px,4vh,44px);align-items:end}
+.bk-call h2{margin:0 0 .24em;font-family:var(--display);font-weight:400;font-size:clamp(46px,6.4vw,104px);line-height:.96;letter-spacing:-.012em}
+@media (min-width:980px){.bk-call{grid-template-columns:minmax(0,1fr) auto}}
+.bk-next{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(18px,2.6vw,34px);align-items:center;padding-top:clamp(26px,4vh,40px);border-top:1px solid var(--hair2);text-decoration:none}
+.bk-next .book{width:clamp(84px,9vw,124px)}
+.bk-next .book img{box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),3px 3px 0 -1px #BDB6A8,5px 5px 0 -1px #0B151A}
+.bk-next .mono{color:var(--fg2)}
+.bk-next b{display:block;margin-top:6px;font-family:var(--display);font-weight:500;font-size:clamp(30px,3.8vw,58px);line-height:1;letter-spacing:.03em;text-transform:uppercase}
+.bk-next i{display:inline-block;margin-top:8px;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--hair2)}
+/* ---- the instrument: a depth gauge where a scrollbar would be (built by stair.js) ----------------- */
+.rest{color:var(--fg2)}
+.instr{position:fixed;inset:0;z-index:60;pointer-events:none;font-family:var(--mono);font-variant-numeric:tabular-nums;text-transform:uppercase}
+.instr a{pointer-events:auto;text-decoration:none}
+.instr [data-on="paper"]{color:#1A2126;--bar:rgba(232,226,214,.86);--bar-line:rgba(26,33,38,.14)}
+.instr [data-on="deep"]{color:#EFE8DA;--bar:rgba(7,17,21,.84);--bar-line:rgba(201,143,82,.3)}
+.instr-bar{position:absolute;top:0;left:0;right:0;height:44px;background:var(--bar);border-bottom:1px solid var(--bar-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:background-color 300ms linear}
+.instr.at-rim .instr-bar{background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.instr-home{position:absolute;top:0;left:var(--gl);height:44px;display:flex;align-items:center;font-size:9.5px;letter-spacing:.26em;transition:opacity 500ms linear}
+.instr.at-rim .instr-home{opacity:0;pointer-events:none}
+.instr-read{position:absolute;top:0;right:14px;height:44px;display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.06em}
+.instr-read b{font-weight:400;opacity:.78}
+.instr-layer{position:absolute;inset:0}
+.instr-layer.ink{color:#1A2126}
+.instr-layer.bone{color:#EFE8DA}
+.instr-gauge{position:absolute;top:118px;bottom:calc(var(--foot,84px) + env(safe-area-inset-bottom,0px));right:calc(var(--gr)*.5);width:0}
+.instr-cable{position:absolute;top:0;bottom:0;left:0;width:1px;background:currentColor;opacity:.5}
+.instr-layer.bone .instr-cable{background:linear-gradient(#EFE8DA,#C98F52);opacity:.7}
+.instr-ticks{list-style:none;margin:0;padding:0}
+.instr-ticks li{position:absolute;left:0;height:0;font-size:9px;letter-spacing:.05em;line-height:1;white-space:nowrap}
+.instr-ticks li::before{content:"";position:absolute;right:0;top:0;width:5px;height:1px;background:currentColor;opacity:.75}
+.instr-ticks li span{display:none}
+.instr-ticks li.is-threshold::before{width:11px;right:-5px;opacity:1}
+.instr-marker{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}
+.instr-marker img{position:absolute;left:-4.5px;bottom:0;width:9px;max-width:none;height:auto;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.6))}
+.instr-marker b{display:none}
+.instr-horizon{position:absolute;right:calc(var(--gr)*.5 - 9px);bottom:calc(var(--foot,84px) - 8px + env(safe-area-inset-bottom,0px));width:19px;height:1px;background:var(--rim);box-shadow:0 0 9px 1px rgba(196,169,104,.6)}
+.instr-horizon-label{display:none}
+/* the persistent buy control: a docked bar on phones, a block in the gauge's gutter on desktop.
+   It is out of the way while any buy button of the page itself is on screen. */
+.instr-buy{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px calc(9px + env(safe-area-inset-bottom,0px)) var(--gl);background:var(--bar);border-top:1px solid var(--bar-line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);text-transform:none;visibility:hidden;opacity:0;transform:translate3d(0,100%,0);transition:transform 420ms cubic-bezier(.22,.61,.24,1),opacity 300ms linear,visibility 0s linear 420ms,background-color 300ms linear}
+.instr.buy-on .instr-buy{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition-delay:0s}
+.instr-buy-what{display:grid;min-width:0}
+.instr-buy-what b{font-weight:500;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase}
+.instr-buy-what i{font-family:var(--display);font-size:20px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.buy--mini{flex:none;padding:8px 12px 9px 15px;column-gap:12px;box-shadow:0 0 0 1px #5B3716,inset 0 1px 0 rgba(255,243,220,.75),inset 0 -2px 0 rgba(70,36,10,.5),0 6px 12px -6px rgba(0,0,0,.7)}
+.buy--mini::before{inset:3px}
+.buy--mini .buy-main{font-size:17.5px}
+.buy--mini .buy-sub{font-size:8.5px;margin-top:1px}
+.buy--mini::after{font-size:14px}
+@media (min-width:1000px){
+  .instr-bar{display:none}
+  .instr-home{top:30px;left:30px;height:auto;display:block;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.34em}
+  .instr-read{top:26px;right:30px;height:auto;font-size:12.5px;letter-spacing:.07em}
+  .instr-read b{display:none}
+  .instr-gauge{top:150px;bottom:184px;right:78px}
+  .instr-ticks li::before{left:0;right:auto;width:7px}
+  .instr-ticks li span{display:block;position:absolute;left:14px;top:-.5em}
+  .instr-ticks li.is-threshold::before{left:-7px;right:auto;width:15px}
+  .instr-marker img{left:-5.5px;width:11px}
+  .instr-marker b{display:block;position:absolute;right:19px;top:-.62em;font-weight:400;font-size:11.5px;letter-spacing:.06em;line-height:1;white-space:nowrap}
+  .instr-horizon{right:56px;bottom:183px;width:45px}
+  .instr-horizon-label{display:block;position:absolute;right:78px;bottom:162px;transform:translateX(50%);font-size:8.5px;letter-spacing:.14em;line-height:1}
+  .instr-buy{left:auto;right:18px;bottom:20px;width:calc(var(--gr) - 34px);display:grid;gap:8px;padding:0;background:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none;transform:translate3d(0,10px,0)}
+  .instr-buy-what i{font-size:18px;white-space:normal}
+  .buy--mini{padding:10px 10px 11px 13px;column-gap:8px}
+  .buy--mini .buy-main{font-size:17px}
+}
+.ascent{--pt:0px;min-height:125vh;text-align:center;padding-left:var(--gr)}
+.ascent p{position:sticky;top:64vh;font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(46px,8vw,130px);line-height:.94;letter-spacing:-.014em}
+.clothpanel{position:relative;isolation:isolate;background:linear-gradient(rgba(8,19,24,.82),rgba(5,13,17,.96)),url(assets/scenes/cloth.jpg) 0 0/340px;box-shadow:0 -1px 0 rgba(201,143,82,.55),0 -34px 70px -10px rgba(2,8,11,.9)}
+.clothpanel .st{padding-top:clamp(80px,13vh,150px);padding-bottom:clamp(80px,13vh,150px)}
+.clothpanel .colophon{padding-top:clamp(40px,6vh,64px);padding-bottom:clamp(90px,14vh,150px)}

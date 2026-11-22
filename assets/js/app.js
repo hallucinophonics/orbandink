@@ -1,13 +1,15 @@
 /* app.js — progressive enhancement boot.
    Everything on the page already works without this file:
    real links, prerendered content, working buy buttons.
-   This adds: language menu behavior, catalog filters (CSV-driven),
-   page transitions, and the shader/particle layer. */
+   This adds: language menu behavior, the shelf's filters, page
+   transitions, the opening books and the shader/particle layer. */
 
-import { getLang, i18nReady, t, books, themeKey, site } from './data.js';
+import { site } from './data.js';
+
+document.documentElement.classList.add('js');
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const fx = { gl: null, lattice: null };
+const fx = { gl: null, lattice: null, stage: null };
 
 /* ---- dev-only font shim ----
    The repo ships without font binaries (run tools/fetch_fonts.py once).
@@ -56,6 +58,11 @@ function initTransitions() {
     if (reduced) return; // plain navigation
     e.preventDefault();
     pending = a.href;
+    // into a world: its own picture opens over the screen, then the page turns
+    if (a.hasAttribute('data-enter') && fx.stage) {
+      fx.stage.enter(a, e).then(() => location.assign(pending));
+      return;
+    }
     document.documentElement.classList.add('leaving');
     fx.gl && fx.gl.burst();
     fx.lattice && fx.lattice.burst();
@@ -63,53 +70,104 @@ function initTransitions() {
   });
   addEventListener('keydown', () => { if (pending) location.assign(pending); });
   addEventListener('pageshow', e => {
-    if (e.persisted) { document.documentElement.classList.remove('leaving'); pending = null; }
+    if (e.persisted) {
+      document.documentElement.classList.remove('leaving'); pending = null;
+      fx.stage && fx.stage.clearEnter();
+    }
   });
 }
 
-/* ---- catalog filters (built at runtime from the CSVs) ---- */
-async function initFilters() {
-  const grid = document.querySelector('[data-filterable] .grid-books');
-  const nav = document.querySelector('nav.filters');
-  if (!grid || !nav) return;
-  await i18nReady();
-  const lang = getLang();
-  const all = await books(lang);
-  const series = [...new Set(all.map(b => b.series).filter(Boolean))];
-  const themes = [...new Set(all.flatMap(b => b.themes))];
-  const cards = [...grid.querySelectorAll('.card')];
+/* ---- the shelf's filters ----
+   The controls are prerendered by build.py; this only wires them.
+   Within a group, chips widen the selection (audiobook OR drama); across
+   groups they narrow it (… AND by this author). The state lives in the
+   URL, so a filtered shelf can be linked to — the home page's format
+   tiles do exactly that. */
+function initFilters() {
+  const scope = document.querySelector('[data-filterable]');
+  const form = scope && scope.querySelector('.filters');
+  if (!form) return;
+  const cards = [...scope.querySelectorAll('.grid-books .card')];
+  const chips = [...form.querySelectorAll('.chip')];
+  const input = form.querySelector('.fsearch input');
+  const count = form.querySelector('.fcount');
+  const clear = form.querySelector('.fclear');
+  const none = scope.querySelector('.fnone');
+  const PARAM = { way: 'format', byline: 'author', series: 'series', theme: 'theme' };
+  const state = { way: new Set(), byline: new Set(), series: new Set(), theme: new Set() };
+  let q = '';
 
-  const mk = (label, kind, value) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'chip'; b.textContent = label;
-    b.setAttribute('aria-pressed', kind === 'all' ? 'true' : 'false');
-    b.dataset.kind = kind; b.dataset.value = value || '';
-    b.addEventListener('click', () => apply(b));
-    return b;
+  const list = (card, key) => (card.dataset[key] || '').split(';').filter(Boolean);
+  const matches = card => {
+    if (state.way.size && !list(card, 'ways').some(w => state.way.has(w))) return false;
+    if (state.byline.size && !state.byline.has(card.dataset.byline)) return false;
+    if (state.series.size && !state.series.has(card.dataset.series || 'standalone')) return false;
+    if (state.theme.size && !list(card, 'themes').some(th => state.theme.has(th))) return false;
+    if (q && !(card.dataset.search || '').includes(q)) return false;
+    return true;
   };
-  const apply = btn => {
-    nav.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === btn ? 'true' : 'false'));
-    const kind = btn.dataset.kind, value = btn.dataset.value || '';
+
+  function apply(push = true) {
+    let n = 0;
     cards.forEach(card => {
-      const show = kind === 'all'
-        || (kind === 'series' && (card.dataset.series || '') === value)
-        || (kind === 'theme' && (card.dataset.themes || '').split(';').includes(value));
+      const show = matches(card);
       card.hidden = !show;
+      if (show) { n++; card.classList.add('in'); }
     });
-  };
+    chips.forEach(c => c.setAttribute('aria-pressed',
+      state[c.dataset.kind].has(c.dataset.value) ? 'true' : 'false'));
+    const active = q || Object.values(state).some(s => s.size);
+    count.textContent = n;
+    clear.hidden = !active;
+    none.hidden = n > 0;
+    if (!push) return;
+    const p = new URLSearchParams();
+    for (const [kind, name] of Object.entries(PARAM))
+      if (state[kind].size) p.set(name, [...state[kind]].join('|'));
+    if (q) p.set('q', q);
+    const qs = p.toString();
+    history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+  }
 
-  nav.append(mk(t('filter.all', {}, lang), 'all'));
-  if (series.length) {
-    const s1 = document.createElement('span'); s1.className = 'sep'; s1.textContent = '//'; s1.setAttribute('aria-hidden', 'true');
-    nav.append(s1);
-    series.forEach(s => nav.append(mk(s, 'series', s)));
-    if (all.some(b => !b.series)) nav.append(mk(t('book.standalone', {}, lang), 'series', ''));
+  chips.forEach(c => c.addEventListener('click', () => {
+    const set = state[c.dataset.kind], v = c.dataset.value;
+    set.has(v) ? set.delete(v) : set.add(v);
+    apply();
+  }));
+  input.addEventListener('input', () => { q = input.value.trim().toLowerCase(); apply(); });
+  clear.addEventListener('click', () => {
+    Object.values(state).forEach(s => s.clear());
+    q = ''; input.value = '';
+    apply();
+  });
+
+  const p = new URLSearchParams(location.search);
+  for (const [kind, name] of Object.entries(PARAM)) {
+    const known = new Set(chips.filter(c => c.dataset.kind === kind).map(c => c.dataset.value));
+    (p.get(name) || '').split('|').forEach(v => { if (v && known.has(v)) state[kind].add(v); });
   }
-  if (themes.length) {
-    const s2 = document.createElement('span'); s2.className = 'sep'; s2.textContent = '//'; s2.setAttribute('aria-hidden', 'true');
-    nav.append(s2);
-    themes.forEach(th => nav.append(mk(t(themeKey(th), {}, lang), 'theme', th)));
-  }
+  if (p.get('q')) { q = p.get('q').trim().toLowerCase(); input.value = p.get('q'); }
+  const more = form.querySelector('.fmore');
+  if (more && (state.series.size || state.theme.size)) more.open = true;
+  apply(false);
+}
+
+/* ---- the buy bar (book pages with something on sale) ----
+   Hidden while the title's own buy button or the editions panel is on
+   screen; otherwise it rides the bottom edge so buying is one tap away. */
+function initBuyBar() {
+  const bar = document.querySelector('[data-buybar]');
+  const head = document.querySelector('.book-title-wrap');
+  const panel = document.getElementById('buy');
+  if (!bar || !head || !('IntersectionObserver' in window)) return;
+  bar.hidden = false;
+  const seen = new Set();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+    bar.classList.toggle('on', seen.size === 0);
+  });
+  io.observe(head);
+  if (panel) io.observe(panel);
 }
 
 /* ---- effects layer ---- */
@@ -121,26 +179,15 @@ async function initFx() {
       document.querySelectorAll('.fx-erode').forEach(el => {
         gl.registerErosion(el, el.dataset.accent || cssAccent());
       });
-      document.querySelectorAll('.cover-box[data-fx]').forEach(box => {
-        gl.registerCover(box, box.dataset.accent || cssAccent(), box.dataset.book);
-      });
-      document.querySelectorAll('.cover-reflect').forEach(r => {
-        const box = r.parentElement && r.parentElement.querySelector('.cover-box');
-        if (box) gl.registerMirror(r, box);
-      });
+      // the Orb: a layer of the same context, on the home page only
+      if (document.querySelector('[data-hero]')) {
+        try { (await import('./fx/orb.js')).init(gl); }
+        catch (err) { console.warn('the orb stays still:', err); }
+      }
     }
   } catch (err) {
     console.warn('fx disabled:', err);
     document.documentElement.classList.add('no-fx');
-  }
-  try {
-    const hero = document.querySelector('.hero');
-    if (hero && hero.querySelector('.hero-word[data-words]')) {
-      const lattice = await import('./fx/lattice.js');
-      fx.lattice = lattice.init(hero);
-    }
-  } catch (err) {
-    console.warn('lattice disabled:', err);
   }
   try {
     const reveal = await import('./fx/reveal.js');
@@ -150,51 +197,39 @@ async function initFx() {
     document.documentElement.classList.remove('fx-ready');
   }
   try {
-    const boxes = document.querySelectorAll('.cover-box[data-fx]');
-    if (boxes.length) {
-      const ct = await import('./fx/covertitle.js');
-      boxes.forEach(box => ct.init(box));
-    }
-  } catch (err) {
-    console.warn('cover titles disabled:', err);
-  }
-  try {
     const rain = await import('./fx/rain.js');
     document.querySelectorAll('[data-rain]').forEach(s => rain.init(s));
-    // ambient letterfall: one sparse fixed layer under the whole page
-    const amb = document.createElement('div');
-    amb.className = 'rain-ambient';
-    amb.setAttribute('aria-hidden', 'true');
-    const heroGlyphs = document.querySelector('.hero-word[data-glyphs]');
-    amb.dataset.glyphs = (heroGlyphs && heroGlyphs.dataset.glyphs) || 'ORB&INK0123·:/—';
-    amb.dataset.rainDensity = '0.38';
-    document.body.appendChild(amb);
-    rain.init(amb);
+    // ambient letterfall: one sparse fixed layer under the inner pages
+    // (the home page has the orb and the passage; it does not need it)
+    if (!document.querySelector('[data-hero]')) {
+      const amb = document.createElement('div');
+      amb.className = 'rain-ambient';
+      amb.setAttribute('aria-hidden', 'true');
+      amb.dataset.glyphs = 'ORB&INK0123·:/—';
+      amb.dataset.rainDensity = '0.3';
+      document.body.appendChild(amb);
+      rain.init(amb);
+    }
   } catch (err) {
     console.warn('rain disabled:', err);
   }
-  initCoverTilt();
 }
 
-/* ---- 3D tilt on revealed covers (fine pointers) ---- */
-function initCoverTilt() {
-  if (reduced || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  document.querySelectorAll('.cover-box[data-fx]').forEach(box => {
-    box.addEventListener('pointermove', ev => {
-      if (!box.classList.contains('is-revealed')) return;
-      const r = box.getBoundingClientRect();
-      const nx = (ev.clientX - r.left) / r.width - 0.5;
-      const ny = (ev.clientY - r.top) / r.height - 0.5;
-      box.style.setProperty('--ty', (nx * 10).toFixed(2) + 'deg');
-      box.style.setProperty('--tx', (ny * -8).toFixed(2) + 'deg');
-      box.style.setProperty('--gx', (50 + nx * 64).toFixed(1) + '%');
-      box.style.setProperty('--gy', (32 + ny * 64).toFixed(1) + '%');
-    }, { passive: true });
-    box.addEventListener('pointerleave', () => {
-      box.style.setProperty('--ty', '0deg');
-      box.style.setProperty('--tx', '0deg');
-    });
-  });
+/* ---- the physical layer: books that open, worlds that light up ---- */
+async function initObjects() {
+  try {
+    if (document.querySelector('[data-book3d]')) (await import('./fx/book3d.js')).init();
+  } catch (err) { console.warn('books stay closed:', err); }
+  try {
+    if (document.querySelector('[data-tint], [data-tint-page]')) (await import('./fx/worlds.js')).init();
+  } catch (err) { console.warn('worlds stay unlit:', err); }
+  try {
+    fx.stage = await import('./fx/stage.js');
+    fx.stage.init();
+  } catch (err) { console.warn('stage stays plain:', err); }
+  try {
+    if (document.querySelector('[data-passage]')) (await import('./fx/passage.js')).init();
+  } catch (err) { console.warn('the passage stays a row:', err); }
 }
 
 const cssAccent = () =>
@@ -204,4 +239,6 @@ devFontShim();
 initLangMenu();
 initTransitions();
 initFilters();
+initBuyBar();
+initObjects();
 initFx();

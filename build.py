@@ -41,6 +41,16 @@ CODES = [l["code"] for l in LANGS]
 SITE = {r["key"]: r["value"] for r in read_csv("site")}
 I18N = {r["key"]: r for r in read_csv("i18n")}
 BOOKS = read_csv("books")
+TODAY = datetime.date.today()
+for _b in BOOKS:
+    # A pre-order whose date has passed is simply out: the pill, the call to
+    # action and schema.org availability all follow, with no row edit on the day.
+    if _b["status"] == "preorder":
+        try:
+            if datetime.date.fromisoformat(_b.get("release_date", "")) <= TODAY:
+                _b["status"] = "published"
+        except ValueError:
+            pass
 # Every row, whatever its status. Derived assets (responsive covers, OG) are
 # not publication — generating them for a coming-soon book reveals nothing and
 # means flipping catalog_coming_soon later needs no second build.
@@ -54,15 +64,35 @@ if SITE.get("catalog_coming_soon", "show") == "hide":
 BI18N = read_csv("books_i18n")
 LINKS = read_csv("store_links")
 PRIVACY = {r["lang"]: r for r in read_csv("privacy_i18n")}
-# Some series have a dedicated world-site (hand-owned data/series.csv);
-# PLACEHOLDER urls stay hidden until the real domain exists.
-SERIES_SITES = {r["series"]: r["url"] for r in read_csv("series")
-                if r["url"] and not any(tok in r["url"] for tok in
-                                        ("PLACEHOLDER", "example.com", "TODO"))}
+# Every series is a world with a site of its own (hand-owned data/series.csv).
+# `url` is either an absolute address (a series on its own domain) or a path
+# inside this repo (worlds/<slug>/ — mounted by tools/sync_worlds.py). A link
+# only ever ships when its target really exists: PLACEHOLDER urls and worlds
+# that have not been mounted yet stay hidden rather than dead.
+SERIES_ROWS = read_csv("series")
+SERIES = {r["series"]: r for r in SERIES_ROWS}
+SI18N = read_csv("series_i18n")
+HOLD = ("PLACEHOLDER", "example.com", "TODO")
+
+
+def _site_ok(url):
+    if not url or any(tok in url for tok in HOLD):
+        return False
+    if re.match(r"https?://", url):
+        return True
+    return (ROOT / url / "index.html").exists()
+
+
+SERIES_SITES = {r["series"]: r["url"] for r in SERIES_ROWS if _site_ok(r["url"])}
 # A series may brand its ordinal (The Universal Menu numbers its books as
 # menu courses); the label lives in i18n so every language uses its own
 # restaurant word (Gang, Service, Portata…). Empty key → plain number.
-SERIES_ORDINAL = {r["series"]: r.get("ordinal_key", "") for r in read_csv("series")}
+SERIES_ORDINAL = {r["series"]: r.get("ordinal_key", "") for r in SERIES_ROWS}
+# Editions in production per book (tools/sync_editions.py). A title is more
+# than print: audiobook, immersive audiobook, audio drama, graphic novel.
+EDITIONS = {}
+for _r in read_csv("editions"):
+    EDITIONS.setdefault(_r["book_id"], []).append(_r["format"])
 
 
 def series_no(book, lang):
@@ -74,7 +104,17 @@ PRAISE = read_csv("praise")
 
 DOMAIN = SITE["domain"]
 YEAR = datetime.date.today().year
-FORMAT_ORDER = ["ebook", "paperback", "hardcover", "audiobook"]
+FORMAT_ORDER = ["ebook", "paperback", "hardcover", "audiobook",
+                "immersive", "drama", "graphic"]
+# How a reader meets an edition: read it, listen to it, see it.
+FORMAT_GROUPS = [("read", ["ebook", "paperback", "hardcover"]),
+                 ("listen", ["audiobook", "immersive", "drama"]),
+                 ("see", ["graphic"])]
+# The five public "ways in": the three print formats fold into one.
+WAYS = [("book", ["ebook", "paperback", "hardcover"]),
+        ("audiobook", ["audiobook"]), ("immersive", ["immersive"]),
+        ("drama", ["drama"]), ("graphic", ["graphic"])]
+BYLINE_NAMES = {"bianco": "Alessio Bianco", "weiss": "A. P. Weiss", "blanc": "Alec Blanc"}
 OG_LOCALE = {"en": "en_US", "ru": "ru_RU", "fr": "fr_FR", "pt": "pt_PT",
              "de": "de_DE", "it": "it_IT", "es": "es_ES", "ja": "ja_JP"}
 warnings = []
@@ -138,6 +178,7 @@ def theme_key(tok):
 def page_path(lang, kind, slug=None):
     return {"home": f"{lang}/", "books": f"{lang}/books/",
             "book": f"{lang}/books/{slug}/", "about": f"{lang}/about/",
+            "worlds": f"{lang}/series/", "world": f"{lang}/series/{slug}/",
             "privacy": f"{lang}/privacy/"}[kind]
 
 
@@ -219,11 +260,11 @@ def preloads(lang, rel):
 
 
 def status_pill(book, lang):
-    if book["status"] == "preorder":
-        return f' <span class="pill pill--preorder">{esc(t("status.preorder", lang))}</span>'
-    if book["status"] == "coming_soon":
-        return f' <span class="pill pill--soon">{esc(t("status.coming_soon", lang))}</span>'
-    return ""
+    key = {"published": ("status.out", "out"), "preorder": ("status.preorder", "preorder"),
+           "coming_soon": ("status.coming_soon", "soon")}.get(book["status"])
+    if not key:
+        return ""
+    return f'<span class="pill pill--{key[1]}">{esc(t(key[0], lang))}</span>'
 
 
 def cta_key(status):
@@ -231,32 +272,585 @@ def cta_key(status):
             "coming_soon": "book.coming_soon"}.get(status, "book.buy")
 
 
-def plate_attr(book):
-    """Interim plates (no real cover art yet) keep the rained-in title and
-    never run the reveal — there is nothing truer underneath to show."""
-    return ' data-plate="1"' if book.get("cover_art") == "plate" else ""
+# ---- bylines, series, editions -------------------------------------------
+
+def byline_key(book):
+    """Which of the house's four names signs this book (standalones: Belenkiy)."""
+    return SERIES.get(book["series"], {}).get("byline") or "belenkiy"
+
+
+def byline_name(key, lang):
+    """Belenkiy's name has native forms; the pen names stay Latin everywhere."""
+    return BYLINE_NAMES.get(key) or t("hero.name", lang)
+
+
+def series_books(name):
+    return sorted((b for b in BOOKS if b["series"] == name),
+                  key=lambda b: int(b["series_order"] or 0))
+
+
+def series_loc(name, lang):
+    mine = next((r for r in SI18N if r["series"] == name and r["lang"] == lang), None)
+    en = next((r for r in SI18N if r["series"] == name and r["lang"] == "en"), None)
+    row = mine or en or {}
+    return {"tagline": row.get("tagline", ""), "premise": row.get("premise", "")}
+
+
+def listed_series():
+    """Series with at least one book on the shelf, live series first.
+    Honours catalog_coming_soon: a series with nothing listed is not shown."""
+    rows = [r for r in SERIES_ROWS if series_books(r["series"])]
+    live = lambda r: any(b["status"] in ("published", "preorder")
+                         for b in series_books(r["series"]))
+    return [r for r in rows if live(r)] + [r for r in rows if not live(r)]
+
+
+def world_href(series, rel, book=None):
+    """Where a series' own site lives: absolute for a series on its own
+    domain, relative for one mounted in this repo — deep-linked to the book's
+    page there when that page exists."""
+    url = SERIES_SITES.get(series)
+    if not url:
+        return ""
+    if re.match(r"https?://", url):
+        return url
+    if book and (ROOT / url / f"{book['slug']}.html").exists():
+        return f"{rel}{url}{book['slug']}.html"
+    return rel + url
+
+
+def play_href(series, rel):
+    """A series' browser game, if it has one: play.html inside a world mounted
+    here, or the play_url column for a world on its own domain."""
+    row = SERIES.get(series, {})
+    explicit = row.get("play_url", "")
+    if explicit and not any(tok in explicit for tok in HOLD):
+        return explicit
+    url = SERIES_SITES.get(series, "")
+    if url and not re.match(r"https?://", url) and (ROOT / url / "play.html").exists():
+        return f"{rel}{url}play.html"
+    return ""
+
+
+def formats_of(book):
+    have = EDITIONS.get(book["id"]) or ["ebook"]
+    return [f for f in FORMAT_ORDER if f in have]
+
+
+def ways_of(book):
+    have = formats_of(book)
+    return [w for w, fmts in WAYS if any(f in have for f in fmts)]
+
+
+def series_ways(name):
+    found = {w for b in series_books(name) for w in ways_of(b)}
+    return [w for w, _ in WAYS if w in found]
+
+
+def icon(name, label=""):
+    """One glyph from the sprite in base.html. Labelled → it carries meaning
+    on its own; unlabelled → decoration beside text that already says it."""
+    a11y = (f' role="img" aria-label="{esc(label)}"><title>{esc(label)}</title>'
+            if label else ' aria-hidden="true" focusable="false">')
+    return f'<svg class="fi"{a11y}<use href="#i-{name}"/></svg>'
+
+
+def ways_icons(ways, lang, live=()):
+    return "".join(
+        f'<span class="way{" is-live" if w in live else ""}">{icon(w, t("format." + w, lang))}</span>'
+        for w in ways)
+
+
+def live_ways(book, lang):
+    """Ways in that can be bought today — the ones with a store row."""
+    fmts = {r["format"] for r in links_for(book["id"], lang)}
+    if book["status"] == "coming_soon":
+        return []
+    return [w for w, group in WAYS if any(f in fmts for f in group)]
+
+
+def buy_buttons(book, lang, limit=2, cls="btn"):
+    """The straight line to a sale: one button per edition that can be bought
+    today, best first (e-book, print, then sound), each going to its store.
+    Empty for a book with nothing on sale yet."""
+    if book["status"] == "coming_soon":
+        return ""
+    rows = links_for(book["id"], lang)
+    L = loc(book, lang)
+    out = []
+    for fmt in FORMAT_ORDER:
+        for r in rows:
+            if r["format"] != fmt or len(out) >= limit:
+                continue
+            if fmt == "ebook" and book["status"] == "published":
+                label = f'{t("book.buy_ebook", lang)} · {r["store"]}'
+            else:
+                label = f'{t(cta_key(book["status"]), lang)}: {t("format." + fmt, lang)} · {r["store"]}'
+            aria = t("a11y.buy", lang, title=L["title"], format=t("format." + fmt, lang), store=r["store"])
+            out.append(f'<a class="{cls}" href="{esc(r["url"])}" target="_blank" rel="noopener" '
+                       f'aria-label="{esc(aria)}">{esc(label)}</a>')
+    return "".join(out)
+
+
+def cover_small(book):
+    small = f"covers/{Path(book['cover']).stem}-480.jpg"
+    return small if (ROOT / small).exists() else book["cover"]
+
+
+def book3d(book, lang, rel, *, eager=False, leaf=""):
+    """The physical book: a hinged cover over a title page, a page block whose
+    thickness follows the real page count. Opens on hover, focus and tap."""
+    L = loc(book, lang)
+    key = byline_key(book)
+    series_line = (f'{book["series"]} · {series_no(book, lang)}'
+                   if book["series"] else t("book.standalone", lang))
+    if not leaf:
+        leaf = (f'<span class="b3-series">{esc(series_line)}</span>'
+                f'<span class="b3-title">{esc(L["title"])}</span>'
+                f'<span class="b3-rule"></span>'
+                f'<span class="b3-tag">{esc(L["tagline"])}</span>'
+                f'<span class="b3-by">{esc(byline_name(key, lang))}</span>')
+    pages = book["pages"] if book["pages"].isdigit() and int(book["pages"]) > 60 else "320"
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return (
+        f'<div class="book3d" data-book3d style="--pages:{pages}">\n'
+        f'      <div class="b3">\n'
+        f'        <div class="b3-back"></div>\n'
+        f'        <div class="b3-block"></div>\n'
+        f'        <div class="b3-leaf" aria-hidden="true"><div class="b3-leaf-in">{leaf}'
+        f'<span class="b3-mark">Orb &amp; Ink</span></div></div>\n'
+        f'        <div class="b3-cover">\n'
+        f'          <div class="b3-front"><img src="{rel}{book["cover"]}"{srcset_for(book["cover"], rel)} '
+        f'alt="{esc(L["title"])}" width="800" height="1200" {load}></div>\n'
+        f'          <div class="b3-inside"></div>\n'
+        f'        </div>\n'
+        f'      </div>\n'
+        f'      <div class="b3-shadow"></div>\n'
+        f'    </div>')
 
 
 def card(book, lang, rel):
     L = loc(book, lang)
+    key = byline_key(book)
+    en_title = loc(book, "en")["title"]
+    search = " ".join(dict.fromkeys(
+        s.lower() for s in (L["title"], en_title, book["series"], byline_name(key, lang))
+        if s))
     return render("_card", {
         "REL": rel,
-        "C_IDX": f"{BOOKS.index(book) + 1:02d}",
         "C_ACCENT": book["accent"] or SITE["accent"],
         "C_SERIES": esc(book["series"]),
         "C_THEMES": esc(book["themes"]),
+        "C_WAYS": ";".join(ways_of(book)),
+        "C_BYLINE_KEY": key,
+        "C_STATUS": book["status"],
+        "C_SEARCH": esc(search),
         "C_SLUG": book["slug"],
-        "C_PLATE": plate_attr(book),
-        "C_ID": book["id"],
-        "C_COVER": book["cover"],
-        "C_SRCSET": srcset_for(book["cover"], rel),
-        "C_ALT": esc(L["title"]),
-        "C_YEAR": esc(book["year"]),
-        "C_META_RIGHT": esc(book["series"] or t("book.standalone", lang)),
+        "C_BOOK3D": book3d(book, lang, rel),
+        "C_META_LEFT": esc(f'{series_no(book, lang)} · {book["series"]}'
+                           if book["series"] else t("book.standalone", lang)),
+        # the shelf only flags what can be had today; "coming soon" on 43 of
+        # 45 cards is noise, and the book's own page says it plainly
+        "C_PILL": status_pill(book, lang) if book["status"] != "coming_soon" else "",
         "C_TITLE": esc(L["title"]),
         "C_TAGLINE": esc(L["tagline"]),
+        "C_BYLINE": esc(byline_name(key, lang)),
+        "C_WAYS_ICONS": ways_icons(ways_of(book), lang, live_ways(book, lang)),
         "LANG": lang,
     })
+
+
+def world_card(slug):
+    """A world's wide picture for the index (tools/world_cards.py): a still
+    of its own built scene, cut to the card. Empty until one has been made."""
+    f = f"assets/img/worlds/{slug}-still.jpg"
+    return f if (ROOT / f).exists() else ""
+
+
+def world_rows(lang, rel, rows=None, start=1):
+    """The worlds index: one lit card per series — its picture, its name,
+    its line, who signs it, how many books, the ways in, its covers, and the
+    door to its own site. A world with no picture yet stands its covers on a
+    wash of its own colour."""
+    out = []
+    for i, r in enumerate(listed_series() if rows is None else rows, start):
+        name = r["series"]
+        books = series_books(name)
+        L = series_loc(name, lang)
+        accent = books[0]["accent"] or SITE["accent"]
+        hub = rel + page_path(lang, "world", r["slug"])
+        site = world_href(name, rel)
+        fan = "".join(
+            f'<img src="{rel}{cover_small(b)}" alt="" width="480" height="720" '
+            f'loading="lazy" decoding="async">' for b in books[:3])
+        pic = world_card(r["slug"])
+        picture = ""
+        if pic:
+            small = pic.replace("-still.jpg", "-still-640.jpg")
+            picture = (
+                f'    <span class="world-pic" aria-hidden="true"><img src="{rel}{pic}" '
+                f'srcset="{rel}{small} 640w, {rel}{pic} 1280w" '
+                f'sizes="(max-width: 900px) 100vw, 50vw" alt="" width="1280" height="720" '
+                f'loading="lazy" decoding="async"></span>\n')
+        play = play_href(name, rel)
+        doors = "".join([
+            (f'<a class="world-site" href="{esc(site)}" target="_blank" rel="noopener">'
+             f'{esc(t("series.site", lang))}</a>' if site else ""),
+            (f'<a class="world-site world-site--play" href="{esc(play)}" target="_blank" rel="noopener">'
+             f'{esc(t("series.play", lang))}</a>' if play else "")])
+        door = f'\n  <div class="world-doors">{doors}</div>' if doors else ""
+        kind = "world--pic" if pic else "world--bare"
+        out.append(
+            f'<li class="world {kind}" style="--accent-book:{accent}" data-tint="{accent}" data-reveal>\n'
+            f'  <a class="world-main" href="{hub}" data-enter>\n'
+            f'{picture}'
+            f'    <span class="world-no mono-meta">{i:02d}</span>\n'
+            f'    <span class="world-name">{esc(name)}</span>\n'
+            f'    <span class="world-tag">{esc(L["tagline"])}</span>\n'
+            f'    <span class="world-meta mono-meta"><span>{esc(byline_name(r["byline"], lang))}</span>'
+            f'<span>{esc(t("series.books_n", lang, n=len(books)))}</span>'
+            f'<span class="ways">{ways_icons(series_ways(name), lang)}</span></span>\n'
+            f'  </a>\n'
+            f'  <div class="world-fan" aria-hidden="true">{fan}</div>{door}\n'
+            f'</li>')
+    return "\n".join(out)
+
+
+# ---- the showpiece layer: orb, passage, wall, roster ----------------------
+
+def hero_stills(rel):
+    """What the orb can show: every world that has a still, in index order.
+    The orb's shader loads them one at a time; with none on disk it simply
+    stays full of ink."""
+    out = []
+    for r in listed_series():
+        pic = world_card(r["slug"])
+        if not pic:
+            continue
+        small = pic.replace("-still.jpg", "-still-640.jpg")
+        if not (ROOT / small).exists():
+            small = pic
+        books = series_books(r["series"])
+        out.append({"src": rel + small, "tint": books[0]["accent"] or SITE["accent"]})
+    return json.dumps(out, ensure_ascii=False)
+
+
+def hero_roster(lang, rel):
+    """The four authors, signed under the house's name."""
+    return "".join(
+        f'<li><a href="{rel}{page_path(lang, "about")}#{key}">{esc(byline_name(key, lang))}</a></li>'
+        for key, _ in AUTHORS)
+
+
+def on_sale():
+    """Books a reader can have today, the featured one first."""
+    live = [b for b in BOOKS if b["status"] in ("published", "preorder")]
+    live.sort(key=lambda b: b["id"] != SITE["featured_book"])
+    return live
+
+
+def now_panels(lang, rel, featured):
+    """Home, "New and next": each book on sale as a lit stage — the real
+    cover as an opening book, and the buy button first."""
+    books = on_sale() or [featured]
+    out = []
+    for i, b in enumerate(books):
+        L = loc(b, lang)
+        accent = b["accent"] or SITE["accent"]
+        url = rel + page_path(lang, "book", b["slug"])
+        buy = buy_buttons(b, lang, limit=1, cls="btn btn--buy")
+        line = (f'{b["series"]} · {series_no(b, lang)}' if b["series"]
+                else t("book.standalone", lang))
+        second = (f'<a class="btn btn--glass" href="{url}">{esc(t("book.view", lang))}</a>' if buy
+                  else f'<a class="btn" href="{url}#buy">{esc(t(cta_key(b["status"]), lang))}</a>')
+        out.append(
+            f'  <article class="now" style="--accent-book:{accent}" data-tint="{accent}" data-reveal>\n'
+            f'    <span class="now-glow" aria-hidden="true"></span>\n'
+            f'    <a class="now-book" href="{url}" tabindex="-1" aria-hidden="true">\n'
+            f'    {book3d(b, lang, rel, eager=(i == 0))}\n'
+            f'    </a>\n'
+            f'    <div class="now-body">\n'
+            f'      <p class="now-kicker mono-meta">{status_pill(b, lang)}<span>{esc(line)}</span></p>\n'
+            f'      <h3 class="now-title"><a href="{url}" data-gather>{esc(L["title"])}</a></h3>\n'
+            f'      <p class="now-tag">{esc(L["tagline"])}</p>\n'
+            f'      <p class="now-by mono-meta">{esc(t("series.by", lang, name=byline_name(byline_key(b), lang)))}'
+            f'<span class="ways">{ways_icons(ways_of(b), lang, live_ways(b, lang))}</span></p>\n'
+            f'      <div class="now-act">{buy}{second}</div>\n'
+            f'    </div>\n'
+            f'  </article>')
+    return "\n".join(out)
+
+
+def still_img(pic, rel, sizes="100vw", eager=False):
+    small = pic.replace("-still.jpg", "-still-640.jpg")
+    srcset = (f' srcset="{rel}{small} 640w, {rel}{pic} 1280w" sizes="{sizes}"'
+              if (ROOT / small).exists() else "")
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return f'<img src="{rel}{pic}"{srcset} alt="" width="1280" height="720" {load}>'
+
+
+def passage(lang, rel):
+    """Home: the worlds as a passage. Each world takes the whole screen in
+    turn — its still (or, until one exists, a wash of its own colour), its
+    name set large, its line, three of its real covers standing as books, and
+    its doors. The same list is a pinned scroll passage on a wide screen and
+    a swipeable row of cards on a phone or without scripts."""
+    rows = listed_series()
+    n = len(rows)
+    items = []
+    for i, r in enumerate(rows, 1):
+        name = r["series"]
+        books = series_books(name)
+        L = series_loc(name, lang)
+        accent = books[0]["accent"] or SITE["accent"]
+        hub = rel + page_path(lang, "world", r["slug"])
+        site = world_href(name, rel)
+        play = play_href(name, rel)
+        pic = world_card(r["slug"])
+        picture = (f'  <span class="pw-pic" aria-hidden="true">{still_img(pic, rel)}</span>\n'
+                   if pic else '  <span class="pw-pic pw-pic--wash" aria-hidden="true"></span>\n')
+        covers = "".join(
+            f'<a class="pw-cover" href="{rel}{page_path(lang, "book", b["slug"])}">'
+            f'<img src="{rel}{cover_small(b)}" alt="{esc(loc(b, lang)["title"])}" width="480" height="720" '
+            f'loading="lazy" decoding="async"></a>' for b in books[:3])
+        doors = (
+            f'<a class="btn" href="{hub}" data-enter>{esc(t("series.view", lang))}</a>'
+            + (f'<a class="btn btn--glass" href="{esc(site)}" target="_blank" rel="noopener">'
+               f'{esc(t("series.site", lang))}</a>' if site else "")
+            + (f'<a class="btn btn--glass btn--play" href="{esc(play)}" target="_blank" rel="noopener">'
+               f'{esc(t("series.play", lang))}</a>' if play else ""))
+        items.append(
+            f'<li class="pw {"pw--pic" if pic else "pw--bare"}" style="--accent-book:{accent}" '
+            f'data-tint="{accent}" data-name="{esc(name)}">\n'
+            f'{picture}'
+            f'  <div class="pw-in">\n'
+            f'    <div class="pw-text">\n'
+            f'      <span class="pw-no mono-meta"><b>{i:02d}</b> / {n:02d}</span>\n'
+            f'      <h3 class="pw-name"><a href="{hub}" data-enter>{esc(name)}</a></h3>\n'
+            f'      <p class="pw-tag">{esc(L["tagline"])}</p>\n'
+            f'      <p class="pw-meta mono-meta"><span>{esc(byline_name(r["byline"], lang))}</span>'
+            f'<span>{esc(t("series.books_n", lang, n=len(books)))}</span>'
+            f'<span class="ways">{ways_icons(series_ways(name), lang)}</span></p>\n'
+            f'      <div class="pw-doors">{doors}</div>\n'
+            f'    </div>\n'
+            f'    <div class="pw-books">{covers}</div>\n'
+            f'  </div>\n'
+            f'</li>')
+    return "\n".join(items)
+
+
+def world_index(lang, rel):
+    """Home: all the worlds at a glance, after the passage — a set index."""
+    out = []
+    for i, r in enumerate(listed_series(), 1):
+        name = r["series"]
+        books = series_books(name)
+        accent = books[0]["accent"] or SITE["accent"]
+        hub = rel + page_path(lang, "world", r["slug"])
+        pic = world_card(r["slug"])
+        small = pic.replace("-still.jpg", "-still-640.jpg") if pic else ""
+        if small and not (ROOT / small).exists():
+            small = pic
+        lens = (f'<span class="wi-lens"><img src="{rel}{small}" alt="" width="640" height="360" '
+                f'loading="lazy" decoding="async"></span>' if small
+                else '<span class="wi-lens wi-lens--wash"></span>')
+        out.append(
+            f'    <li style="--accent-book:{accent}" data-reveal><a class="wi" href="{hub}" data-enter>'
+            f'{lens}<span class="wi-no mono-meta">{i:02d}</span>'
+            f'<span class="wi-name">{esc(name)}</span>'
+            f'<span class="wi-by mono-meta">{esc(byline_name(r["byline"], lang))} · '
+            f'{esc(t("series.books_n", lang, n=len(books)))}</span></a></li>')
+    return "\n".join(out)
+
+
+def world_lens(lang, rel):
+    """/series/: every world as a line of large type beside one glass lens.
+    The lens shows the world under the pointer (or, on a touch screen, the
+    one crossing the middle of the screen): its still, or its own colour
+    until a still exists. Each row is the door to the series page and
+    carries the door to the world's own site."""
+    rows, pics = [], []
+    for i, r in enumerate(listed_series()):
+        name = r["series"]
+        books = series_books(name)
+        L = series_loc(name, lang)
+        accent = books[0]["accent"] or SITE["accent"]
+        hub = rel + page_path(lang, "world", r["slug"])
+        site = world_href(name, rel)
+        pic = world_card(r["slug"])
+        thumb = (f'<span class="wi-lens">{still_img(pic, rel, sizes="64px")}</span>' if pic
+                 else '<span class="wi-lens wi-lens--wash"></span>')
+        door = (f'<a class="ld-site" href="{esc(site)}" target="_blank" rel="noopener" '
+                f'aria-label="{esc(name)} — {esc(t("series.site", lang))}">{esc(t("series.site", lang))}</a>'
+                if site else "")
+        rows.append(
+            f'    <li class="ld-row" style="--accent-book:{accent}" data-tint="{accent}" data-i="{i}" data-reveal>\n'
+            f'      <a class="ld" href="{hub}" data-enter>{thumb}'
+            f'<span class="ld-no mono-meta">{i + 1:02d}</span>'
+            f'<span class="ld-name">{esc(name)}</span>'
+            f'<span class="ld-tag">{esc(L["tagline"])}</span>'
+            f'<span class="ld-by mono-meta">{esc(byline_name(r["byline"], lang))} · '
+            f'{esc(t("series.books_n", lang, n=len(books)))}</span></a>{door}\n'
+            f'    </li>')
+        inner = (still_img(pic, rel, sizes="(max-width: 1000px) 1px, 44vw") if pic
+                 else "".join(f'<img class="ld-cover" src="{rel}{cover_small(b)}" alt="" width="480" height="720" '
+                              f'loading="lazy" decoding="async">' for b in books[:3]))
+        pics.append(f'<span class="ld-pic{"" if pic else " ld-pic--wash"}{" on" if i == 0 else ""}" '
+                    f'style="--accent-book:{accent}">{inner}</span>')
+    return ('<div class="lensdex" data-lensdex>\n  <ol class="ld-list">\n' + "\n".join(rows) + '\n  </ol>\n'
+            '  <div class="ld-stage" aria-hidden="true"><div class="ld-orb">' + "".join(pics)
+            + '<span class="ld-glass"></span></div></div>\n</div>')
+
+
+def wall_order():
+    """Every book once, dealt series by series so neighbours on the wall
+    come from different worlds."""
+    piles = [list(series_books(r["series"])) for r in listed_series()]
+    piles.append([b for b in BOOKS if not b["series"]])
+    out = []
+    while any(piles):
+        for pile in piles:
+            if pile:
+                out.append(pile.pop(0))
+    return out
+
+
+def cover_wall(lang, rel, rows=3):
+    """Home: the whole list as a wall of real covers, drifting in depth.
+    Each cover is whole and is a link to its book; the second copy of each
+    row only closes the loop and is hidden from assistive tech."""
+    books = wall_order()
+    out = []
+    for r in range(rows):
+        row = books[r::rows]
+
+        def cells(copy):
+            hide = ' aria-hidden="true" tabindex="-1"' if copy else ""
+            return "".join(
+                f'<a class="wall-c" href="{rel}{page_path(lang, "book", b["slug"])}"{hide} '
+                f'style="--accent-book:{b["accent"] or SITE["accent"]}">'
+                f'<img src="{rel}{cover_small(b)}" alt="{"" if copy else esc(loc(b, lang)["title"])}" '
+                f'width="480" height="720" loading="lazy" decoding="async"></a>' for b in row)
+        out.append(f'      <div class="wall-row" style="--n:{len(row)}"><div class="wall-track">'
+                   f'{cells(False)}{cells(True)}</div></div>')
+    return "\n".join(out)
+
+
+def author_books(key):
+    """An author's books, dealt world by world (first books first)."""
+    piles = [list(series_books(r["series"])) for r in listed_series() if r["byline"] == key]
+    piles.append([b for b in BOOKS if not b["series"] and byline_key(b) == key])
+    out = []
+    while any(piles):
+        for pile in piles:
+            if pile:
+                out.append(pile.pop(0))
+    return out
+
+
+def roster(lang, rel, full=False):
+    """The house's four authors as a roster: each a portrait in type — the
+    name set as a signature, the kind of story, the worlds signed, and the
+    real covers of the books. `full` (the authors page) adds the biography
+    and the door to that author's shelf."""
+    rows = []
+    for i, (key, _name) in enumerate(AUTHORS, 1):
+        worlds = [r for r in listed_series() if r["byline"] == key]
+        books = author_books(key)
+        if not books and not full:
+            continue
+        accent = (books[0]["accent"] if books else "") or SITE["accent"]
+        name = byline_name(key, lang)
+        about = f'{rel}{page_path(lang, "about")}#{key}'
+        shelf = f'{rel}{page_path(lang, "books")}?author={key}'
+        wl = "".join(
+            f'<li><a href="{rel}{page_path(lang, "world", r["slug"])}">{esc(r["series"])}</a></li>'
+            for r in worlds)
+        wl += "".join(
+            f'<li><a href="{rel}{page_path(lang, "book", b["slug"])}">{esc(loc(b, lang)["title"])}</a></li>'
+            for b in books if not b["series"])
+        covers = "".join(
+            f'<img src="{rel}{cover_small(b)}" alt="" width="480" height="720" loading="lazy" decoding="async">'
+            for b in books[:7])
+        stat = (f'<span>{esc(t("home.worlds", lang))} {len(worlds):02d}</span>'
+                f'<span>{esc(t("nav.books", lang))} {len(books):02d}</span>')
+        head = (f'<h2 class="ros-name">{esc(name)}</h2>' if full
+                else f'<h3 class="ros-name"><a href="{about}">{esc(name)}</a></h3>')
+        extra = ""
+        if full:
+            live = any(b["status"] in ("published", "preorder") for b in books)
+            status = (f'<a class="btn" href="{shelf}">{esc(t("home.view_all", lang))} · {len(books):02d}</a>'
+                      if live or key == "belenkiy" else
+                      f'<a class="btn btn--glass" href="{shelf}">{esc(t("home.view_all", lang))} · {len(books):02d}</a>'
+                      f'<span class="ros-debut mono-meta">{esc(t("authors.debut", lang))}</span>')
+            extra = (f'      <p class="ros-bio">{esc(t("author.bio." + key, lang))}</p>\n'
+                     f'      <p class="ros-act">{status}</p>\n')
+        rows.append(
+            f'  <article class="ros{" ros--full" if full else ""}" id="{key}" style="--accent-book:{accent}" '
+            f'data-tint="{accent}" data-reveal>\n'
+            f'    <span class="ros-no mono-meta">{i:02d}</span>\n'
+            f'    <div class="ros-body">\n'
+            f'      {head}\n'
+            f'      <p class="ros-lane kicker">{esc(t("author.lane." + key, lang))}</p>\n'
+            f'{extra}'
+            f'      <p class="ros-stat mono-meta">{stat}</p>\n'
+            f'      <ul class="ros-worlds">{wl}</ul>\n'
+            f'    </div>\n'
+            f'    <a class="ros-covers" href="{shelf}" tabindex="-1" aria-hidden="true">{covers}</a>\n'
+            f'  </article>')
+    return "\n".join(rows)
+
+
+def author_stages(lang, rel):
+    """The authors page: each author a full-width lit stage — the name set
+    very large, the kind of story, the worlds as pictures, the books standing
+    in a row, and one button to that author's shelf."""
+    out = []
+    for i, (key, _name) in enumerate(AUTHORS, 1):
+        worlds = [r for r in listed_series() if r["byline"] == key]
+        books = author_books(key)
+        accent = (books[0]["accent"] if books else "") or SITE["accent"]
+        shelf = f'{rel}{page_path(lang, "books")}?author={key}'
+        back = next((world_card(r["slug"]) for r in worlds if world_card(r["slug"])), "")
+        tiles = []
+        for r in worlds:
+            pic = world_card(r["slug"])
+            wb = series_books(r["series"])
+            wa = wb[0]["accent"] or SITE["accent"]
+            art = (still_img(pic, rel, sizes="(max-width: 900px) 50vw, 22vw") if pic else "")
+            tiles.append(
+                f'<li><a class="aw{"" if pic else " aw--wash"}" href="{rel}{page_path(lang, "world", r["slug"])}" '
+                f'style="--accent-book:{wa}" data-enter><span class="aw-pic world-pic">{art}</span>'
+                f'<span class="aw-name">{esc(r["series"])}</span>'
+                f'<span class="aw-n mono-meta">{esc(t("series.books_n", lang, n=len(wb)))}</span></a></li>')
+        covers = "".join(
+            f'<a class="pw-cover" href="{rel}{page_path(lang, "book", b["slug"])}">'
+            f'<img src="{rel}{cover_small(b)}" alt="{esc(loc(b, lang)["title"])}" width="480" height="720" '
+            f'loading="lazy" decoding="async"></a>' for b in books[:6])
+        live = any(b["status"] in ("published", "preorder") for b in books)
+        debut = "" if live else f'<span class="ros-debut mono-meta">{esc(t("authors.debut", lang))}</span>'
+        out.append(
+            f'<article class="astage" id="{key}" style="--accent-book:{accent}" data-tint="{accent}">\n'
+            + (f'  <span class="astage-pic" aria-hidden="true">{still_img(back, rel)}</span>\n' if back else "")
+            + f'  <div class="astage-head">\n'
+            f'    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{i:02d} · {esc(t("author.lane." + key, lang))}</p>\n'
+            f'    <h2 class="astage-name" data-gather>{esc(byline_name(key, lang))}</h2>\n'
+            f'    <p class="astage-bio">{esc(t("author.bio." + key, lang))}</p>\n'
+            f'    <p class="ros-stat mono-meta"><span>{esc(t("home.worlds", lang))} {len(worlds):02d}</span>'
+            f'<span>{esc(t("nav.books", lang))} {len(books):02d}</span></p>\n'
+            f'    <p class="ros-act"><a class="btn btn--lg" href="{shelf}">{esc(t("home.view_all", lang))} · {len(books):02d}</a>{debut}</p>\n'
+            f'  </div>\n'
+            f'  <ul class="astage-worlds">{"".join(tiles)}</ul>\n'
+            f'  <div class="astage-books pw-books">{covers}</div>\n'
+            f'</article>')
+    return "\n".join(out)
+
+
+def css_orb():
+    """The orb as plain CSS: what stands on the page before the shader takes
+    over, and what stays when there is no WebGL, no script or reduced motion."""
+    return ('<div class="orb" data-orb-el aria-hidden="true"><span class="orb-ink"></span>'
+            '<span class="orb-glass"></span></div>')
 
 
 def glyph_pool():
@@ -279,22 +873,17 @@ def glyph_pool():
 
 
 def hero_words(lang):
-    """The hero lattice's morph frames: all four of the house's bylines — the
-    real name and the three pen names — rotating through the en/ru/ja scripts,
-    stepped together (4 and 3 are coprime, so all twelve name×script frames
-    occur and consecutive frames change both). The page's own script leads so
-    the first frame matches the static H1 underneath the canvas."""
-    identities = ["hero.word", "hero.word.bianco",
-                  "hero.word.weiss", "hero.word.blanc"]
-    scripts = ["en", "ru", "ja"]
-    if lang in scripts:
-        scripts = [lang] + [s for s in scripts if s != lang]
-    frames = []
-    for i in range(len(identities) * len(scripts)):
-        word = t(identities[i % len(identities)], scripts[i % len(scripts)])
-        word = word.replace("|", "\n")
-        if word not in frames:
-            frames.append(word)
+    """The frames the hero's gathering letters spell: the house first, then
+    each of its four authors (Belenkiy's name in the page's own script, the
+    pen names in Latin everywhere). Each frame is two words, set either side
+    of the orb. The script (fx/lattice.js) returns to the house between
+    authors."""
+    house = [w.split()[0].upper() for w in SITE["site_name"].split("&")][:2]
+    frames = [house]
+    for key in ("hero.word", "hero.word.bianco", "hero.word.weiss", "hero.word.blanc"):
+        parts = [p.strip() for p in t(key, lang).split("|") if p.strip()]
+        if len(parts) >= 2:
+            frames.append([parts[0], " ".join(parts[1:])])
     return json.dumps(frames, ensure_ascii=False)
 
 
@@ -313,23 +902,6 @@ def ticker_html(lang):
     for it in items:
         out.append(f'<span class="ti">{esc(it)}</span><span class="tsep">·</span>')
     return "".join(out)
-
-
-def book_years():
-    return sorted({int(b["year"]) for b in BOOKS if b["year"]})
-
-
-def timeline_html(accent_year=None):
-    nodes = []
-    for y in book_years():
-        cls = " acc" if (accent_year is not None and y == accent_year) else ""
-        nodes.append(f'    <span class="tl-node{cls}"><i></i>{y}</span>')
-    return "\n".join(nodes)
-
-
-def cat_span():
-    ys = book_years()
-    return f"{ys[0]} — {ys[-1]}" if ys else ""
 
 
 # Month names per language, so a release date reads as written rather than as
@@ -401,28 +973,6 @@ AUTHORS = [("belenkiy", None), ("bianco", "Alessio Bianco"),
            ("weiss", "A. P. Weiss"), ("blanc", "Alec Blanc")]
 
 
-def author_blocks(lang, rel):
-    blocks = []
-    for i, (key, name) in enumerate(AUTHORS, 1):
-        display = name or t("hero.name", lang)
-        if key == "belenkiy":
-            status = (f'<a class="btn btn--ghost" href="{rel}{lang}/books/">'
-                      f'{esc(t("home.view_all", lang))}</a>')
-        else:
-            status = f'<span class="pill pill--soon">{esc(t("authors.debut", lang))}</span>'
-        blocks.append(
-            f'  <article class="author-row" data-reveal>\n'
-            f'    <span class="author-idx mono-meta">{i:02d}</span>\n'
-            f'    <div class="author-body">\n'
-            f'      <h2 class="author-name" data-decode-hover>{esc(display)}</h2>\n'
-            f'      <p class="kicker author-lane">{esc(t("author.lane." + key, lang))}</p>\n'
-            f'      <p class="author-bio">{esc(t("author.bio." + key, lang))}</p>\n'
-            f'      <p class="author-status">{status}</p>\n'
-            f'    </div>\n'
-            f'  </article>')
-    return "\n".join(blocks)
-
-
 def privacy_paragraphs(lang):
     row = PRIVACY.get(lang) or PRIVACY.get("en") or {}
     paras = [p.strip() for p in re.split(r"\n\s*\n", row.get("body", "")) if p.strip()]
@@ -438,6 +988,20 @@ def socials(fmt):
             label = key.split("_", 1)[1].replace("_", ".").title()
             out.append(fmt.format(url=esc(val), label=esc(label)))
     return "\n".join(out) + "\n"
+
+
+def foot_call(lang, kind, rel):
+    """The closing call on every page: the house's line, set large, and the
+    next door — the shelf, or the worlds when the reader is already at it."""
+    if kind == "books":
+        href, label = rel + page_path(lang, "worlds"), t("hero.cta_worlds", lang)
+    else:
+        href, label = rel + page_path(lang, "books"), f'{t("hero.cta_books", lang)} · {len(BOOKS):02d}'
+    return (f'<section class="call" aria-label="{esc(SITE["site_name"])}">\n'
+            f'  <span class="call-orb" aria-hidden="true"></span>\n'
+            f'  <p class="call-line" data-gather>{esc(t("brand.line", lang))}</p>\n'
+            f'  <a class="btn btn--lg" href="{href}" data-reveal>{esc(label)}</a>\n'
+            f'</section>')
 
 
 def lang_links(lang, kind, rel, slug=None):
@@ -457,7 +1021,8 @@ def lang_links(lang, kind, rel, slug=None):
 
 def base_page(lang, kind, content, *, title, desc, og_type="website",
               og_image=None, slug=None, jsonld="", body_class=""):
-    depth = {"home": 1, "books": 2, "book": 3, "about": 2, "privacy": 2}[kind]
+    depth = {"home": 1, "books": 2, "book": 3, "about": 2, "privacy": 2,
+             "worlds": 2, "world": 3}[kind]
     rel = "../" * depth
     self_path = page_path(lang, kind, slug)
     panel, foot = lang_links(lang, kind, rel, slug)
@@ -483,6 +1048,8 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
         "T_ABOUT": esc(t("nav.about", lang)),
         "T_LANGS": esc(t("a11y.langs", lang)),
         "CUR_BOOKS": ' aria-current="page"' if kind == "books" else (' aria-current="true"' if kind == "book" else ""),
+        "T_SERIES": esc(t("nav.series", lang)),
+        "CUR_SERIES": ' aria-current="page"' if kind == "worlds" else (' aria-current="true"' if kind == "world" else ""),
         "CUR_ABOUT": ' aria-current="page"' if kind == "about" else "",
         "LANG_SHORT": esc(short),
         "LANG_LINKS": panel,
@@ -496,48 +1063,70 @@ def base_page(lang, kind, content, *, title, desc, og_type="website",
         "T_FOOT_LANGS": esc(t("footer.langs", lang)),
         "FOOT_LANGS": foot,
         "FOOT_STATUS": foot_status(lang),
+        "FOOT_CALL": foot_call(lang, kind, rel),
+        "HEAD_SHELF": esc(f'{len(BOOKS):02d}'),
     })
     return page.replace("</head>", GENERATED_MARK + "\n</head>", 1)
 
 
-def series_sections_html(lang, rel, start_num=2):
-    """The home shelf: one numbered section per series, standalones last.
+def way_art(way, rel, turn):
+    """A tile's picture: three real editions of that kind, one per series.
+    Books show their covers, the three audio forms their own square covers,
+    and the graphic novel a cover cut into panels. `turn` starts each tile
+    at a different series so the five tiles show fifteen different books."""
+    picks, seen = [], set()
+    for book in BOOKS:
+        if way not in ways_of(book) or book["series"] in seen:
+            continue
+        if way in ("book", "graphic"):
+            src = cover_small(book)
+        else:
+            src = f"covers/audio/{book['id']}-{way}.jpg"
+            if not (ROOT / src).exists():
+                continue
+        seen.add(book["series"])
+        picks.append(src)
+    if not picks:
+        return ""
+    k = (turn * 3) % len(picks)
+    picks = picks[k:] + picks[:k]
+    img = lambda src, side, high: (f'<img src="{rel}{src}" alt="" width="{side}" height="{high}" '
+                                   f'loading="lazy" decoding="async">')
+    if way == "book":
+        # three volumes standing on the shelf
+        inner = "".join(f'<span class="obj-book">{img(src, 480, 720)}</span>' for src in picks[:3])
+    elif way == "audiobook":
+        # a record in its sleeve: the edition's own square cover, the disc drawn out
+        inner = f'<span class="obj-sleeve"><i class="obj-disc"></i>{img(picks[0], 360, 360)}</span>'
+    elif way == "immersive":
+        # the same sleeve, sound standing round it
+        inner = f'<span class="obj-sleeve"><i class="obj-rings"></i>{img(picks[0], 360, 360)}</span>'
+    elif way == "drama":
+        # a cast: three sleeves, one in front
+        inner = "".join(f'<span class="obj-sleeve">{img(src, 360, 360)}</span>' for src in picks[:3])
+    else:
+        # the graphic novel: the whole cover on a drawing board, page frames behind it
+        inner = f'<i class="obj-page"></i><i class="obj-page"></i><span class="obj-book">{img(picks[0], 480, 720)}</span>'
+    return f'      <span class="way-art way-art--{way}" aria-hidden="true">{inner}</span>\n'
 
-    The catalogue page keeps the flat everything-together grid; home reads as
-    the imprint's index — each series its own entry in the running numbers,
-    its books in series order, the shared card component throughout. A series
-    with a real world-site gets its outbound link in the section head.
-    """
-    groups: dict[str, list] = {}
-    for b in BOOKS:
-        groups.setdefault(b["series"] or "", []).append(b)
-    order = [k for k in groups if k] + ([""] if "" in groups else [])
-    out = []
-    num = start_num
-    for key in order:
-        books = groups[key]
-        if key:
-            books = sorted(books, key=lambda b: int(b["series_order"] or 0))
-        label = key or t("book.standalone", lang)
-        world = SERIES_SITES.get(key)
-        more = (f'\n  <div class="sec-head"><a class="more" href="{esc(world)}" '
-                f'target="_blank" rel="noopener">{esc(t("series.site", lang))} →</a></div>'
-                if world else "")
-        accent = books[0]["accent"] or SITE["accent"]
-        cards = "\n".join(card(b, lang, rel) for b in books)
-        rain = ' data-rain' if num == start_num else ''
-        out.append(
-            f'<section class="section" style="--accent-book:{accent}"{rain}>\n'
-            f'  <span class="sec-num" aria-hidden="true" data-plx>{num:02d}</span>\n'
-            f'  <div class="sec-mark" data-reveal><span class="idx">{num:02d}</span>'
-            f'<span class="lbl" data-decode>{esc(label)} · {len(books):02d}</span></div>{more}\n'
-            f'  <div class="grid-books">\n{cards}\n  </div>\n'
-            f'</section>')
-        num += 1
-    view_all = (f'<p style="text-align:center;margin:48px 0 0" data-reveal>'
-                f'<a class="btn btn--ghost" href="{rel}{lang}/books/">'
-                f'{esc(t("home.view_all", lang))} · {len(BOOKS):02d} →</a></p>')
-    return "\n\n".join(out) + "\n\n" + view_all, num
+
+def way_tiles(lang, rel):
+    """Home: the five ways into a story, each a door into the filtered shelf,
+    each showing real editions of its kind."""
+    tiles = []
+    for turn, (way, _) in enumerate(WAYS):
+        n = sum(1 for b in BOOKS if way in ways_of(b))
+        if not n:
+            continue
+        tiles.append(
+            f'    <a class="way-tile" href="{rel}{lang}/books/?format={way}" data-reveal>\n'
+            f'{way_art(way, rel, turn)}'
+            f'      <span class="way-head"><span class="way-ico">{icon(way)}</span>'
+            f'<span class="way-name">{esc(t("format." + way, lang))}</span></span>\n'
+            f'      <span class="way-desc">{esc(t("formatdesc." + way, lang))}</span>\n'
+            f'      <span class="way-n mono-meta">{esc(t("format.count", lang, n=n))}</span>\n'
+            f'    </a>')
+    return "\n".join(tiles)
 
 
 def build_home(lang):
@@ -546,46 +1135,50 @@ def build_home(lang):
     if featured is None:
         sys.exit(f"FATAL: site.csv featured_book={SITE['featured_book']!r} is not "
                  f"in books.csv. Available: {', '.join(b['id'] for b in BOOKS) or 'none'}")
-    fl = loc(featured, lang)
-    series_html, next_num = series_sections_html(lang, rel)
     content = render("home", {
         "REL": rel,
-        "TICKER": ticker_html(lang),
-        "TIMELINE": timeline_html(int(featured["year"]) if featured["year"] else None),
-        "CAT_SPAN": esc(cat_span()),
-        "KICKER": esc(t("brand.kicker", lang)),
+        "LANG": lang,
+        # the hero: the orb, and the letters that gather into the house's name
+        "HERO_STILLS": esc(hero_stills(rel)),
         "HERO_WORDS": esc(hero_words(lang)),
         "GLYPHS": esc(glyph_pool()),
-        "HERO_WORD": esc(t("hero.word", lang)).replace("|", "<br>"),
-        "T_TAGLINE": esc(t("meta.tagline", lang)),
-        "T_SCROLL": esc(t("scroll.cue", lang)),
-        "F_ACCENT": featured["accent"] or SITE["accent"],
-        "F_ID": featured["id"],
-        "F_PLATE": plate_attr(featured),
-        "F_COVER": featured["cover"],
-        "F_SRCSET": srcset_for(featured["cover"], rel),
-        "F_COVER_ALT": esc(fl["title"]),
-        "T_FEATURED": esc(t("home.featured", lang)),
-        "F_SERIES_META": esc(f" · {featured['series']} {series_no(featured, lang)}"
-                             if featured["series"] else f" · {t('book.standalone', lang)}"),
-        "F_URL": rel + page_path(lang, "book", featured["slug"]),
-        "F_WORLD_LINK": (
-            f'        <a class="btn btn--ghost" href="{esc(SERIES_SITES[featured["series"]])}" '
-            f'target="_blank" rel="noopener">{esc(t("series.site", lang))}</a>\n'
-            if SERIES_SITES.get(featured["series"]) else ""),
-        "F_TITLE": esc(fl["title"]),
-        "F_TAGLINE": esc(fl["tagline"]),
-        "F_YEAR": esc(featured["year"]),
-        "F_STATUS_PILL": status_pill(featured, lang),
-        "F_CTA": esc(t(cta_key(featured["status"]), lang)),
-        "F_DATA": f_data(featured, lang),
-        "SERIES_SECTIONS": series_html,
-        "ABOUT_NUM": f"{next_num:02d}",
-        "T_ABOUT_TEASER": esc(t("home.about_teaser", lang)),
+        "HM_A": esc(SITE["site_name"].split("&")[0].split()[0]),
+        "HM_B": esc(SITE["site_name"].split("&")[-1].split()[0]),
+        "CSS_ORB": css_orb(),
+        "T_HOUSE": esc(t("hero.house", lang)),
+        "T_LEDE": esc(t("hero.lede", lang, books=len(BOOKS), series=len(listed_series()))),
+        "T_CTA_WORLDS": esc(t("hero.cta_worlds", lang)),
+        "T_CTA_BOOKS": esc(t("hero.cta_books", lang)),
+        "HERO_ROSTER": hero_roster(lang, rel),
+        "TICKER": ticker_html(lang),
+        # new and next
+        "T_STATUS_OUT": esc(t("status.out", lang)),
+        "T_NEW": esc(t("home.new", lang)),
+        "NOW_PANELS": now_panels(lang, rel, featured),
+        # the worlds
+        "T_WORLDS": esc(t("home.worlds", lang)),
+        "T_WORLDS_SUB": esc(t("home.worlds_sub", lang)),
+        "PASSAGE": passage(lang, rel),
+        "PASS_N": len(listed_series()),
+        "T_PASS_PREV": esc(t("pass.prev", lang)),
+        "T_PASS_NEXT": esc(t("pass.next", lang)),
+        "T_PASS_SKIP": esc(t("pass.skip", lang)),
+        "T_SERIES_ALL": esc(t("series.all", lang)),
+        "WORLD_INDEX": world_index(lang, rel),
+        # the covers
+        "COVER_WALL": cover_wall(lang, rel),
+        "N_BOOKS": len(BOOKS),
+        "T_WALL_TITLE": esc(t("home.wall_title", lang)),
+        "T_WALL_SUB": esc(t("home.wall_sub", lang)),
+        "T_VIEW_ALL": esc(f'{t("home.view_all", lang)} · {len(BOOKS):02d}'),
+        # ways in, and the authors
+        "T_FORMATS": esc(t("home.formats", lang)),
+        "WAY_TILES": way_tiles(lang, rel),
+        "T_BYLINES": esc(t("home.bylines", lang)),
+        "T_AUTHORS_TITLE": esc(t("home.authors_title", lang)),
         "AUTHORS_INTRO": esc(t("authors.intro", lang)),
-        "SITE_NAME": esc(SITE["site_name"]),
+        "ROSTER": roster(lang, rel),
         "T_ABOUT": esc(t("nav.about", lang)),
-        "LANG": lang,
     })
     write(page_path(lang, "home") + "index.html", base_page(
         lang, "home", content,
@@ -596,20 +1189,230 @@ def build_home(lang):
         body_class="page-home"))
 
 
+def filter_bar(lang):
+    """The shelf's controls, prerendered: search, then format / author /
+    series / theme chips. Groups combine (a book must satisfy every group that
+    has a selection); the chips are inert without JS and hidden then."""
+    def chips(kind, items):
+        return "".join(
+            f'<button type="button" class="chip" data-kind="{kind}" data-value="{esc(v)}" '
+            f'aria-pressed="false">{label}</button>' for v, label in items)
+
+    def group(key, kind, items, extra=""):
+        if not items:
+            return ""
+        return (f'    <div class="fgroup{extra}" role="group" aria-label="{esc(t(key, lang))}">\n'
+                f'      <span class="flabel mono-meta">{esc(t(key, lang))}</span>\n'
+                f'      <div class="fchips">{chips(kind, items)}</div>\n'
+                f'    </div>\n')
+
+    ways = [(w, icon(w) + esc(t("format." + w, lang))) for w, _ in WAYS
+            if any(w in ways_of(b) for b in BOOKS)]
+    bys = [(k, esc(byline_name(k, lang))) for k, _ in AUTHORS
+           if any(byline_key(b) == k for b in BOOKS)]
+    series = [(r["series"], esc(r["series"])) for r in listed_series()]
+    if any(not b["series"] for b in BOOKS):
+        series.append(("standalone", esc(t("book.standalone", lang))))
+    themes = []
+    for b in BOOKS:
+        for tok in themes_of(b):
+            if tok not in [x for x, _ in themes]:
+                themes.append((tok, esc(t(theme_key(tok), lang))))
+    more = (group("filter.series", "series", series, " fgroup--scroll")
+            + group("filter.themes", "theme", themes, " fgroup--scroll"))
+    return (
+        f'    <div class="frow">\n'
+        f'    <label class="fsearch"><span class="visually-hidden">{esc(t("filter.search", lang))}</span>'
+        f'<input type="search" placeholder="{esc(t("filter.search", lang))}" autocomplete="off" spellcheck="false"></label>\n'
+        f'    <p class="fstatus mono-meta" aria-live="polite"><span class="fcount">{len(BOOKS)}</span> / {len(BOOKS)}'
+        f'<button type="button" class="fclear" hidden>{esc(t("filter.clear", lang))} ×</button></p>\n'
+        f'    </div>\n'
+        f'    <div class="frow frow--main">\n'
+        + group("filter.format", "way", ways)
+        + group("filter.byline", "byline", bys)
+        + f'    </div>\n'
+        f'    <details class="fmore"><summary>{esc(t("filter.series", lang))} · {esc(t("filter.themes", lang))}</summary>\n'
+        + more + f'    </details>\n')
+
+
 def build_books(lang):
     rel = "../../"
     content = render("books", {
         "KICKER": esc(t("brand.kicker", lang)),
         "T_BOOKS_TITLE": esc(t("books.title", lang)),
         "T_FILTERS": esc(t("a11y.filters", lang)),
-        "TIMELINE": timeline_html(),
+        "FILTER_BAR": filter_bar(lang),
+        "T_NONE": esc(t("filter.none", lang)),
         "CARDS": "\n".join(card(b, lang, rel) for b in BOOKS),
+        "N_BOOKS": len(BOOKS),
+        "T_LEDE": esc(t("hero.lede", lang, books=len(BOOKS), series=len(listed_series()))),
     })
     write(page_path(lang, "books") + "index.html", base_page(
         lang, "books", content,
         title=f'{t("books.title", lang)} — {SITE["site_name"]}',
         desc=t("meta.books_desc", lang),
         body_class="page-books"))
+
+
+def build_worlds(lang):
+    """/series/ — every world on one page."""
+    rel = "../../"
+    content = render("worlds", {
+        "KICKER": esc(t("brand.kicker", lang)),
+        "T_TITLE": esc(t("home.worlds", lang)),
+        "T_SUB": esc(t("home.worlds_sub", lang)),
+        "WORLD_ROWS": world_rows(lang, rel),
+        "N_WORLDS": f'{len(listed_series()):02d}',
+        "WORLD_LENS": world_lens(lang, rel),
+        "T_SERIES_ALL": esc(t("series.all", lang)),
+        "T_SITE": esc(t("series.site", lang)),
+    })
+    write(page_path(lang, "worlds") + "index.html", base_page(
+        lang, "worlds", content,
+        title=f'{t("nav.series", lang)} — {SITE["site_name"]}',
+        desc=t("meta.series_desc", lang),
+        body_class="page-worlds"))
+
+
+def build_world(lang, row):
+    """/series/<slug>/ — one world: its line, its premise, the door to its
+    own site, the reading order, the ways in, and the rest of the byline."""
+    rel = "../../../"
+    name = row["series"]
+    books = series_books(name)
+    L = series_loc(name, lang)
+    accent = books[0]["accent"] or SITE["accent"]
+    key = row["byline"]
+    site = world_href(name, rel)
+    themes = []
+    for b in books:
+        for tok in themes_of(b):
+            if tok not in themes:
+                themes.append(tok)
+    # The door to the world: its own site, running on the screen of a display.
+    # Three frames (tools/shoot_worlds.mjs) cross-fade on the screen; with no
+    # frames on disk there is no display and the button beside it is the door.
+    portal = ""
+    if site:
+        frames = [f for f in (f"assets/img/worlds/{row['slug']}-{n}.jpg" for n in (1, 2, 3))
+                  if (ROOT / f).exists()]
+        label = esc(f'{name} — {t("series.site", lang)}')
+        cap = (f'<span class="xdr-cap"><span class="kicker">{esc(name)}</span>'
+               f'<span class="portal-go">{esc(t("series.site", lang))}</span></span>')
+        if frames:
+            imgs = "".join(
+                f'<img src="{rel}{f}" alt="" width="1440" height="810" decoding="async"'
+                + (' fetchpriority="high"' if i == 0 else ' loading="lazy"') + '>'
+                for i, f in enumerate(frames))
+            portal = (
+                f'<a class="xdr" href="{esc(site)}" target="_blank" rel="noopener" aria-label="{label}" data-xdr data-reveal>\n'
+                f'    <span class="xdr-stage">\n'
+                f'      <span class="xdr-glow"></span><span class="xdr-floor"></span>\n'
+                f'      <span class="xdr-rig">\n'
+                f'        <span class="xdr-foot"></span>\n'
+                f'        <span class="xdr-arm"></span>\n'
+                f'        <span class="xdr-head">\n'
+                f'          <span class="xdr-edge xdr-edge--t"></span><span class="xdr-edge xdr-edge--r"></span>\n'
+                f'          <span class="xdr-face"><span class="xdr-bezel"><span class="xdr-screen">{imgs}'
+                f'<span class="xdr-glass"></span></span></span></span>\n'
+                f'        </span>\n'
+                f'      </span>\n'
+                f'    </span>\n'
+                f'    {cap}\n'
+                f'  </a>')
+    # ...and, where the series has a game, a handheld on the desk beside it
+    play = play_href(name, rel)
+    frame = f"assets/img/worlds/{row['slug']}-play.jpg"
+    if portal and play and (ROOT / frame).exists():
+        portal = (
+            f'<div class="desk">\n  {portal}\n'
+            f'  <a class="pad" href="{esc(play)}" target="_blank" rel="noopener" data-xdr data-reveal '
+            f'aria-label="{esc(name)} — {esc(t("series.play", lang))}">\n'
+            f'    <span class="pad-stage"><span class="pad-floor"></span><span class="pad-rig">\n'
+            f'      <span class="pad-edge"></span>\n'
+            f'      <span class="pad-face"><span class="pad-dpad"></span>'
+            f'<span class="pad-screen"><img src="{rel}{frame}" alt="" width="1440" height="810" loading="lazy" decoding="async">'
+            f'<span class="xdr-glass"></span></span>'
+            f'<span class="pad-keys"><i></i><i></i><i></i><i></i></span></span>\n'
+            f'    </span></span>\n'
+            f'    <span class="pad-cap portal-go">{esc(t("series.play", lang))}</span>\n'
+            f'  </a>\n</div>')
+    ways = "".join(
+        f'<li class="way-row"><span class="way-ico">{icon(w)}</span>'
+        f'<span class="way-name">{esc(t("format." + w, lang))}</span>'
+        f'<span class="way-desc">{esc(t("formatdesc." + w, lang))}</span></li>'
+        for w in series_ways(name))
+    others = [r for r in listed_series() if r["byline"] == key and r["series"] != name]
+    more = ""
+    if others:
+        more = (
+            '<section class="section act">\n'
+            f'  <header class="act-head" data-reveal><p class="act-kicker"><i class="dot"></i>'
+            f'{esc(byline_name(key, lang))}</p><h2 class="act-title act-title--sm" data-gather>'
+            f'{esc(t("series.more_by", lang, name=byline_name(key, lang)))}</h2></header>\n'
+            f'  <ol class="worlds">\n{world_rows(lang, rel, others)}\n  </ol>\n</section>')
+    pic = world_card(row["slug"])
+    hero_pic = (f'  <div class="whero-pic" aria-hidden="true">{still_img(pic, rel, eager=True)}</div>'
+                if pic else "")
+    hero_books = "".join(
+        f'<a class="whero-cover" href="{rel}{page_path(lang, "book", b["slug"])}" tabindex="-1">'
+        f'<img src="{rel}{cover_small(b)}" alt="" width="480" height="720" decoding="async"></a>'
+        for b in books[:3])
+    # the straight line to a sale: the first book of the series that is out
+    out_now = next((b for b in books if buy_buttons(b, lang)), None)
+    now_line = ""
+    site_btn = (
+        (f'<a class="btn{" btn--glass" if out_now else ""}" href="{esc(site)}" target="_blank" rel="noopener">'
+         f'{esc(t("series.site", lang))}</a>' if site else "")
+        + (f'<a class="btn btn--glass btn--play" href="{esc(play)}" target="_blank" rel="noopener">'
+           f'{esc(t("series.play", lang))}</a>' if play else ""))
+    if out_now:
+        now_line = (f'<p class="whero-now mono-meta">{status_pill(out_now, lang)}'
+                    f'<span>{esc(series_no(out_now, lang))} · {esc(loc(out_now, lang)["title"])}</span></p>')
+        site_btn = buy_buttons(out_now, lang, limit=1, cls="btn btn--buy") + site_btn
+    content = render("world", {
+        "REL": rel,
+        "LANG": lang,
+        "T_NAV": esc(t("a11y.nav", lang)),
+        "T_SERIES": esc(t("nav.series", lang)),
+        "W_ACCENT": accent,
+        "W_NAME": esc(name),
+        "W_TAGLINE": esc(L["tagline"]),
+        "W_PREMISE": esc(L["premise"]),
+        "W_BY": esc(t("series.by", lang, name=byline_name(key, lang))),
+        "W_COUNT": esc(t("series.books_n", lang, n=len(books))),
+        "W_THEMES": "".join(f'<span class="pill">{esc(t(theme_key(tok), lang))}</span>' for tok in themes),
+        "W_SITE_BTN": site_btn,
+        "W_FIRST_URL": rel + page_path(lang, "book", books[0]["slug"]),
+        "W_FIRST": esc(loc(books[0], lang)["title"]),
+        "W_PORTAL": portal,
+        "W_STAGE_CLASS": "" if "xdr-stage" in portal else " world-stage--bare",
+        "T_ORDER": esc(t("series.reading_order", lang)),
+        "W_CARDS": "\n".join(card(b, lang, rel) for b in books),
+        "T_FORMATS": esc(t("home.formats", lang)),
+        "W_WAYS": ways,
+        "W_MORE": more,
+        "W_HERO_PIC": hero_pic,
+        "W_HERO_CLASS": " whero--pic" if hero_pic else " whero--bare",
+        "W_HERO_BOOKS": hero_books,
+        "W_NOW": now_line,
+        "T_MORE": esc(t("series.more_by", lang, name=byline_name(key, lang))),
+    })
+    data = {
+        "@context": "https://schema.org", "@type": "BookSeries", "name": name,
+        "url": canonical(page_path(lang, "world", row["slug"])),
+        "author": {"@type": "Person", "name": byline_name(key, "en")},
+        "publisher": {"@type": "Organization", "name": SITE["site_name"]},
+        "description": L["premise"], "inLanguage": lang,
+    }
+    write(page_path(lang, "world", row["slug"]) + "index.html", base_page(
+        lang, "world", content,
+        title=f'{name} — {SITE["site_name"]}',
+        desc=f'{L["tagline"]} {L["premise"]}'.strip(),
+        og_image=og_image_for(books[0]), slug=row["slug"],
+        jsonld=('<script type="application/ld+json">'
+                + json.dumps(data, ensure_ascii=False) + "</script>\n"),
+        body_class="page-world"))
 
 
 def jsonld_org(lang):
@@ -629,8 +1432,7 @@ def jsonld_book(book, lang, L):
         "@context": "https://schema.org",
         "@type": "Book",
         "name": L["title"],
-        "author": {"@type": "Person",
-                   "name": book.get("author") or SITE["author_name"]},
+        "author": {"@type": "Person", "name": byline_name(byline_key(book), "en")},
         "publisher": {"@type": "Organization", "name": SITE["site_name"]},
         "inLanguage": lang,
         "url": canonical(page_path(lang, "book", book["slug"])),
@@ -677,23 +1479,62 @@ def build_book(lang, book):
 
     series_note = ""
     siblings_html = ""
+    portal = ""
+    crumb = esc(t("book.standalone", lang))
     if book["series"]:
-        world = ""
-        if SERIES_SITES.get(book["series"]):
-            world = (f' · <a href="{esc(SERIES_SITES[book["series"]])}" target="_blank" '
-                     f'rel="noopener">{esc(t("series.site", lang))} ↗</a>')
+        srow = SERIES.get(book["series"], {})
+        hub = rel + page_path(lang, "world", srow["slug"]) if srow.get("slug") else ""
+        pos = esc(t("book.series_pos", lang, n=int(book["series_order"]), series=book["series"]))
         series_note = (f'    <p class="series-note mono-meta" data-reveal>'
-                       f'{esc(t("book.series_pos", lang, n=int(book["series_order"]), series=book["series"]))}'
-                       f'{world}</p>')
-        sibs = [b for b in BOOKS if b["series"] == book["series"] and b["id"] != book["id"]]
-        if sibs:
-            cards = "\n".join(card(b, lang, rel) for b in sibs)
-            siblings_html = ('<section class="section" aria-labelledby="sib-h">\n'
-                             f'  <div class="sec-head"><h2 id="sib-h">{esc(t("book.in_series", lang))}</h2></div>\n'
-                             f'  <div class="sibling-row">\n{cards}\n  </div>\n</section>')
+                       + (f'<a href="{hub}">{pos}</a>' if hub else pos) + '</p>')
+        label = esc(f'{book["series"]} · {series_no(book, lang)}')
+        crumb = f'<a href="{hub}">{label}</a>' if hub else label
+        world = world_href(book["series"], rel, book)
+        if world:
+            portal = (
+                f'    <a class="portal portal--bare{" portal--pic" if world_card(srow.get("slug", "")) else ""}" '
+                f'href="{esc(world)}" target="_blank" rel="noopener" data-reveal>\n'
+                + (f'      <span class="portal-pic" aria-hidden="true">{still_img(world_card(srow["slug"]), rel, sizes="(max-width: 900px) 100vw, 640px")}</span>\n'
+                   if world_card(srow.get("slug", "")) else "")
+                + f'      <span class="portal-cap"><span class="kicker">{esc(book["series"])}</span>'
+                f'<span class="portal-go">{esc(t("series.in_world", lang))}</span></span>\n'
+                f'    </a>')
+        sibs = series_books(book["series"])
+        if len(sibs) > 1:
+            cards = "\n".join(
+                card(b, lang, rel).replace('<article class="card"', '<article class="card is-current" aria-current="true"', 1)
+                if b["id"] == book["id"] else card(b, lang, rel) for b in sibs)
+            siblings_html = ('<section class="section act act--split" aria-labelledby="sib-h">\n'
+                             f'  <header class="act-head" data-reveal><p class="act-kicker"><i class="dot"></i>{esc(book["series"])}</p>'
+                             f'<h2 class="act-title act-title--sm" id="sib-h" data-gather>{esc(t("series.reading_order", lang))}</h2>'
+                             + (f'<a class="btn btn--glass act-more" href="{hub}">{esc(t("series.view", lang))}</a>' if hub else "")
+                             + '</header>\n'
+                             f'  <div class="grid-books shelf">\n{cards}\n  </div>\n</section>')
     else:
         series_note = (f'    <p class="series-note mono-meta" data-reveal>'
                        f'{esc(t("book.standalone", lang))}</p>')
+
+    # the world's own picture as a band, leading to the series page
+    band = ""
+    if book["series"] and SERIES.get(book["series"], {}).get("slug"):
+        srow = SERIES[book["series"]]
+        hub = rel + page_path(lang, "world", srow["slug"])
+        SL = series_loc(book["series"], lang)
+        pic = world_card(srow["slug"])
+        site = world_href(book["series"], rel, book)
+        band = (
+            f'<section class="band{" band--pic" if pic else ""}" style="--accent-book:{accent}">\n'
+            + (f'  <span class="band-pic" aria-hidden="true">{still_img(pic, rel)}</span>\n' if pic else "")
+            + f'  <div class="band-in">\n'
+            f'    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>'
+            f'{esc(t("book.series_pos", lang, n=int(book["series_order"]), series=book["series"]))}</p>\n'
+            f'    <h2 class="band-title" data-gather>{esc(book["series"])}</h2>\n'
+            f'    <p class="band-line">{esc(SL["tagline"])}</p>\n'
+            f'    <div class="band-act">{buy_buttons(book, lang, limit=1, cls="btn btn--buy")}'
+            f'<a class="btn{" btn--glass" if buy_buttons(book, lang) else ""}" href="{hub}" data-enter>{esc(t("series.view", lang))}</a>'
+            + (f'<a class="btn btn--glass" href="{esc(site)}" target="_blank" rel="noopener">{esc(t("series.in_world", lang))}</a>' if site else "")
+            + '</div>\n  </div>\n</section>')
+        portal = ""
 
     theme_pills = "\n".join(
         f'      <span class="pill">{esc(t(theme_key(tok), lang))}</span>' for tok in themes_of(book))
@@ -703,25 +1544,62 @@ def build_book(lang, book):
         excerpt = (f'    <a class="btn btn--ghost" href="{esc(L["excerpt_url"])}" target="_blank" '
                    f'rel="noopener" style="margin-top:8px">{esc(t("book.excerpt", lang))}</a>')
 
-    rows = links_for(book["id"], lang)
-    if book["status"] == "coming_soon" or not rows:
-        groups = f'      <p class="soon-note">{esc(t("book.coming_soon_note", lang))}</p>'
-    else:
-        chunks = []
-        for fmt in FORMAT_ORDER:
-            frows = [r for r in rows if r["format"] == fmt]
-            if not frows:
+    # Editions: every way into this book, grouped by how a reader meets it.
+    # A store row makes an edition live; without one it says where it stands —
+    # print waits on the release, sound and pictures are in production.
+    rows = links_for(book["id"], lang) if book["status"] != "coming_soon" else []
+    have = formats_of(book)
+    chunks = []
+    if book["status"] == "coming_soon":
+        chunks.append(f'      <p class="soon-note">{esc(t("book.coming_soon_note", lang))}</p>')
+    for gkey, fmts in FORMAT_GROUPS:
+        items = []
+        for fmt in fmts:
+            if fmt not in have:
                 continue
-            btns = "\n".join(
-                f'          <a class="btn" href="{esc(r["url"])}" target="_blank" rel="noopener" '
-                f'aria-label="{esc(t("a11y.buy", lang, title=L["title"], format=t("format." + fmt, lang), store=r["store"]))}">'
-                f'{esc(r["store"])}</a>' for r in frows)
-            chunks.append(f'      <div class="format-group">\n        <h3>{esc(t("format." + fmt, lang))}</h3>\n'
-                          f'        <div class="store-row">\n{btns}\n        </div>\n      </div>')
-        groups = "\n".join(chunks)
+            frows = [r for r in rows if r["format"] == fmt]
+            # each edition as the object it is: the book's own cover for the
+            # printed and drawn forms, the edition's square sleeve for sound
+            art = f"covers/audio/{book['id']}-{fmt}.jpg"
+            if gkey == "listen" and (ROOT / art).exists():
+                glyph = (f'<span class="ed-obj ed-obj--{fmt}"><img class="ed-art" src="{rel}{art}" alt="" '
+                         f'width="360" height="360" loading="lazy" decoding="async"></span>')
+            elif gkey == "listen":
+                glyph = icon(fmt)
+            else:
+                glyph = (f'<span class="ed-obj ed-obj--{"graphic" if gkey == "see" else "book"}">'
+                         f'<img class="ed-art ed-art--cover" src="{rel}{cover_small(book)}" alt="" '
+                         f'width="480" height="720" loading="lazy" decoding="async"></span>')
+            desc = (f'<span class="ed-desc">{esc(t("formatdesc." + fmt, lang))}</span>'
+                    if gkey != "read" else "")
+            if frows:
+                act = "".join(
+                    f'<a class="btn btn--sm" href="{esc(r["url"])}" target="_blank" rel="noopener" '
+                    f'aria-label="{esc(t("a11y.buy", lang, title=L["title"], format=t("format." + fmt, lang), store=r["store"]))}">'
+                    f'{esc(r["store"])}</a>' for r in frows)
+            else:
+                state = "status.coming_soon" if gkey == "read" else "edition.soon"
+                act = f'<span class="ed-state">{esc(t(state, lang))}</span>'
+            items.append(
+                f'          <li class="ed{" is-live" if frows else ""}"><span class="ed-ico">{glyph}</span>'
+                f'<span class="ed-name">{esc(t("format." + fmt, lang))}{desc}</span>'
+                f'<span class="ed-act">{act}</span></li>')
+        if items:
+            chunks.append(
+                f'      <div class="ed-group">\n        <h3>{esc(t("edition." + gkey, lang))}</h3>\n'
+                f'        <ul class="eds">\n' + "\n".join(items) + '\n        </ul>\n      </div>')
+    groups = "\n".join(chunks)
 
-    synopsis = "\n".join(f'      <p>{esc(p.strip())}</p>'
-                         for p in L["synopsis"].split("\n") if p.strip())
+    paras = [p.strip() for p in L["synopsis"].split("\n") if p.strip()]
+    synopsis = "\n".join(f'      <p>{esc(p)}</p>' for p in paras)
+    # the page the cover opens onto: the book's own first paragraph, set as type
+    opening = paras[0] if paras else L["tagline"]
+    if len(opening) > 400:
+        cut = opening[:400]
+        stop = max(cut.rfind(". "), cut.rfind("。"), cut.rfind("! "), cut.rfind("? "))
+        opening = cut[:stop + 1] if stop > 160 else cut.rsplit(" ", 1)[0] + "…"
+    leaf = (f'<span class="b3-series">{esc(L["title"])}</span>'
+            f'<span class="b3-page">{esc(opening)}</span>')
 
     praise = ""
     quotes = praise_for(book["id"], lang)
@@ -737,25 +1615,37 @@ def build_book(lang, book):
         "REL": rel,
         "T_NAV": esc(t("a11y.nav", lang)),
         "T_BOOKS": esc(t("nav.books", lang)),
-        "B_CRUMB": esc(f'{book["series"]} · {series_no(book, lang)}' if book["series"] else t("book.standalone", lang)),
+        "B_CRUMB": crumb,
         "B_ACCENT": accent,
         "B_TITLE": esc(L["title"]),
         "B_TAGLINE": esc(L["tagline"]),
-        "B_ID": book["id"],
-        "B_PLATE_ATTR": plate_attr(book),
-        "B_COVER": book["cover"],
-        "B_SRCSET": srcset_for(book["cover"], rel),
-        "B_COVER_ALT": esc(L["title"]),
+        "B_BYLINE": esc(t("series.by", lang, name=byline_name(byline_key(book), lang))),
+        "B_PILL": status_pill(book, lang),
+        "B_ACTIONS": (buy_buttons(book, lang, cls="btn btn--buy btn--lg")
+                      + f'<a class="btn btn--glass btn--down" href="#buy">{esc(t("book.editions", lang))}</a>'),
+        "B_BUYBAR": (
+            f'<div class="buybar" data-buybar hidden style="--accent-book:{accent}">'
+            f'<img src="{rel}{cover_small(book)}" alt="" width="480" height="720" loading="lazy" decoding="async">'
+            f'<span class="buybar-title">{esc(L["title"])}</span>'
+            f'{buy_buttons(book, lang, limit=1, cls="btn btn--sm")}</div>'
+            if buy_buttons(book, lang) else ""),
+        "B_BOOK3D": book3d(book, lang, rel, eager=True, leaf=leaf),
+        "T_OPEN": esc(t("book.open", lang)),
+        "T_CLOSE": esc(t("book.close", lang)),
+        "B_PORTAL": portal,
         "B_PLATE": "\n".join(plate),
         "B_SERIES_NOTE": series_note,
         "B_SYNOPSIS": synopsis,
         "B_PRAISE": praise,
         "B_THEME_PILLS": theme_pills,
         "B_EXCERPT_BTN": excerpt,
-        "B_BUY_HEAD": esc(t(cta_key(book["status"]), lang)),
+        "B_BUY_HEAD": esc(t("book.editions", lang)),
         "B_BUY_GROUPS": groups,
         "B_SIBLINGS": siblings_html,
         "LANG": lang,
+        "B_HERO_CLASS": " bhero--sale" if buy_buttons(book, lang) else "",
+        "B_SIDE_COVER": (f'<img src="{rel}{cover_small(book)}" alt="" width="480" height="720" loading="lazy" decoding="async">'),
+        "B_BAND": band,
     })
     desc = (L["tagline"] + " " + L["synopsis"]).strip()
     if len(desc) > 155:
@@ -775,7 +1665,8 @@ def build_about(lang):
         "KICKER": esc(t("brand.kicker", lang)),
         "T_ABOUT_TITLE": esc(t("about.title", lang)),
         "AUTHORS_INTRO": esc(t("authors.intro", lang)),
-        "AUTHOR_BLOCKS": author_blocks(lang, rel),
+        "ROSTER": author_stages(lang, rel),
+        "N_AUTHORS": f'{len(AUTHORS):02d}',
         "T_PRESS": esc(t("about.press", lang)),
         "PRESS_BODY": esc(t("press.body", lang)),
         "T_CONTACT": esc(t("about.contact", lang)),
@@ -833,6 +1724,7 @@ def build_root():
         "# generated by build.py",
         "/ /en/ 302",
         "/books /en/books/ 302",
+        "/series /en/series/ 302",
         "/about /en/about/ 302",
         "/privacy /en/privacy/ 302",
     ]) + "\n")
@@ -842,8 +1734,10 @@ def build_root():
 
     urls = []
     for kind, slug_list in (("home", [None]), ("books", [None]),
-                            ("book", [b["slug"] for b in BOOKS]), ("about", [None]),
-                            ("privacy", [None])):
+                            ("book", [b["slug"] for b in BOOKS]),
+                            ("worlds", [None]),
+                            ("world", [r["slug"] for r in listed_series()]),
+                            ("about", [None]), ("privacy", [None])):
         for slug in slug_list:
             for code in CODES:
                 alts = "".join(
@@ -931,6 +1825,9 @@ def main():
         build_books(code)
         for book in BOOKS:
             build_book(code, book)
+        build_worlds(code)
+        for row in listed_series():
+            build_world(code, row)
         build_about(code)
         build_privacy(code)
     build_root()

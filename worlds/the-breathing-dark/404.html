@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>No entry — The Breathing Dark</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="This page is not in the catalogue.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050708">
+<meta name="author" content="A. P. Weiss">
+<meta property="og:site_name" content="The Breathing Dark">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A night sky half gone dark, and the words The Breathing Dark, a trilogy by A. P. Weiss.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Space+Grotesk:wght@500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<script>(function(d){d.className+=' js';try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)d.className+=' still'}catch(e){}})(document.documentElement)</script>
+<style>
+/* ── The Breathing Dark · shared system ─────────────────────────────────────
+   Palette: void, star white, dim ink, amber. The only true black on the site is
+   the door. Motion: dim, kindle, breathe — opacity and luminance only. */
+:root{--void:#050708;--field:#0B1016;--star:#E9EEF4;--ink:#B4BDC7;--dim:#8C97A3;--amber:#D9A05B;--deep:#8A5B28;--obit:#6E3B2E;
+  --accent:#D9A05B;--on-accent:#050708;--rule:rgba(140,151,163,.2);--scrim:5,7,8;--murmur:.5;--amp:1;
+  --buy:#D9A05B;--buy-hi:#EDC48C;--buy-lo:#B8843F;--on-buy:#050708;--buy-halo:217,160,91;
+  --serif:Spectral,"Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);--gut:clamp(20px,5.4vw,88px);--max:1240px;--edge:max(var(--gut),calc((100% - var(--max)) / 2))}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--void);-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:76px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--void);color:var(--ink);font:400 18px/1.65 var(--serif);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ol,ul,figure,table{margin:0}
+ol,ul{padding:0;list-style:none}
+img,svg{display:block}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--accent);outline-offset:5px}
+::selection{background:rgba(217,160,91,.3);color:#fff}
+.gr{text-transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--gut);top:-80px;z-index:95;background:var(--void);color:var(--star);font:500 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:12px 16px;border:1px solid var(--accent)}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto}
+
+/* voices */
+.lab{font:500 11px/1.5 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.lab a{text-decoration:none;color:var(--star)}
+.lab b{font-weight:500;color:var(--star)}
+.mono{font:400 11.5px/1.7 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.h2{font:300 clamp(30px,4.5vw,60px)/1.1 var(--serif);color:var(--star);letter-spacing:-.006em;text-wrap:balance}
+.caps{font-family:var(--serif);font-weight:300;text-transform:uppercase;letter-spacing:.16em;color:var(--star)}
+.t-the{display:block;font-size:.27em;letter-spacing:.52em;line-height:1;margin:0 0 .5em .12em}
+/* a ruled line with a mono label, as in a survey logbook */
+.rule{display:flex;justify-content:space-between;align-items:baseline;gap:8px 24px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:13px;font:400 11px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.rule > :first-child{color:var(--star)}
+.rule h2,.rule h3{font:inherit;letter-spacing:inherit}
+.tick{flex:none;width:13px;height:10px;fill:none;stroke:var(--amber);stroke-width:1.4}
+.more{font:500 11px/1.5 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--star);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:5px;text-decoration-thickness:1px;transition:text-decoration-color .5s var(--ease)}
+.more:hover{text-decoration-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:1.1em;border:1px solid var(--accent);color:var(--accent);font:500 12px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;padding:18px 26px 17px;transition:background-color .6s var(--ease),color .6s var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--accent);color:var(--on-accent)}
+
+/* ── buying: a plain verb first, the series' voice second ──────────────────────
+   .buy--solid is a book's main button. .buy--line is a quieter one. When RETAIL in
+   dark.js holds a shop link the engine adds .is-live: solid, with a lit halo. An
+   edition that is not on sale yet is a .chip, which is not a button at all. */
+.buy{display:inline-flex;flex-direction:column;justify-content:center;gap:6px;max-width:100%;padding:16px 24px 15px;border:1px solid var(--buy);color:var(--buy);text-decoration:none;text-align:left;transition:background-color .5s var(--ease),border-color .5s var(--ease),color .5s var(--ease),box-shadow .6s var(--ease)}
+.buy-verb{display:flex;align-items:center;justify-content:space-between;gap:1.2em;font:500 13px/1.3 var(--sans);letter-spacing:.17em;text-transform:uppercase}
+.buy-verb::after{content:"\2192";flex:none;letter-spacing:0;font-size:1.15em;line-height:1}
+.buy-sub{font:400 10.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.buy--solid,.buy.is-live{background:var(--buy);color:var(--on-buy);box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(0,0,0,.18),0 18px 40px -22px rgba(var(--buy-halo),.75)}
+.buy--solid:hover,.buy--solid:focus-visible,.buy.is-live:hover,.buy.is-live:focus-visible{background:var(--buy-hi);border-color:var(--buy-hi)}
+.buy--line{background:rgba(var(--buy-halo),.09);box-shadow:inset 0 1px 0 rgba(var(--buy-halo),.28)}
+.buy--line:hover,.buy--line:focus-visible{background:var(--buy);color:var(--on-buy)}
+.buy:active{background:var(--buy-lo);border-color:var(--buy-lo);color:var(--on-buy);box-shadow:inset 0 2px 6px rgba(0,0,0,.35);transition-duration:.08s}
+.buy:focus-visible{outline:2px solid var(--star);outline-offset:4px}
+.buy.is-live{box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 0 0 4px rgba(var(--buy-halo),.2),0 0 44px rgba(var(--buy-halo),.4)}
+.buy.is-live .buy-sub::before{content:"Available now \00B7  "}
+.buy--lg{padding:19px 28px 18px}
+.buy--lg .buy-verb{font-size:14px}
+.buy--sm{padding:11px 14px 10px}
+.buy--sm .buy-verb{font-size:10.5px;letter-spacing:.13em;gap:.9em}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 13px 7px;border:1px solid var(--rule);border-radius:99px;font:400 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;border:1px solid currentColor}
+
+/* covers: the real jackets, on the void, with a faint edge-light */
+.cover{position:relative;display:block;margin:0}
+.cover img{width:100%;height:auto;box-shadow:0 0 0 1px rgba(217,160,91,.16),0 34px 90px -46px rgba(138,91,40,.55)}
+.cover::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 1px 1px 0 rgba(217,160,91,.34)}
+/* stills: one frame of each scene, in the markup, under its canvas from the first paint */
+.plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* the sky */
+.sky{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:0;background:var(--void);pointer-events:none;overflow:hidden}
+.sky--in{position:absolute;height:100%}
+.sky canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .9s var(--ease)}
+.still .sky canvas{transition:none}
+/* the still: one frame of this page's own sky, in place from the first paint. The live sky fades in over it */
+.sky-static{position:absolute;inset:0;background:var(--void) 50% 50%/cover no-repeat}
+
+/* the Murmur: page luminance, one overlay, one property */
+.breath{position:fixed;inset:0;z-index:80;pointer-events:none;background:#000;opacity:calc(.046 * var(--amp) * (1 - var(--murmur)));transition:opacity .16s linear}
+.still .breath{transition:none}
+/* archival grain */
+.grain{position:fixed;inset:0;z-index:81;pointer-events:none;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .92  0 0 0 0 .94  0 0 0 0 .97  0 0 0 .34 -.115'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* kindle: every reveal is a fade */
+.js:not(.still) [data-k]{opacity:0;transition:opacity .6s var(--ease) var(--d,0s)}
+.js:not(.still) [data-k].is-lit{opacity:1}
+
+/* nav */
+.nav{position:fixed;left:0;right:0;top:0;z-index:60;display:flex;justify-content:space-between;align-items:center;gap:18px;height:62px;padding:0 var(--edge);font:500 10.5px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;background:linear-gradient(to bottom,rgba(var(--scrim),.86),rgba(var(--scrim),.6) 42%,rgba(var(--scrim),.2) 78%,rgba(var(--scrim),0));transition:opacity .9s var(--ease)}
+.nav a{display:inline-block;padding:16px 0;color:var(--dim);text-decoration:none;transition:color .5s var(--ease)}
+.nav a:hover,.nav a[aria-current]{color:var(--star)}
+.nav .nav-home{color:var(--star)}
+.nav ul{display:flex;gap:clamp(16px,2.6vw,38px)}
+.nav .s{display:none}
+.js .nav.is-shy:not(.is-on):not(:focus-within){opacity:0;pointer-events:none}
+.nav[data-tone="blue"]{--scrim:7,19,30;--dim:#86A0B3}
+.nav[data-tone="bone"]{--scrim:232,226,214;--dim:#5F584D;--star:#141210}
+/* dark type passing under a pale bar ghosts through a soft scrim: on bone the bar is nearly solid */
+.nav[data-tone="bone"]{background:linear-gradient(to bottom,rgba(232,226,214,.98),rgba(232,226,214,.95) 72%,rgba(232,226,214,0))}
+@media (max-width:780px){.nav{font-size:10px;letter-spacing:.2em}.nav .l{display:none}.nav .s{display:inline}.nav ul{gap:0}.nav ul a{padding:16px 9px;min-width:30px;text-align:center}.nav ul li:last-child a{padding-right:0}}
+@media (max-width:350px){.nav .nav-author{display:none}}
+
+/* ── the dock: the persistent buy control ──────────────────────────────────────
+   A slim bar at the foot of the window once the first screen is behind you: the
+   book, a plain verb, and the door. It is chrome at the edge, so it never sits on
+   reading text, and the footer keeps clear of it. */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px var(--edge) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(var(--scrim),.94),rgba(var(--scrim),.78) 46%,rgba(var(--scrim),0));pointer-events:none;transition:opacity .9s var(--ease),visibility 0s}
+.dock > *{pointer-events:auto}
+.js .dock:not(.is-seen){opacity:0;visibility:hidden;pointer-events:none;transition:opacity .9s var(--ease),visibility 0s linear .9s}
+.dock-voice{font:400 10.5px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* the button the dock holds: the door is its icon, a true-black hole in the light, so the disc always comes with its plain words */
+.dock .dock-go{flex-direction:row;align-items:center;gap:15px;padding:8px 20px 8px 9px;min-width:0}
+.dock-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dock .buy-verb{font-size:12px;letter-spacing:.15em}
+.dock .buy-sub{font-size:9.5px}
+.dock-go.is-live .buy-sub::before{content:"Available now \00B7  "}
+.door{position:relative;flex:none;width:34px;height:34px;border-radius:50%}
+.door-disc{position:absolute;inset:0;border-radius:50%;background:#000;box-shadow:0 0 0 1px rgba(80,50,20,.55),0 0 0 calc(2px + 2px * var(--murmur)) rgba(255,236,204,calc(.18 + .3 * var(--murmur))),inset 0 2px 5px rgba(0,0,0,.9);transition:box-shadow .16s linear}
+.door-lens{position:absolute;left:-13px;top:-13px;width:60px;height:60px;transform:scale(calc(1 + .04 * var(--murmur)));fill:none;stroke:#2A1A08;stroke-linecap:round;transition:transform .16s linear}
+@media (max-width:700px){
+  .dock{padding-left:12px;padding-right:12px;gap:0}
+  .dock-voice{display:none}
+  .dock .dock-go{flex:1;padding:7px 16px 7px 8px;gap:12px}
+  .dock .buy-verb{font-size:11px;letter-spacing:.12em}
+  .door{width:30px;height:30px}
+  .door-lens{left:-11px;top:-11px;width:52px;height:52px}
+}
+
+/* obituary caption for a bright star */
+.obit{position:fixed;z-index:65;margin:0;padding:0 0 0 16px;font:400 10.5px/1.6 var(--mono);letter-spacing:.11em;color:var(--star);text-shadow:0 0 12px rgb(var(--scrim)),0 0 4px rgb(var(--scrim));pointer-events:none;opacity:0;transition:opacity .5s var(--ease)}
+.obit::before{content:"";position:absolute;left:0;top:.78em;width:9px;height:1px;background:var(--amber)}
+.obit.is-on{opacity:1}
+
+/* footer: the colophon (it keeps clear of the dock) */
+.foot{position:relative;z-index:1;background:var(--void);padding:0 var(--gut) calc(92px + env(safe-area-inset-bottom))}
+.foot-in{max-width:var(--max);margin:0 auto;border-top:1px solid var(--rule);padding:22px 0 0;display:grid;grid-template-columns:1fr auto;gap:10px 40px;align-items:baseline}
+.foot p{font:400 11px/1.8 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.foot a{color:var(--ink);text-decoration:none;transition:color .5s var(--ease)}
+.foot a:hover{color:var(--star)}
+.foot .foot-pub a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:4px}
+.foot-links{grid-column:1/-1;font-family:var(--sans) !important;font-weight:500 !important;letter-spacing:.22em !important;font-size:10.5px !important}
+.foot-links a{display:inline-block;padding:6px 0;margin-right:clamp(14px,2.2vw,30px)}
+@media (max-width:700px){.foot-in{grid-template-columns:1fr}}
+
+/* the door, large, where the page ends: a true-black disc; the shader bends the sky round it */
+.end-art{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.end-art canvas,.band-art canvas,.about-art canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s var(--ease)}
+.end-art canvas.is-on,.band-art canvas.is-on,.about-art canvas.is-on{opacity:1}
+.end-door{position:relative;z-index:1;width:clamp(104px,12vw,150px);aspect-ratio:1;margin:0 auto clamp(40px,7vh,72px)}
+.end-door i{position:absolute;inset:0;border-radius:50%;background:#000;border:1px solid rgba(217,160,91,calc(.4 + .55 * var(--murmur)));box-shadow:0 0 calc(18px + 44px * var(--murmur)) rgba(217,160,91,calc(.05 + .15 * var(--murmur)));transition:border-color .16s linear,box-shadow .16s linear}
+.end-door svg{position:absolute;inset:-38%;width:176%;height:176%;fill:none;stroke:var(--star);stroke-linecap:round;transform:scale(calc(1 + .03 * var(--murmur)))}
+.end-door.is-live svg{display:none}
+.go > *:not(.end-art),.end > *:not(.end-art){position:relative;z-index:1}
+
+/* a book is an object: a board, a spine, light across it */
+.book{position:relative;display:block;margin:0;transform:perspective(1500px) rotateY(15deg);transform-style:preserve-3d}
+.book img{width:100%;height:auto;box-shadow:0 44px 90px -46px rgba(var(--lift,138,91,40),var(--lift-a,.7))}
+.book::before{content:"";position:absolute;left:0;top:0;width:30px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#030405,#1b2129 46%,#0a0d11)}
+.book::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(104deg,rgba(255,255,255,.13) 0,rgba(255,255,255,0) 21%,rgba(0,0,0,0) 72%,rgba(0,0,0,.26) 100%);box-shadow:inset 1px 1px 0 rgba(217,160,91,.4);transition:opacity .6s var(--ease)}
+a.book:hover::after{opacity:.55}
+/* a glass plate: emulsion, a bevel, a second edge where the glass ends */
+.gp{position:relative;margin:0;aspect-ratio:1;overflow:hidden;background:#07090C center/cover no-repeat;box-shadow:0 0 0 1px rgba(233,238,244,.2),0 0 0 7px rgba(140,151,163,.07),0 0 0 8px rgba(233,238,244,.1),0 60px 100px -56px rgba(138,91,40,.75)}
+.gp canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s var(--ease)}
+.gp canvas.is-on{opacity:1}
+.gp::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.09),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 82%,rgba(255,255,255,.04))}
+.gp figcaption{position:absolute;left:14px;bottom:11px;z-index:1;font:400 9.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--star);text-shadow:0 0 8px #000}
+.sky-static{background-image:url(assets/scenes/sky-wide.webp);opacity:.5}
+@media (max-aspect-ratio:85/100){.sky-static{background-image:url(assets/scenes/sky-tall.webp)}}
+main{position:relative;z-index:1;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:110px var(--edge) 120px}
+.lost{max-width:var(--max)}
+.lost .rule{max-width:760px}
+.lost h1{margin-top:clamp(28px,5vh,52px);font:300 clamp(36px,6.4vw,92px)/1.08 var(--serif);color:var(--star);letter-spacing:-.01em}
+.lost p.say{margin-top:clamp(18px,3vh,30px);max-width:30em;font:italic 300 clamp(20px,2.1vw,27px)/1.4 var(--serif);color:var(--ink)}
+.lost .cta{margin-top:clamp(30px,5vh,52px)}
+.lost-more{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 26px}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><div class="sky-static"></div></div>
+<nav class="nav" data-nav aria-label="The Breathing Dark">
+  <a class="nav-home" href="index.html">The Breathing Dark</a>
+  <ul>
+    <li><a href="the-vanishing.html" aria-label="The Vanishing, book one"><span class="l">The Vanishing</span><span class="s" aria-hidden="true">I</span></a></li>
+    <li><a href="the-exhale.html" aria-label="The Exhale, book two"><span class="l">The Exhale</span><span class="s" aria-hidden="true">II</span></a></li>
+    <li><a href="the-outside.html" aria-label="The Outside, book three"><span class="l">The Outside</span><span class="s" aria-hidden="true">III</span></a></li>
+    <li><a class="nav-author" href="index.html#author">Author</a></li>
+  </ul>
+</nav>
+<main>
+  <div class="lost">
+    <header class="rule"><span>Entry not found · code 404</span><span>Cause: unknown · Witnesses: one</span></header>
+    <h1>Present on Tuesday.<br>Gone on Thursday.</h1>
+    <p class="say">No explosion, no remnant, no redirect. Whatever was at this address is not in the catalogue.</p>
+    <p class="cta"><a class="btn" href="index.html">Back under the sky <span aria-hidden="true">→</span></a></p>
+    <p class="lost-more"><a class="more" href="the-vanishing.html">The Vanishing</a><a class="more" href="the-exhale.html">The Exhale</a><a class="more" href="the-outside.html">The Outside</a></p>
+  </div>
+</main>
+<footer class="foot">
+  <div class="foot-in">
+    <p class="foot-links"><a href="index.html">The Breathing Dark</a><a href="the-vanishing.html">The Vanishing</a><a href="the-exhale.html">The Exhale</a><a href="the-outside.html">The Outside</a><a href="index.html#author">Author</a></p>
+    <p class="foot-pub">© A. P. Weiss 2026 · Published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a></p>
+    <p class="foot-rhythm">Background rhythm: 19 s · Unexplained.</p>
+  </div>
+</footer>
+<aside class="dock" data-dock aria-label="Buy the book">
+  <p class="dock-voice" aria-hidden="true">Marked the way you mark a door.</p>
+  <a class="dock-go buy buy--solid" data-buy="the-vanishing" href="https://orbandink.co.uk/en/books/the-vanishing/">
+    <span class="door" aria-hidden="true">
+      <svg class="door-lens" viewBox="0 0 92 92" focusable="false">
+        <circle cx="46" cy="46" r="31" stroke-width="1.3" stroke-dasharray="9 44 3 58 13 36 2 29.8" stroke-dashoffset="14" opacity=".55"/>
+        <circle cx="46" cy="46" r="36" stroke-width="1.1" stroke-dasharray="1.5 31 6 55 1 43 4 81.5" stroke-dashoffset="3" opacity=".38"/>
+      </svg>
+      <span class="door-disc"></span>
+    </span>
+    <span class="dock-txt"><span class="buy-sub">The Vanishing · Book one</span><span class="buy-verb" data-buy-verb>See the book at Orb &amp; Ink</span></span>
+  </a>
+</aside>
+<div class="breath" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<script type="module" onerror="document.documentElement.classList.remove('js')">
+import { boot } from './dark.js';
+boot({ page: '404', murmur: { period: 19, amp: 1 } });
+</script>
+</body>
+</html>

@@ -1,12 +1,17 @@
-<section class="hero">
-  <p class="hero-kicker kicker">{{KICKER}}</p>
-  <div class="hero-word-wrap">
-    <h1 class="hero-word" data-words="{{HERO_WORDS}}" data-glyphs="{{GLYPHS}}">{{HERO_WORD}}</h1>
+<section class="hero" data-hero data-stills="{{HERO_STILLS}}">
+  <div class="hero-stage" data-orb-stage>
+    <h1 class="hero-mark" data-words="{{HERO_WORDS}}" data-glyphs="{{GLYPHS}}"><span class="hm hm-a">{{HM_A}}</span> <span class="hm hm-amp">&amp;</span> <span class="hm hm-b">{{HM_B}}</span></h1>
+    {{CSS_ORB}}
   </div>
-  <div class="hero-foot">
-    <span class="mono-meta">{{T_TAGLINE}}</span>
-    <span class="mono-meta scroll-cue">{{T_SCROLL}}</span>
+  <div class="hero-base">
+    <p class="hero-kicker kicker"><i class="dot" aria-hidden="true"></i>{{T_HOUSE}}</p>
+    <p class="hero-lede">{{T_LEDE}}</p>
+    <div class="hero-cta">
+      <a class="btn btn--down" href="#worlds">{{T_CTA_WORLDS}}</a>
+      <a class="btn btn--glass" href="{{REL}}{{LANG}}/books/">{{T_CTA_BOOKS}}</a>
+    </div>
   </div>
+  <ul class="hero-roster" aria-label="{{T_ABOUT}}">{{HERO_ROSTER}}</ul>
 </section>
 
 <div class="ticker" aria-hidden="true">
@@ -16,42 +21,83 @@
   </div>
 </div>
 
-<section class="section" style="--accent-book:{{F_ACCENT}}">
-  <span class="sec-num" aria-hidden="true" data-plx>01</span>
-  <div class="sec-mark" data-reveal><span class="idx">01</span><span class="lbl" data-decode>{{T_FEATURED}}{{F_SERIES_META}}</span></div>
-  <div class="featured">
-    <div class="cover-col" data-reveal>
-      <div class="cover-box" data-fx data-book="{{F_ID}}" data-accent="{{F_ACCENT}}"{{F_PLATE}}>
-        <img src="{{REL}}{{F_COVER}}"{{F_SRCSET}} alt="{{F_COVER_ALT}}" width="800" height="1200" fetchpriority="high">
-        <span class="tick tk-a" aria-hidden="true"></span><span class="tick tk-b" aria-hidden="true"></span>
+<section class="section act now-sec" id="new">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{T_STATUS_OUT}}</p>
+    <h2 class="act-title" data-gather>{{T_NEW}}</h2>
+  </header>
+  <div class="now-grid">
+{{NOW_PANELS}}
+  </div>
+</section>
+
+<section class="passage" id="worlds" data-passage style="--n:{{PASS_N}}" aria-labelledby="pass-h">
+  <header class="act-head pass-intro" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{T_WORLDS}} · {{PASS_N}}</p>
+    <h2 class="act-title" data-gather id="pass-h">{{T_WORLDS_SUB}}</h2>
+  </header>
+  <div class="pass-track">
+    <div class="pass-sticky">
+      <ol class="pass-list">
+{{PASSAGE}}
+      </ol>
+      <span class="pass-lens" aria-hidden="true"></span>
+      <div class="pass-nav">
+        <button type="button" class="pass-btn pass-prev" aria-label="{{T_PASS_PREV}}"></button>
+        <span class="pass-rail" aria-hidden="true"></span>
+        <button type="button" class="pass-btn pass-next" aria-label="{{T_PASS_NEXT}}"></button>
+        <a class="pass-skip mono-meta" href="#index">{{T_PASS_SKIP}}</a>
       </div>
-      <div class="cover-reflect" aria-hidden="true"></div>
-    </div>
-    <div>
-      <h2 class="featured-title fx-erode" data-accent="{{F_ACCENT}}"><a href="{{F_URL}}">{{F_TITLE}}</a></h2>
-      <p class="tagline" data-reveal>{{F_TAGLINE}}</p>
-      <div class="data-strip mono-meta" data-reveal>
-{{F_DATA}}
-      </div>
-      <div class="meta-row" data-reveal>
-        <a class="btn" href="{{F_URL}}">{{F_CTA}}</a>
-{{F_WORLD_LINK}}      </div>
     </div>
   </div>
 </section>
 
-{{SERIES_SECTIONS}}
+<section class="section act" id="index">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{T_SERIES_ALL}} · {{PASS_N}}</p>
+  </header>
+  <ol class="windex">
+{{WORLD_INDEX}}
+  </ol>
+</section>
 
-<section class="section">
-  <span class="sec-num" aria-hidden="true" data-plx>{{ABOUT_NUM}}</span>
-  <div class="sec-mark" data-reveal><span class="idx">{{ABOUT_NUM}}</span><span class="lbl" data-decode>{{T_ABOUT_TEASER}}</span></div>
-  <div class="about-grid">
-    <div class="brand-plate" data-reveal><img src="{{REL}}assets/img/orb-and-ink-wordmark-lg.png" alt="{{SITE_NAME}}" loading="lazy"></div>
-    <div>
-      <div class="bio" data-reveal>
-        <p>{{AUTHORS_INTRO}}</p>
-      </div>
-      <a class="btn btn--ghost" href="{{REL}}{{LANG}}/about/" style="margin-top:28px" data-reveal>{{T_ABOUT}}</a>
+<section class="wall" id="shelf" aria-labelledby="wall-h">
+  <div class="wall-stage" data-wall>
+    <div class="wall-plane">
+{{COVER_WALL}}
     </div>
+    <span class="wall-light" aria-hidden="true"></span>
+  </div>
+  <div class="wall-copy">
+    <span class="wall-num" aria-hidden="true">{{N_BOOKS}}</span>
+    <div class="wall-text">
+      <h2 class="wall-title" id="wall-h" data-gather>{{T_WALL_TITLE}}</h2>
+      <p class="wall-sub">{{T_WALL_SUB}}</p>
+      <a class="btn btn--lg" href="{{REL}}{{LANG}}/books/">{{T_VIEW_ALL}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section act" id="formats">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{T_CTA_BOOKS}}</p>
+    <h2 class="act-title" data-gather>{{T_FORMATS}}</h2>
+  </header>
+  <div class="ways-grid">
+{{WAY_TILES}}
+  </div>
+</section>
+
+<section class="section act" id="bylines">
+  <header class="act-head" data-reveal>
+    <p class="act-kicker"><i class="dot" aria-hidden="true"></i>{{T_BYLINES}}</p>
+    <h2 class="act-title" data-gather>{{T_AUTHORS_TITLE}}</h2>
+    <p class="act-lede">{{AUTHORS_INTRO}}</p>
+  </header>
+  <div class="roster">
+{{ROSTER}}
+  </div>
+  <div class="meta-row meta-row--end" data-reveal>
+    <a class="btn btn--glass" href="{{REL}}{{LANG}}/about/">{{T_ABOUT}}</a>
   </div>
 </section>

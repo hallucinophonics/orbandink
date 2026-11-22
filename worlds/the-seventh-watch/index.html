@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1C1E21">
+<title>The Seventh Watch — a cycle in six books by Alexey Belenkiy</title>
+<meta name="description" content="The Seventh Watch, a cycle of six books by Alexey Belenkiy. Six civilisations wake, build, decay and are sung to sleep, each believing the Wheel is the order of the world. All six are realms aboard one ship.">
+<meta name="author" content="Alexey Belenkiy">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Seventh Watch">
+<meta property="og:title" content="The Seventh Watch — a cycle in six books by Alexey Belenkiy">
+<meta property="og:description" content="Six sleepers. One hull.">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Six lamps hanging in a dark hull, one of them lit and lighting a desert at dusk, with the words: The Seventh Watch.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..600;1,400..600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..600&amp;text=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%20.%2C%27%E2%80%99%C2%B7%E2%80%94%E2%80%93-%26%3A%3B%2F%28%29%E2%86%92%E2%86%90%E2%86%93%E2%86%91%2B%C2%A9&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..600&amp;family=Bodoni+Moda:opsz,wght@6..96,400..500&amp;family=Julius+Sans+One&amp;text=ABCDEFGHIJKLMNOPQRSTUVWXYZ%20.%2C%27%E2%80%99%C2%B7%E2%80%94-%26&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300..500&amp;family=Grenze+Gotisch:wght@400..600&amp;family=IM+Fell+English:ital@1&amp;text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.%2C%27%E2%80%99%C2%B7%E2%80%94-%26%3A%3B&amp;display=swap">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BookSeries","name":"The Seventh Watch","description":"Six civilisations live in cycles, each believing the Wheel is the natural order of the world. All six are sealed realms aboard a worldship twenty-eight thousand years into the dark.","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"},"genre":["Science fiction","Epic science fiction"],"inLanguage":"en","numberOfBooks":6,"hasPart":[{"@type":"Book","name":"The Early Dusk","position":1,"url":"the-early-dusk.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}},{"@type":"Book","name":"The Drained Sea","position":2,"url":"the-drained-sea.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}},{"@type":"Book","name":"The Continuous City","position":3,"url":"the-continuous-city.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}},{"@type":"Book","name":"The Slow Court","position":4,"url":"the-slow-court.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}},{"@type":"Book","name":"The Ingathering","position":5,"url":"the-ingathering.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}},{"@type":"Book","name":"The Far Shore","position":6,"url":"the-far-shore.html","author":{"@type":"Person","name":"Alexey Belenkiy"},"publisher":{"@type":"Organization","name":"Orb & Ink","url":"https://orbandink.co.uk/"}}]}</script>
+<style>
+/* ── The hull: constants ─────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;background:#1C1E21}
+:root{
+  --graphite:#1C1E21;--bone:#CFC9BE;--seam:#5A6570;--lit:#EFE6D2;
+  --ember:#B4552F;--silt:#6E8794;--brick:#A8763C;--oxblood:#6E2B33;--gold:#D9C48A;--shore:#7E9B86;
+  --frame:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --body:'EB Garamond','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --f1:'Cinzel','Trajan Pro','Times New Roman',serif;
+  --f2:'Cormorant','EB Garamond',Georgia,serif;
+  --f3:'Grenze Gotisch','EB Garamond',Georgia,serif;
+  --f4:'IM Fell English','EB Garamond',Georgia,serif;
+  --f5:'Bodoni Moda','Didot','Bodoni MT','Times New Roman',serif;
+  --f6:'Julius Sans One','Inter Tight','Helvetica Neue',sans-serif;
+  --gut:clamp(18px,4.4vw,64px);
+  --u:max(1vh,5px);--seam-y:calc(64*var(--u));
+  --ease:cubic-bezier(.3,.1,.2,1);
+}
+@supports (height:1svh){:root{--u:max(1svh,5px)}}
+body{margin:0;background:var(--graphite);color:var(--bone);font-family:var(--body);font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:clip}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lit);outline-offset:3px}
+::selection{background:rgba(207,201,190,.86);color:var(--graphite)}
+.vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.lab{margin:0;font:500 11px/1.3 var(--frame);letter-spacing:.22em;text-transform:uppercase;color:rgba(207,201,190,.66)}
+main{position:relative;z-index:1}
+
+/* ── The hull: plate metal, brushed along its length, seamed and riveted. Fixed; it never
+      changes while the realms pass. ── */
+.hull{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;--ln:rgba(0,0,0,.62);--hi:rgba(168,180,194,.2);background:
+  radial-gradient(ellipse 70% 46% at 22% 26%,rgba(140,152,166,.13),rgba(140,152,166,0) 70%),
+  radial-gradient(ellipse 70% 50% at 90% 100%,rgba(0,0,0,.42),rgba(0,0,0,0) 70%),
+  linear-gradient(180deg,#22252A 0,#1B1D21 52%,#15171A 100%)}
+.hull::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='512'%20height='512'%3E%3Cfilter%20id='n'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.0022%200.55'%20numOctaves='2'%20seed='6'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='matrix'%20values='0%200%200%200%200.74%200%200%200%200%200.79%200%200%200%200%200.86%200.8%200%200%200%20-0.34'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23n)'/%3E%3C/svg%3E");opacity:.24}
+/* the plate catches whatever light there is: a soft sheen that follows the pointer */
+.hull::after{content:"";position:absolute;inset:0;background:radial-gradient(46vmax circle at var(--hx,28%) var(--hy,22%),rgba(196,208,224,.075),rgba(196,208,224,.025) 42%,rgba(196,208,224,0) 70%);transition:background-position .6s}
+.hull-bays{position:absolute;inset:0 var(--gut);display:grid;grid-template-columns:repeat(6,1fr);counter-reset:bay}
+.hull-bays i{position:relative;border-left:1px solid var(--ln);box-shadow:inset 1px 0 0 var(--hi);counter-increment:bay}
+.hull-bays i:last-child{border-right:1px solid var(--ln);box-shadow:inset 1px 0 0 var(--hi),1px 0 0 var(--hi)}
+.hull-bays i::before{content:"";position:absolute;left:-5px;top:-96px;bottom:-96px;width:11px;background:radial-gradient(circle at 50% 6px,rgba(196,204,214,.62) 0,rgba(150,160,172,.5) 1.3px,rgba(0,0,0,.7) 2.4px,rgba(0,0,0,0) 3.4px) 0 0/11px 96px repeat-y;transform:translateY(var(--creep,0px))}
+.hull-bays i::after{content:counter(bay,decimal-leading-zero);position:absolute;left:10px;top:calc(var(--seam-y) + 11px);font:500 9px/1 var(--frame);letter-spacing:.16em;color:rgba(150,162,176,.5)}
+.hull.fwd .hull-bays,.hull.fwd .hull-arc,.hull.fwd .hull-seam{filter:brightness(calc(1 + .7*var(--fwd,0)))}
+.hull-seam{position:absolute;left:0;right:0;top:var(--seam-y);height:3px;margin-top:-1px;background:linear-gradient(to bottom,rgba(0,0,0,.7) 0,rgba(0,0,0,.7) 1px,rgba(176,188,202,.3) 1px,rgba(176,188,202,.3) 2px,rgba(0,0,0,0) 2px)}
+.hull-arc{position:absolute;left:50%;aspect-ratio:1;border:1px solid rgba(0,0,0,.45);box-shadow:0 1px 0 rgba(168,180,194,.1);border-radius:50%;transform:translateX(-50%)}
+.hull-arc.fl{width:calc(230% + 60vh);bottom:calc(100% - var(--seam-y))}
+.hull-arc.fl.b{width:calc(230% + 60vh + 40px);bottom:calc(100% - var(--seam-y) - 20px)}
+.hull-arc.va{width:calc(250% + 40vh);top:calc(8*var(--u))}
+.hull-arc.va.b{width:calc(250% + 40vh + 28px);top:calc(8*var(--u) - 14px)}
+
+/* The same ribs, drawn over every room: the sky is a picture standing in the hull, and the
+   joints show through it. The horizontal joint lies exactly on that room's horizon. */
+.ribs{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;--bw:calc((100% - 2*var(--gut))/6)}
+.ribs i{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(90deg,rgba(0,0,0,.24) 0,rgba(0,0,0,.24) 1px,rgba(230,224,212,.11) 1px)}
+.ribs i:nth-child(1){left:var(--gut)}
+.ribs i:nth-child(2){left:calc(var(--gut) + var(--bw))}
+.ribs i:nth-child(3){left:calc(var(--gut) + 2*var(--bw))}
+.ribs i:nth-child(4){left:calc(var(--gut) + 3*var(--bw))}
+.ribs i:nth-child(5){left:calc(var(--gut) + 4*var(--bw))}
+.ribs i:nth-child(6){left:calc(var(--gut) + 5*var(--bw))}
+.ribs i:nth-child(7){left:calc(100% - var(--gut) - 1px)}
+.ribs b{position:absolute;left:0;right:0;top:calc(var(--fy,.64)*100%);height:2px;margin-top:-1px;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0,rgba(0,0,0,.3) 1px,rgba(230,224,212,.2) 1px)}
+
+/* ── The frame: the hull's label strip ───────────────────────────── */
+.frame{position:absolute;inset:0 0 auto 0;z-index:60;height:56px;padding:0 var(--gut);display:flex;align-items:center;gap:clamp(12px,2vw,26px);font:500 11px/1 var(--frame);letter-spacing:.2em;text-transform:uppercase;color:rgba(207,201,190,.86);--lamp:#EFE6D2}
+.js .frame{position:fixed}
+.frame::before{content:"";position:absolute;inset:0 0 -26px 0;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,rgba(28,30,33,.86),rgba(28,30,33,.5) 58%,rgba(28,30,33,0));-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);-webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent);mask-image:linear-gradient(to bottom,#000 60%,transparent)}
+.frame.l:not(.past-hero)::before{display:none}
+.frame.on-light{color:rgba(28,30,33,.86)}
+.frame.on-light::before{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(to bottom,#D6D0C5 0,#D6D0C5 66%,rgba(214,208,197,0))}
+.frame a{color:inherit;text-decoration:none}
+.frame-home{margin-right:auto;display:inline-flex;align-items:center;gap:11px;min-height:44px;transition:opacity .6s}
+.frame-home svg{width:17px;height:17px;flex:none}
+.rail{display:flex;align-items:flex-start;height:34px;transition:opacity .6s}
+.rail a{position:relative;display:block;width:20px;height:34px;color:rgba(207,201,190,.45);transform:translateY(var(--ry,0px));transition:color .7s,transform 1.1s var(--ease)}
+.rail a svg{display:block;width:12px;height:30px;margin:0 auto;overflow:visible}
+.rail a:hover{color:rgba(207,201,190,.95)}
+.rail a.is-lit{color:var(--lamp);--lf:var(--lamp);--lc:#FFF8E6}
+.rail a.is-lit svg{filter:drop-shadow(0 0 6px var(--lamp))}
+.frame.all-lit .rail a{transform:none}
+.frame.on-light .rail a{color:rgba(28,30,33,.45)}
+.frame.on-light .rail a.is-lit{color:#1C1E21;--lf:#1C1E21;--lc:#CFC9BE}
+.frame.on-light .rail a.is-lit svg{filter:none}
+.frame.l:not(.past-hero) .rail,.frame.l:not(.past-hero) .frame-home{opacity:0;visibility:hidden}
+.frame .nar{display:none}
+@media (max-width:760px){
+  .frame{height:50px;font-size:10px;letter-spacing:.18em}
+  .frame .wide{display:none}.frame .nar{display:inline}
+}
+@media (max-width:359px){.frame{gap:10px}.frame-home .nar{display:none}}
+
+/* ── The lamp glyph (one symbol, used everywhere) ────────────────── */
+.lamp-g{display:block;overflow:visible}
+
+/* ── Buying. One shape everywhere: a solid plate, a plain verb, the series' voice beneath.
+      Coming = flat. Live (a RETAIL slot is filled) = the lamp in it is lit and it glows. ── */
+.buy{display:inline-grid;grid-template-columns:auto auto;justify-content:start;align-items:center;column-gap:13px;padding:12px 22px 11px 15px;background:var(--buy-bg,#EFE6D2);color:var(--buy-ink,#1C1E21);text-decoration:none;text-align:left;border-radius:2px;line-height:1.1;box-shadow:0 12px 26px -14px rgba(0,0,0,.75);transition:transform .25s,filter .25s,box-shadow .35s}
+.buy .lamp-g{grid-row:1/3;width:13px;height:33px;opacity:.62}
+.buy b{font:500 clamp(18px,1.4vw,21px)/1.1 var(--body);letter-spacing:.002em;white-space:nowrap}
+.buy small{grid-column:2;margin-top:5px;font:500 9.5px/1.2 var(--frame);letter-spacing:.18em;text-transform:uppercase;opacity:.74;white-space:nowrap}
+.buy{background-image:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 46%,rgba(0,0,0,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.25),0 12px 26px -14px rgba(0,0,0,.8)}
+.buy:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(0,0,0,.25),0 18px 30px -14px rgba(0,0,0,.85)}
+.buy:active{transform:translateY(1px);filter:brightness(.96);box-shadow:inset 0 2px 5px rgba(0,0,0,.35)}
+.buy:focus-visible,.ed-buy:focus-visible,.bar:focus-visible b{outline:2px solid var(--buy-ink,#1C1E21);outline-offset:-5px;box-shadow:0 0 0 3px var(--buy-bg,#EFE6D2),0 0 0 5px rgba(239,230,210,.5)}
+.buy.is-live{box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 0 0 4px var(--buy-halo,rgba(239,230,210,.2)),0 16px 40px -10px var(--buy-glow,rgba(239,230,210,.55))}
+.buy.is-live .lamp-g{opacity:1;--lf:currentColor;--lc:var(--buy-bg,#EFE6D2)}
+.buy.is-live b{font-weight:600}
+.buy.s{display:inline-flex;padding:9px 15px 8px;box-shadow:none}
+.buy.s b{font-size:16px}
+.more{display:inline-block;padding:10px 0 8px;font:500 10.5px/1 var(--frame);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;opacity:.86;white-space:nowrap}
+.more:hover{opacity:1;border-bottom-color:transparent}
+.acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+@media (max-width:359px){.buy{padding:10px 14px 9px 11px;column-gap:9px;max-width:100%}.buy b{font-size:16px}.buy small{font-size:8.5px;letter-spacing:.12em}}
+
+/* The persistent control: the book on screen and the plain verb. In the frame on wide
+   screens; a strip along the bottom edge on phones. Present once the hero has gone. */
+.bar{display:none}
+.js .bar{display:inline-flex;align-items:center;gap:11px;min-height:40px;text-decoration:none;transition:opacity .5s,visibility .5s,transform .5s var(--ease)}
+.frame:not(.past-hero) .bar{opacity:0;visibility:hidden;pointer-events:none}
+.bar-thumb{display:block;width:22px;height:34px;object-fit:cover;flex:none;box-shadow:0 0 0 1px rgba(207,201,190,.3)}
+.bar-t{white-space:nowrap}
+.bar b{display:block;padding:9px 13px 8px;background:var(--buy-bg,#EFE6D2);color:var(--buy-ink,#1C1E21);border-radius:2px;font:500 15.5px/1 var(--body);letter-spacing:0;text-transform:none;white-space:nowrap;transition:background .6s,color .6s,filter .25s}
+.bar:hover b{filter:brightness(1.08)}
+.bar.is-live b{font-weight:600;box-shadow:0 0 0 3px var(--buy-halo,rgba(239,230,210,.2)),0 6px 22px -4px var(--buy-glow,rgba(239,230,210,.55))}
+@media (min-width:761px){
+  .frame.on-light .bar:not([style*="--buy-bg"]) b{background:#1C1E21;color:#EFE6D2}
+  .frame.on-light .bar-thumb{box-shadow:0 0 0 1px rgba(28,30,33,.4)}
+}
+@media (max-width:1000px) and (min-width:761px){.bar-t{display:none}}
+@media (max-width:760px){
+  .js .bar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:12px;min-height:0;height:calc(56px + env(safe-area-inset-bottom));padding:0 var(--gut) env(safe-area-inset-bottom);background:rgba(24,26,29,.97);border-top:1px solid rgba(90,101,112,.9);color:#E6E0D5;font:500 10px/1.2 var(--frame);letter-spacing:.16em;text-transform:uppercase}
+  .frame:not(.past-hero) .bar{transform:translateY(100%)}
+  .bar-thumb{width:26px;height:40px}
+  .bar-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;font:400 17px/1.1 var(--body);letter-spacing:0;text-transform:none}
+  .bar b{padding:11px 15px 10px;font-size:16px}
+}
+
+/* ── Editions: six things you can pick up. A quiet chip while coming; a solid button when live. ── */
+.eds{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(18px,2.4vw,36px)}
+.eds-g h3{margin:0 0 10px;font:500 11px/1.3 var(--frame);letter-spacing:.22em;text-transform:uppercase;color:var(--eds-lab,rgba(207,201,190,.7))}
+.eds-g ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1vw,14px)}
+.ed{display:flex;flex-direction:column;min-width:0}
+.ed-art{position:relative;aspect-ratio:1;display:grid;place-items:center;overflow:hidden;background:var(--eds-box,#15171a);box-shadow:inset 0 0 0 1px rgba(207,201,190,.12)}
+.ed-art img{display:block}
+/* absolutely placed, so the percentage heights mean the same thing in Safari as in Chrome */
+.ed-ebook img,.ed-paper img,.ed-hard img{position:absolute;left:50%;top:50%;max-width:none;transform:translate(-50%,-50%)}
+.ed-sq img{width:100%;height:100%;object-fit:cover}
+.ed-ebook img{height:74%;width:auto;border-radius:5px;box-shadow:0 0 0 5px #0b0c0e,0 0 0 6px rgba(207,201,190,.4),0 14px 22px -8px rgba(0,0,0,.8)}
+.ed-paper img{height:80%;width:auto;transform:translate(-50%,-50%) rotate(-4deg);box-shadow:-2px 0 0 rgba(255,255,255,.14),6px 10px 18px -4px rgba(0,0,0,.8)}
+.ed-hard img{height:78%;width:auto;border-radius:1px 3px 3px 1px;box-shadow:0 0 0 2px #2b2622,4px 0 0 2px #2b2622,7px 2px 0 1px rgba(226,220,208,.75),8px 12px 20px -2px rgba(0,0,0,.85)}
+.ed-name{display:block;margin-top:11px;font-size:clamp(16px,1.3vw,19px);line-height:1.15}
+.ed-note{display:block;margin-top:2px;font-style:italic;font-size:14.5px;line-height:1.25;color:var(--eds-mute,rgba(207,201,190,.7))}
+.ed-state{align-self:flex-start;margin-top:9px;padding:5px 8px 4px;border:1px solid var(--eds-rule,rgba(207,201,190,.34));border-radius:2px;font:500 9px/1 var(--frame);letter-spacing:.2em;text-transform:uppercase;color:var(--eds-mute,rgba(207,201,190,.7))}
+.ed-buy{align-self:flex-start;margin-top:9px;padding:8px 12px 7px;background:var(--buy-bg,#EFE6D2);color:var(--buy-ink,#1C1E21);border-radius:2px;font:600 15px/1.1 var(--body);text-decoration:none;box-shadow:0 0 0 3px var(--buy-halo,rgba(239,230,210,.18)),0 8px 20px -8px var(--buy-glow,rgba(239,230,210,.5));transition:filter .25s,transform .25s}
+.ed-buy:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.ed.is-live .ed-art{box-shadow:inset 0 0 0 1px var(--buy-bg,#EFE6D2)}
+.eds-note{margin:18px 0 0;font-style:italic;font-size:16px;line-height:1.4;color:var(--eds-mute,rgba(207,201,190,.7))}
+@media (max-width:760px){
+  .eds{grid-template-columns:1fr;gap:24px 0}
+  .ed-name{font-size:15.5px}.ed-note{font-size:13px}
+  .ed-buy{font-size:14px;padding:7px 9px 6px}
+}
+
+/* ── Colophon, with the author's paragraph ───────────────────────── */
+.colophon{position:relative;background:rgba(28,30,33,.94);padding:clamp(54px,9vh,96px) var(--gut) calc(40px + env(safe-area-inset-bottom))}
+.colo-grid{display:grid;grid-template-columns:repeat(6,1fr);row-gap:26px;align-items:start}
+.colo-author{grid-column:1/4;margin:0;padding-right:clamp(0px,2vw,30px)}
+.colo-author .lab{margin-bottom:12px}
+.colo-author p{margin:0;font-size:clamp(19px,1.7vw,24px);line-height:1.32;color:#DDD7CC;text-wrap:pretty;max-width:30ch}
+.colo-col{grid-column:span 1;font:500 11px/1.9 var(--frame);letter-spacing:.2em;text-transform:uppercase;color:rgba(207,201,190,.66)}
+.colo-col.c2{grid-column:5/7}
+.colo-col b{display:block;font-weight:500;color:rgba(207,201,190,.92)}
+.colo-col a{text-decoration:none;border-bottom:1px solid rgba(207,201,190,.4);color:rgba(207,201,190,.92)}
+.colo-col a:hover{border-bottom-color:var(--bone)}
+.colo-foot{grid-column:1/-1;margin:clamp(20px,5vh,54px) 0 0;padding-top:16px;border-top:1px solid rgba(90,101,112,.7);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font:500 10px/1.6 var(--frame);letter-spacing:.2em;text-transform:uppercase;color:rgba(207,201,190,.56)}
+@media (max-width:760px){
+  .colo-author{grid-column:1/-1;padding:0}.colo-col.c2{grid-column:1/-1}
+  .js .colophon{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+}
+
+/* ── Arrivals (armed by the engine only) ─────────────────────────── */
+.rv{opacity:0;transform:translateY(16px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.001ms!important}
+}
+
+/* ── A room: one realm, built in light (light.js), with its book standing in it. The still
+      picture under the canvas is a frame of the same built scene. ── */
+.scene{position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 1.2s var(--ease);pointer-events:none}
+.scene.on{opacity:1}
+.realm{position:relative;height:clamp(560px,calc(78*var(--u)),780px);overflow:hidden;isolation:isolate;color:var(--bone);--fx:.70;--fy:.60;--zoom:1;--lx:var(--fx)}
+.realm.flip{--fx:.30}
+/* the room's own lamp, hung in the hull above its subject; the scene is lit from it */
+.r-lamp{position:absolute;z-index:0;left:calc(var(--lx)*100%);top:0;width:34px;margin-left:-17px;height:clamp(92px,16%,140px);display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.r-lamp::before{content:"";flex:1;width:2px;background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(190,170,120,.6) 50%,rgba(0,0,0,.4))}
+.r-lamp svg{flex:none;width:clamp(22px,2.3vw,32px);height:auto;aspect-ratio:48/120;overflow:visible}
+/* its glow is a gradient, not a filter: Safari draws a stray black block for filtered lamps here */
+.r-lamp::after{content:"";position:absolute;left:50%;bottom:-14px;width:110px;height:110px;margin-left:-55px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,224,165,.5),rgba(255,214,150,.16) 45%,rgba(255,214,150,0));pointer-events:none}
+.realm .art{position:absolute;inset:0;z-index:-3;overflow:hidden;background:#141517}
+.realm .art img{display:block;width:100%;height:100%;object-fit:cover;object-position:70% 50%}
+.realm.flip .art img{transform:scaleX(-1)}
+.realm .veil{position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(11,12,14,.82) 0,rgba(11,12,14,.58) 30%,rgba(11,12,14,0) 60%),
+  linear-gradient(to top,rgba(11,12,14,.6) 0,rgba(11,12,14,0) 38%),
+  linear-gradient(to bottom,rgba(11,12,14,.5) 0,rgba(11,12,14,0) 20%)}
+.realm.flip .veil{transform:scaleX(-1)}
+.realm::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),inset 0 2px 0 rgba(207,201,190,.10),inset 0 22px 30px -22px rgba(0,0,0,.8),inset 0 -22px 30px -22px rgba(0,0,0,.8)}
+.realm .in{position:absolute;z-index:1;left:var(--gut);bottom:clamp(30px,7.4%,62px);max-width:66%;display:grid;grid-template-columns:auto minmax(0,440px);grid-template-areas:"cover head" "cover txt";grid-template-rows:1fr auto;column-gap:clamp(22px,3vw,48px);align-items:end}
+.realm.flip .in{left:auto;right:var(--gut);grid-template-columns:minmax(0,440px) auto;grid-template-areas:"head cover" "txt cover"}
+.realm .head{grid-area:head}
+.realm .txt{grid-area:txt}
+/* the book: its real cover, whole, standing in its own realm */
+.cover{position:relative;display:block;aspect-ratio:970/1500;background:#15171a;border-radius:1px 3px 3px 1px;box-shadow:3px 0 0 -1px #cfc8b8,4px 1px 0 -1px #6f695c,5px 0 0 -1px #cfc8b8,6px 2px 0 -1px #57524a,30px 40px 56px -22px rgba(0,0,0,.95),0 3px 10px rgba(0,0,0,.55);transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.cover img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.cover::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.42) 0,rgba(255,255,255,.2) 1.3%,rgba(0,0,0,.2) 3.2%,rgba(0,0,0,0) 6.5%),linear-gradient(115deg,rgba(255,255,255,.14) 0,rgba(255,255,255,0) 30%,rgba(0,0,0,0) 62%,rgba(0,0,0,.26) 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+a.cover:hover{transform:translateY(-6px) rotate(-.6deg)}
+a.cover:active{transform:translateY(-1px)}
+.realm .cover{grid-area:cover;height:clamp(300px,calc(58*var(--u)),540px)}
+.realm .ord{margin:0 0 clamp(10px,1.6vh,18px);display:flex;align-items:center;gap:12px;font:500 11px/1 var(--frame);letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.realm .ord b{display:inline-grid;place-items:center;min-width:30px;height:30px;padding:0 7px;border:1px solid currentColor;border-radius:50%;font-weight:500;letter-spacing:.06em}
+.realm .title{margin:0;font-weight:400;color:#F3EDE2;text-wrap:balance;text-shadow:0 2px 30px rgba(6,6,7,.75)}
+.realm .hook{margin:clamp(14px,2.4vh,24px) 0 0;max-width:30ch;font-size:clamp(18px,1.55vw,23px);line-height:1.32;color:#EAE4D9;text-wrap:pretty;text-shadow:0 1px 16px rgba(6,6,7,.8)}
+.realm .acts{margin-top:clamp(16px,2.6vh,26px)}
+.realm .more{color:#E4DED3}
+@media (max-width:860px){
+  .realm{height:clamp(560px,calc(72*var(--u)),620px);--fx:.5;--fy:.44;--lx:.86}
+  .realm.flip{--fx:.5}
+  .r-lamp{height:74px}
+  .r-lamp svg{width:20px}
+  .realm .art img{object-position:50% 50%}
+  .realm .veil,.realm.flip .veil{transform:none;background:
+    linear-gradient(to bottom,rgba(11,12,14,.84) 0,rgba(11,12,14,.62) 20%,rgba(11,12,14,.3) 34%,rgba(11,12,14,0) 46%),
+    linear-gradient(to top,rgba(11,12,14,.94) 0,rgba(11,12,14,.86) 30%,rgba(11,12,14,.4) 48%,rgba(11,12,14,0) 62%)}
+  .realm .in,.realm.flip .in{left:var(--gut);right:var(--gut);top:66px;bottom:22px;max-width:none;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"head head" "cover txt";column-gap:16px}
+  .realm .head{align-self:start}
+  .realm .cover{height:auto;width:clamp(118px,38vw,170px)}
+  .realm .ord{margin-bottom:10px;font-size:10px}
+  .realm .ord b{min-width:26px;height:26px}
+  .realm .hook{margin-top:0;font-size:16.5px;line-height:1.3;max-width:none}
+  .realm .acts{margin-top:12px}
+  .realm .acts .more{display:none}
+  .realm .buy{padding:9px 14px 8px 11px;column-gap:9px;max-width:100%}
+  .realm .buy{grid-template-columns:auto}
+  .realm .buy .lamp-g{display:none}
+  .realm .buy b{font-size:16.5px;white-space:normal}
+  .realm .buy small{display:none}
+}
+@media (max-width:359px){.realm .hook{font-size:15px}.realm .buy b{font-size:15px}}
+
+/* ── The lamp hero: six lamps at different heights, one lit. The lit lamp is the sun of its
+      realm: where its light falls there is a world; where it does not, bare hull. ── */
+.hero{position:relative;height:calc(100*var(--u));min-height:560px;overflow:hidden;isolation:isolate;--fy:.64;--fx:.44;--zoom:1}
+.hero-art{position:absolute;inset:0;z-index:-3;background:#16181b}
+.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:0 64%}
+.hero-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(14,15,17,.5) 0,rgba(14,15,17,0) calc(13*var(--u)),rgba(14,15,17,0) calc(54*var(--u)),rgba(14,15,17,.46) calc(64*var(--u)),rgba(15,16,18,.84) calc(80*var(--u)),rgba(18,20,22,.95) 100%)}
+.lamps{position:absolute;inset:0 var(--gut);margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(6,1fr)}
+.lamps li{position:relative}
+.lamp{position:absolute;left:50%;top:0;width:64px;margin-left:-32px;height:calc(var(--h)*var(--u));display:flex;flex-direction:column;align-items:center;text-decoration:none;transform-origin:50% 0;animation:sway var(--sw,11s) ease-in-out infinite alternate}
+.lamp::before{content:"";flex:1;width:2px;background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(190,170,120,calc(.2 + .5*var(--rim,.3))) 50%,rgba(0,0,0,.4))}
+.lamp svg{flex:none;width:clamp(30px,3.5vw,52px);height:auto;aspect-ratio:48/120;overflow:visible;margin-top:-1px}
+.lamp:not(.lit) svg{opacity:calc(.5 + .5*var(--rim,.3));transition:opacity .6s,filter .6s}
+.lamp:not(.lit):hover svg,.lamp:not(.lit):focus-visible svg{opacity:1;filter:drop-shadow(0 0 14px rgba(239,230,210,.35))}
+.lamp.lit svg{filter:drop-shadow(0 0 14px rgba(255,226,170,.9)) drop-shadow(0 0 46px rgba(255,214,150,.55))}
+.lamp .n{position:absolute;top:calc(100% + 9px);left:50%;transform:translateX(-50%);font:500 9px/1 var(--frame);letter-spacing:.2em;color:rgba(207,201,190,.55)}
+.lamp .lbl{position:absolute;top:calc(100% + 27px);left:50%;transform:translateX(-50%);white-space:nowrap;font:italic 400 17px/1 var(--body);color:rgba(230,224,213,.95);opacity:0;transition:opacity .5s}
+.lamp:hover .lbl,.lamp:focus-visible .lbl{opacity:1}
+.lamp.lit .n{color:rgba(255,236,200,.9)}
+.hero.away .lamp{animation-play-state:paused}
+@keyframes sway{from{transform:rotate(-.6deg)}to{transform:rotate(.6deg)}}
+.hero-copy{position:absolute;left:var(--gut);right:var(--gut);top:calc(64*var(--u));bottom:0}
+.kick{position:absolute;left:0;bottom:clamp(18px,4vh,40px);margin:0;font:500 11px/1.5 var(--frame);letter-spacing:.24em;text-transform:uppercase;color:rgba(232,226,214,.86);text-shadow:0 1px 14px rgba(8,6,5,.9)}
+.kick b{font-weight:500;color:#F4EEE2}
+.series{margin:calc(2.4*var(--u)) 0 0 -.04em;font:400 clamp(46px,7.9vw,128px)/.9 var(--body);letter-spacing:-.022em;color:#F1EBDF;white-space:nowrap}
+.tagline{margin:calc(1.5*var(--u)) 0 0;font:italic 400 clamp(21px,2.5vw,38px)/1.1 var(--body);color:rgba(226,219,206,.92)}
+.hero-acts{margin-top:calc(2.6*var(--u))}
+.hero-acts .more{color:#DAD4C9}
+.cue{position:absolute;right:0;bottom:clamp(18px,4vh,40px);display:inline-flex;align-items:center;gap:12px;font:500 11px/1.5 var(--frame);letter-spacing:.2em;text-transform:uppercase;color:rgba(207,201,190,.74);text-decoration:none;white-space:nowrap}
+.cue i{display:block;width:1px;height:30px;background:linear-gradient(to bottom,rgba(207,201,190,.9),rgba(207,201,190,0));transform-origin:50% 0;animation:drop 2.8s var(--ease) infinite}
+.hero.away .cue i{animation-play-state:paused}
+@keyframes drop{0%{transform:scaleY(0)}55%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@media (max-height:700px) and (min-width:861px){.series{font-size:clamp(46px,min(7.9vw,14vh),128px)}.tagline{font-size:clamp(20px,3.6vh,30px)}}
+@media (max-width:860px){
+  .hero{--fx:.58}
+  .hero-art img{object-position:50% 64%}
+  .lamp{width:44px;margin-left:-22px;height:calc(var(--h)*var(--u)*.84)}
+  .lamp svg{width:26px}
+  .lamp .lbl{display:none}
+  .kick{font-size:9.5px;letter-spacing:.2em;white-space:nowrap}
+  .series{margin-top:calc(2*var(--u));font-size:min(11.7vw,64px)}
+  .tagline{font-size:21px}
+  .hero-acts{margin-top:calc(2.2*var(--u))}
+  .hero-acts .more{display:none}
+  .cue{display:none}
+}
+@media (max-width:359px){.series{font-size:11.2vw}.kick{letter-spacing:.12em;font-size:9px}}
+
+/* ── The Wheel, in three lines: a brass wheel with six small skies under glass ── */
+.creed{position:relative;overflow:hidden;padding:calc(7*var(--u)) var(--gut) calc(8*var(--u));background:linear-gradient(to bottom,rgba(18,20,22,.96),rgba(22,24,27,.82) 30%,rgba(22,24,27,.82) 70%,rgba(18,20,22,.96))}
+.creed-grid{display:grid;grid-template-columns:repeat(6,1fr);align-items:center}
+/* no filter here: Safari draws a stray black block for a filtered parent of turning children */
+.wheelobj{grid-column:1/4;justify-self:center;position:relative;z-index:0;width:min(80%,calc(44*var(--u)),420px);aspect-ratio:1}
+.wheelobj::before{content:"";position:absolute;z-index:-1;inset:4% 2% -8% 2%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.62),rgba(0,0,0,.34) 62%,rgba(0,0,0,0))}
+.wo-ring{position:absolute;inset:9%;border-radius:50%;background:conic-gradient(from 210deg,#5E4E30,#D9C28A 9%,#8C7648 20%,#F0DCA6 31%,#6C5A38 44%,#C9B078 58%,#5A4A2E 70%,#E6D09A 82%,#7A673F 92%,#5E4E30);-webkit-mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 17px),#000 calc(100% - 16px));mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 17px),#000 calc(100% - 16px))}
+.wo-ring.in{inset:27%;opacity:.8;-webkit-mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 6px),#000 calc(100% - 5px));mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 6px),#000 calc(100% - 5px))}
+.wo-turn{position:absolute;inset:0;transform:rotate(var(--rot,0deg))}
+.wo-spoke{position:absolute;left:50%;top:50%;width:41%;height:7px;margin-top:-3.5px;transform-origin:0 50%;transform:rotate(calc(var(--k)*60deg - 90deg));background:linear-gradient(to bottom,#F0DCA6,#A08A56 38%,#5A4A2E 100%);box-shadow:0 2px 3px rgba(0,0,0,.5)}
+.wo-words{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+/* six small worlds, each a sky and a ground in its own inks, drawn in CSS: no picture is used */
+.wo-med{position:absolute;left:50%;top:50%;width:23%;aspect-ratio:1;margin:-11.5% 0 0 -11.5%;transform:rotate(calc(var(--k)*60deg)) translateY(-178%) rotate(calc(var(--k)*-60deg - var(--rot,0deg)));border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px #141516,0 0 0 7px #B79C62,0 0 0 8px #54452B,0 12px 18px rgba(0,0,0,.7)}
+.wo-med::before{content:"";position:absolute;inset:0;background:var(--sky)}
+.wo-med::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 60% 44% at 32% 22%,rgba(255,255,255,.34),rgba(255,255,255,0) 70%),radial-gradient(circle at 50% 50%,rgba(0,0,0,0) 54%,rgba(0,0,0,.55) 100%),linear-gradient(rgba(20,22,26,.36),rgba(20,22,26,.36))}
+.wo-med.lit{box-shadow:0 0 0 3px #141516,0 0 0 7px #EBD59C,0 0 0 8px #6C5A38,0 0 34px 6px rgba(255,222,160,.5),0 12px 18px rgba(0,0,0,.7)}
+.wo-med.lit::after{background:radial-gradient(ellipse 60% 44% at 32% 22%,rgba(255,255,255,.34),rgba(255,255,255,0) 70%),radial-gradient(circle at 50% 50%,rgba(0,0,0,0) 54%,rgba(0,0,0,.55) 100%)}
+.m1{--sky:radial-gradient(circle at 34% 56%,#FFE9B8 0,#FFE9B8 7%,rgba(255,170,90,.7) 9%,rgba(255,150,70,0) 34%),linear-gradient(to bottom,#3d2a3a 0,#b85a34 40%,#f0a85a 62%,#7a2f18 62.5%,#3a1410 100%)}
+.m2{--sky:linear-gradient(to bottom,#5f7684 0,#c9d2d2 58%,#4f8490 62%,#b9bdb6 67%,#8e979a 100%)}
+.m3{--sky:linear-gradient(100deg,rgba(0,0,0,0) 56%,#ffcf80 60%,#e8641e 64%,#f0903a 100%),linear-gradient(to bottom,#0b0706 0,#3a1a0e 62%,#120a08 62.5%,#060404 100%)}
+.m4{--sky:radial-gradient(circle at 50% 66%,#ffd28a 0,#ffd28a 4%,rgba(255,180,100,0) 16%),linear-gradient(90deg,#05080f 0,rgba(5,8,15,0) 30%,rgba(5,8,15,0) 70%,#05080f 100%),linear-gradient(to bottom,#07101f 0,#1f3a66 62%,#0a1322 100%)}
+.m5{--sky:linear-gradient(to bottom,rgba(0,0,0,0) 62%,#0c1116 62.5%),linear-gradient(90deg,#c9783a 0,#f3dc9c 50%,#5f8fa6 100%)}
+.m6{--sky:radial-gradient(circle at 52% 62%,#fff4cf 0,#fff4cf 5%,rgba(255,220,150,0) 30%),linear-gradient(to bottom,#4a4670 0,#c9a7b4 40%,#f6dc9a 62%,#6f8f84 63%,#2a3a3a 100%)}
+.wo-hub{position:absolute;left:50%;top:50%;width:13%;aspect-ratio:1;margin:-6.5% 0 0 -6.5%;border-radius:50%;background:radial-gradient(circle at 36% 30%,#F6E6B8 0,#C9B078 30%,#7A673F 72%,#4A3D25 100%);box-shadow:0 0 0 2px #2c2416,0 4px 10px rgba(0,0,0,.7),inset 0 -3px 6px rgba(0,0,0,.4)}
+.wo-hub::after{content:"";position:absolute;inset:36%;border-radius:50%;background:radial-gradient(circle at 40% 34%,#3a3020,#15120c)}
+.wo-pin{position:absolute;left:50%;top:1.5%;width:0;height:0;margin-left:-8px;border:8px solid rgba(0,0,0,0);border-top:13px solid #E6D09A;border-bottom:0}
+.creed-lines{grid-column:4/7;margin:0;padding:0 0 0 clamp(0px,2vw,34px);list-style:none}
+.creed-lines li{padding:clamp(13px,2.2vh,22px) 0;border-top:1px solid rgba(0,0,0,.6);box-shadow:inset 0 1px 0 rgba(168,180,194,.16);font-size:clamp(22px,2.6vw,38px);line-height:1.14;letter-spacing:-.008em;color:#EAE4D9;text-wrap:balance}
+.creed-lines li:first-child{border-top:0;box-shadow:none}
+@media (max-width:860px){
+  .creed{padding:44px var(--gut) 40px}
+  .creed-grid{grid-template-columns:104px minmax(0,1fr);column-gap:18px;align-items:center}
+  .wheelobj{grid-column:1;width:150px;margin-left:-58px}
+  .wo-ring{-webkit-mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 7px),#000 calc(100% - 6px));mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 7px),#000 calc(100% - 6px))}
+  .wo-ring.in{-webkit-mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 3px),#000 calc(100% - 2px));mask:radial-gradient(closest-side,rgba(0,0,0,0) calc(100% - 3px),#000 calc(100% - 2px))}
+  .wo-spoke{height:3px;margin-top:-1.5px}
+  .wo-words{display:none}
+  .wo-med{box-shadow:0 0 0 2px #141516,0 0 0 4px #B79C62,0 6px 9px rgba(0,0,0,.7)}
+  .wo-med.lit{box-shadow:0 0 0 2px #141516,0 0 0 4px #EBD59C,0 0 16px 3px rgba(255,222,160,.5)}
+  .wo-pin{display:none}
+  .creed-lines{grid-column:2;padding:0}
+  .creed-lines li{padding:11px 0;font-size:19.5px;line-height:1.18}
+}
+
+/* ── Six rooms. Between two rooms the hull itself shows: a riveted bulkhead. ── */
+.rooms{position:relative;display:grid;row-gap:34px;padding:34px 0}
+.rooms .realm + .realm::before{content:"";position:absolute;left:var(--gut);right:var(--gut);top:-20px;height:7px;z-index:4;background:radial-gradient(circle,rgba(196,204,214,.62) 0,rgba(150,160,172,.5) 1.3px,rgba(0,0,0,.7) 2.4px,rgba(0,0,0,0) 3.4px) 0 0/calc(100%/36) 7px repeat-x}
+.rooms .realm{overflow:visible}
+.rooms .realm .art,.rooms .realm .ribs{overflow:hidden}
+@media (max-width:860px){.rooms{row-gap:26px;padding:26px 0}.rooms .realm + .realm::before{top:-16px;background-size:calc(100%/18) 7px}}
+
+/* ── THE SEAM, and the six books. Six skies stand in six bays of one hull, each under its own
+      lamp, and one riveted line runs through all six horizons. ── */
+.seam{position:relative;isolation:isolate;--fy:.70;--buy-bg:#EFE6D2;--buy-ink:#1C1E21}
+.seam-band{position:relative;height:clamp(250px,calc(50*var(--u)),480px);overflow:hidden;background:#131416}
+.seam-band picture img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+.seam-band::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(14,15,17,.5) 0,rgba(14,15,17,0) 22%,rgba(14,15,17,0) 70%,rgba(20,22,25,.6) 86%,#191b1e 100%)}
+.s-lamps{position:absolute;z-index:2;inset:0 var(--gut);margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(6,1fr)}
+.s-lamps li{position:relative}
+.s-lamp{position:absolute;left:50%;top:0;width:34px;margin-left:-17px;height:24%;display:flex;flex-direction:column;align-items:center}
+.s-lamp::before{content:"";flex:1;width:2px;background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(190,170,120,.6) 50%,rgba(0,0,0,.4))}
+.s-lamp span{position:relative;flex:none;display:block;width:clamp(22px,2.4vw,34px);aspect-ratio:48/120}
+.s-lamp svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.s-lamp .on{filter:drop-shadow(0 0 10px rgba(255,226,170,.9)) drop-shadow(0 0 34px rgba(255,214,150,.5));transition:opacity 1.1s var(--ease)}
+.js .seam:not(.still) .s-lamps li:not(.is-lit) .on{opacity:0}
+.seam-line{position:absolute;z-index:2;left:0;right:0;top:70%;height:0}
+.seam-line::before{content:"";position:absolute;left:0;right:0;top:-2px;height:4px;background:linear-gradient(to bottom,#0c0d0e 0,#0c0d0e 1px,#F1EADC 1px,#F1EADC 3px,rgba(0,0,0,.6) 3px);box-shadow:0 0 18px rgba(241,234,220,.5)}
+.seam-line .rivets{position:absolute;left:var(--gut);right:var(--gut);top:-11px;height:22px;background:
+  radial-gradient(circle,#F6EFD9 0,#C9B078 1.4px,#3a301c 2.4px,rgba(0,0,0,0) 3.2px) 0 0/calc(100%/36) 7px repeat-x,
+  radial-gradient(circle,#F6EFD9 0,#C9B078 1.4px,#3a301c 2.4px,rgba(0,0,0,0) 3.2px) 0 100%/calc(100%/36) 7px repeat-x}
+.seam-say{position:absolute;z-index:3;left:var(--gut);right:var(--gut);bottom:clamp(8px,2.4vh,22px);margin:0;font:italic 400 clamp(21px,2.6vw,40px)/1.1 var(--body);letter-spacing:-.006em;color:#F1EBDF;text-shadow:0 2px 22px rgba(8,8,9,.95)}
+.seam-body{position:relative;padding:clamp(34px,6vh,60px) var(--gut) clamp(44px,8vh,80px);background:linear-gradient(to bottom,#191b1e 0,rgba(22,24,27,.86) 30%,rgba(20,22,25,.9) 100%)}
+/* Book One leads: its cover large, lit, with the one solid button; the other five stand after it */
+.start{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:clamp(26px,4.4vw,72px)}
+.start .cover{height:clamp(340px,calc(52*var(--u)),480px)}
+.start-txt{padding-bottom:6px}
+.start .so,.shelf .so{margin:0;font:500 10px/1.2 var(--frame);letter-spacing:.22em;text-transform:uppercase;color:var(--acc)}
+.start h2{margin:10px 0 0 -.03em;font:400 clamp(44px,6.6vw,104px)/.92 var(--body);letter-spacing:-.022em;color:#F1EBDF}
+.start-txt p.say{margin:clamp(14px,2.4vh,24px) 0 0;max-width:34ch;font-size:clamp(18px,1.6vw,24px);line-height:1.32;color:rgba(230,224,213,.95);text-wrap:pretty}
+.start-txt .acts{margin-top:clamp(16px,2.6vh,26px)}
+.shelf{margin:clamp(40px,7.4vh,74px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,1fr);column-gap:clamp(14px,2vw,30px)}
+.shelf li,.start{position:relative}
+.shelf li{display:flex;flex-direction:column;align-items:flex-start}
+/* each book under its own lamp: a pool of that realm's light on the hull behind it */
+.shelf li::before,.start::before{content:"";position:absolute;z-index:-1;left:-8%;right:-8%;top:-12%;height:90%;background:radial-gradient(ellipse 50% 50% at 50% 46%,color-mix(in srgb,var(--acc) 34%,transparent),rgba(0,0,0,0) 70%);opacity:.7}
+.start::before{left:-6%;right:auto;width:min(60%,620px);top:-16%;height:120%}
+.shelf .cover{width:100%}
+.shelf .so{margin-top:20px}
+.shelf .st{margin:6px 0 12px;font:400 clamp(19px,1.9vw,28px)/1.08 var(--body);color:#EFE9DE}
+.shelf .st a{text-decoration:none}
+.shelf .st a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.shelf .buy{margin-top:auto}
+.chron-end{margin:clamp(30px,6vh,60px) 0 0;font-style:italic;font-size:clamp(17px,1.4vw,20px);color:rgba(207,201,190,.74)}
+@media (max-width:860px){
+  .seam-band{height:236px}
+  .s-lamp{width:22px;margin-left:-11px}
+  .s-lamp span{width:18px}
+  .seam-line .rivets{background-size:calc(100%/24) 7px,calc(100%/24) 7px}
+  .seam-say{font-size:23px}
+  .seam-body{padding:28px var(--gut) 44px}
+  .start{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"h h" "c t";column-gap:16px;align-items:end}
+  .start h2{grid-area:h;margin:6px 0 18px;font-size:min(12.4vw,60px)}
+  .start .cover{grid-area:c;height:auto;width:clamp(124px,40vw,180px)}
+  .start-txt{grid-area:t;display:contents}
+  .start .so{grid-area:h;align-self:start;display:none}
+  .start-txt p.say{grid-area:t;align-self:start;margin:0;font-size:16.5px;line-height:1.3}
+  .start-txt .acts{grid-area:t;align-self:end;margin:0}
+  .start .buy{padding:9px 14px 8px 11px;grid-template-columns:auto;max-width:100%}
+  .start .buy .lamp-g{display:none}
+  .start .buy b{font-size:16.5px;white-space:normal}
+  .start .buy small{display:none}
+  .shelf{grid-template-columns:repeat(2,1fr);gap:30px 16px;margin-top:38px}
+  .shelf .so{margin-top:13px;font-size:9px;letter-spacing:.16em}
+  .shelf .st{margin:4px 0 10px;font-size:19px}
+  .chron-end{margin-top:28px;font-size:16px}
+}
+
+/* ── I · Karsk · ember · Cinzel · light: a day that fails early ── */
+.r1{--ink:#F0A87F;--buy-bg:#D8703F;--buy-ink:#1B0E08;--buy-halo:rgba(216,112,63,.3);--buy-glow:rgba(216,112,63,.65)}
+.r1 .veil{background:
+  linear-gradient(90deg,rgba(20,9,8,.80) 0,rgba(20,9,8,.52) 30%,rgba(20,9,8,0) 58%),
+  linear-gradient(to top,rgba(16,8,7,.66) 0,rgba(16,8,7,0) 38%),
+  linear-gradient(to bottom,rgba(16,9,10,.5) 0,rgba(16,9,10,0) 20%)}
+.r1 .title{font-family:var(--f1);font-weight:500;font-size:clamp(30px,4.3vw,62px);line-height:1.06;letter-spacing:.14em;text-transform:uppercase}
+@media (max-width:860px){.r1{--fx:.40;--zoom:.8}.r1 .title{font-size:min(7.2vw,34px);letter-spacing:.13em}}
+
+/* ── II · the Sound · blue-grey · Cormorant · light: a sea drawing down its shore ── */
+.r2{--ink:#C4D8E2;--buy-bg:#9DB8C6;--buy-ink:#0F1A20;--buy-halo:rgba(157,184,198,.28);--buy-glow:rgba(157,184,198,.6)}
+.r2 .veil{background:
+  linear-gradient(90deg,rgba(14,24,31,.88) 0,rgba(16,28,36,.72) 36%,rgba(18,30,38,.3) 60%,rgba(20,32,40,0) 76%),
+  linear-gradient(to top,rgba(14,22,28,.66) 0,rgba(14,22,28,0) 40%),
+  linear-gradient(to bottom,rgba(14,22,28,.5) 0,rgba(14,22,28,0) 22%)}
+.r2 .title{font-family:var(--f2);font-style:italic;font-weight:300;font-size:clamp(50px,7.2vw,108px);line-height:.84;letter-spacing:-.012em}
+.r2 .head{padding-bottom:.4em}
+@media (max-width:860px){.r2 .title{font-size:min(14vw,66px)}.r2 .head{padding-bottom:0}}
+
+/* ── III · the Kiln · brick-and-gilt · Grenze Gotisch · light: the wall of dawn, walking in ── */
+.r3{--ink:#EBBE82;--buy-bg:#D09A4A;--buy-ink:#17110A;--buy-halo:rgba(208,154,74,.28);--buy-glow:rgba(208,154,74,.6)}
+.r3 .veil{background:
+  linear-gradient(90deg,rgba(12,7,6,.72) 0,rgba(12,7,6,.4) 30%,rgba(12,7,6,0) 56%),
+  linear-gradient(to top,rgba(10,6,5,.6) 0,rgba(10,6,5,0) 36%),
+  linear-gradient(to bottom,rgba(10,6,5,.5) 0,rgba(10,6,5,0) 20%)}
+.r3 .title{font-family:var(--f3);font-weight:500;font-size:clamp(44px,6vw,92px);line-height:.9;letter-spacing:.005em}
+@media (max-width:860px){.r3 .title{font-size:min(12.6vw,60px)}}
+
+/* ── IV · the Still · oxblood · IM Fell English · light: time gone thick ── */
+.r4{--ink:#E9AAB1;--buy-bg:#EDE4D6;--buy-ink:#4A1820;--buy-halo:rgba(237,228,214,.22);--buy-glow:rgba(237,228,214,.5)}
+.r4 .veil{background:
+  linear-gradient(90deg,rgba(50,16,22,.84) 0,rgba(40,13,18,.6) 30%,rgba(20,8,12,0) 60%),
+  linear-gradient(to top,rgba(8,10,20,.6) 0,rgba(8,10,20,0) 38%),
+  linear-gradient(to bottom,rgba(8,10,20,.5) 0,rgba(8,10,20,0) 20%)}
+.r4 .title{font-family:var(--f4);font-style:italic;font-size:clamp(44px,6.2vw,94px);line-height:.96;letter-spacing:-.006em}
+.r4 .hook::first-line{font-variant-caps:small-caps;letter-spacing:.035em}
+@media (max-width:860px){.r4 .title{font-size:min(12.8vw,60px)}
+  .r4 .veil{background:
+    linear-gradient(to bottom,rgba(40,12,18,.86) 0,rgba(34,11,16,.6) 20%,rgba(30,10,15,.3) 34%,rgba(11,12,14,0) 46%),
+    linear-gradient(to top,rgba(11,12,18,.94) 0,rgba(11,12,18,.86) 30%,rgba(11,12,18,.4) 48%,rgba(11,12,18,0) 62%)}}
+
+/* ── V · the Ingathering · white-gold · Bodoni Moda · light: two lights coming into step ── */
+.r5{--ink:#EAD7A0;--buy-bg:#D9C48A;--buy-ink:#1A1710;--buy-halo:rgba(217,196,138,.26);--buy-glow:rgba(217,196,138,.6)}
+.r5 .veil{background:
+  linear-gradient(90deg,rgba(18,10,8,.82) 0,rgba(18,10,8,.56) 30%,rgba(18,10,8,0) 58%),
+  linear-gradient(to top,rgba(10,10,12,.62) 0,rgba(10,10,12,0) 38%),
+  linear-gradient(to bottom,rgba(10,10,12,.5) 0,rgba(10,10,12,0) 20%)}
+.r5 .title{font-family:var(--f5);font-weight:400;font-size:clamp(28px,3.7vw,56px);line-height:1.04;letter-spacing:.07em;text-transform:uppercase}
+.r5 .title .a{display:block;font-size:.5em;letter-spacing:.5em;margin-bottom:.35em;color:var(--ink)}
+@media (max-width:860px){.r5 .title{font-size:min(8.3vw,40px)}}
+
+/* ── VI · the Far Shore · pale green · Julius Sans One · light: a sky of cells that fails along the seam ── */
+.r6.flip{--fx:.46;--lx:.34}
+.r6{--ink:#C5DFCD;--buy-bg:#A9C9B3;--buy-ink:#10201A;--buy-halo:rgba(169,201,179,.26);--buy-glow:rgba(169,201,179,.6)}
+.r6 .veil{background:
+  linear-gradient(90deg,rgba(16,10,16,.86) 0,rgba(16,10,16,.70) 34%,rgba(16,10,16,.26) 56%,rgba(16,10,16,0) 70%),
+  linear-gradient(to top,rgba(10,11,13,.6) 0,rgba(10,11,13,0) 34%),
+  linear-gradient(to bottom,rgba(10,11,13,.5) 0,rgba(10,11,13,0) 20%)}
+.r6 .title{font-family:var(--f6);font-size:clamp(26px,3.5vw,52px);line-height:1.12;letter-spacing:.3em;text-transform:uppercase;color:#F4EFE4}
+@media (max-width:860px){.r6.flip{--fx:.5;--lx:.86}.r6 .title{font-size:min(7vw,34px);letter-spacing:.26em}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="g-brass" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#4A3C22"/><stop offset=".3" stop-color="#C9B078"/><stop offset=".46" stop-color="#F6E6B8"/><stop offset=".62" stop-color="#B89C60"/><stop offset="1" stop-color="#3E321C"/></linearGradient><radialGradient id="g-glass" cx=".36" cy=".3" r=".85"><stop offset="0" stop-color="#9AA9B8" stop-opacity=".34"/><stop offset=".5" stop-color="#3C444C" stop-opacity=".3"/><stop offset="1" stop-color="#0C0D0F" stop-opacity=".66"/></radialGradient><radialGradient id="g-fire" cx=".5" cy=".56" r=".62"><stop offset="0" stop-color="#FFFDF0"/><stop offset=".3" stop-color="#FFEAB4"/><stop offset=".62" stop-color="#F3C672"/><stop offset="1" stop-color="#C98338" stop-opacity=".7"/></radialGradient><symbol id="lantern" viewBox="0 0 48 120"><rect x="22.8" y="0" width="2.4" height="10.4" fill="url(#g-brass)"/><circle cx="24" cy="13" r="3.3" fill="none" stroke="url(#g-brass)" stroke-width="2"/><path d="M15 17.6h18l4.2 9.4H10.8z" fill="url(#g-brass)"/><path d="M9.6 27h28.8v3.6H9.6z" fill="#3A2F1B"/><path d="M9.6 27h28.8v1H9.6z" fill="#E6D09A" fill-opacity=".7"/><path d="M12.4 30.6C3 46 3.4 70 24 96 44.6 70 45 46 35.6 30.6z" fill="url(#g-glass)" stroke="url(#g-brass)" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 46c-3.2 6-3.8 10.8 0 17 3.8-6.2 3.2-11 0-17z" fill="#0B0C0E" fill-opacity=".55"/><path d="M15.4 36.4C10.2 48 10.6 62 17 76" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2.2" stroke-linecap="round"/><path d="M33.6 40c3 8 2.8 17-.6 26" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1.2" stroke-linecap="round"/><rect x="22.9" y="96" width="2.2" height="6.4" fill="url(#g-brass)"/><path d="M24 102l4.6 6.4L24 115l-4.6-6.6z" fill="url(#g-brass)"/></symbol><symbol id="lantern-lit" viewBox="0 0 48 120"><rect x="22.8" y="0" width="2.4" height="10.4" fill="url(#g-brass)"/><circle cx="24" cy="13" r="3.3" fill="none" stroke="url(#g-brass)" stroke-width="2"/><path d="M15 17.6h18l4.2 9.4H10.8z" fill="url(#g-brass)"/><path d="M9.6 27h28.8v3.6H9.6z" fill="#3A2F1B"/><path d="M9.6 27h28.8v1H9.6z" fill="#E6D09A" fill-opacity=".7"/><path d="M12.4 30.6C3 46 3.4 70 24 96 44.6 70 45 46 35.6 30.6z" fill="url(#g-fire)" stroke="url(#g-brass)" stroke-width="1.6" stroke-linejoin="round"/><path d="M24 40c-5 9.4-5.8 17 0 26.6 5.8-9.6 5-17.2 0-26.6z" fill="#FFFEF6"/><path d="M15.4 36.4C10.2 48 10.6 62 17 76" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.2" stroke-linecap="round"/><path d="M33.6 40c3 8 2.8 17-.6 26" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1.2" stroke-linecap="round"/><rect x="22.9" y="96" width="2.2" height="6.4" fill="url(#g-brass)"/><path d="M24 102l4.6 6.4L24 115l-4.6-6.6z" fill="url(#g-brass)"/></symbol><symbol id="lamp" viewBox="0 0 24 60"><path d="M12 0v5.4" fill="none" stroke="currentColor"/><circle cx="12" cy="7" r="1.6" fill="none" stroke="currentColor"/><path d="M8.2 9.4h7.6l1.7 3.4H6.5z" fill="currentColor"/><path d="M7 12.8C2.4 20.6 2.6 33.4 12 46 21.4 33.4 21.6 20.6 17 12.8z" fill="var(--lf,none)" stroke="currentColor" stroke-linejoin="round"/><path d="M12 22.4c-2.5 4.1-3 7.4 0 11.8 3-4.4 2.5-7.7 0-11.8z" fill="var(--lc,none)"/><path d="M12 46v4.4" fill="none" stroke="currentColor"/><path d="M12 50.4l1.9 2.7-1.9 2.7-1.9-2.7z" fill="currentColor"/></symbol><symbol id="wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor"/><circle cx="12.00" cy="2.50" r="1.9" fill="currentColor"/><circle cx="20.23" cy="7.25" r="1.9" fill="currentColor"/><circle cx="20.23" cy="16.75" r="1.9" fill="currentColor"/><circle cx="12.00" cy="21.50" r="1.9" fill="currentColor"/><circle cx="3.77" cy="16.75" r="1.9" fill="currentColor"/><circle cx="3.77" cy="7.25" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></symbol></defs></svg>
+<div class="hull" aria-hidden="true" data-hull><div class="hull-arc va"></div><div class="hull-arc va b"></div><div class="hull-arc fl"></div><div class="hull-arc fl b"></div><div class="hull-bays"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hull-seam"></div></div>
+<div class="frame l" data-frame>
+<a class="frame-home" href="#top" aria-label="The Seventh Watch: back to the top"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wheel"/></svg><span class="wide">The Seventh Watch</span></a>
+<nav class="rail" aria-label="The six books"><a href="#the-early-dusk" data-rail style="--ry:6px" aria-label="Book 1: The Early Dusk"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a><a href="#the-drained-sea" data-rail style="--ry:-3px" aria-label="Book 2: The Drained Sea"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a><a href="#the-continuous-city" data-rail style="--ry:2px" aria-label="Book 3: The Continuous City"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a><a href="#the-slow-court" data-rail style="--ry:-6px" aria-label="Book 4: The Slow Court"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a><a href="#the-ingathering" data-rail style="--ry:4px" aria-label="Book 5: The Ingathering"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a><a href="#the-far-shore" data-rail style="--ry:-1px" aria-label="Book 6: The Far Shore"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg></a></nav>
+<a class="bar" data-bar data-buy="the-early-dusk" data-kind="bar" href="https://orbandink.co.uk/en/books/the-early-dusk/" aria-label="See The Early Dusk at Orb &amp; Ink"><img class="bar-thumb" data-bar-thumb src="assets/thumb-the-early-dusk.jpg" alt="" width="120" height="186"><span class="bar-t" data-bar-title>The Early Dusk</span><b data-verb>See the book</b></a>
+</div>
+<main>
+
+<!-- 1 · THE LAMP HERO — six lamps at different heights, one lit. The canvas is the lamp's light and the
+     world it finds (built in light.js); the picture beneath it is a still frame of the same scene. -->
+<header class="hero" id="top" data-hero>
+<div class="hero-art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/hero-phone.jpg"><img src="assets/scenes/hero.jpg" alt="" width="1280" height="720" fetchpriority="high" decoding="async"></picture><canvas class="scene" data-scene="hero"></canvas></div>
+<div class="hero-veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<ol class="lamps" aria-label="The six books">
+<li><a class="lamp lit" href="#the-early-dusk" style="--h:50;--sw:13s;--rim:1" aria-label="Book 1: The Early Dusk"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg><span class="n" aria-hidden="true">I</span><span class="lbl" aria-hidden="true">The Early Dusk</span></a></li>
+<li><a class="lamp" href="#the-drained-sea" style="--h:29;--sw:17s;--rim:0.62" aria-label="Book 2: The Drained Sea"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><span class="n" aria-hidden="true">II</span><span class="lbl" aria-hidden="true">The Drained Sea</span></a></li>
+<li><a class="lamp" href="#the-continuous-city" style="--h:39;--sw:11s;--rim:0.42" aria-label="Book 3: The Continuous City"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><span class="n" aria-hidden="true">III</span><span class="lbl" aria-hidden="true">The Continuous City</span></a></li>
+<li><a class="lamp" href="#the-slow-court" style="--h:22;--sw:19s;--rim:0.3" aria-label="Book 4: The Slow Court"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><span class="n" aria-hidden="true">IV</span><span class="lbl" aria-hidden="true">The Slow Court</span></a></li>
+<li><a class="lamp" href="#the-ingathering" style="--h:44;--sw:15s;--rim:0.22" aria-label="Book 5: The Ingathering"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><span class="n" aria-hidden="true">V</span><span class="lbl" aria-hidden="true">The Ingathering</span></a></li>
+<li><a class="lamp" href="#the-far-shore" style="--h:33;--sw:12s;--rim:0.16" aria-label="Book 6: The Far Shore"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><span class="n" aria-hidden="true">VI</span><span class="lbl" aria-hidden="true">The Far Shore</span></a></li>
+</ol>
+<div class="hero-copy">
+<p class="kick">A cycle in six books by <b>Alexey Belenkiy</b></p>
+<h1 class="series">The Seventh Watch</h1>
+<p class="tagline">Six sleepers. One hull.</p>
+<div class="acts hero-acts"><a class="buy" data-buy="the-early-dusk" data-kind="one" href="https://orbandink.co.uk/en/books/the-early-dusk/" aria-label="See The Early Dusk at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See Book One at Orb &amp; Ink</b><small>The Early Dusk &middot; begin here</small></a><a class="more" href="#books">See all six books</a></div>
+<a class="cue" href="#wheel"><span>Six realms</span><i aria-hidden="true"></i></a>
+</div>
+</header>
+
+<!-- 2 · THE WHEEL, in three lines -->
+<section class="creed" id="wheel" aria-labelledby="creed-h">
+<div class="creed-grid">
+<h2 class="vh" id="creed-h">The Wheel</h2>
+<div class="wheelobj" data-dial aria-hidden="true"><div class="wo-ring"></div><div class="wo-ring in"></div><div class="wo-turn"><i class="wo-spoke" style="--k:0"></i><i class="wo-spoke" style="--k:1"></i><i class="wo-spoke" style="--k:2"></i><i class="wo-spoke" style="--k:3"></i><i class="wo-spoke" style="--k:4"></i><i class="wo-spoke" style="--k:5"></i><svg class="wo-words" viewBox="0 0 400 400" fill="none"><defs><path id="ph" d="M200 97a103 103 0 1 1 -.01 0"/></defs><text font-family="Inter Tight,Helvetica Neue,Arial,sans-serif" font-weight="500" font-size="11" fill="#E6D8B0" fill-opacity=".9"><textPath href="#ph" textLength="640" lengthAdjust="spacing">WAKE · BUILD · CONQUER · DECAY · SLEEP ·</textPath></text></svg><span class="wo-med m1 lit" style="--k:0"></span><span class="wo-med m2" style="--k:1"></span><span class="wo-med m3" style="--k:2"></span><span class="wo-med m4" style="--k:3"></span><span class="wo-med m5" style="--k:4"></span><span class="wo-med m6" style="--k:5"></span></div><div class="wo-hub"></div><i class="wo-pin"></i></div>
+<ol class="creed-lines">
+<li>An age wakes, builds, conquers and decays.</li>
+<li>Robed strangers arrive, singing, and the age is sung down to sleep.</li>
+<li>Six realms keep this Wheel. Each believes it is the whole world.</li>
+</ol>
+</div>
+</section>
+
+<!-- 3 · SIX ROOMS — an age, in one screen. Each scene is built in light.js; each book is its real cover. -->
+<div class="rooms" data-rooms>
+<section class="realm r1" id="the-early-dusk" data-realm aria-labelledby="t-the-early-dusk">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book1-place-phone.jpg"><img src="assets/scenes/book1-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="karsk"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-early-dusk.html" aria-label="The Early Dusk: about the book"><img src="assets/cover-the-early-dusk-760.jpg" srcset="assets/cover-the-early-dusk-760.jpg 491w, assets/cover-the-early-dusk.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Early Dusk: a caravan of riders crossing red desert beneath a leaning slab of stone, the sea showing through the gap behind it." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>I</b>Karsk</p><h2 class="title" id="t-the-early-dusk">The Early Dusk</h2></div>
+<div class="txt"><p class="hook">The age is ending early, and only one man has noticed the singers are ahead of schedule.</p><div class="acts"><a class="buy" data-buy="the-early-dusk" data-kind="book" href="https://orbandink.co.uk/en/books/the-early-dusk/" aria-label="See The Early Dusk at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Enter the age</small></a><a class="more" href="the-early-dusk.html">About the book<span class="vh">: The Early Dusk</span></a></div></div>
+</div>
+</section>
+
+<section class="realm r2 flip" id="the-drained-sea" data-realm aria-labelledby="t-the-drained-sea">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book2-place-phone.jpg"><img src="assets/scenes/book2-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="sound" data-flip="1"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-drained-sea.html" aria-label="The Drained Sea: about the book"><img src="assets/cover-the-drained-sea-760.jpg" srcset="assets/cover-the-drained-sea-760.jpg 491w, assets/cover-the-drained-sea.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Drained Sea: three robed figures on a stone stair above a dry seabed, where a vast creature lies overgrown with coral." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>II</b>The Sound</p><h2 class="title" id="t-the-drained-sea">The Drained Sea</h2></div>
+<div class="txt"><p class="hook">A civilisation inherits a seabed and learns why the water left.</p><div class="acts"><a class="buy" data-buy="the-drained-sea" data-kind="book" href="https://orbandink.co.uk/en/books/the-drained-sea/" aria-label="See The Drained Sea at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Walk the seabed</small></a><a class="more" href="the-drained-sea.html">About the book<span class="vh">: The Drained Sea</span></a></div></div>
+</div>
+</section>
+
+<section class="realm r3" id="the-continuous-city" data-realm aria-labelledby="t-the-continuous-city">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book3-place-phone.jpg"><img src="assets/scenes/book3-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="kiln"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-continuous-city.html" aria-label="The Continuous City: about the book"><img src="assets/cover-the-continuous-city-760.jpg" srcset="assets/cover-the-continuous-city-760.jpg 491w, assets/cover-the-continuous-city.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Continuous City: a dark terraced city pricked with lamps, facing a wall of fire-coloured light, with walkers crossing a high bridge." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>III</b>The Kiln</p><h2 class="title" id="t-the-continuous-city">The Continuous City</h2></div>
+<div class="txt"><p class="hook">A city that has never once stopped building, and the survey that finds its outer wall.</p><div class="acts"><a class="buy" data-buy="the-continuous-city" data-kind="book" href="https://orbandink.co.uk/en/books/the-continuous-city/" aria-label="See The Continuous City at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Join the march</small></a><a class="more" href="the-continuous-city.html">About the book<span class="vh">: The Continuous City</span></a></div></div>
+</div>
+</section>
+
+<section class="realm r4 flip" id="the-slow-court" data-realm aria-labelledby="t-the-slow-court">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book4-place-phone.jpg"><img src="assets/scenes/book4-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="still" data-flip="1"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-slow-court.html" aria-label="The Slow Court: about the book"><img src="assets/cover-the-slow-court-760.jpg" srcset="assets/cover-the-slow-court-760.jpg 491w, assets/cover-the-slow-court.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Slow Court: robed figures climbing a stair to a lamplit court, under a vast curtain of slowly falling drops." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>IV</b>The Still</p><h2 class="title" id="t-the-slow-court">The Slow Court</h2></div>
+<div class="txt"><p class="hook">A case older than the nation trying it, and the clerk who reads the first filing.</p><div class="acts"><a class="buy" data-buy="the-slow-court" data-kind="book" href="https://orbandink.co.uk/en/books/the-slow-court/" aria-label="See The Slow Court at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Approach the court</small></a><a class="more" href="the-slow-court.html">About the book<span class="vh">: The Slow Court</span></a></div></div>
+</div>
+</section>
+
+<section class="realm r5" id="the-ingathering" data-realm aria-labelledby="t-the-ingathering">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book5-place-phone.jpg"><img src="assets/scenes/book5-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="ingather"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-ingathering.html" aria-label="The Ingathering: about the book"><img src="assets/cover-the-ingathering-760.jpg" srcset="assets/cover-the-ingathering-760.jpg 491w, assets/cover-the-ingathering.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Ingathering: many terraced lands divided by a deep channel of machinery, with a crowd crossing one narrow bridge." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>V</b>All realms</p><h2 class="title" id="t-the-ingathering"><span class="a">The</span> Ingathering</h2></div>
+<div class="txt"><p class="hook">The stagger fails. Two ages meet for the first time in twenty-eight thousand years.</p><div class="acts"><a class="buy" data-buy="the-ingathering" data-kind="book" href="https://orbandink.co.uk/en/books/the-ingathering/" aria-label="See The Ingathering at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Come to the meeting</small></a><a class="more" href="the-ingathering.html">About the book<span class="vh">: The Ingathering</span></a></div></div>
+</div>
+</section>
+
+<section class="realm r6 flip" id="the-far-shore" data-realm aria-labelledby="t-the-far-shore">
+<div class="art" aria-hidden="true"><picture><source media="(max-width:860px)" srcset="assets/scenes/book6-place-phone.jpg"><img src="assets/scenes/book6-place.jpg" alt="" width="960" height="480" decoding="async" loading="lazy"></picture><canvas class="scene" data-scene="shore" data-flip="1"></canvas></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="ribs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+<span class="r-lamp" aria-hidden="true"><svg class="" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span>
+<div class="in">
+<a class="cover" href="the-far-shore.html" aria-label="The Far Shore: about the book"><img src="assets/cover-the-far-shore-760.jpg" srcset="assets/cover-the-far-shore-760.jpg 491w, assets/cover-the-far-shore.jpg 970w" sizes="(max-width:760px) 42vw, 24vw" width="970" height="1500" alt="Cover of The Far Shore: figures at a balustrade between two immense walls, looking out at a dawn sky over water." decoding="async" loading="lazy"></a>
+<div class="head"><p class="ord"><b>VI</b>The seam</p><h2 class="title" id="t-the-far-shore">The Far Shore</h2></div>
+<div class="txt"><p class="hook">What the Perennial was crossing toward, and who decided.</p><div class="acts"><a class="buy" data-buy="the-far-shore" data-kind="book" href="https://orbandink.co.uk/en/books/the-far-shore/" aria-label="See The Far Shore at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See the book at Orb &amp; Ink</b><small>Go on to the shore</small></a><a class="more" href="the-far-shore.html">About the book<span class="vh">: The Far Shore</span></a></div></div>
+</div>
+</section>
+</div>
+
+<!-- 4 · THE SEAM, and the six books: the way to buy them -->
+<section class="seam" id="books" data-seam aria-labelledby="books-h">
+<div class="seam-band">
+<picture aria-hidden="true"><source media="(max-width:860px)" srcset="assets/scenes/closing-phone.jpg"><img src="assets/scenes/closing.jpg" alt="" width="960" height="300" loading="lazy" decoding="async"></picture>
+<canvas class="scene" data-scene="seam" aria-hidden="true"></canvas>
+<ol class="s-lamps" aria-hidden="true"><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li><li><span class="s-lamp"><span><svg class="off" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern"/></svg><svg class="on" viewBox="0 0 48 120" aria-hidden="true"><use href="#lantern-lit"/></svg></span></span></li></ol>
+<div class="seam-line" aria-hidden="true"><div class="rivets"></div></div>
+<p class="seam-say">The horizon is a seam.</p>
+</div>
+<div class="seam-body">
+<div class="start" style="--acc:#D8703F">
+<a class="cover" href="the-early-dusk.html" aria-label="The Early Dusk: about the book"><img src="assets/cover-the-early-dusk-760.jpg" srcset="assets/cover-the-early-dusk-760.jpg 491w, assets/cover-the-early-dusk.jpg 970w" sizes="(max-width:860px) 40vw, 24vw" width="970" height="1500" alt="Cover of The Early Dusk: a caravan of riders crossing red desert beneath a leaning slab of stone, the sea showing through the gap behind it." decoding="async" loading="lazy"></a>
+<div class="start-txt">
+<p class="so">I &middot; Karsk &middot; The Early Dusk</p>
+<h2 id="books-h">Start with Book&nbsp;One.</h2>
+<p class="say">Six realms, each certain it is the whole world. One ship, twenty-eight thousand years into the dark.</p>
+<div class="acts"><a class="buy" data-buy="the-early-dusk" data-kind="one" href="https://orbandink.co.uk/en/books/the-early-dusk/" aria-label="See The Early Dusk at Orb &amp; Ink"><svg class="lamp-g" viewBox="0 0 24 60" aria-hidden="true"><use href="#lamp"/></svg><b data-verb>See Book One at Orb &amp; Ink</b><small>The Early Dusk &middot; enter the age</small></a></div>
+</div>
+</div>
+<ol class="shelf" start="2" aria-label="The other five books, in order">
+<li style="--acc:#8FA9B6"><a class="cover" href="the-drained-sea.html" aria-label="The Drained Sea: about the book"><img src="assets/cover-the-drained-sea-760.jpg" srcset="assets/cover-the-drained-sea-760.jpg 491w, assets/cover-the-drained-sea.jpg 970w" sizes="(max-width:860px) 44vw, 18vw" width="970" height="1500" alt="Cover of The Drained Sea: three robed figures on a stone stair above a dry seabed, where a vast creature lies overgrown with coral." decoding="async" loading="lazy"></a><p class="so">II &middot; The Sound</p><h3 class="st"><a href="the-drained-sea.html">The Drained Sea</a></h3><a class="buy s" data-buy="the-drained-sea" data-kind="short" href="https://orbandink.co.uk/en/books/the-drained-sea/" aria-label="See The Drained Sea at Orb &amp; Ink"><b data-verb>See the book</b></a></li>
+<li style="--acc:#C9934F"><a class="cover" href="the-continuous-city.html" aria-label="The Continuous City: about the book"><img src="assets/cover-the-continuous-city-760.jpg" srcset="assets/cover-the-continuous-city-760.jpg 491w, assets/cover-the-continuous-city.jpg 970w" sizes="(max-width:860px) 44vw, 18vw" width="970" height="1500" alt="Cover of The Continuous City: a dark terraced city pricked with lamps, facing a wall of fire-coloured light, with walkers crossing a high bridge." decoding="async" loading="lazy"></a><p class="so">III &middot; The Kiln</p><h3 class="st"><a href="the-continuous-city.html">The Continuous City</a></h3><a class="buy s" data-buy="the-continuous-city" data-kind="short" href="https://orbandink.co.uk/en/books/the-continuous-city/" aria-label="See The Continuous City at Orb &amp; Ink"><b data-verb>See the book</b></a></li>
+<li style="--acc:#C25664"><a class="cover" href="the-slow-court.html" aria-label="The Slow Court: about the book"><img src="assets/cover-the-slow-court-760.jpg" srcset="assets/cover-the-slow-court-760.jpg 491w, assets/cover-the-slow-court.jpg 970w" sizes="(max-width:860px) 44vw, 18vw" width="970" height="1500" alt="Cover of The Slow Court: robed figures climbing a stair to a lamplit court, under a vast curtain of slowly falling drops." decoding="async" loading="lazy"></a><p class="so">IV &middot; The Still</p><h3 class="st"><a href="the-slow-court.html">The Slow Court</a></h3><a class="buy s" data-buy="the-slow-court" data-kind="short" href="https://orbandink.co.uk/en/books/the-slow-court/" aria-label="See The Slow Court at Orb &amp; Ink"><b data-verb>See the book</b></a></li>
+<li style="--acc:#D9C48A"><a class="cover" href="the-ingathering.html" aria-label="The Ingathering: about the book"><img src="assets/cover-the-ingathering-760.jpg" srcset="assets/cover-the-ingathering-760.jpg 491w, assets/cover-the-ingathering.jpg 970w" sizes="(max-width:860px) 44vw, 18vw" width="970" height="1500" alt="Cover of The Ingathering: many terraced lands divided by a deep channel of machinery, with a crowd crossing one narrow bridge." decoding="async" loading="lazy"></a><p class="so">V &middot; All realms</p><h3 class="st"><a href="the-ingathering.html">The Ingathering</a></h3><a class="buy s" data-buy="the-ingathering" data-kind="short" href="https://orbandink.co.uk/en/books/the-ingathering/" aria-label="See The Ingathering at Orb &amp; Ink"><b data-verb>See the book</b></a></li>
+<li style="--acc:#9DBBA6"><a class="cover" href="the-far-shore.html" aria-label="The Far Shore: about the book"><img src="assets/cover-the-far-shore-760.jpg" srcset="assets/cover-the-far-shore-760.jpg 491w, assets/cover-the-far-shore.jpg 970w" sizes="(max-width:860px) 44vw, 18vw" width="970" height="1500" alt="Cover of The Far Shore: figures at a balustrade between two immense walls, looking out at a dawn sky over water." decoding="async" loading="lazy"></a><p class="so">VI &middot; The seam</p><h3 class="st"><a href="the-far-shore.html">The Far Shore</a></h3><a class="buy s" data-buy="the-far-shore" data-kind="short" href="https://orbandink.co.uk/en/books/the-far-shore/" aria-label="See The Far Shore at Orb &amp; Ink"><b data-verb>See the book</b></a></li>
+</ol>
+<p class="chron-end">The cycle is complete in six books.</p>
+</div>
+</section>
+
+<footer class="colophon">
+<div class="colo-grid">
+<div class="colo-author"><h2 class="lab">The author</h2><p><b style="font-weight:500">Alexey Belenkiy</b> writes the literary line at Orb &amp; Ink: long forms, exact physics, patient time.</p></div>
+<p class="colo-col c2"><b>Colophon</b>Published by <a href="https://orbandink.co.uk/">Orb &amp; Ink</a><br>Set in EB Garamond and Inter Tight</p>
+<div class="colo-foot"><span>&copy; Alexey Belenkiy</span><span>Six sleepers. One hull.</span></div>
+</div>
+</footer>
+</main>
+<script type="module">
+import { boot } from './wheel.js';
+boot({ page: 'landing' });
+</script>
+</body>
+</html>

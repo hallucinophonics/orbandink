@@ -1,21 +1,28 @@
-<nav class="crumbs" aria-label="{{T_NAV}}">
-  <a href="{{REL}}{{LANG}}/books/">{{T_BOOKS}}</a><span class="sep" aria-hidden="true">/</span><span class="mono-meta">{{B_CRUMB}}</span>
-</nav>
-<div class="book-title-wrap" style="--accent-book:{{B_ACCENT}}">
-  <h1 class="book-title fx-erode" data-accent="{{B_ACCENT}}">{{B_TITLE}}</h1>
-  <p class="book-tagline">{{B_TAGLINE}}</p>
-</div>
-<section class="section book-layout" style="--accent-book:{{B_ACCENT}}; margin-top:clamp(32px,5vw,72px)">
-  <div class="cover-col">
-    <div class="cover-box" data-fx data-book="{{B_ID}}" data-accent="{{B_ACCENT}}"{{B_PLATE_ATTR}}>
-      <img src="{{REL}}{{B_COVER}}"{{B_SRCSET}} alt="{{B_COVER_ALT}}" width="800" height="1200" fetchpriority="high">
-      <span class="tick tk-a" aria-hidden="true"></span><span class="tick tk-b" aria-hidden="true"></span>
+<section class="bhero{{B_HERO_CLASS}}" style="--accent-book:{{B_ACCENT}}" data-tint-page="{{B_ACCENT}}">
+  <nav class="crumbs" aria-label="{{T_NAV}}">
+    <a href="{{REL}}{{LANG}}/books/">{{T_BOOKS}}</a><span class="sep" aria-hidden="true">/</span><span class="mono-meta">{{B_CRUMB}}</span>
+  </nav>
+  <div class="bhero-grid">
+    <div class="book-title-wrap bhero-text">
+      <h1 class="book-title fx-erode" data-accent="{{B_ACCENT}}">{{B_TITLE}}</h1>
+      <p class="book-tagline">{{B_TAGLINE}}</p>
+      <p class="book-byline mono-meta"><span>{{B_BYLINE}}</span>{{B_PILL}}</p>
+      <div class="meta-row book-actions">{{B_ACTIONS}}</div>
     </div>
-    <div class="cover-reflect" aria-hidden="true"></div>
+    <div class="cover-col bhero-stage">
+      <span class="bhero-light" aria-hidden="true"></span>
+      <div class="book-stage" data-stage>
+      {{B_BOOK3D}}
+      </div>
+      <button type="button" class="open-btn mono-meta" data-open-book data-open="{{T_OPEN}}" data-close="{{T_CLOSE}}" aria-pressed="false" hidden>{{T_OPEN}}</button>
+    </div>
     <dl class="plate">
 {{B_PLATE}}
     </dl>
   </div>
+</section>
+<section class="section book-layout" style="--accent-book:{{B_ACCENT}}">
+  <div class="book-side" aria-hidden="true">{{B_SIDE_COVER}}</div>
   <div class="book-body">
 {{B_SERIES_NOTE}}
     <div class="synopsis" data-reveal>
@@ -26,10 +33,13 @@
 {{B_THEME_PILLS}}
     </div>
 {{B_EXCERPT_BTN}}
-    <div class="buy" id="buy" data-reveal>
-      <span class="kicker">{{B_BUY_HEAD}}</span>
-{{B_BUY_GROUPS}}
-    </div>
+{{B_PORTAL}}
   </div>
+  <aside class="buy" id="buy" data-reveal>
+    <span class="kicker">{{B_BUY_HEAD}}</span>
+{{B_BUY_GROUPS}}
+  </aside>
 </section>
+{{B_BAND}}
 {{B_SIBLINGS}}
+{{B_BUYBAR}}

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F4E8CE">
+  <meta name="description" content="The Golden Shore — Book II of The Calorate, forthcoming from Alexey Belenkiy. Political science fiction on a crown world of administered summer, where cold is the ultimate luxury.">
+  <title>The Golden Shore — The Calorate, Book II | Alexey Belenkiy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #F4E8CE; -webkit-font-smoothing: antialiased; }
+    a { color: #7A5310; text-decoration-color: rgba(122, 83, 16, 0.45); text-underline-offset: 3px; }
+    a:hover { color: #B4472F; text-decoration-color: #B4472F; }
+    :focus-visible { outline: 2px solid #B4472F; outline-offset: 3px; }
+    ::selection { background: rgba(201, 147, 47, 0.35); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; } }
+    .hv-1:hover { background: rgba(255, 158, 61, 0.14); }
+    .hv-2:hover { color: #EDF4F7 !important; }
+    .hv-3:hover { color: #B4472F !important; }
+    .hv-4:hover { background: rgba(237, 244, 247, 0.75) !important; border-color: #5A431C !important; }
+    .hv-5:hover { background: #4A3417 !important; }
+    .hv-6:hover { background: rgba(237, 244, 247, 0.75); }
+    .hv-7:hover { background: rgba(90, 67, 28, 0.1); }
+    @media (max-width: 719px) { .buy-bar { top: auto !important; right: 10px !important; left: 10px !important; bottom: 10px !important; } }
+    /* ── BUY CONTROLS · plain verb first, survey voice second. What is live comes from RETAIL in thermo.js.
+          Lit = on sale: an ember, with a top light, a halo and a press. Dashed = coming: a reserved plate. ── */
+    :root { --live-bg: #5A431C; --live-top: #71572A; --live-low: #453110; --live-edge: #3F2E12; --live-sheen: rgba(255, 236, 190, 0.3); --live-halo: rgba(90, 67, 28, 0.22); --live-glow: rgba(58, 40, 10, 0.6); --live-press: rgba(20, 12, 0, 0.5); --live-ink: #F4E8CE; --soon-ink: #5A431C; --soon-line: rgba(122, 83, 16, 0.7); --soon-hover: #B4472F; --soon-fill: rgba(244, 232, 206, 0.4); --focus: #B4472F; --rule: rgba(90, 67, 28, 0.4); --key-ink: rgba(90, 67, 28, 0.8); --cover-cast: rgba(58, 40, 10, 0.8); }
+    .buy { position: relative; box-sizing: border-box; display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; max-width: 100%; padding: 13px 20px; border: 1px dashed var(--soon-line); background: var(--soon-fill); color: var(--soon-ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; text-decoration: none; -webkit-tap-highlight-color: transparent; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms, color 260ms, border-color 260ms, box-shadow 260ms, filter 260ms; }
+    .buy[hidden] { display: none; }
+    .nb { white-space: nowrap; }
+    .buy-main { font-size: 11.5px; letter-spacing: 0.15em; line-height: 1.4; }
+    .buy-main::after { content: '\2192'; display: inline-block; margin-left: 0.7em; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .buy:hover .buy-main::after { transform: translateX(4px); }
+    .buy-sub { font-size: 9.5px; letter-spacing: 0.14em; line-height: 1.5; opacity: 0.8; }
+    .buy.is-soon:hover { color: var(--soon-hover); border-color: var(--soon-hover); border-style: solid; }
+    .buy.is-soon:active { transform: translateY(1px); }
+    .buy.is-live { border: 1px solid var(--live-edge); background-color: var(--live-bg); background-image: linear-gradient(180deg, var(--live-top), var(--live-bg) 46%, var(--live-low)); color: var(--live-ink); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 16px 38px -14px var(--live-glow); }
+    .buy.is-live .buy-main { font-size: 13.5px; font-weight: 600; }
+    .buy.is-live .buy-sub { opacity: 0.86; }
+    .buy.is-live:hover { color: var(--live-ink); filter: brightness(1.07); transform: translateY(-2px); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 24px 48px -14px var(--live-glow); }
+    .buy.is-live:active { transform: translateY(1px); filter: brightness(0.95); box-shadow: inset 0 2px 8px var(--live-press), 0 0 0 1px var(--live-halo); }
+    .buy:focus-visible, .ed:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+    .buy--xl { padding: 17px 28px; }
+    .buy--xl.is-live .buy-main { font-size: 15.5px; }
+    @media (max-width: 719px) { .buy { padding: 12px 15px; } .buy--xl { padding: 15px 18px; } .buy--xl.is-live .buy-main { font-size: 14.5px; } }
+    .buy--bar { padding: 6px 12px; }
+    .buy--bar .buy-main, .buy--bar.is-live .buy-main { font-size: 11px; letter-spacing: 0.13em; }
+    .buy--bar.is-live { box-shadow: inset 0 1px 0 var(--live-sheen); }
+    .buy-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 12px; }
+    @media (max-width: 719px) { .buy-bar { flex-wrap: nowrap !important; justify-content: space-between; } .buy-bar .buy { margin-left: auto; } }
+    @media (max-width: 479px) { .bar-more { display: none; } }
+    .buy-bar { --live-bg: #FF9E3D; --live-top: #FFBE78; --live-low: #F0862A; --live-edge: #FFC98F; --live-sheen: rgba(255, 244, 220, 0.55); --live-ink: #0A1520; --soon-ink: #FFD9A0; --soon-line: rgba(255, 158, 61, 0.55); --soon-hover: #FFFFFF; --soon-fill: transparent; }
+    /* ── THE COVER AS AN OBJECT · a spine crease, a top light and three depths of shadow ── */
+    .cover { position: relative; display: block; line-height: 0; background: #0A1520; box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 18px 28px -14px rgba(2, 8, 12, 0.75), 0 46px 84px -38px var(--cover-cast); transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .cover img { display: block; width: 100%; height: auto; }
+    .cover::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(255, 255, 255, 0.20) 0, rgba(255, 255, 255, 0.04) 0.9%, rgba(0, 0, 0, 0.26) 1.7%, rgba(0, 0, 0, 0) 4.2%, rgba(0, 0, 0, 0) 92%, rgba(0, 0, 0, 0.10) 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0) 14%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07); }
+    a.cover:hover { transform: translateY(-5px); box-shadow: 0 2px 3px rgba(2, 8, 12, 0.5), 0 26px 36px -16px rgba(2, 8, 12, 0.8), 0 60px 96px -40px var(--cover-cast); }
+    /* ── LIVING PLATES · the <img> is the still plate (a scene made for the site, in assets/scenes/); the canvas over it is the same picture with the heat law acting on it ── */
+    [data-plate] { touch-action: pan-y; }
+    [data-plate] canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1); }
+    [data-hearth] { position: absolute; left: -130px; right: -130px; top: -120px; bottom: -120px; width: calc(100% + 260px); height: calc(100% + 240px); z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .hearth { position: relative; isolation: isolate; }
+
+    /* ── EDITIONS · a tile per edition: lit when it is on sale, a quiet dashed chip while it is coming ── */
+    .eds { display: grid; grid-template-columns: 84px minmax(0, 1fr); max-width: 900px; margin: 34px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+    .eds dt { margin: 0; padding: 20px 0 0; border-top: 1px solid var(--rule); font-size: 11px; letter-spacing: 0.2em; color: var(--key-ink); }
+    .eds dd { margin: 0; padding: 14px 0 16px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+    .ed { box-sizing: border-box; display: flex; flex-direction: column; gap: 5px; width: 172px; padding: 12px 14px; border: 1px dashed var(--soon-line); background: var(--soon-fill); color: var(--soon-ink); text-decoration: none; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background-color 260ms, color 260ms, border-color 260ms, box-shadow 260ms, filter 260ms; }
+    .ed.is-soon, .ed.is-soon:hover { color: var(--soon-ink); cursor: default; }
+    .ed-name { font-size: 11.5px; letter-spacing: 0.15em; line-height: 1.45; text-transform: uppercase; }
+    .ed-note { font-size: 10.5px; letter-spacing: 0.03em; line-height: 1.5; opacity: 0.78; }
+    .ed-state { margin-top: auto; padding-top: 7px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.72; }
+    .ed.is-live { border: 1px solid var(--live-edge); background-color: var(--live-bg); background-image: linear-gradient(180deg, var(--live-top), var(--live-bg) 46%, var(--live-low)); color: var(--live-ink); box-shadow: inset 0 1px 0 var(--live-sheen), 0 0 0 1px var(--live-halo), 0 16px 38px -14px var(--live-glow); }
+    .ed.is-live .ed-state { opacity: 1; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; }
+    .ed.is-live .ed-state::after { content: '\2192'; display: inline-block; margin-left: 0.6em; transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .ed.is-live:hover { color: var(--live-ink); filter: brightness(1.07); transform: translateY(-2px); }
+    .ed.is-live:hover .ed-state::after { transform: translateX(4px); }
+    .ed.is-live:active { transform: translateY(1px); filter: brightness(0.95); }
+    .ed--art { padding: 0 0 12px; }
+    .ed--art img { display: block; width: 100%; height: auto; aspect-ratio: 1; margin-bottom: 7px; }
+    .ed--art > span { padding: 0 13px; }
+    @media (max-width: 719px) { .eds { grid-template-columns: minmax(0, 1fr); } .eds dd { border-top: none; padding-top: 10px; } .ed { width: calc(50% - 6px); } }
+
+    /* ── BOOK PAGE · cover, title and the button share the first screen; plates carry the rest ── */
+    .bk-hero { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: clamp(24px, 4vw, 56px); align-items: end; max-width: 1180px; }
+    .bk-cover { grid-column: 1; grid-row: 1 / span 5; align-self: end; width: clamp(180px, 20vw, 290px); }
+    .bk-hero > :not(.bk-cover) { grid-column: 2; min-width: 0; }
+    @media (max-width: 719px) {
+      .bk-hero { grid-template-columns: min(40vw, 172px) minmax(0, 1fr); column-gap: 16px; }
+      .bk-cover { grid-row: 1; width: min(40vw, 172px); }
+      .bk-hero > .bk-chips { grid-row: 1; align-self: end; }
+      .bk-hero > .bk-title, .bk-hero > .bk-hook, .bk-hero > .bk-cta, .bk-hero > .bk-note { grid-column: 1 / -1; }
+    }
+    .plate { position: relative; margin: 0; overflow: hidden; }
+    .plate img { display: block; width: 100%; height: clamp(260px, 62vh, 640px); object-fit: cover; object-position: 50% 78%; }
+    @media (max-width: 719px) { .plate img { object-position: 76% 60%; } }
+    .plate figcaption { position: absolute; left: var(--content-x); right: 20px; bottom: 18px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(237, 244, 247, 0.9); pointer-events: none; }
+    .plate figcaption span { padding: 5px 10px; background: rgba(10, 21, 32, 0.62); box-decoration-break: clone; -webkit-box-decoration-break: clone; line-height: 2.1; }
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"The Golden Shore","author":{"@type":"Person","name":"Alexey Belenkiy"},"position":2,"isPartOf":{"@type":"BookSeries","name":"The Calorate"},"description":"Book II of The Calorate, forthcoming. Into the crown world's administered summer comes a woman from a world that froze to pay for it."}</script>
+</head>
+<body>
+<div style="position: relative; overflow-x: clip; background: #F4E8CE; color: #5A431C; font-family: Newsreader, Georgia, 'Times New Roman', serif; --vein-x: clamp(16px, 4.5vw, 54px); --content-x: clamp(56px, 11vw, 150px);">
+
+  <div aria-hidden="true" style="position: absolute; z-index: 30; top: 0; bottom: 50px; left: var(--vein-x); width: 2px; background: linear-gradient(180deg, rgba(201, 120, 30, 0.55), rgba(201, 120, 30, 0.15)); pointer-events: none;"></div>
+
+  <!-- PERSISTENT BUY BAR — one job, in plain words; its link and state come from RETAIL in thermo.js -->
+  <div class="buy-bar" role="region" aria-label="Linewalker — buy bar" style="position: fixed; z-index: 60; top: 14px; right: 14px; display: none; align-items: center; flex-wrap: wrap; gap: 8px 12px; padding: 9px 12px; background: rgba(10, 21, 32, 0.93); border: 1px solid rgba(255, 158, 61, 0.4); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.13em; color: #EDF4F7;">
+    <span style="opacity: 0.85; white-space: nowrap;">LINEWALKER<span class="bar-more"> · BOOK ONE</span></span>
+    <a class="buy buy--bar is-live" data-buy="linewalker" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy the <span class="nb">e-book</span></span></a>
+    <button type="button" aria-label="Dismiss buy bar" data-ref="dismissBtn" class="hv-2" style="background: none; border: none; color: rgba(237, 244, 247, 0.6); font-family: inherit; font-size: 14px; line-height: 1; cursor: pointer; padding: 2px 5px;">×</button>
+  </div>
+
+  <!-- HERO — the Noon Palace floor; touch draws frost, the cost lands elsewhere -->
+  <section data-ref="heroRef" style="position: relative; min-height: 90svh; overflow: hidden; background: #E3BE6E; touch-action: pan-y;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 1;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #F4E8CE 0%, #EBD5A0 45%, #D9AE58 100%);"></div>
+      <div style="position: absolute; left: -10%; top: -20%; width: 70%; height: 70%; background: radial-gradient(ellipse at 40% 40%, rgba(244, 232, 206, 0.9), rgba(244, 232, 206, 0) 65%);"></div>
+      <div style="position: absolute; right: -6%; top: -8%; width: 46%; height: 52%; background: radial-gradient(ellipse at 70% 20%, rgba(237, 244, 247, 0.75), rgba(237, 244, 247, 0) 62%);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 64%; height: 1px; background: rgba(90, 67, 28, 0.18);"></div>
+      <div style="position: absolute; left: 0; right: 0; top: 82%; height: 1px; background: rgba(90, 67, 28, 0.12);"></div>
+      <div style="position: absolute; inset: 0; opacity: 0.04; background-image: url(data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27120%27%20height=%27120%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27/%3E%3C/filter%3E%3Crect%20width=%27120%27%20height=%27120%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E);"></div>
+    </div>
+    <canvas data-ref="canvasRef" role="img" aria-label="The Noon Palace floor in thermal survey: administered summer, gold in every direction. Touch draws frost across it; the warmth is not destroyed, only pushed somewhere out of sight." style="position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1);"></canvas>
+    <div aria-hidden="true" style="position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(244, 232, 206, 0.15) 0%, rgba(244, 232, 206, 0) 32%, rgba(244, 232, 206, 0.35) 74%, rgba(244, 232, 206, 0.72) 100%);"></div>
+    <div style="position: relative; z-index: 4; min-height: 90svh; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; padding: clamp(18px, 3.5vh, 40px) clamp(20px, 5vw, 64px) clamp(28px, 6vh, 56px) var(--content-x);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+        <a href="index.html" class="hv-3" style="padding: 5px 10px; background: rgba(90, 67, 28, 0.12); color: #5A431C; text-decoration: none;">← THE CALORATE · A TRILOGY</a>
+        <span data-ref="counterRef" style="padding: 5px 10px; background: rgba(90, 67, 28, 0.12); color: #5A431C;">− 0 therms · the palace floor ░ + 0 therms · elsewhere, unsigned</span>
+      </div>
+      <div class="bk-hero">
+        <span class="cover bk-cover"><img src="assets/cover-the-golden-shore.jpg" width="900" height="1399" alt="The Golden Shore — the cover: an iron cuff and a brass assay gauge on blue ice"></span>
+        <div class="bk-chips" style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.16em;">
+          <span style="border: 1px solid rgba(90, 67, 28, 0.5); color: #5A431C; padding: 5px 10px; background: rgba(244, 232, 206, 0.5);">BOOK II</span>
+          <span style="border: 1px solid rgba(90, 67, 28, 0.4); color: rgba(90, 67, 28, 0.9); padding: 5px 10px; background: rgba(244, 232, 206, 0.5);">+35.5° · AURENTINE · ADMINISTERED SUMMER</span>
+          <span style="border: 1px solid rgba(180, 71, 47, 0.6); color: #B4472F; padding: 5px 10px; background: rgba(244, 232, 206, 0.5); transform: rotate(-1.5deg);">IN THE VEINS · FORTHCOMING</span>
+        </div>
+        <h1 class="bk-title" style="margin: 20px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 500; font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: clamp(44px, 7.2vw, 104px); line-height: 0.98; letter-spacing: -0.01em; color: #5A431C;">The Golden Shore</h1>
+        <p class="bk-hook" style="margin: 20px 0 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.4vw, 28px); line-height: 1.4; color: rgba(90, 67, 28, 0.95); max-width: 34ch; text-wrap: pretty;">When the arithmetic of empire is genuinely correct — who signs?</p>
+        <div class="bk-cta buy-row" style="margin-top: clamp(20px, 3.5vh, 32px);">
+          <a class="buy buy--xl is-live" data-buy="linewalker" data-live-label="Buy Book One" data-sub-live="Linewalker · e-book — the line starts on Vesh" data-sub-soon="Linewalker · the line starts on Vesh" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy Book One</span><span class="buy-sub" data-buy-sub>Linewalker · e-book — the line starts on Vesh</span></a>
+          <a class="buy is-soon" data-buy="the-golden-shore" data-sub-live="The Golden Shore · Book Two" data-sub-soon="The Golden Shore · in the veins" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span><span class="buy-sub" data-buy-sub>The Golden Shore · in the veins</span></a>
+          <a class="buy is-soon" data-buy-imprint="the-golden-shore" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener" hidden><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+        </div>
+        <p class="bk-note" style="margin: 16px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(90, 67, 28, 0.7);">Blurbs are spoiler-safe for earlier books.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ENTRY — one short paragraph, with the epigraphs set beside it -->
+  <section style="padding: clamp(52px, 9vh, 110px) clamp(20px, 6vw, 110px) clamp(48px, 8vh, 100px) var(--content-x); display: flex; flex-wrap: wrap; align-items: stretch; gap: clamp(30px, 6vw, 90px);">
+    <div style="flex: 1 1 380px; max-width: 58ch; min-width: min(100%, 270px);">
+      <h2 style="margin: 0 0 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; font-size: 11px; letter-spacing: 0.22em; color: rgba(90, 67, 28, 0.8);">THE ENTRY · SEALED UNTIL RELEASE</h2>
+      <div style="max-width: 58ch; font-size: clamp(17px, 1.7vw, 19.5px); line-height: 1.75; color: #4A3417;">
+        <p style="margin: 0; text-wrap: pretty;">Aurentine has never known a cloud. The crown world's summer is administered, its tides are scheduled, and its aristocrats smuggle <em>cold</em>. Into this paradise comes a woman from a world that froze to pay for it. She makes frost bloom across the Noon Palace floor — and makes sure everyone watching learns exactly where the cost of a miracle lands. And beyond the pleasure-piers, very quietly, the sea has started to steam.</p>
+        <p style="margin: 24px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: #B4472F;">− 1 miracle · cost landed: see rim</p>
+      </div>
+    </div>
+    <div style="flex: 1 1 320px; max-width: 46ch; min-width: min(100%, 270px); display: grid; gap: clamp(26px, 4vh, 40px); align-content: center; border-left: 1px solid rgba(201, 147, 47, 0.55); padding-left: clamp(20px, 3vw, 44px);">
+      <figure style="margin: 0;">
+        <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.55; color: #4A3417; text-wrap: pretty;">Cold is the one thing Aurentine cannot requisition. Naturally, it became fashion.</blockquote>
+        <figcaption style="margin-top: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(90, 67, 28, 0.75);">— court almanac, Year of the Scheduled Tide</figcaption>
+      </figure>
+      <figure style="margin: 0;">
+        <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: clamp(19px, 2.2vw, 26px); line-height: 1.55; color: #4A3417; text-wrap: pretty;">The sea off the golden shore has quietly started to steam.</blockquote>
+        <figcaption style="margin-top: 14px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: rgba(90, 67, 28, 0.75);">— Linewalker, closing lines</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PLATE — the Noon Palace floor, full-bleed, with the heat law acting on it -->
+  <figure class="plate" data-plate="noon" data-heart="0.66,0.65">
+    <img src="assets/scenes/book2-place.jpg" width="1672" height="941" alt="The floor of the Noon Palace: dark gold marble barred with hard noon light, and one bloom of white frost grown across it" loading="lazy" decoding="async">
+    <canvas aria-hidden="true"></canvas>
+    <figcaption><span>FIG. 2 · EVERY MIRACLE HAS AN INVOICE</span></figcaption>
+  </figure>
+
+
+  <!-- FORTHCOMING / READ BOOK I -->
+  <section id="buy" data-ref="buyRef" style="scroll-margin-top: 40px; position: relative; padding: clamp(56px, 9vh, 120px) clamp(20px, 6vw, 110px) 40px var(--content-x);">
+    <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.18em; color: rgba(90, 67, 28, 0.85);">
+      <span>ISOTHERM 01</span>
+      <span style="flex: 1; min-width: 40px; height: 1px; background: linear-gradient(90deg, rgba(90, 67, 28, 0.45), rgba(90, 67, 28, 0.06));"></span>
+      <span style="text-align: right;">+35.5° · AURENTINE · HIGH SUMMER</span>
+    </div>
+    <h2 style="margin: 30px 0 0; font-family: Fraunces, Georgia, serif; font-weight: 500; font-variation-settings: 'SOFT' 100, 'WONK' 1; font-size: clamp(38px, 5.5vw, 76px); line-height: 0.98; color: #5A431C;">In the veins.</h2>
+    <p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.18em; color: rgba(90, 67, 28, 0.85);">BOOK II OF THE CALORATE · FORTHCOMING FROM ORB &amp; INK</p>
+    <!-- EDITIONS — one tile per edition. Lit = on sale (RETAIL in thermo.js has its link); dashed = coming. -->
+    <dl class="eds">
+      <dt>READ</dt>
+      <dd>
+        <a class="ed is-soon" data-edition="the-golden-shore ebook"><span class="ed-name">E-book</span><span class="ed-state" data-edition-state>Coming</span></a>
+        <a class="ed is-soon" data-edition="the-golden-shore paperback"><span class="ed-name">Paperback</span><span class="ed-state" data-edition-state>Coming</span></a>
+        <a class="ed is-soon" data-edition="the-golden-shore hardcover"><span class="ed-name">Hardcover</span><span class="ed-state" data-edition-state>Coming</span></a>
+      </dd>
+      <dt>LISTEN</dt>
+      <dd>
+        <a class="ed ed--art is-soon" data-edition="the-golden-shore audiobook"><img src="assets/audio-the-golden-shore.jpg" width="700" height="700" alt="The Golden Shore — audiobook cover" loading="lazy" decoding="async"><span class="ed-name">Audiobook</span><span class="ed-note">unabridged narration</span><span class="ed-state" data-edition-state>Coming</span></a>
+        <a class="ed ed--art is-soon" data-edition="the-golden-shore immersive"><img src="assets/audio-the-golden-shore-immersive.jpg" width="700" height="700" alt="The Golden Shore — immersive audiobook cover" loading="lazy" decoding="async"><span class="ed-name">Immersive audiobook</span><span class="ed-note">the narration set in score and sound design</span><span class="ed-state" data-edition-state>Coming</span></a>
+        <a class="ed is-soon" data-edition="the-golden-shore drama"><span class="ed-name">Audio drama</span><span class="ed-note">full-cast dramatisation</span><span class="ed-state" data-edition-state>Coming</span></a>
+      </dd>
+      <dt>SEE</dt>
+      <dd>
+        <a class="ed is-soon" data-edition="the-golden-shore graphic"><span class="ed-name">Graphic novel</span><span class="ed-state" data-edition-state>Coming</span></a>
+      </dd>
+    </dl>
+    <div class="buy-row" style="margin-top: 30px;">
+      <a class="buy buy--xl is-live" data-buy="linewalker" data-live-label="Buy Book One" data-sub-live="Linewalker · e-book — the line starts on Vesh" data-sub-soon="Linewalker · the line starts on Vesh" href="https://www.amazon.com/dp/B0HF13VNMR" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>Buy Book One</span><span class="buy-sub" data-buy-sub>Linewalker · e-book — the line starts on Vesh</span></a>
+      <a class="buy is-soon" data-buy="the-golden-shore" data-sub-live="The Golden Shore · Book Two" data-sub-soon="The Golden Shore · in the veins" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener"><span class="buy-main" data-buy-main>See the book at Orb &amp; Ink</span><span class="buy-sub" data-buy-sub>The Golden Shore · in the veins</span></a>
+      <a class="buy is-soon" data-buy-imprint="the-golden-shore" href="https://orbandink.co.uk/en/books/the-golden-shore/" target="_blank" rel="noopener" hidden><span class="buy-main">See the book at Orb &amp; Ink</span></a>
+    </div>
+    <p style="margin: 28px 0 0; font-style: italic; font-size: 16.5px; line-height: 1.6; color: rgba(74, 52, 23, 0.85); max-width: 46ch; text-wrap: pretty;">Follow <a href="https://orbandink.co.uk/" target="_blank" rel="noopener">Orb &amp; Ink</a> for release day.</p>
+  </section>
+
+  <!-- CROSS-NAV + FOOTER -->
+  <section style="position: relative; padding: clamp(30px, 5vh, 60px) clamp(20px, 6vw, 110px) 130px var(--content-x);">
+    <nav aria-label="Series navigation" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 26px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em;">
+      <a href="linewalker.html" class="hv-7" style="color: #5A431C; text-decoration: none; border: 1px solid rgba(90, 67, 28, 0.5); padding: 8px 13px;">← COLDER · LINEWALKER · −41.0°</a>
+      <a href="the-even-cold.html" class="hv-7" style="color: #5A431C; text-decoration: none; border: 1px solid rgba(90, 67, 28, 0.5); padding: 8px 13px;">COLDER → THE EVEN COLD · 0.000°</a>
+    </nav>
+    <div style="margin-top: clamp(40px, 6vh, 70px); border-top: 1px solid rgba(90, 67, 28, 0.3); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.15em; color: rgba(90, 67, 28, 0.75);">
+      <span>© Alexey Belenkiy · published by <a href="https://orbandink.co.uk/" target="_blank" rel="noopener" class="hv-3" style="color: inherit; text-decoration-color: rgba(90, 67, 28, 0.4);">Orb &amp; Ink</a></span>
+      <span>THERE IS NO WEATHER. THERE ARE ONLY DECISIONS.</span>
+    </div>
+    <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 39px; transform: translateX(-50%); width: 21px; height: 21px; border-radius: 50%; border: 1px solid rgba(201, 120, 30, 0.6);"></div>
+    <div aria-hidden="true" style="position: absolute; left: var(--vein-x); bottom: 44px; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: radial-gradient(circle, #FFD9A0 0%, #FF9E3D 60%, rgba(255, 158, 61, 0) 100%); box-shadow: 0 0 14px 4px rgba(255, 158, 61, 0.4);"></div>
+    <div style="position: absolute; left: calc(var(--vein-x) + 22px); bottom: 43px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; color: rgba(90, 67, 28, 0.7);">the line ends at a hearth</div>
+  </section>
+</div>
+<script type="module">
+const $ref = (n) => document.querySelector('[data-ref="' + n + '"]');
+// thermo.js does three things for this page once it has loaded: it sets every buy control from the
+// RETAIL map (the markup already carries today's state, so nothing moves if the module is slow or
+// missing), wakes the living plates, and lights the hearth behind the buy area
+import('./thermo.js').then((m) => {
+  m.wireRetail();
+  document.querySelectorAll('[data-plate]').forEach((fig) => m.mountPlate(fig));
+  document.querySelectorAll('.hearth').forEach((el) => m.mountHearth(el));
+}).catch((err) => console.warn('thermo.js unavailable — the still plates and the links in the markup hold', err));
+const heroEl = $ref('heroRef');
+const canvasEl = $ref('canvasRef');
+const counterEl = $ref('counterRef');
+const buyEl = $ref('buyRef');
+const barEl = document.querySelector('.buy-bar');
+const dismissBtn = $ref('dismissBtn');
+
+let dismissed = false, heroPast = false, buyIn = false, reduced = false;
+let h = null, tried = false, heroVisible = true, coolT = 0;
+
+const updateBar = () => {
+  if (barEl) barEl.style.display = (heroPast && !buyIn && !dismissed) ? 'flex' : 'none';
+};
+
+const rq = window.matchMedia('(prefers-reduced-motion: reduce)');
+const syncMq = () => { reduced = rq.matches; };
+syncMq();
+rq.addEventListener('change', syncMq);
+
+let ticking = false;
+const onScroll = () => {
+  if (ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    ticking = false;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    coolT = Math.min(0.9, p * 1.5); // scrolling brings the frost scandal closer
+    if (h) h.setCoolTarget(coolT);
+  });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+
+const io = (el, cb, opts) => { if (!el) return null; const o = new IntersectionObserver(cb, opts); o.observe(el); return o; };
+io(heroEl, (es) => {
+  const e = es[0];
+  heroVisible = e.isIntersecting;
+  if (h) h.setVisible(e.isIntersecting);
+  const past = !e.isIntersecting && e.boundingClientRect.bottom < 120;
+  if (past !== heroPast) { heroPast = past; updateBar(); }
+}, { threshold: [0, 0.02] });
+io(buyEl, (es) => { const v = es[0].isIntersecting; if (v !== buyIn) { buyIn = v; updateBar(); } }, { threshold: 0.1 });
+
+if (dismissBtn) dismissBtn.addEventListener('click', () => { dismissed = true; updateBar(); });
+
+if (heroEl) {
+  const onPointer = (e) => {
+    mount();
+    const c = canvasEl; if (!c || !h) return;
+    const r = c.getBoundingClientRect(); if (!r.width) return;
+    const amp = (e.buttons & 1) || e.pointerType === 'touch' ? -0.5 : -0.18; // the frost brush: a miracle, billed elsewhere
+    h.pointer((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height, amp);
+  };
+  heroEl.addEventListener('pointermove', onPointer);
+  heroEl.addEventListener('pointerdown', onPointer);
+}
+
+async function mount() {
+  if (tried || !canvasEl) return;
+  tried = true;
+  const INIT = 'precision highp float; varying vec2 vUv; void main(){ vec2 uv=vUv;' +
+    ' float t = 0.80 + 0.06*uv.y + 0.02*sin(uv.x*9.0)*sin(uv.y*6.0);' + // the administered summer
+    ' gl_FragColor = vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const SIM = 'precision highp float; varying vec2 vUv; uniform sampler2D uPrev; uniform vec2 uTexel; uniform vec3 uBrush; uniform float uBrushMean; uniform float uCool; uniform float uAspect; void main(){ vec2 uv=vUv;' +
+    ' float c=texture2D(uPrev,uv).r;' +
+    ' float l=texture2D(uPrev,uv-vec2(uTexel.x,0.0)).r; float r=texture2D(uPrev,uv+vec2(uTexel.x,0.0)).r;' +
+    ' float d=texture2D(uPrev,uv-vec2(0.0,uTexel.y)).r; float u=texture2D(uPrev,uv+vec2(0.0,uTexel.y)).r;' +
+    ' float t=c+0.2*(l+r+u+d-4.0*c);' +
+    ' t=mix(t,0.86,0.004);' + // the palace maintains its noon
+    ' float dcorn=distance(vec2(uv.x*uAspect,uv.y),vec2(uAspect*0.94,1.02));' +
+    ' t=mix(t,0.2,exp(-dcorn*dcorn*2.2)*uCool*0.05);' + // frost seeps in from one corner as you scroll
+    ' float dd=distance(vec2(uv.x*uAspect,uv.y),vec2(uBrush.x*uAspect,uBrush.y));' +
+    ' t+=uBrush.z*exp(-dd*dd*700.0);' + // negative brush: frost here
+    ' t-=uBrushMean;' + // ...warmth pushed everywhere else; the ledger balances
+    ' gl_FragColor=vec4(clamp(t,0.0,1.0),0.0,0.0,1.0); }';
+  const DISP = 'precision highp float; varying vec2 vUv; uniform sampler2D uField; uniform float uTime; uniform float uPulse; uniform float uMotion;' +
+    ' vec3 pal(float t){ vec3 c0=vec3(0.929,0.957,0.969),c1=vec3(0.788,0.847,0.871),c2=vec3(0.937,0.878,0.737),c3=vec3(0.890,0.745,0.431),c4=vec3(0.788,0.576,0.184),c5=vec3(0.659,0.471,0.141);' +
+    ' vec3 col=mix(c0,c1,smoothstep(0.0,0.34,t)); col=mix(col,c2,smoothstep(0.18,0.56,t)); col=mix(col,c3,smoothstep(0.38,0.76,t)); col=mix(col,c4,smoothstep(0.58,0.94,t)); return mix(col,c5,smoothstep(0.8,1.08,t)); }' +
+    ' void main(){ vec2 uv=vUv; float t=texture2D(uField,uv).r;' +
+    ' vec2 fp=floor(gl_FragCoord.xy); t+=(mod(fp.x,2.0)*2.0+mod(fp.y,2.0))*0.0035-0.005;' +
+    ' vec3 col=pal(t);' +
+    ' float f=abs(fract(t*10.0)-0.5); col*=1.0-(1.0-smoothstep(0.015,0.09,f))*0.03;' + // barely-there survey contours in the marble
+    ' col*=0.965+0.045*uv.y+0.02*(1.0-uv.x);' + // noon light from one side; shadows never move
+    ' float shim=sin((uv.x+uv.y*0.3)*60.0)*0.5+0.5;' +
+    ' col+=vec3(0.045,0.042,0.032)*shim*smoothstep(0.5,0.15,t)*uMotion*0.35;' + // frost glitters, gently, where it lands
+    ' gl_FragColor=vec4(col,1.0); }';
+  try {
+    const { mountThermo } = await import('./thermo.js');
+    h = mountThermo(canvasEl, {
+      initFrag: INIT, simFrag: SIM, dispFrag: DISP, own: true,
+      bpm: 57, reduced: reduced,
+      onTherms: (n) => { if (counterEl) counterEl.textContent = '\u2212 ' + n + ' therms \u00b7 the palace floor \u2591 + ' + n + ' therms \u00b7 elsewhere, unsigned'; }
+    });
+    if (h) { h.setVisible(heroVisible); h.setCoolTarget(coolT); }
+  } catch (err) { console.warn('hero shader unavailable — static composition holds', err); }
+}
+
+const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 400));
+idle(() => mount());
+</script>
+</body>
+</html>

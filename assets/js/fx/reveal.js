@@ -39,6 +39,48 @@ export function decode(el, dur = 420) {
   requestAnimationFrame(frame);
 }
 
+/* Letters that gather, for titles set in the page (the hero's are drawn
+   by fx/lattice.js): each letter starts loose — displaced, turned, unseen —
+   and settles into the line, first letters first. The words are put back
+   as plain text when it is done, so kerning and wrapping are the page's
+   own. Reduced motion never splits anything. */
+export function gather(el, fast) {
+  if (sched.reduced.matches || el.dataset.gathering) return;
+  const text = el.textContent;
+  if (!text.trim() || el.children.length) return;
+  el.dataset.gathering = '1';
+  el.setAttribute('aria-label', text.trim());
+  const frag = document.createDocumentFragment();
+  let i = 0;
+  /* the whole line is in place within about a second, however long it is */
+  const step = Math.min(fast ? 12 : 20, (fast ? 220 : 420) / Math.max(1, text.length));
+  for (const part of text.split(/(\s+)/)) {
+    if (!part) continue;
+    if (/^\s+$/.test(part)) { frag.append(' '); continue; }
+    const w = document.createElement('span');
+    w.className = 'gw'; w.setAttribute('aria-hidden', 'true');
+    for (const ch of part) {
+      const l = document.createElement('span');
+      l.className = 'gl'; l.textContent = ch;
+      l.style.cssText = `--x:${((Math.random() - 0.5) * 1.7).toFixed(2)}em;--y:${((Math.random() - 0.62) * 1.5).toFixed(2)}em;`
+        + `--r:${((Math.random() - 0.5) * 64).toFixed(0)}deg;--d:${Math.round(i * step + Math.random() * (fast ? 60 : 110))}ms`;
+      w.append(l); i++;
+    }
+    frag.append(w);
+  }
+  el.textContent = '';
+  el.append(frag);
+  el.classList.add('gather');
+  el.getBoundingClientRect();
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('gathered')));
+  setTimeout(() => {
+    el.textContent = text;
+    el.classList.remove('gather', 'gathered');
+    el.removeAttribute('aria-label');
+    delete el.dataset.gathering;
+  }, 1250 + i * step);
+}
+
 export function init(fx) {
   const reduced = sched.reduced.matches;
   document.documentElement.classList.add('fx-ready');
@@ -63,6 +105,16 @@ export function init(fx) {
       });
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
     els.forEach(el => io.observe(el));
+  }
+
+  // titles gather from loose letters as they arrive
+  if (!reduced) {
+    const tio = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      tio.unobserve(e.target);
+      gather(e.target);
+    }), { rootMargin: '0px 0px -8% 0px', threshold: 0.2 });
+    document.querySelectorAll('[data-gather]').forEach(el => tio.observe(el));
   }
 
   // erosion titles phase-lock with one glitch frame as they arrive
