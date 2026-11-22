@@ -19,8 +19,8 @@ export const RETAIL = {
   'linewalker': {
     imprint: 'https://orbandink.co.uk/en/books/linewalker/',
     ebook: 'https://www.amazon.com/dp/B0HF13VNMR',
-    paperback: '',
-    hardcover: '',
+    paperback: 'https://www.amazon.com/dp/1919140018',
+    hardcover: 'https://www.amazon.com/dp/1919140026',
     audiobook: '',
     immersive: '',
     drama: '',

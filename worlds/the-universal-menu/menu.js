@@ -17,7 +17,7 @@
    The pages' own markup already shows today's state, so they read correctly without this
    file; when you fill a slot, also update that book page's JSON-LD "offers". */
 export const RETAIL = {
-  'the-aperitif':         { ebook: 'https://www.amazon.com/dp/B0HFDPP6F4', paperback: '', hardcover: '', audiobook: '', immersive: '', drama: '', graphic: '' },
+  'the-aperitif':         { ebook: 'https://www.amazon.com/dp/B0HFDPP6F4', paperback: 'https://www.amazon.com/dp/1919140611', hardcover: 'https://www.amazon.com/dp/191914062X', audiobook: '', immersive: '', drama: '', graphic: '' },
   'the-recipe-rebellion': { ebook: '', paperback: '', hardcover: '', audiobook: '', immersive: '', drama: '', graphic: '' },
   'past-expiration-date': { ebook: '', paperback: '', hardcover: '', audiobook: '', immersive: '', drama: '', graphic: '' },
 };
